@@ -124,7 +124,7 @@ Merged form combining paper Forms B-1, B-2, B-3, and C.
 | 17 | Contractor Indemnity Undertaking | Multiple Choice (checkboxes) | Yes | Exists (Q4) | Lift protection, common area clauses |
 | 18 | Terms and Conditions Acknowledgment | Single Choice (checkbox) | Yes | Exists (Q2) | |
 | 19 | PDPA Consent | Single Choice (checkbox) | Yes | Exists (Q2/Q4) | |
-| 20 | Contractor Signature | Attachment | Yes | Exists (Q5) | |
+| 20 | Signed Contractor Indemnity Form | Attachment | Yes | Exists (Q5) | Resident uploads contractor's signed indemnity document |
 | - | ~~NRIC Last 4 Digits~~ | ~~Text~~ | Remove | Exists (remove) | PDPA non-compliant by 31 Dec 2026 |
 | - | ~~Official Use x2~~ | ~~Header~~ | Remove | Exists (Q6, Q8 -- remove) | MA uses approval workflow |
 | - | ~~Deposit Cheque Number~~ | ~~Text~~ | Remove | N/A | Deposit collected via Facility Booking module |
