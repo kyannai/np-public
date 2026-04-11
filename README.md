@@ -358,7 +358,7 @@ The following issues affect multiple forms and must be resolved before any e-for
 
 - **Payment references: eliminate all cheque/cash references.** Use PayNow/Bank Transfer/Credit Card as the accepted payment modes. E-forms that currently reference cheques (18271, 18272, 18274) must be updated.
 
-- **Price discrepancies between handbook and Hilife.** Tennis Court booking fee is $10 in the handbook but $10.90 in Hilife. Function Room booking fee shows as $100 in some contexts but $109 in Hilife. The approximately 9% Hilife surcharge likely covers platform and credit card processing fees. Pricing must be confirmed with the MCST council and aligned across all references.
+- **Pricing alignment.** Tennis Court booking fee is $10 in the handbook but $10.90 in Hilife; Function Room is $100 vs $109. The difference is GST (9%). Handbook prices should be updated to reflect GST-inclusive amounts to match what residents see in Hilife.
 
 ---
 
@@ -434,13 +434,54 @@ For forms that require a non-refundable fee (not a deposit), the fee is collecte
 
 ### 4.3 Deposit-Required Forms
 
-**The problem:** Hilife e-forms cannot collect deposits or fees. The Facility Booking module can collect deposits via credit card hold but does not support rich application forms with contractor details, signatures, and back-and-forth communication.
+**Applies to:**
+- Renovation (A&A) -- Form B-1 equivalent, $1,000 deposit
+- Moving In/Out -- Form D-1 equivalent, $1,000 deposit
+- Vehicle Registration -- Form F equivalent, $50 deposit
 
-**Proposed 3-step flow:**
+**Forms eliminated:** Form E (Refund of A&A Deposit) and Form K (Refund of Facility Deposit). Refund is now an MA-driven action at process closure, not a resident request.
+
+#### The Problem
+
+Hilife's E-Form module **cannot collect deposits**. The Facility Booking module **can collect deposits** via credit card hold. However, the two modules are completely separate -- there is no linkage between an e-form submission and a facility booking.
+
+#### Option 1: Use Facility Booking for Everything (Form + Deposit)
+
+The Facility Booking module supports Q&A questions (`enable_qa`) which can serve as a basic form. The archived "Renovation Deposit" and "Moving Deposit" categories previously used this approach -- combining Q&A form + deposit collection in a single flow.
+
+**Downside:** Residents would need to look for their renovation or moving application under "Facility Booking" rather than "E-Forms", which is confusing. The Q&A is also more limited than e-forms (no signatures, limited question types, no reply thread for back-and-forth).
+
+#### Option 2: Split E-Form and Deposit Payment (Recommended)
+
+Use E-Form for the application (rich form, signatures, reply thread) and Facility Booking purely for deposit collection. The two are not linked in the system, but the MA manages the connection manually.
+
+**Advantage:** Each module does what it is best at. Residents submit applications where they expect to (E-Forms) and pay deposits where the system supports it (Facility Booking). The e-form reply thread enables back-and-forth communication throughout the process.
+
+#### Payment Method Options
+
+For the deposit payment step, there are two options:
+
+**Credit Card via Facility Booking:**
+- Resident pays deposit via credit card hold in the Facility Booking module.
+- Deposit lifecycle is automatically tracked (In Use / Refunded / Forfeited).
+- MA can refund or forfeit via the Deposit Records page.
+- **Concern:** Credit card processing fees may apply on both charge and refund. On a $1,000 deposit cycle, MCST may lose $20-$30 in processing fees. This must be clarified with Hilife (see Action Item 5.1).
+
+**PayNow / Bank Transfer:**
+- Resident pays deposit via PayNow to the MCST bank account.
+- Resident uploads payment confirmation screenshot in the e-form reply thread.
+- MA verifies and creates a manual deposit record in Hilife Deposit Records.
+- On completion, MA refunds via bank transfer.
+- **No credit card fees**, but requires more manual effort from both resident and MA.
+
+#### Proposed Workflow (Payment Method Agnostic)
+
+Regardless of whether deposit is collected via credit card or PayNow, the overall workflow is the same:
 
 ```
 STEP 1: E-FORM APPLICATION
    Resident submits e-form with full details
+   (contractor info, work scope, dates, attachments, signatures)
         |
         v
    MA reviews application
@@ -453,86 +494,29 @@ STEP 1: E-FORM APPLICATION
    MA approves e-form
         |
         v
-STEP 2: DEPOSIT COLLECTION (Facility Booking Module)
-   MA instructs resident via reply thread:
-   "Application approved. Please proceed to Facility Booking
-    to pay the $1,000 deposit."
+STEP 2: DEPOSIT PAYMENT
+   MA instructs resident to pay deposit
+   (via credit card in Facility Booking, or via PayNow)
         |
         v
-   Resident opens Facility Booking module
-   Selects "Renovation Deposit" or "Moving Deposit" category
-   Pays $1,000 via credit card hold
-        |
-        v
+   Resident pays deposit
    Deposit status = "In Use"
    Work/move may commence
         |
         v
 STEP 3: COMPLETION AND REFUND
-   Resident submits "Completion & Inspection Request" e-form
-   (or notifies MA via reply thread)
+   Resident notifies MA via e-form reply thread:
+   "Work completed. Please arrange inspection."
         |
         v
    MA inspects common areas
         |
    [Damage found?]
         |
-       No --> MA clicks "Refund" in Deposit Records --> $1,000 returned
+       No --> MA processes refund --> Deposit returned
         |
-       Yes --> MA clicks "Forfeit" in Deposit Records --> Full/partial deduction
+       Yes --> MA processes forfeit --> Full/partial deduction
 ```
-
-**Applies to:**
-- Renovation (A&A) -- Form B-1 equivalent, $1,000 deposit
-- Moving In/Out -- Form D-1 equivalent, $1,000 deposit
-- Vehicle Registration -- Form F equivalent, $50 deposit (smaller amount, PayNow may be simpler)
-
-**Forms eliminated:** Form E (Refund of A&A Deposit) and Form K (Refund of Facility Deposit). Refund is now an MA-driven action at process closure, not a resident request.
-
-#### Concern: Credit Card Processing Fees
-
-Hilife adds an approximately 9% surcharge on credit card transactions:
-
-| Item | Handbook Price | Hilife Price | Markup |
-|------|---------------|-------------|--------|
-| Tennis Court booking fee | $10.00/hr | $10.90/hr | +9% |
-| Function Room booking fee | $100/session | $109/session | +9% |
-
-On a deposit charge-and-refund cycle, the MCST may lose 2-3% in credit card processing fees (processors typically do not return the merchant fee on refunds):
-
-| Deposit Amount | Estimated Processing Fee (2-3%) | Net Cost to MCST |
-|---------------|-------------------------------|-------------------|
-| $1,000 (Renovation/Moving) | $20 - $30 | $20 - $30 per cycle |
-| $200 (Function Room/Dining) | $4 - $6 | $4 - $6 per cycle |
-
-**Estimated annual impact:**
-
-| Category | Volume | Cost per Cycle | Annual Cost |
-|----------|--------|---------------|-------------|
-| Renovation/Moving deposits ($1,000) | ~50 | $20 - $30 | $1,000 - $1,500 |
-| Facility deposits ($200) | ~200 | $4 - $6 | $800 - $1,200 |
-| **Total** | | | **$1,800 - $2,700** |
-
-**Questions to clarify with Hilife:**
-
-1. Is there a per-transaction fee on deposit charges and refunds, and what is the exact rate?
-2. Does the ~9% surcharge apply to deposits, or only to booking fees?
-3. On full refund, does the resident receive 100% of the original deposit?
-4. Does the MCST absorb the credit card processing fee on both charge and refund?
-5. What happens when a deposit reaches its 6-month expiry -- auto-refund, flag for MA, or extend?
-6. Are PayNow or bank transfer available as alternative deposit modes?
-
-#### Alternative: PayNow for High-Value Deposits
-
-If credit card processing costs are confirmed to be material, the $1,000 deposits can be collected via PayNow instead:
-
-1. Resident submits e-form application (as normal).
-2. Upon approval, MA instructs resident to pay $1,000 via PayNow to the MCST bank account.
-3. Resident uploads payment confirmation screenshot in the e-form reply thread.
-4. MA verifies payment and creates a manual deposit record in Hilife Deposit Records.
-5. On completion, MA processes refund via bank transfer.
-
-This avoids credit card fees entirely but adds manual steps for both the resident and the MA. **Recommendation:** Confirm exact fee structure with Hilife first, then decide. If fees are negligible, use the credit card flow for simplicity. If fees are material ($20-30 per cycle), use PayNow for the $1,000 deposits while keeping credit card for the smaller $200 facility deposits.
 
 ---
 
@@ -587,58 +571,69 @@ The Facility Booking module is already working for Function Rooms, Dining Pavili
 
 ## 5. Action Items
 
-### 5.1 Immediate (Before Publishing Any E-Forms)
+### 5.1 Check with Hilife on Credit Card Fees
 
-| # | Action | Affected |
-|---|--------|----------|
-| 1 | Remove all NRIC collection fields | 18271, 18272 |
-| 2 | Remove all "Official Use" sections | All e-forms |
-| 3 | Replace "KINGSFORD HURAY DEVELOPMENT PTE LTD" with "MCST 4932" | All forms |
-| 4 | Remove all cheque/cash references; update to PayNow/Bank Transfer/Credit Card | 18271, 18272, 18273, 18274 |
-| 5 | Clarify credit card processing fees with Hilife (per-transaction costs, surcharge on deposits, 6-month expiry behaviour, refund handling) | All deposit workflows |
-| 6 | Check with Hilife whether credit card charges apply when collecting and refunding a deposit without any booking fee -- i.e., does a deposit-only transaction (no booking fee) still incur processing fees for the MCST on both charge and refund? | Renovation, Moving, Vehicle Reg deposit workflows |
-| 7 | Confirm pricing with MCST council (Tennis $10 vs $10.90, Function Room $100 vs $109) | Facility categories |
+Before committing to the Facility Booking module for deposit collection, the following must be clarified with Hilife:
+
+| # | Question |
+|---|----------|
+| 1 | What are the credit card processing fees for deposit collection and refund via the Facility Booking module? |
+| 2 | Does a deposit-only transaction (no booking fee) still incur processing fees for the MCST on both the charge and the refund? |
+| 3 | On full refund, does the resident receive 100% of the deposit, or is any processing fee deducted from the resident? |
+| 4 | What happens when a deposit reaches its 6-month expiry -- auto-refund, flag for MA action, or extension? |
+| 5 | Are PayNow or bank transfer available as alternative deposit collection modes within the Facility Booking module? |
+
+**Estimated impact if fees apply:** On a $1,000 deposit charge-and-refund cycle, MCST may lose $20-$30 in processing fees. Across ~50 renovation/moving deposits per year, that is $1,000-$1,500 annually.
 
 ### 5.2 E-Form Completion
 
-| # | Action | E-Form ID | Details |
-|---|--------|-----------|---------|
-| 8 | Add contact number and email to Address Change | 18237 | 2 fields to add, 1 to remove |
-| 9 | Add renovation scope, dates, worker list, applicant contact to A&A form | 18271 | 9 fields to add, 3 to remove; restructure Q1 into separate fields |
-| 10 | Add moving direction, time slot, contractor PIC to Moving form | 18272 | 4 fields to add, 3 to remove |
-| 11 | Add vehicle plate, IU, make/model, vehicle type, document uploads, deposit payment to Vehicle Registration | 18238 | 6 fields to add (consolidate from 18239), 1 to remove |
-| 12 | Add card holder details, quantity, replacement reason, payment upload to Access Card | 18274 | 4 fields to add, 2 to remove |
-| 13 | Expand Occupancy Registration with occupant details, tenancy period, emergency contact, consent | 18276 | 8 fields to add, 1 to remove |
-| 14 | Delete the Refund Request e-form | 18273 | Eliminated by proposed workflow |
+#### Forms to Update
 
-### 5.3 Facility Booking Configuration
+| # | Form | Hilife ID | Action Required |
+|---|------|-----------|-----------------|
+| 1 | Address Change | 18237 | Add contact number and email (2 fields). Remove "Official Use" section. |
+| 2 | Renovation A&A + Contractor | 18271 | Add renovation scope, dates, worker list, applicant contact, contractor email, hot work question (9 fields). Restructure Q1 into separate text fields. Remove NRIC, "Official Use" x2, deposit cheque ref. |
+| 3 | Moving In/Out | 18272 | Add moving direction, time slot, contractor PIC, number of workers (4 fields). Remove NRIC, deposit cheque ref, "Official Use". |
+| 4 | Vehicle Registration | 18238 | Add vehicle plate, IU, make/model, vehicle type, company letter upload, tenancy agreement upload, deposit payment confirmation (6 fields). Consolidate from form 18239. Remove "Official Use". |
+| 5 | Access Card | 18274 | Add number of cards, card holder details, replacement reason, payment confirmation (4 fields). Remove cash/cheque ref, "Official Use". |
+| 6 | Occupancy Registration | 18276 | Add registration type, owner name, tenancy dates, tenancy agreement, number of occupants, occupant details, emergency contact x2, PDPA consent (8 fields). Remove "Official Use". |
 
-| # | Action | Details |
-|---|--------|---------|
-| 15 | Reactivate "Renovation Deposit" facility category | deposit_switch=1, deposit=$1,000, enable_qa=0, booking_fee=$0 |
-| 16 | Reactivate "Moving Deposit" facility category | deposit_switch=1, deposit=$1,000, enable_qa=0, booking_fee=$0 |
-| 17 | Create "Carwash Bay" facility category | Pricing and rules TBD |
-| 18 | Create "EV Lot" facility category | Pricing and rules TBD |
-| 19 | Create "Temporary Overnight Parking" facility category | Pricing and rules TBD |
-| 20 | Enable booking Q&A for Function Room and Dining Pavilion | Guest count, event type |
-| 21 | Determine approach for Visitor Parking and Loading/Unloading Bay | Facility Booking vs E-form vs VMS integration |
+#### Forms to Delete
 
-### 5.4 New E-Forms to Build
+| # | Form | Hilife ID | Reason |
+|---|------|-----------|--------|
+| 7 | Request for Refund of Deposit | 18273 | Eliminated -- refund is now MA-driven at process closure, not a resident request. |
 
-| # | Form Name | Fields | Complexity |
-|---|-----------|--------|------------|
-| 22 | Pet Registration | 8 | Low |
-| 23 | Visitor Management System (VMS) | 7 | Medium |
-| 24 | Instructor/Coach Registration | 7 | Medium |
-| 25 | Completion & Inspection Request | 4 | Low |
+#### Forms to Create
 
-### 5.5 Testing & Rollout
+| # | Form | Fields | Complexity |
+|---|------|--------|------------|
+| 8 | Pet Registration | 8 | Low |
+| 9 | Visitor Management System (VMS) | 7 | Medium |
+| 10 | Instructor/Coach Registration | 7 | Medium |
+| 11 | Completion & Inspection Request (replaces Forms E and K) | 4 | Low |
 
-| # | Action | Details |
-|---|--------|---------|
-| 26 | Publish Form A (Address Change) as pilot | Lowest risk, near-complete |
-| 27 | Publish Form H (Bicycle Tag) as second pilot | Also near-complete |
-| 28 | Test full 3-step deposit workflow end-to-end | E-form submission, Facility Booking deposit, inspection, refund/forfeit |
-| 29 | Publish remaining e-forms in batches | Non-deposit forms first, then deposit forms |
-| 30 | Communicate to residents | Provide guide on digital submission process |
-| 31 | Decommission paper forms | After digital equivalents are stable |
+#### Cross-Cutting Fixes (All E-Forms)
+
+| # | Action |
+|---|--------|
+| 12 | Remove all NRIC last-4-digit collection fields (PDPA deadline: 31 Dec 2026) |
+| 13 | Remove all "Official Use" sections from resident-facing e-forms |
+| 14 | Replace all "KINGSFORD HURAY DEVELOPMENT PTE LTD" with "MCST 4932" |
+| 15 | Remove all cheque/cash references; update payment instructions to PayNow/Bank Transfer/Credit Card |
+| 16 | Update handbook prices to reflect GST-inclusive amounts (e.g., Tennis $10.90, Function Room $109) |
+
+### 5.3 Decide: Fee and Deposit Collection via Facility Booking or PayNow
+
+Pending the outcome of Section 5.1 (Hilife credit card fee clarification), decide the collection method for each form:
+
+| Form | Amount | Type | Option A: Facility Booking | Option B: PayNow |
+|------|--------|------|---------------------------|-------------------|
+| Renovation (B-1) | $1,000 | Refundable deposit | Credit card hold, auto-lifecycle tracking, MA refund/forfeit | Resident pays via PayNow, uploads screenshot, MA creates manual deposit record, MA refunds via bank transfer |
+| Moving (D-1) | $1,000 | Refundable deposit | Same as above | Same as above |
+| Vehicle Reg (F) | $50 | Refundable deposit | Same as above (smaller amount) | Same as above |
+| Access Card (G) | $50/card | Non-refundable fee | Booking fee per slot (awkward for variable qty) | Resident pays via PayNow, uploads screenshot in e-form |
+
+**If credit card fees are negligible:** Use Facility Booking for all deposits (simpler for residents, automated lifecycle). Use PayNow for Access Card fees (variable quantity).
+
+**If credit card fees are material ($20-30 per cycle):** Use PayNow for all $1,000 deposits (avoid fee loss). Use Facility Booking only for facility deposits ($200) where it is already working. Use PayNow for Access Card and Vehicle Registration fees/deposits.
