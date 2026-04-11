@@ -398,31 +398,30 @@ Note: Forms that require fee or deposit collection use separate workflows -- see
 
 For forms that require a non-refundable fee (not a deposit), the fee is collected via PayNow with proof of payment uploaded in the e-form.
 
+**Status convention:** The e-form stays in **Pending** throughout the entire process. MA only marks it as **Approved** when the case is fully closed (payment verified, request fulfilled). All communication and intermediate steps are managed via the **reply thread**.
+
 ```
-   Resident submits e-form with application details
+   Resident submits e-form              (status: PENDING)
         |
         v
-   MA reviews application
-        |
-   [Need more info?] --Yes--> MA uses reply thread --> Resident replies
-        |
-       No
-        |
-        v
-   MA approves e-form
+   MA reviews application via reply thread
+   (all back-and-forth happens here)
         |
         v
    MA replies with payment instruction:
-   "Approved. Please pay $XX via PayNow to MCST 4932
+   "Please pay $XX via PayNow to MCST 4932
     and upload the payment screenshot."
         |
         v
    Resident pays via PayNow
-   Uploads payment screenshot in e-form reply thread
+   Uploads payment screenshot in reply thread
         |
         v
    MA verifies payment
    Processes the request (issues card, decal, etc.)
+        |
+        v
+   MA marks e-form as APPROVED           (status: APPROVED = case closed)
 ```
 
 **Applies to:**
@@ -474,97 +473,78 @@ For the deposit payment step, there are two options:
 - On completion, MA refunds via bank transfer.
 - **No credit card fees**, but requires more manual effort from both resident and MA.
 
+**Status convention:** The e-form stays in **Pending** throughout the entire process -- application, deposit payment, work in progress, inspection, and refund. MA only marks it as **Approved** when the deposit has been fully refunded (or forfeited) and the case is closed. All communication and intermediate steps are managed via the **reply thread**.
+
 #### Proposed Workflow -- Flow A: Credit Card via Facility Booking
 
 ```
-STEP 1: E-FORM APPLICATION
-   Resident submits e-form with full details
-   (contractor info, work scope, dates, attachments, signatures)
+   Resident submits e-form              (status: PENDING)
         |
         v
-   MA reviews application
-        |
-   [Need more info?] --Yes--> MA uses reply thread --> Resident replies
-        |
-       No
+   MA reviews via reply thread
+   (all back-and-forth happens here)
         |
         v
-   MA approves e-form
+   MA replies: "Please proceed to Facility Booking to pay the deposit."
         |
         v
-STEP 2: DEPOSIT PAYMENT (Credit Card)
-   MA instructs resident via reply thread:
-   "Approved. Please proceed to Facility Booking to pay the deposit."
+   Resident pays deposit via credit card hold in Facility Booking
+   Deposit status = "In Use" (auto-tracked)
         |
         v
-   Resident opens Facility Booking module
-   Selects "Renovation Deposit" or "Moving Deposit" category
-   Pays deposit via credit card hold
+   Work/move commences
+   (MA and resident communicate via reply thread as needed)
         |
         v
-   Deposit status = "In Use" (auto-tracked in Deposit Records)
-   Work/move may commence
-        |
-        v
-STEP 3: COMPLETION AND REFUND
-   Resident notifies MA via e-form reply thread:
-   "Work completed. Please arrange inspection."
+   Resident notifies via reply thread: "Work completed."
         |
         v
    MA inspects common areas
         |
-   [Damage found?]
+   [Damage?]
+       No --> MA clicks "Refund" in Deposit Records
+       Yes --> MA clicks "Forfeit" in Deposit Records
         |
-       No --> MA clicks "Refund" in Deposit Records --> Deposit returned to credit card
-        |
-       Yes --> MA clicks "Forfeit" in Deposit Records --> Full/partial deduction
+        v
+   MA marks e-form as APPROVED           (status: APPROVED = case closed)
 ```
 
 #### Proposed Workflow -- Flow B: PayNow
 
 ```
-STEP 1: E-FORM APPLICATION
-   Resident submits e-form with full details
-   (contractor info, work scope, dates, attachments, signatures)
+   Resident submits e-form              (status: PENDING)
         |
         v
-   MA reviews application
-        |
-   [Need more info?] --Yes--> MA uses reply thread --> Resident replies
-        |
-       No
+   MA reviews via reply thread
+   (all back-and-forth happens here)
         |
         v
-   MA approves e-form
-        |
-        v
-STEP 2: DEPOSIT PAYMENT (PayNow)
-   MA instructs resident via reply thread:
-   "Approved. Please pay $X,XXX via PayNow to MCST 4932
+   MA replies: "Please pay $X,XXX via PayNow to MCST 4932
     and upload the payment screenshot here."
         |
         v
-   Resident pays via PayNow to MCST bank account
-   Uploads payment confirmation screenshot in e-form reply thread
+   Resident pays via PayNow
+   Uploads payment screenshot in reply thread
         |
         v
-   MA verifies payment
-   MA creates manual deposit record in Hilife Deposit Records
-   Work/move may commence
+   MA verifies payment, creates manual deposit record
         |
         v
-STEP 3: COMPLETION AND REFUND
-   Resident notifies MA via e-form reply thread:
-   "Work completed. Please arrange inspection."
+   Work/move commences
+   (MA and resident communicate via reply thread as needed)
+        |
+        v
+   Resident notifies via reply thread: "Work completed."
         |
         v
    MA inspects common areas
         |
-   [Damage found?]
+   [Damage?]
+       No --> MA refunds via bank transfer
+       Yes --> MA deducts damages, refunds remainder
         |
-       No --> MA processes refund via bank transfer --> Deposit returned
-        |
-       Yes --> MA deducts damages, refunds remainder via bank transfer
+        v
+   MA marks e-form as APPROVED           (status: APPROVED = case closed)
 ```
 
 ---
