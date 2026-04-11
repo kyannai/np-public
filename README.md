@@ -56,7 +56,7 @@ Hilife CMS provides two modules relevant to this migration:
 Nine new forms have been identified that have no paper equivalent. These must be built from scratch in Hilife:
 
 - Pet Registration
-- Visitor Management System (VMS)
+- Overnight Stay Visitor Registration (VMS)
 - Instructor/Coach Registration
 - Carwash Bay Booking
 - EV Lot Booking
@@ -85,7 +85,7 @@ This section specifies the complete field requirements for each e-form. For exis
 | Dining / Function Room | I, J | N/A | N/A | N/A | N/A | N/A | Facility Booking |
 | Occupancy Registration | L | 18276 | 2 | 10 | 8 | 1 | Very sparse |
 | Pet Registration | New | N/A | 0 | 8 | 8 | 0 | Not started |
-| VMS | New | N/A | 0 | 7 | 7 | 0 | Not started |
+| Overnight Stay Visitor Reg (VMS) | New | N/A | 0 | 7 | 7 | 0 | Not started |
 | Instructor Registration | New | N/A | 0 | 7 | 7 | 0 | Not started |
 | Completion & Inspection | Replaces E, K | N/A | 0 | 4 | 4 | 0 | Not started |
 
@@ -299,7 +299,7 @@ $50 refundable deposit is required for vehicle registration.
 
 ---
 
-### 3.11 New: Visitor Management System (VMS)
+### 3.11 New: Overnight Stay Visitor Registration (VMS)
 
 **Not yet built in Hilife | Required: 7 fields**
 
@@ -388,7 +388,7 @@ Simple e-form submission and approval flow:
    Resident receives outcome notification
 ```
 
-**Applies to:** Form A (Address Change), Form H (Bicycle Tag), Form L (Occupancy Registration), Pet Registration, VMS, Instructor/Coach Registration, Bicycle Registration.
+**Applies to:** Form A (Address Change), Form H (Bicycle Tag), Form L (Occupancy Registration), Pet Registration, Overnight Stay Visitor Reg (VMS), Instructor/Coach Registration, Bicycle Registration.
 
 Note: Forms that require fee or deposit collection use separate workflows -- see Section 4.2 (Fee Collection) and Section 4.3 (Deposit-Required).
 
@@ -638,7 +638,7 @@ Before committing to the Facility Booking module for deposit collection, the fol
 | # | Form | Fields | Complexity |
 |---|------|--------|------------|
 | 8 | Pet Registration | 8 | Low |
-| 9 | Visitor Management System (VMS) | 7 | Medium |
+| 9 | Overnight Stay Visitor Registration (VMS) | 7 | Medium |
 | 10 | Instructor/Coach Registration | 7 | Medium |
 | 11 | Completion & Inspection Request (replaces Forms E and K) | 4 | Low |
 
