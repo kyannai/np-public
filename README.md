@@ -634,6 +634,4 @@ Pending the outcome of Section 5.1 (Hilife credit card fee clarification), decid
 | Vehicle Reg (F) | $50 | Refundable deposit | Same as above (smaller amount) | Same as above |
 | Access Card (G) | $50/card | Non-refundable fee | Booking fee per slot (awkward for variable qty) | Resident pays via PayNow, uploads screenshot in e-form |
 
-**If credit card fees are negligible:** Use Facility Booking for all deposits (simpler for residents, automated lifecycle). Use PayNow for Access Card fees (variable quantity).
-
-**If credit card fees are material ($20-30 per cycle):** Use PayNow for all $1,000 deposits (avoid fee loss). Use Facility Booking only for facility deposits ($200) where it is already working. Use PayNow for Access Card and Vehicle Registration fees/deposits.
+**Recommendation:** Confirm exact fee structure with Hilife first, then decide. If there is no fee, and the max duration is enough, use the credit card flow for simplicity. If fees are material ($20-30 per cycle), use PayNow.
