@@ -102,7 +102,7 @@
   /* Main content */
   .main {
     margin-left: var(--color-sidebar-width);
-    max-width: 960px;
+    max-width: 1200px;
     padding: 40px 48px 80px;
   }
 
@@ -462,6 +462,17 @@
     color: var(--color-red);
   }
 
+  /* Expandable table rows */
+  .expandable-row { cursor: pointer; }
+  .expandable-row:hover { background: var(--color-primary-light) !important; }
+  .expandable-row td:first-child .arrow { display: inline-block; width: 16px; transition: transform 0.2s; }
+  .expandable-row.open td:first-child .arrow { transform: rotate(90deg); }
+  .detail-row { display: none; }
+  .detail-row.open { display: table-row; }
+  .detail-row td { padding: 16px 24px; background: #f8f9fa; }
+  .detail-row table { margin: 0; width: 100%; }
+  .detail-row .form-notes { margin-top: 12px; padding: 10px 14px; background: #fff; border-left: 3px solid var(--color-primary); font-size: 13px; }
+
   /* Print styles */
   @media print {
     .sidebar {
@@ -474,6 +485,9 @@
     }
     .collapsible-content {
       display: block !important;
+    }
+    .detail-row {
+      display: table-row !important;
     }
     .flow-diagram {
       break-inside: avoid;
@@ -629,383 +643,337 @@
     <p>Status key: <span class="badge badge-green">Exists</span> <span class="badge badge-yellow">Exists (QX)</span> <span class="badge badge-yellow">Partial (QX)</span> <span class="badge badge-red">MISSING</span> <span class="badge badge-yellow">Remove</span> <span class="badge badge-red">N/A</span></p>
 
     <h3 id="eform-summary">Discrepancy Summary</h3>
+    <p>Click any row to expand field details.</p>
     <div class="table-wrap">
       <table>
         <thead>
           <tr><th>Form</th><th>Paper Form ID</th><th>Hilife ID</th><th>Current Qs</th><th>Required Fields</th><th>Missing</th><th>To Remove</th><th>Readiness</th></tr>
         </thead>
         <tbody>
-          <tr><td>Address Change</td><td>A</td><td>18237</td><td>4</td><td>5</td><td>2</td><td>1</td><td><span class="badge badge-green">Near-complete</span></td></tr>
-          <tr><td>Renovation/A&amp;A + Contractor</td><td>B-1, B-2, B-3, C</td><td>18271</td><td>8</td><td>20</td><td>9</td><td>3</td><td><span class="badge badge-red">Major gaps</span></td></tr>
-          <tr><td>Moving In/Out</td><td>D-1, D-2</td><td>18272</td><td>5</td><td>10</td><td>4</td><td>3</td><td><span class="badge badge-red">Major gaps</span></td></tr>
-          <tr><td>Refund of Deposit</td><td>E, K</td><td>18273</td><td>5</td><td>0</td><td>0</td><td>0</td><td><span class="badge badge-red">ELIMINATED</span></td></tr>
-          <tr><td>Vehicle Registration</td><td>F</td><td>18238</td><td>4</td><td>9</td><td>6</td><td>1</td><td><span class="badge badge-yellow">Incomplete</span></td></tr>
-          <tr><td>Access Card</td><td>G</td><td>18274</td><td>3</td><td>6</td><td>4</td><td>2</td><td><span class="badge badge-red">Major gaps</span></td></tr>
-          <tr><td>Bicycle Tag</td><td>H</td><td>18275</td><td>4</td><td>4</td><td>0</td><td>1</td><td><span class="badge badge-green">Near-complete</span></td></tr>
-          <tr><td>Dining / Function Room</td><td>I, J</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td><span class="badge badge-green">Facility Booking</span></td></tr>
-          <tr><td>Occupancy Registration</td><td>L</td><td>18276</td><td>2</td><td>10</td><td>8</td><td>1</td><td><span class="badge badge-red">Very sparse</span></td></tr>
-          <tr><td>Pet Registration</td><td>New</td><td>N/A</td><td>0</td><td>8</td><td>8</td><td>0</td><td><span class="badge badge-red">Not started</span></td></tr>
-          <tr><td>VMS</td><td>New</td><td>N/A</td><td>0</td><td>7</td><td>7</td><td>0</td><td><span class="badge badge-red">Not started</span></td></tr>
-          <tr><td>Instructor Reg</td><td>New</td><td>N/A</td><td>0</td><td>7</td><td>7</td><td>0</td><td><span class="badge badge-red">Not started</span></td></tr>
-          <tr><td>Completion &amp; Inspection</td><td>Replaces E, K</td><td>N/A</td><td>0</td><td>4</td><td>4</td><td>0</td><td><span class="badge badge-red">Not started</span></td></tr>
+
+          <!-- Row 1: Address Change -->
+          <tr class="expandable-row" id="form-a" onclick="toggleDetailRow(this)">
+            <td><span class="arrow">&#9654;</span> Address Change</td><td>A</td><td>18237</td><td>4</td><td>5</td><td>2</td><td>1</td><td><span class="badge badge-green">Near-complete</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="8">
+              <table>
+                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>New Correspondence Address</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
+                  <tr><td>2</td><td>Effective Date of Change</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
+                  <tr><td>3</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Mobile and/or home</td></tr>
+                  <tr><td>4</td><td>Email Address</td><td>Text</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>For correspondence</td></tr>
+                  <tr><td>5</td><td>Consent (PDPA)</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
+                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove</span></td><td>MA uses approval workflow instead</td></tr>
+                </tbody>
+              </table>
+              <div class="form-notes">
+                <strong>Assessment:</strong> Near-complete. Add contact number and email fields, remove the "Official Use" section, verify entity name reads "MCST 4932". Recommended as a pilot form.
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 2: Renovation/A&A + Contractor -->
+          <tr class="expandable-row" id="form-b1" onclick="toggleDetailRow(this)">
+            <td><span class="arrow">&#9654;</span> Renovation/A&amp;A + Contractor</td><td>B-1, B-2, B-3, C</td><td>18271</td><td>8</td><td>20</td><td>9</td><td>3</td><td><span class="badge badge-red">Major gaps</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="8">
+              <p style="margin-bottom:12px;">Merged form combining paper Forms B-1, B-2, B-3, and C.</p>
+              <table>
+                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
+                <tbody>
+                  <tr class="section-header"><td colspan="6">Section: Applicant Info</td></tr>
+                  <tr><td>1</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Mobile</td></tr>
+                  <tr><td>2</td><td>Email Address</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
+                  <tr class="section-header"><td colspan="6">Section: Renovation Details</td></tr>
+                  <tr><td>3</td><td>Summary of Proposed Renovation Works</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Description of scope</td></tr>
+                  <tr><td>4</td><td>Date of Commencement</td><td>Date</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
+                  <tr><td>5</td><td>Expected Date of Completion</td><td>Date</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
+                  <tr><td>6</td><td>Drawing Plans / Renovation Proposal</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Upload PDF/images</td></tr>
+                  <tr><td>7</td><td>Hot Work Required?</td><td>Single Choice (Yes/No)</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>If yes, hot work permit applies</td></tr>
+                  <tr class="section-header"><td colspan="6">Section: Contractor Info</td></tr>
+                  <tr><td>8</td><td>Name of Contractor Company</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Exists (QX)</span></td><td>Combined as Multiple Choice in Q1, needs restructuring</td></tr>
+                  <tr><td>9</td><td>Contractor Business Reg. No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Exists (QX)</span></td><td>Combined in Q1, needs separate field</td></tr>
+                  <tr><td>10</td><td>Contractor Address</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Exists (QX)</span></td><td>Combined in Q1, needs separate field</td></tr>
+                  <tr><td>11</td><td>Contractor Person-in-Charge</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Exists (QX)</span></td><td>Combined in Q1, needs separate field</td></tr>
+                  <tr><td>12</td><td>Contractor Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Exists (QX)</span></td><td>Combined in Q1, needs separate field</td></tr>
+                  <tr><td>13</td><td>Contractor Email</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
+                  <tr><td>14</td><td>Company Stamp</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
+                  <tr class="section-header"><td colspan="6">Section: Worker Details</td></tr>
+                  <tr><td>15</td><td>Number of Workers</td><td>Number</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
+                  <tr><td>16</td><td>Worker Names and ID Numbers</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Name + work permit/passport no. Do NOT collect NRIC.</td></tr>
+                  <tr class="section-header"><td colspan="6">Section: Indemnity &amp; Acknowledgment</td></tr>
+                  <tr><td>17</td><td>Contractor Indemnity Undertaking</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td>Lift protection, common area clauses</td></tr>
+                  <tr><td>18</td><td>Terms and Conditions Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
+                  <tr><td>19</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2/Q4)</span></td><td></td></tr>
+                  <tr><td>20</td><td>Contractor Signature</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q5)</span></td><td></td></tr>
+                  <tr class="remove-row"><td>-</td><td><s>NRIC Last 4 Digits</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove</span></td><td>PDPA non-compliant by 31 Dec 2026</td></tr>
+                  <tr class="remove-row"><td>-</td><td><s>Official Use x2</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q6, Q8)</span></td><td>MA uses approval workflow</td></tr>
+                  <tr class="remove-row"><td>-</td><td><s>Deposit Cheque Number</s></td><td><s>Text</s></td><td>Remove</td><td>N/A</td><td>Deposit collected via Facility Booking module</td></tr>
+                </tbody>
+              </table>
+              <div class="form-notes">
+                <strong>Assessment:</strong> Major gaps. The merge of B-1/B-2/B-3/C is correct in concept, but the form lacks renovation scope details, dates, worker list, and applicant contact info. Contractor info fields exist but are crammed into a single Multiple Choice question and need restructuring into separate text fields. NRIC field must be removed. Deposit handled via Facility Booking module.
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 3: Moving In/Out -->
+          <tr class="expandable-row" id="form-d1" onclick="toggleDetailRow(this)">
+            <td><span class="arrow">&#9654;</span> Moving In/Out</td><td>D-1, D-2</td><td>18272</td><td>5</td><td>10</td><td>4</td><td>3</td><td><span class="badge badge-red">Major gaps</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="8">
+              <p style="margin-bottom:12px;">Merged form combining paper Forms D-1 and D-2.</p>
+              <table>
+                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>Moving Direction</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>"Moving In" or "Moving Out"</td></tr>
+                  <tr><td>2</td><td>Date of Moving</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
+                  <tr><td>3</td><td>Preferred Time Slot</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Morning (9am-1pm) / Afternoon (1pm-5pm)</td></tr>
+                  <tr class="section-header"><td colspan="6">Section: Contractor Info</td></tr>
+                  <tr><td>4</td><td>Name of Moving Company</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Partial (QX)</span></td><td>Combined in Q3, needs restructuring</td></tr>
+                  <tr><td>5</td><td>Contractor Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Partial (QX)</span></td><td>Combined in Q3</td></tr>
+                  <tr><td>6</td><td>Contractor Person-in-Charge</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
+                  <tr><td>7</td><td>Number of Workers</td><td>Number</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
+                  <tr class="section-header"><td colspan="6">Section: Indemnity &amp; Acknowledgment</td></tr>
+                  <tr><td>8</td><td>Contractor Indemnity Undertaking</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td>Lift protection, common area protection</td></tr>
+                  <tr><td>9</td><td>Terms and Conditions Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
+                  <tr><td>10</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3/Q4)</span></td><td></td></tr>
+                  <tr class="remove-row"><td>-</td><td><s>NRIC Last 4 Digits</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q4)</span></td><td>PDPA non-compliant</td></tr>
+                  <tr class="remove-row"><td>-</td><td><s>Deposit Cheque Number</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q2)</span></td><td>Deposit via Facility Booking</td></tr>
+                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q5)</span></td><td></td></tr>
+                </tbody>
+              </table>
+              <div class="form-notes">
+                <strong>Assessment:</strong> Major gaps. Cannot distinguish moving in from moving out. Missing time slot preference. Cheque reference and NRIC field must be removed. Deposit handled via Facility Booking module.
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 4: Refund of Deposit (ELIMINATED) -->
+          <tr class="expandable-row" id="form-ek" onclick="toggleDetailRow(this)">
+            <td><span class="arrow">&#9654;</span> Refund of Deposit</td><td>E, K</td><td>18273</td><td>5</td><td>0</td><td>0</td><td>0</td><td><span class="badge badge-red">ELIMINATED</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="8">
+              <p>This form is <strong>eliminated</strong> from the digital platform. The current Hilife draft (ID 18273) conflates two different refund processes and should be deleted.</p>
+              <div class="form-notes">
+                <strong>Rationale:</strong> Under the proposed dual-module workflow, deposit refunds are no longer resident-initiated "requests." They are mandatory MA actions triggered at process closure:
+                <ul style="margin-top:8px;">
+                  <li><strong>A&amp;A/Moving deposit refunds</strong> &mdash; MA processes via the Deposit Records page after inspection.</li>
+                  <li><strong>Facility booking deposit refunds</strong> &mdash; handled automatically by the Facility Booking module, or MA clicks Refund/Forfeit in Deposit Records.</li>
+                </ul>
+              </div>
+              <p style="margin-top:12px;">The paper Forms E and K are replaced by the new "Completion &amp; Inspection Request" e-form, which notifies the MA that work is complete and triggers inspection, rather than requesting a refund.</p>
+            </td>
+          </tr>
+
+          <!-- Row 5: Vehicle Registration -->
+          <tr class="expandable-row" id="form-f" onclick="toggleDetailRow(this)">
+            <td><span class="arrow">&#9654;</span> Vehicle Registration</td><td>F</td><td>18238</td><td>4</td><td>9</td><td>6</td><td>1</td><td><span class="badge badge-yellow">Incomplete</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="8">
+              <table>
+                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>Applicant Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>"Subsidiary Proprietor" or "Tenant"</td></tr>
+                  <tr><td>2</td><td>Vehicle Registration Plate No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Exists in wrong form (18239)</td></tr>
+                  <tr><td>3</td><td>Vehicle IU Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Exists in wrong form (18239)</td></tr>
+                  <tr><td>4</td><td>Vehicle Make and Model</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Exists in wrong form (18239)</td></tr>
+                  <tr><td>5</td><td>Vehicle Type</td><td>Single Choice</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>Car / Motorcycle / Others</td></tr>
+                  <tr><td>6</td><td>Company Vehicle Letter</td><td>Attachment</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>Required if company-registered vehicle</td></tr>
+                  <tr><td>7</td><td>Tenancy Agreement Copy</td><td>Attachment</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>Required if tenant</td></tr>
+                  <tr><td>8</td><td>Consent + Rules Acknowledgment</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>PDPA + carpark rules</td></tr>
+                  <tr><td>9</td><td>Deposit Payment Confirmation</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Upload PayNow screenshot ($50 to MCST 4932)</td></tr>
+                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q4)</span></td><td></td></tr>
+                </tbody>
+              </table>
+              <p style="margin-top:12px;"><strong>Note:</strong> The $50 deposit is refundable upon de-registration of the vehicle.</p>
+              <div class="form-notes">
+                <strong>Assessment:</strong> Incomplete. Critical vehicle details (plate, IU, make/model) are missing from this form &mdash; they exist in a separate form (ID 18239) and must be consolidated. Vehicle type and supporting document uploads need to be added.
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 6: Access Card -->
+          <tr class="expandable-row" id="form-g" onclick="toggleDetailRow(this)">
+            <td><span class="arrow">&#9654;</span> Access Card</td><td>G</td><td>18274</td><td>3</td><td>6</td><td>4</td><td>2</td><td><span class="badge badge-red">Major gaps</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="8">
+              <table>
+                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>Application Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>"Replacement" or "Additional Card"</td></tr>
+                  <tr><td>2</td><td>Number of Cards Required</td><td>Number</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
+                  <tr><td>3</td><td>Card Holder Details</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Name and relationship to SP per card</td></tr>
+                  <tr><td>4</td><td>Reason for Replacement</td><td>Text</td><td>Conditional</td><td><span class="badge badge-red">MISSING</span></td><td>Required if "Replacement"</td></tr>
+                  <tr><td>5</td><td>Payment Confirmation</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Upload PayNow screenshot ($50/card to MCST 4932)</td></tr>
+                  <tr><td>6</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
+                  <tr class="remove-row"><td>-</td><td><s>Cash/Cheque Reference</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q3)</span></td><td>Payment via PayNow</td></tr>
+                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q3)</span></td><td></td></tr>
+                </tbody>
+              </table>
+              <div class="form-notes">
+                <strong>Assessment:</strong> Major gaps. Missing card holder details, quantity, and replacement reason. The $50/card fee should be collected via PayNow with screenshot upload as payment confirmation.
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 7: Bicycle Tag -->
+          <tr class="expandable-row" id="form-h" onclick="toggleDetailRow(this)">
+            <td><span class="arrow">&#9654;</span> Bicycle Tag</td><td>H</td><td>18275</td><td>4</td><td>4</td><td>0</td><td>1</td><td><span class="badge badge-green">Near-complete</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="8">
+              <table>
+                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>Number of Bicycle Tags</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
+                  <tr><td>2</td><td>Application Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td>"First-time" or "Replacement"</td></tr>
+                  <tr><td>3</td><td>Terms and Conditions Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>Bicycle parking rules</td></tr>
+                  <tr><td>4</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
+                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q4)</span></td><td></td></tr>
+                </tbody>
+              </table>
+              <div class="form-notes">
+                <strong>Assessment:</strong> Near-complete. All required fields exist. Only action needed is removing the "Official Use" section and verifying entity name. Recommended as a pilot alongside Form A.
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 8: Dining / Function Room -->
+          <tr class="expandable-row" id="form-ij" onclick="toggleDetailRow(this)">
+            <td><span class="arrow">&#9654;</span> Dining / Function Room</td><td>I, J</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td><span class="badge badge-green">Facility Booking</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="8">
+              <p><strong>No e-form needed.</strong> These are handled entirely by the Facility Booking module, which is already active and working.</p>
+              <ul style="margin-top:8px;">
+                <li><strong>Dining Pavilion</strong> (Form I) &mdash; $200 deposit + $25-50 booking fee, via Facility Booking.</li>
+                <li><strong>Function Room</strong> (Form J) &mdash; $200 deposit + $100 booking fee, via Facility Booking.</li>
+                <li><strong>Form K</strong> (Refund Request for Facilities) &mdash; eliminated. Refunds are automatic or MA-driven through Deposit Records.</li>
+              </ul>
+            </td>
+          </tr>
+
+          <!-- Row 9: Occupancy Registration -->
+          <tr class="expandable-row" id="form-l" onclick="toggleDetailRow(this)">
+            <td><span class="arrow">&#9654;</span> Occupancy Registration</td><td>L</td><td>18276</td><td>2</td><td>10</td><td>8</td><td>1</td><td><span class="badge badge-red">Very sparse</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="8">
+              <table>
+                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>Registration Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>"New Occupancy" or "Change of Occupancy"</td></tr>
+                  <tr><td>2</td><td>Owner Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Auto-populate from Hilife profile if possible</td></tr>
+                  <tr><td>3</td><td>Tenancy Start Date</td><td>Date</td><td>Conditional</td><td><span class="badge badge-red">MISSING</span></td><td>Required if tenant</td></tr>
+                  <tr><td>4</td><td>Tenancy End Date</td><td>Date</td><td>Conditional</td><td><span class="badge badge-red">MISSING</span></td><td>Required if tenant</td></tr>
+                  <tr><td>5</td><td>Tenancy Agreement</td><td>Attachment</td><td>Conditional</td><td><span class="badge badge-red">MISSING</span></td><td>Required if tenant</td></tr>
+                  <tr><td>6</td><td>Number of Occupants</td><td>Number</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Maximum 6 unrelated persons per regulations</td></tr>
+                  <tr><td>7</td><td>Occupant Details</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-yellow">Partial (QX)</span></td><td>Q1 "Tenant Info" &mdash; very sparse, needs expansion</td></tr>
+                  <tr><td>8</td><td>Emergency Contact Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
+                  <tr><td>9</td><td>Emergency Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
+                  <tr><td>10</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
+                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q2)</span></td><td></td></tr>
+                </tbody>
+              </table>
+              <div class="form-notes">
+                <strong>Assessment:</strong> Very sparse. Only one actual resident-facing field exists (Q1 "Tenant Info"). The paper form collects significantly more detail. Eight fields must be added.
+              </div>
+            </td>
+          </tr>
+
+          <!-- Row 10: Pet Registration -->
+          <tr class="expandable-row" id="form-pet" onclick="toggleDetailRow(this)">
+            <td><span class="arrow">&#9654;</span> Pet Registration</td><td>New</td><td>N/A</td><td>0</td><td>8</td><td>8</td><td>0</td><td><span class="badge badge-red">Not started</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="8">
+              <table>
+                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>Pet Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Dog / Cat / Others</td></tr>
+                  <tr><td>2</td><td>Breed</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>3</td><td>Pet Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>4</td><td>Pet Photo</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>For identification</td></tr>
+                  <tr><td>5</td><td>AVS License Number</td><td>Text</td><td>Conditional</td><td><span class="badge badge-red">N/A</span></td><td>Required for dogs</td></tr>
+                  <tr><td>6</td><td>Vaccination Certificate</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Up-to-date vaccination proof</td></tr>
+                  <tr><td>7</td><td>Rules Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>"I agree to abide by the pet rules and regulations"</td></tr>
+                  <tr><td>8</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Row 11: VMS -->
+          <tr class="expandable-row" id="form-vms" onclick="toggleDetailRow(this)">
+            <td><span class="arrow">&#9654;</span> VMS</td><td>New</td><td>N/A</td><td>0</td><td>7</td><td>7</td><td>0</td><td><span class="badge badge-red">Not started</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="8">
+              <table>
+                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>Visitor Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>2</td><td>Visitor Contact Number</td><td>Text</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>3</td><td>Visit Date</td><td>Date</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>4</td><td>Expected Time of Arrival</td><td>Time</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>5</td><td>Vehicle Number (if driving)</td><td>Text</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td>For carpark access</td></tr>
+                  <tr><td>6</td><td>Purpose of Visit</td><td>Single Choice</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td>Social / Delivery / Service / Others</td></tr>
+                  <tr><td>7</td><td>Number of Visitors</td><td>Number</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td>Default 1</td></tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Row 12: Instructor Reg -->
+          <tr class="expandable-row" id="form-instructor" onclick="toggleDetailRow(this)">
+            <td><span class="arrow">&#9654;</span> Instructor Reg</td><td>New</td><td>N/A</td><td>0</td><td>7</td><td>7</td><td>0</td><td><span class="badge badge-red">Not started</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="8">
+              <table>
+                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>Instructor/Coach Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>2</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>3</td><td>Activity/Sport</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Swimming / Tennis / Gym / Yoga / Others</td></tr>
+                  <tr><td>4</td><td>Schedule</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Days and times</td></tr>
+                  <tr><td>5</td><td>Insurance/Certification Proof</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>6</td><td>Sponsoring Resident (Unit No.)</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Resident who engaged the coach</td></tr>
+                  <tr><td>7</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Row 13: Completion & Inspection -->
+          <tr class="expandable-row" id="form-completion" onclick="toggleDetailRow(this)">
+            <td><span class="arrow">&#9654;</span> Completion &amp; Inspection</td><td>Replaces E, K</td><td>N/A</td><td>0</td><td>4</td><td>4</td><td>0</td><td><span class="badge badge-red">Not started</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="8">
+              <p style="margin-bottom:12px;">Simple e-form submitted by residents when renovation or moving is complete, to trigger MA inspection and deposit refund.</p>
+              <table>
+                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>Application Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>"Renovation Completed" or "Moving Completed"</td></tr>
+                  <tr><td>2</td><td>Date of Completion</td><td>Date</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>3</td><td>Remarks</td><td>Text (multi-line)</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td>Any notes for MA</td></tr>
+                  <tr><td>4</td><td>Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>"I confirm all works are completed and common areas have been restored"</td></tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
         </tbody>
       </table>
-    </div>
-
-    <!-- ===== Form A ===== -->
-    <div class="collapsible" id="form-a">
-      <button class="collapsible-toggle" onclick="toggleCollapsible(this)">
-        <span><span class="badge badge-green">Near-complete</span> &nbsp; Form A &mdash; Notice of Change of Correspondence Address &nbsp;|&nbsp; ID: 18237 &nbsp;|&nbsp; 4 current / 5 required</span>
-        <span class="arrow">&#9654;</span>
-      </button>
-      <div class="collapsible-content">
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>1</td><td>New Correspondence Address</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
-              <tr><td>2</td><td>Effective Date of Change</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
-              <tr><td>3</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Mobile and/or home</td></tr>
-              <tr><td>4</td><td>Email Address</td><td>Text</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>For correspondence</td></tr>
-              <tr><td>5</td><td>Consent (PDPA)</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
-              <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove</span></td><td>MA uses approval workflow instead</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="info-box info-box-green">
-          <strong>Assessment:</strong> Near-complete. Add contact number and email fields, remove the "Official Use" section, verify entity name reads "MCST 4932". Recommended as a pilot form.
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== Form B-1 ===== -->
-    <div class="collapsible" id="form-b1">
-      <button class="collapsible-toggle" onclick="toggleCollapsible(this)">
-        <span><span class="badge badge-red">Major gaps</span> &nbsp; Form B-1 &mdash; Renovation + Contractor Reg &nbsp;|&nbsp; ID: 18271 &nbsp;|&nbsp; 8 current / 20 required</span>
-        <span class="arrow">&#9654;</span>
-      </button>
-      <div class="collapsible-content">
-        <p>Merged form combining paper Forms B-1, B-2, B-3, and C.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr class="section-header"><td colspan="6">Section: Applicant Info</td></tr>
-              <tr><td>1</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Mobile</td></tr>
-              <tr><td>2</td><td>Email Address</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-              <tr class="section-header"><td colspan="6">Section: Renovation Details</td></tr>
-              <tr><td>3</td><td>Summary of Proposed Renovation Works</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Description of scope</td></tr>
-              <tr><td>4</td><td>Date of Commencement</td><td>Date</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-              <tr><td>5</td><td>Expected Date of Completion</td><td>Date</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-              <tr><td>6</td><td>Drawing Plans / Renovation Proposal</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Upload PDF/images</td></tr>
-              <tr><td>7</td><td>Hot Work Required?</td><td>Single Choice (Yes/No)</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>If yes, hot work permit applies</td></tr>
-              <tr class="section-header"><td colspan="6">Section: Contractor Info</td></tr>
-              <tr><td>8</td><td>Name of Contractor Company</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Exists (QX)</span></td><td>Combined as Multiple Choice in Q1, needs restructuring</td></tr>
-              <tr><td>9</td><td>Contractor Business Reg. No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Exists (QX)</span></td><td>Combined in Q1, needs separate field</td></tr>
-              <tr><td>10</td><td>Contractor Address</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Exists (QX)</span></td><td>Combined in Q1, needs separate field</td></tr>
-              <tr><td>11</td><td>Contractor Person-in-Charge</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Exists (QX)</span></td><td>Combined in Q1, needs separate field</td></tr>
-              <tr><td>12</td><td>Contractor Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Exists (QX)</span></td><td>Combined in Q1, needs separate field</td></tr>
-              <tr><td>13</td><td>Contractor Email</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-              <tr><td>14</td><td>Company Stamp</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
-              <tr class="section-header"><td colspan="6">Section: Worker Details</td></tr>
-              <tr><td>15</td><td>Number of Workers</td><td>Number</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-              <tr><td>16</td><td>Worker Names and ID Numbers</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Name + work permit/passport no. Do NOT collect NRIC.</td></tr>
-              <tr class="section-header"><td colspan="6">Section: Indemnity &amp; Acknowledgment</td></tr>
-              <tr><td>17</td><td>Contractor Indemnity Undertaking</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td>Lift protection, common area clauses</td></tr>
-              <tr><td>18</td><td>Terms and Conditions Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
-              <tr><td>19</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2/Q4)</span></td><td></td></tr>
-              <tr><td>20</td><td>Contractor Signature</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q5)</span></td><td></td></tr>
-              <tr class="remove-row"><td>-</td><td><s>NRIC Last 4 Digits</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove</span></td><td>PDPA non-compliant by 31 Dec 2026</td></tr>
-              <tr class="remove-row"><td>-</td><td><s>Official Use x2</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q6, Q8)</span></td><td>MA uses approval workflow</td></tr>
-              <tr class="remove-row"><td>-</td><td><s>Deposit Cheque Number</s></td><td><s>Text</s></td><td>Remove</td><td>N/A</td><td>Deposit collected via Facility Booking module</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="info-box info-box-red">
-          <strong>Assessment:</strong> Major gaps. The merge of B-1/B-2/B-3/C is correct in concept, but the form lacks renovation scope details, dates, worker list, and applicant contact info. Contractor info fields exist but are crammed into a single Multiple Choice question and need restructuring into separate text fields. NRIC field must be removed. Deposit handled via Facility Booking module.
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== Form D-1 ===== -->
-    <div class="collapsible" id="form-d1">
-      <button class="collapsible-toggle" onclick="toggleCollapsible(this)">
-        <span><span class="badge badge-red">Major gaps</span> &nbsp; Form D-1 &mdash; Moving In / Moving Out &nbsp;|&nbsp; ID: 18272 &nbsp;|&nbsp; 5 current / 10 required</span>
-        <span class="arrow">&#9654;</span>
-      </button>
-      <div class="collapsible-content">
-        <p>Merged form combining paper Forms D-1 and D-2.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>1</td><td>Moving Direction</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>"Moving In" or "Moving Out"</td></tr>
-              <tr><td>2</td><td>Date of Moving</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
-              <tr><td>3</td><td>Preferred Time Slot</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Morning (9am-1pm) / Afternoon (1pm-5pm)</td></tr>
-              <tr class="section-header"><td colspan="6">Section: Contractor Info</td></tr>
-              <tr><td>4</td><td>Name of Moving Company</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Partial (QX)</span></td><td>Combined in Q3, needs restructuring</td></tr>
-              <tr><td>5</td><td>Contractor Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Partial (QX)</span></td><td>Combined in Q3</td></tr>
-              <tr><td>6</td><td>Contractor Person-in-Charge</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-              <tr><td>7</td><td>Number of Workers</td><td>Number</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-              <tr class="section-header"><td colspan="6">Section: Indemnity &amp; Acknowledgment</td></tr>
-              <tr><td>8</td><td>Contractor Indemnity Undertaking</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td>Lift protection, common area protection</td></tr>
-              <tr><td>9</td><td>Terms and Conditions Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
-              <tr><td>10</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3/Q4)</span></td><td></td></tr>
-              <tr class="remove-row"><td>-</td><td><s>NRIC Last 4 Digits</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q4)</span></td><td>PDPA non-compliant</td></tr>
-              <tr class="remove-row"><td>-</td><td><s>Deposit Cheque Number</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q2)</span></td><td>Deposit via Facility Booking</td></tr>
-              <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q5)</span></td><td></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="info-box info-box-red">
-          <strong>Assessment:</strong> Major gaps. Cannot distinguish moving in from moving out. Missing time slot preference. Cheque reference and NRIC field must be removed. Deposit handled via Facility Booking module.
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== Form E/K ELIMINATED ===== -->
-    <div class="collapsible" id="form-ek">
-      <button class="collapsible-toggle" onclick="toggleCollapsible(this)">
-        <span><span class="badge badge-red">ELIMINATED</span> &nbsp; Form E/K &mdash; Refund of Deposit &nbsp;|&nbsp; ID: 18273</span>
-        <span class="arrow">&#9654;</span>
-      </button>
-      <div class="collapsible-content">
-        <p>This form is <strong>eliminated</strong> from the digital platform. The current Hilife draft (ID 18273) conflates two different refund processes and should be deleted.</p>
-        <div class="info-box info-box-red">
-          <strong>Rationale:</strong> Under the proposed dual-module workflow, deposit refunds are no longer resident-initiated "requests." They are mandatory MA actions triggered at process closure:
-          <ul style="margin-top:8px;">
-            <li><strong>A&amp;A/Moving deposit refunds</strong> &mdash; MA processes via the Deposit Records page after inspection.</li>
-            <li><strong>Facility booking deposit refunds</strong> &mdash; handled automatically by the Facility Booking module, or MA clicks Refund/Forfeit in Deposit Records.</li>
-          </ul>
-        </div>
-        <p>The paper Forms E and K are replaced by the new "Completion &amp; Inspection Request" e-form, which notifies the MA that work is complete and triggers inspection, rather than requesting a refund.</p>
-      </div>
-    </div>
-
-    <!-- ===== Form F ===== -->
-    <div class="collapsible" id="form-f">
-      <button class="collapsible-toggle" onclick="toggleCollapsible(this)">
-        <span><span class="badge badge-yellow">Incomplete</span> &nbsp; Form F &mdash; Residential Vehicle Registration &nbsp;|&nbsp; ID: 18238 &nbsp;|&nbsp; 4 current / 9 required / 6 missing</span>
-        <span class="arrow">&#9654;</span>
-      </button>
-      <div class="collapsible-content">
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>1</td><td>Applicant Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>"Subsidiary Proprietor" or "Tenant"</td></tr>
-              <tr><td>2</td><td>Vehicle Registration Plate No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Exists in wrong form (18239)</td></tr>
-              <tr><td>3</td><td>Vehicle IU Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Exists in wrong form (18239)</td></tr>
-              <tr><td>4</td><td>Vehicle Make and Model</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Exists in wrong form (18239)</td></tr>
-              <tr><td>5</td><td>Vehicle Type</td><td>Single Choice</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>Car / Motorcycle / Others</td></tr>
-              <tr><td>6</td><td>Company Vehicle Letter</td><td>Attachment</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>Required if company-registered vehicle</td></tr>
-              <tr><td>7</td><td>Tenancy Agreement Copy</td><td>Attachment</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>Required if tenant</td></tr>
-              <tr><td>8</td><td>Consent + Rules Acknowledgment</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>PDPA + carpark rules</td></tr>
-              <tr><td>9</td><td>Deposit Payment Confirmation</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Upload PayNow screenshot ($50 to MCST 4932)</td></tr>
-              <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q4)</span></td><td></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p><strong>Note:</strong> The $50 deposit is refundable upon de-registration of the vehicle.</p>
-        <div class="info-box info-box-yellow">
-          <strong>Assessment:</strong> Incomplete. Critical vehicle details (plate, IU, make/model) are missing from this form &mdash; they exist in a separate form (ID 18239) and must be consolidated. Vehicle type and supporting document uploads need to be added.
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== Form G ===== -->
-    <div class="collapsible" id="form-g">
-      <button class="collapsible-toggle" onclick="toggleCollapsible(this)">
-        <span><span class="badge badge-red">Major gaps</span> &nbsp; Form G &mdash; Application for Access Card &nbsp;|&nbsp; ID: 18274 &nbsp;|&nbsp; 3 current / 6 required</span>
-        <span class="arrow">&#9654;</span>
-      </button>
-      <div class="collapsible-content">
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>1</td><td>Application Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>"Replacement" or "Additional Card"</td></tr>
-              <tr><td>2</td><td>Number of Cards Required</td><td>Number</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-              <tr><td>3</td><td>Card Holder Details</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Name and relationship to SP per card</td></tr>
-              <tr><td>4</td><td>Reason for Replacement</td><td>Text</td><td>Conditional</td><td><span class="badge badge-red">MISSING</span></td><td>Required if "Replacement"</td></tr>
-              <tr><td>5</td><td>Payment Confirmation</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Upload PayNow screenshot ($50/card to MCST 4932)</td></tr>
-              <tr><td>6</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
-              <tr class="remove-row"><td>-</td><td><s>Cash/Cheque Reference</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q3)</span></td><td>Payment via PayNow</td></tr>
-              <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q3)</span></td><td></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="info-box info-box-red">
-          <strong>Assessment:</strong> Major gaps. Missing card holder details, quantity, and replacement reason. The $50/card fee should be collected via PayNow with screenshot upload as payment confirmation.
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== Form H ===== -->
-    <div class="collapsible" id="form-h">
-      <button class="collapsible-toggle" onclick="toggleCollapsible(this)">
-        <span><span class="badge badge-green">Near-complete</span> &nbsp; Form H &mdash; Application for Bicycle Tag &nbsp;|&nbsp; ID: 18275 &nbsp;|&nbsp; 4 current / 4 required</span>
-        <span class="arrow">&#9654;</span>
-      </button>
-      <div class="collapsible-content">
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>1</td><td>Number of Bicycle Tags</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
-              <tr><td>2</td><td>Application Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td>"First-time" or "Replacement"</td></tr>
-              <tr><td>3</td><td>Terms and Conditions Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>Bicycle parking rules</td></tr>
-              <tr><td>4</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
-              <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q4)</span></td><td></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="info-box info-box-green">
-          <strong>Assessment:</strong> Near-complete. All required fields exist. Only action needed is removing the "Official Use" section and verifying entity name. Recommended as a pilot alongside Form A.
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== Forms I/J ===== -->
-    <div class="collapsible" id="form-ij">
-      <button class="collapsible-toggle" onclick="toggleCollapsible(this)">
-        <span><span class="badge badge-green">Facility Booking</span> &nbsp; Forms I/J &mdash; Dining Pavilion / Function Room &nbsp;|&nbsp; No e-form needed</span>
-        <span class="arrow">&#9654;</span>
-      </button>
-      <div class="collapsible-content">
-        <p><strong>No e-form needed.</strong> These are handled entirely by the Facility Booking module, which is already active and working.</p>
-        <ul>
-          <li><strong>Dining Pavilion</strong> (Form I) &mdash; $200 deposit + $25-50 booking fee, via Facility Booking.</li>
-          <li><strong>Function Room</strong> (Form J) &mdash; $200 deposit + $100 booking fee, via Facility Booking.</li>
-          <li><strong>Form K</strong> (Refund Request for Facilities) &mdash; eliminated. Refunds are automatic or MA-driven through Deposit Records.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- ===== Form L ===== -->
-    <div class="collapsible" id="form-l">
-      <button class="collapsible-toggle" onclick="toggleCollapsible(this)">
-        <span><span class="badge badge-red">Very sparse</span> &nbsp; Form L &mdash; Registration of Residential Occupancy &nbsp;|&nbsp; ID: 18276 &nbsp;|&nbsp; 2 current / 10 required</span>
-        <span class="arrow">&#9654;</span>
-      </button>
-      <div class="collapsible-content">
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>1</td><td>Registration Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>"New Occupancy" or "Change of Occupancy"</td></tr>
-              <tr><td>2</td><td>Owner Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Auto-populate from Hilife profile if possible</td></tr>
-              <tr><td>3</td><td>Tenancy Start Date</td><td>Date</td><td>Conditional</td><td><span class="badge badge-red">MISSING</span></td><td>Required if tenant</td></tr>
-              <tr><td>4</td><td>Tenancy End Date</td><td>Date</td><td>Conditional</td><td><span class="badge badge-red">MISSING</span></td><td>Required if tenant</td></tr>
-              <tr><td>5</td><td>Tenancy Agreement</td><td>Attachment</td><td>Conditional</td><td><span class="badge badge-red">MISSING</span></td><td>Required if tenant</td></tr>
-              <tr><td>6</td><td>Number of Occupants</td><td>Number</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Maximum 6 unrelated persons per regulations</td></tr>
-              <tr><td>7</td><td>Occupant Details</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-yellow">Partial (QX)</span></td><td>Q1 "Tenant Info" &mdash; very sparse, needs expansion</td></tr>
-              <tr><td>8</td><td>Emergency Contact Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-              <tr><td>9</td><td>Emergency Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-              <tr><td>10</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-              <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q2)</span></td><td></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="info-box info-box-red">
-          <strong>Assessment:</strong> Very sparse. Only one actual resident-facing field exists (Q1 "Tenant Info"). The paper form collects significantly more detail. Eight fields must be added.
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== New: Pet Registration ===== -->
-    <div class="collapsible" id="form-pet">
-      <button class="collapsible-toggle" onclick="toggleCollapsible(this)">
-        <span><span class="badge badge-red">Not started</span> &nbsp; New: Pet Registration &nbsp;|&nbsp; 8 fields required</span>
-        <span class="arrow">&#9654;</span>
-      </button>
-      <div class="collapsible-content">
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>1</td><td>Pet Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Dog / Cat / Others</td></tr>
-              <tr><td>2</td><td>Breed</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-              <tr><td>3</td><td>Pet Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-              <tr><td>4</td><td>Pet Photo</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>For identification</td></tr>
-              <tr><td>5</td><td>AVS License Number</td><td>Text</td><td>Conditional</td><td><span class="badge badge-red">N/A</span></td><td>Required for dogs</td></tr>
-              <tr><td>6</td><td>Vaccination Certificate</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Up-to-date vaccination proof</td></tr>
-              <tr><td>7</td><td>Rules Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>"I agree to abide by the pet rules and regulations"</td></tr>
-              <tr><td>8</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== New: VMS ===== -->
-    <div class="collapsible" id="form-vms">
-      <button class="collapsible-toggle" onclick="toggleCollapsible(this)">
-        <span><span class="badge badge-red">Not started</span> &nbsp; New: Visitor Management System (VMS) &nbsp;|&nbsp; 7 fields required</span>
-        <span class="arrow">&#9654;</span>
-      </button>
-      <div class="collapsible-content">
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>1</td><td>Visitor Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-              <tr><td>2</td><td>Visitor Contact Number</td><td>Text</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-              <tr><td>3</td><td>Visit Date</td><td>Date</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-              <tr><td>4</td><td>Expected Time of Arrival</td><td>Time</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-              <tr><td>5</td><td>Vehicle Number (if driving)</td><td>Text</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td>For carpark access</td></tr>
-              <tr><td>6</td><td>Purpose of Visit</td><td>Single Choice</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td>Social / Delivery / Service / Others</td></tr>
-              <tr><td>7</td><td>Number of Visitors</td><td>Number</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td>Default 1</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== New: Instructor/Coach ===== -->
-    <div class="collapsible" id="form-instructor">
-      <button class="collapsible-toggle" onclick="toggleCollapsible(this)">
-        <span><span class="badge badge-red">Not started</span> &nbsp; New: Instructor/Coach Registration &nbsp;|&nbsp; 7 fields required</span>
-        <span class="arrow">&#9654;</span>
-      </button>
-      <div class="collapsible-content">
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>1</td><td>Instructor/Coach Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-              <tr><td>2</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-              <tr><td>3</td><td>Activity/Sport</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Swimming / Tennis / Gym / Yoga / Others</td></tr>
-              <tr><td>4</td><td>Schedule</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Days and times</td></tr>
-              <tr><td>5</td><td>Insurance/Certification Proof</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-              <tr><td>6</td><td>Sponsoring Resident (Unit No.)</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Resident who engaged the coach</td></tr>
-              <tr><td>7</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== New: Completion & Inspection ===== -->
-    <div class="collapsible" id="form-completion">
-      <button class="collapsible-toggle" onclick="toggleCollapsible(this)">
-        <span><span class="badge badge-red">Not started</span> &nbsp; New: Completion &amp; Inspection Request (replaces Forms E and K) &nbsp;|&nbsp; 4 fields required</span>
-        <span class="arrow">&#9654;</span>
-      </button>
-      <div class="collapsible-content">
-        <p>Simple e-form submitted by residents when renovation or moving is complete, to trigger MA inspection and deposit refund.</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-            <tbody>
-              <tr><td>1</td><td>Application Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>"Renovation Completed" or "Moving Completed"</td></tr>
-              <tr><td>2</td><td>Date of Completion</td><td>Date</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-              <tr><td>3</td><td>Remarks</td><td>Text (multi-line)</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td>Any notes for MA</td></tr>
-              <tr><td>4</td><td>Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>"I confirm all works are completed and common areas have been restored"</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
 
     <!-- ===== Cross-Cutting Issues ===== -->
@@ -1383,6 +1351,12 @@
 function toggleCollapsible(button) {
   var panel = button.parentElement;
   panel.classList.toggle('open');
+}
+
+function toggleDetailRow(row) {
+  var detailRow = row.nextElementSibling;
+  row.classList.toggle('open');
+  detailRow.classList.toggle('open');
 }
 
 // TOC scroll tracking
