@@ -545,7 +545,6 @@
     <a href="#form-pet" class="sub">New: Pet Registration</a>
     <a href="#form-vms" class="sub">New: Overnight Stay Visitor Reg</a>
     <a href="#form-instructor" class="sub">New: Instructor/Coach</a>
-    <a href="#form-completion" class="sub">New: Completion &amp; Inspection</a>
     <a href="#cross-cutting" class="sub">Cross-Cutting Issues</a>
     <a href="#workflows">4. Workflows</a>
     <a href="#wf-non-deposit" class="sub">4.1 Non-Deposit Forms</a>
@@ -767,7 +766,7 @@
                   <li><strong>Facility booking deposit refunds</strong> &mdash; handled automatically by the Facility Booking module, or MA clicks Refund/Forfeit in Deposit Records.</li>
                 </ul>
               </div>
-              <p style="margin-top:12px;">The paper Forms E and K are replaced by the new "Completion &amp; Inspection Request" e-form, which notifies the MA that work is complete and triggers inspection, rather than requesting a refund.</p>
+              <p style="margin-top:12px;">The paper Forms E and K are eliminated. Completion notification is handled via the <strong>reply thread</strong> of the original e-form (renovation or moving application) &mdash; the resident simply posts "work completed, please arrange inspection" in the thread. No separate form is needed.</p>
             </td>
           </tr>
 
@@ -953,24 +952,7 @@
             </td>
           </tr>
 
-          <!-- Row 13: Completion & Inspection -->
-          <tr class="expandable-row" id="form-completion" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Completion &amp; Inspection</td><td>Replaces E, K</td><td>N/A</td><td>0</td><td>4</td><td>4</td><td>0</td><td><span class="badge badge-red">Not started</span></td>
-          </tr>
-          <tr class="detail-row">
-            <td colspan="8">
-              <p style="margin-bottom:12px;">Simple e-form submitted by residents when renovation or moving is complete, to trigger MA inspection and deposit refund.</p>
-              <table>
-                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-                <tbody>
-                  <tr><td>1</td><td>Application Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>"Renovation Completed" or "Moving Completed"</td></tr>
-                  <tr><td>2</td><td>Date of Completion</td><td>Date</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-                  <tr><td>3</td><td>Remarks</td><td>Text (multi-line)</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td>Any notes for MA</td></tr>
-                  <tr><td>4</td><td>Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>"I confirm all works are completed and common areas have been restored"</td></tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
+
 
         </tbody>
       </table>
@@ -1298,7 +1280,7 @@
           <tr><td>8</td><td>Pet Registration</td><td>8</td><td><span class="badge badge-green">Low</span></td></tr>
           <tr><td>9</td><td>Overnight Stay Visitor Registration (VMS)</td><td>7</td><td><span class="badge badge-yellow">Medium</span></td></tr>
           <tr><td>10</td><td>Instructor/Coach Registration</td><td>7</td><td><span class="badge badge-yellow">Medium</span></td></tr>
-          <tr><td>11</td><td>Completion &amp; Inspection Request (replaces Forms E and K)</td><td>4</td><td><span class="badge badge-green">Low</span></td></tr>
+          
         </tbody>
       </table>
     </div>

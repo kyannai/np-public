@@ -87,7 +87,6 @@ This section specifies the complete field requirements for each e-form. For exis
 | Pet Registration | New | N/A | 0 | 8 | 8 | 0 | Not started |
 | Overnight Stay Visitor Reg (VMS) | New | N/A | 0 | 7 | 7 | 0 | Not started |
 | Instructor Registration | New | N/A | 0 | 7 | 7 | 0 | Not started |
-| Completion & Inspection | Replaces E, K | N/A | 0 | 4 | 4 | 0 | Not started |
 
 ---
 
@@ -188,7 +187,7 @@ This form is eliminated from the digital platform. The current Hilife draft (ID 
 - **A&A/Moving deposit refunds** -- MA processes via the Deposit Records page after inspection.
 - **Facility booking deposit refunds** -- handled automatically by the Facility Booking module, or MA clicks Refund/Forfeit in Deposit Records.
 
-The paper Forms E and K are replaced by the new "Completion & Inspection Request" e-form, which notifies the MA that work is complete and triggers inspection, rather than requesting a refund.
+The paper Forms E and K are eliminated. Completion notification is handled via the **reply thread** of the original e-form (renovation or moving application) -- the resident simply posts "work completed, please arrange inspection" in the thread. No separate form is needed.
 
 ---
 
@@ -331,22 +330,7 @@ $50 refundable deposit is required for vehicle registration.
 
 ---
 
-### 3.13 New: Completion & Inspection Request (Replaces Forms E and K)
-
-**Not yet built in Hilife | Required: 4 fields**
-
-This is a simple e-form submitted by residents when renovation or moving is complete, to trigger MA inspection and deposit refund.
-
-| # | Field | Type | Required | Hilife Status | Notes |
-|---|-------|------|----------|---------------|-------|
-| 1 | Application Type | Single Choice | Yes | N/A | "Renovation Completed" or "Moving Completed" |
-| 2 | Date of Completion | Date | Yes | N/A | |
-| 3 | Remarks | Text (multi-line) | No | N/A | Any notes for MA |
-| 4 | Acknowledgment | Single Choice (checkbox) | Yes | N/A | "I confirm all works are completed and common areas have been restored" |
-
----
-
-### 3.14 Cross-Cutting Issues
+### 3.13 Cross-Cutting Issues
 
 The following issues affect multiple forms and must be resolved before any e-form is published:
 
@@ -640,7 +624,6 @@ Before committing to the Facility Booking module for deposit collection, the fol
 | 8 | Pet Registration | 8 | Low |
 | 9 | Overnight Stay Visitor Registration (VMS) | 7 | Medium |
 | 10 | Instructor/Coach Registration | 7 | Medium |
-| 11 | Completion & Inspection Request (replaces Forms E and K) | 4 | Low |
 
 #### Cross-Cutting Fixes (All E-Forms)
 
