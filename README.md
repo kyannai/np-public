@@ -43,8 +43,8 @@ Hilife CMS provides two modules relevant to this migration:
 | D-1 | Application for Moving In / Moving Out | $1,000 | Moving logistics and deposit |
 | D-2 | Contractor's Indemnity Form for Moving In/Out | None | Mover liability undertaking (merged into D-1) |
 | E | Request for Refund of Deposit (A&A / Moving) | None | Resident-initiated deposit refund request |
-| F | Application for Residential Vehicle Registration | None | Register vehicle for carpark access |
-| G | Application for Access Card | $50/card | Replacement or additional access cards |
+| F | Application for Residential Vehicle Registration | $50 | Register vehicle for carpark access |
+| G | Application for Access Card | $50/card (fee) | Replacement or additional access cards |
 | H | Application for Bicycle Tag | None | Bicycle parking tag |
 | I | Application for Dining Pavilion Booking | $200 + fee | Reserve dining pavilion |
 | J | Application for Function Room Booking | $200 + fee | Reserve function room |
@@ -79,7 +79,7 @@ This section specifies the complete field requirements for each e-form. For exis
 | B-1 -- Renovation/A&A | 18271 | 8 | 20 | 9 | 3 | Major gaps |
 | D-1 -- Moving In/Out | 18272 | 5 | 10 | 4 | 3 | Major gaps |
 | E/K -- Refund of Deposit | 18273 | 5 | 0 | 0 | 0 | ELIMINATED |
-| F -- Vehicle Registration | 18238 | 4 | 8 | 5 | 1 | Incomplete |
+| F -- Vehicle Registration | 18238 | 4 | 9 | 6 | 1 | Incomplete |
 | G -- Access Card | 18274 | 3 | 6 | 4 | 2 | Major gaps |
 | H -- Bicycle Tag | 18275 | 4 | 4 | 0 | 1 | Near-complete |
 | I/J -- Dining / Function Room | N/A | N/A | N/A | N/A | N/A | Facility Booking |
@@ -194,7 +194,9 @@ The paper Forms E and K are replaced by the new "Completion & Inspection Request
 
 ### 3.5 Form F -- Application for Residential Vehicle Registration
 
-**Hilife E-Form ID: 18238 | Current: 4 questions | Required: 8 fields**
+**Hilife E-Form ID: 18238 | Current: 4 questions | Required: 9 fields**
+
+$50 refundable deposit is required for vehicle registration.
 
 | # | Field | Type | Required | Hilife Status | Notes |
 |---|-------|------|----------|---------------|-------|
@@ -206,9 +208,10 @@ The paper Forms E and K are replaced by the new "Completion & Inspection Request
 | 6 | Company Vehicle Letter | Attachment | No | MISSING | Required if company-registered vehicle |
 | 7 | Tenancy Agreement Copy | Attachment | No | MISSING | Required if tenant |
 | 8 | Consent + Rules Acknowledgment | Multiple Choice (checkboxes) | Yes | Exists (Q3) | PDPA + carpark rules |
+| 9 | Deposit Payment Confirmation | Attachment | Yes | MISSING | Upload PayNow screenshot ($50 to MCST 4932) |
 | - | ~~Official Use~~ | ~~Header~~ | Remove | Exists (Q4 -- remove) | |
 
-**Notes:** Incomplete. The critical vehicle details (plate, IU, make/model) are missing from this form -- they exist in a separate form (ID 18239) and must be consolidated into this one. Vehicle type and supporting document upload fields need to be added.
+**Notes:** Incomplete. The critical vehicle details (plate, IU, make/model) are missing -- they exist in a separate form (ID 18239) and must be consolidated. $50 deposit collection is needed; since this is a refundable deposit, it follows the same deposit workflow concern as renovation/moving (credit card via Facility Booking or PayNow with screenshot upload).
 
 ---
 
@@ -385,13 +388,51 @@ Simple e-form submission and approval flow:
    Resident receives outcome notification
 ```
 
-**Applies to:** Form A (Address Change), Form F (Vehicle Registration), Form G (Access Card), Form H (Bicycle Tag), Form L (Occupancy Registration), Pet Registration, VMS, Instructor/Coach Registration, Bicycle Registration.
+**Applies to:** Form A (Address Change), Form H (Bicycle Tag), Form L (Occupancy Registration), Pet Registration, VMS, Instructor/Coach Registration, Bicycle Registration.
 
-**Special case -- Access Card (Form G, $50 fee):** The $50/card fee is not a refundable deposit, so Facility Booking is not needed. Instead, the resident pays via PayNow to the MCST 4932 account and uploads the payment confirmation screenshot as an attachment in the e-form. MA verifies payment before approving.
+Note: Forms that require fee or deposit collection use separate workflows -- see Section 4.2 (Fee Collection) and Section 4.3 (Deposit-Required).
 
 ---
 
-### 4.2 Deposit-Required Forms
+### 4.2 Fee Collection Forms
+
+For forms that require a non-refundable fee (not a deposit), the fee is collected via PayNow with proof of payment uploaded in the e-form.
+
+```
+   Resident submits e-form with application details
+        |
+        v
+   MA reviews application
+        |
+   [Need more info?] --Yes--> MA uses reply thread --> Resident replies
+        |
+       No
+        |
+        v
+   MA approves e-form
+        |
+        v
+   MA replies with payment instruction:
+   "Approved. Please pay $XX via PayNow to MCST 4932
+    and upload the payment screenshot."
+        |
+        v
+   Resident pays via PayNow
+   Uploads payment screenshot in e-form reply thread
+        |
+        v
+   MA verifies payment
+   Processes the request (issues card, decal, etc.)
+```
+
+**Applies to:**
+- Access Card (Form G) -- $50 per card (non-refundable)
+
+**Why not use Facility Booking?** Booking fees in Facility Booking are per-slot, not per-quantity. An Access Card application may request 3 cards ($150) which cannot be easily handled in a single booking slot. PayNow with screenshot is simpler and more flexible for variable amounts.
+
+---
+
+### 4.3 Deposit-Required Forms
 
 **The problem:** Hilife e-forms cannot collect deposits or fees. The Facility Booking module can collect deposits via credit card hold but does not support rich application forms with contractor details, signatures, and back-and-forth communication.
 
@@ -444,6 +485,7 @@ STEP 3: COMPLETION AND REFUND
 **Applies to:**
 - Renovation (A&A) -- Form B-1 equivalent, $1,000 deposit
 - Moving In/Out -- Form D-1 equivalent, $1,000 deposit
+- Vehicle Registration -- Form F equivalent, $50 deposit (smaller amount, PayNow may be simpler)
 
 **Forms eliminated:** Form E (Refund of A&A Deposit) and Form K (Refund of Facility Deposit). Refund is now an MA-driven action at process closure, not a resident request.
 
@@ -494,7 +536,7 @@ This avoids credit card fees entirely but adds manual steps for both the residen
 
 ---
 
-### 4.3 Facility Bookings
+### 4.4 Facility Bookings
 
 The Facility Booking module is already working for Function Rooms, Dining Pavilions, and Tennis Court.
 

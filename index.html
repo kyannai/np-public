@@ -535,8 +535,9 @@
     <a href="#cross-cutting" class="sub">Cross-Cutting Issues</a>
     <a href="#workflows">4. Workflows</a>
     <a href="#wf-non-deposit" class="sub">4.1 Non-Deposit Forms</a>
-    <a href="#wf-deposit" class="sub">4.2 Deposit-Required</a>
-    <a href="#wf-facility" class="sub">4.3 Facility Bookings</a>
+    <a href="#wf-fee" class="sub">4.2 Fee Collection</a>
+    <a href="#wf-deposit" class="sub">4.3 Deposit-Required</a>
+    <a href="#wf-facility" class="sub">4.4 Facility Bookings</a>
     <a href="#actions">5. Action Items</a>
     <a href="#act-immediate" class="sub">Immediate</a>
     <a href="#act-eform" class="sub">E-Form Completion</a>
@@ -597,8 +598,8 @@
           <tr><td>D-1</td><td>Application for Moving In / Moving Out</td><td>$1,000</td><td>Moving logistics and deposit</td></tr>
           <tr><td>D-2</td><td>Contractor's Indemnity Form for Moving In/Out</td><td>None</td><td>Mover liability undertaking (merged into D-1)</td></tr>
           <tr><td>E</td><td>Request for Refund of Deposit (A&amp;A / Moving)</td><td>None</td><td>Resident-initiated deposit refund request</td></tr>
-          <tr><td>F</td><td>Application for Residential Vehicle Registration</td><td>None</td><td>Register vehicle for carpark access</td></tr>
-          <tr><td>G</td><td>Application for Access Card</td><td>$50/card</td><td>Replacement or additional access cards</td></tr>
+          <tr><td>F</td><td>Application for Residential Vehicle Registration</td><td>$50</td><td>Register vehicle for carpark access</td></tr>
+          <tr><td>G</td><td>Application for Access Card</td><td>$50/card (fee)</td><td>Replacement or additional access cards</td></tr>
           <tr><td>H</td><td>Application for Bicycle Tag</td><td>None</td><td>Bicycle parking tag</td></tr>
           <tr><td>I</td><td>Application for Dining Pavilion Booking</td><td>$200 + fee</td><td>Reserve dining pavilion</td></tr>
           <tr><td>J</td><td>Application for Function Room Booking</td><td>$200 + fee</td><td>Reserve function room</td></tr>
@@ -640,7 +641,7 @@
           <tr><td>B-1 &mdash; Renovation/A&amp;A</td><td>18271</td><td>8</td><td>20</td><td>9</td><td>3</td><td><span class="badge badge-red">Major gaps</span></td></tr>
           <tr><td>D-1 &mdash; Moving In/Out</td><td>18272</td><td>5</td><td>10</td><td>4</td><td>3</td><td><span class="badge badge-red">Major gaps</span></td></tr>
           <tr><td>E/K &mdash; Refund of Deposit</td><td>18273</td><td>5</td><td>0</td><td>0</td><td>0</td><td><span class="badge badge-red">ELIMINATED</span></td></tr>
-          <tr><td>F &mdash; Vehicle Registration</td><td>18238</td><td>4</td><td>8</td><td>5</td><td>1</td><td><span class="badge badge-yellow">Incomplete</span></td></tr>
+          <tr><td>F &mdash; Vehicle Registration</td><td>18238</td><td>4</td><td>9</td><td>6</td><td>1</td><td><span class="badge badge-yellow">Incomplete</span></td></tr>
           <tr><td>G &mdash; Access Card</td><td>18274</td><td>3</td><td>6</td><td>4</td><td>2</td><td><span class="badge badge-red">Major gaps</span></td></tr>
           <tr><td>H &mdash; Bicycle Tag</td><td>18275</td><td>4</td><td>4</td><td>0</td><td>1</td><td><span class="badge badge-green">Near-complete</span></td></tr>
           <tr><td>I/J &mdash; Dining / Function Room</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td>N/A</td><td><span class="badge badge-green">Facility Booking</span></td></tr>
@@ -786,7 +787,7 @@
     <!-- ===== Form F ===== -->
     <div class="collapsible" id="form-f">
       <button class="collapsible-toggle" onclick="toggleCollapsible(this)">
-        <span><span class="badge badge-yellow">Incomplete</span> &nbsp; Form F &mdash; Residential Vehicle Registration &nbsp;|&nbsp; ID: 18238 &nbsp;|&nbsp; 4 current / 8 required</span>
+        <span><span class="badge badge-yellow">Incomplete</span> &nbsp; Form F &mdash; Residential Vehicle Registration &nbsp;|&nbsp; ID: 18238 &nbsp;|&nbsp; 4 current / 9 required / 6 missing</span>
         <span class="arrow">&#9654;</span>
       </button>
       <div class="collapsible-content">
@@ -802,10 +803,12 @@
               <tr><td>6</td><td>Company Vehicle Letter</td><td>Attachment</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>Required if company-registered vehicle</td></tr>
               <tr><td>7</td><td>Tenancy Agreement Copy</td><td>Attachment</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>Required if tenant</td></tr>
               <tr><td>8</td><td>Consent + Rules Acknowledgment</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>PDPA + carpark rules</td></tr>
+              <tr><td>9</td><td>Deposit Payment Confirmation</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Upload PayNow screenshot ($50 to MCST 4932)</td></tr>
               <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q4)</span></td><td></td></tr>
             </tbody>
           </table>
         </div>
+        <p><strong>Note:</strong> The $50 deposit is refundable upon de-registration of the vehicle.</p>
         <div class="info-box info-box-yellow">
           <strong>Assessment:</strong> Incomplete. Critical vehicle details (plate, IU, make/model) are missing from this form &mdash; they exist in a separate form (ID 18239) and must be consolidated. Vehicle type and supporting document uploads need to be added.
         </div>
@@ -1069,14 +1072,46 @@
       </div>
     </div>
 
-    <p><strong>Applies to:</strong> Form A (Address Change), Form F (Vehicle Registration), Form G (Access Card), Form H (Bicycle Tag), Form L (Occupancy Registration), Pet Registration, VMS, Instructor/Coach Registration, Bicycle Registration.</p>
+    <p><strong>Applies to:</strong> Form A (Address Change), Form H (Bicycle Tag), Form L (Occupancy Registration), Pet Registration, VMS, Instructor/Coach Registration, Bicycle Registration.</p>
 
     <div class="info-box info-box-blue">
-      <strong>Special case &mdash; Access Card (Form G, $50 fee):</strong> The $50/card fee is not a refundable deposit, so Facility Booking is not needed. Instead, the resident pays via PayNow to the MCST 4932 account and uploads the payment confirmation screenshot as an attachment in the e-form. MA verifies payment before approving.
+      <strong>Note:</strong> Forms that involve a fee or deposit use different workflows. See Section 4.2 (Fee Collection) and Section 4.3 (Deposit-Required) for those processes.
     </div>
 
-    <!-- 4.2 Deposit-Required -->
-    <h3 id="wf-deposit">4.2 Deposit-Required Forms</h3>
+    <!-- 4.2 Fee Collection -->
+    <h3 id="wf-fee">4.2 Fee Collection Forms</h3>
+    <p>For non-refundable fees, the resident pays via PayNow and uploads a screenshot as proof of payment within the e-form. The MA verifies the screenshot before processing the request.</p>
+
+    <div class="flow-diagram">
+      <div class="flow-step flow-step-action">
+        <span class="flow-step-label">Start</span>
+        Resident submits e-form
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step flow-step-action">MA reviews and approves application</div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step flow-step-action">MA replies with PayNow instruction</div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step flow-step-action">Resident pays via PayNow</div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step flow-step-action">Resident uploads screenshot in reply thread</div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step flow-step-action">MA verifies payment</div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step flow-step-outcome-good">
+        <span class="flow-step-label">End</span>
+        MA processes request
+      </div>
+    </div>
+
+    <p><strong>Applies to:</strong> Access Card (Form G) &mdash; $50 per card (non-refundable).</p>
+
+    <div class="info-box info-box-blue">
+      <strong>Why not Facility Booking?</strong> Facility Booking fees are per-slot, not per-quantity. Access Card fees are charged per card ordered, making the PayNow screenshot workflow a better fit.
+    </div>
+
+    <!-- 4.3 Deposit-Required -->
+    <h3 id="wf-deposit">4.3 Deposit-Required Forms</h3>
     <p><strong>The problem:</strong> Hilife e-forms cannot collect deposits or fees. The Facility Booking module can collect deposits via credit card hold but does not support rich application forms with contractor details, signatures, and back-and-forth communication.</p>
 
     <h4>Proposed 3-Step Flow</h4>
@@ -1139,7 +1174,7 @@
       </div>
     </div>
 
-    <p><strong>Applies to:</strong> Renovation (A&amp;A) &mdash; Form B-1, $1,000 deposit. Moving In/Out &mdash; Form D-1, $1,000 deposit.</p>
+    <p><strong>Applies to:</strong> Renovation (A&amp;A) &mdash; Form B-1, $1,000 deposit. Moving In/Out &mdash; Form D-1, $1,000 deposit. Vehicle Registration &mdash; Form F equivalent, $50 deposit.</p>
 
     <div class="info-box info-box-blue">
       <strong>Forms eliminated:</strong> Form E (Refund of A&amp;A Deposit) and Form K (Refund of Facility Deposit). Refund is now an MA-driven action at process closure, not a resident request.
@@ -1206,8 +1241,8 @@
       <strong>Recommendation:</strong> Confirm exact fee structure with Hilife first, then decide. If fees are negligible, use the credit card flow for simplicity. If fees are material ($20-30 per cycle), use PayNow for the $1,000 deposits while keeping credit card for the smaller $200 facility deposits.
     </div>
 
-    <!-- 4.3 Facility Bookings -->
-    <h3 id="wf-facility">4.3 Facility Bookings</h3>
+    <!-- 4.4 Facility Bookings -->
+    <h3 id="wf-facility">4.4 Facility Bookings</h3>
     <p>The Facility Booking module is already working for Function Rooms, Dining Pavilions, and Tennis Court.</p>
 
     <div class="flow-diagram">
