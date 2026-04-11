@@ -596,48 +596,49 @@ The Facility Booking module is already working for Function Rooms, Dining Pavili
 | 3 | Replace "KINGSFORD HURAY DEVELOPMENT PTE LTD" with "MCST 4932" | All forms |
 | 4 | Remove all cheque/cash references; update to PayNow/Bank Transfer/Credit Card | 18271, 18272, 18273, 18274 |
 | 5 | Clarify credit card processing fees with Hilife (per-transaction costs, surcharge on deposits, 6-month expiry behaviour, refund handling) | All deposit workflows |
-| 6 | Confirm pricing with MCST council (Tennis $10 vs $10.90, Function Room $100 vs $109) | Facility categories |
+| 6 | Check with Hilife whether credit card charges apply when collecting and refunding a deposit without any booking fee -- i.e., does a deposit-only transaction (no booking fee) still incur processing fees for the MCST on both charge and refund? | Renovation, Moving, Vehicle Reg deposit workflows |
+| 7 | Confirm pricing with MCST council (Tennis $10 vs $10.90, Function Room $100 vs $109) | Facility categories |
 
 ### 5.2 E-Form Completion
 
 | # | Action | E-Form ID | Details |
 |---|--------|-----------|---------|
-| 7 | Add contact number and email to Address Change | 18237 | 2 fields to add, 1 to remove |
-| 8 | Add renovation scope, dates, worker list, applicant contact to A&A form | 18271 | 9 fields to add, 3 to remove; restructure Q1 into separate fields |
-| 9 | Add moving direction, time slot, contractor PIC to Moving form | 18272 | 4 fields to add, 3 to remove |
-| 10 | Add vehicle plate, IU, make/model, vehicle type, document uploads to Vehicle Registration | 18238 | 5 fields to add (consolidate from 18239), 1 to remove |
-| 11 | Add card holder details, quantity, replacement reason, payment upload to Access Card | 18274 | 4 fields to add, 2 to remove |
-| 12 | Expand Occupancy Registration with occupant details, tenancy period, emergency contact, consent | 18276 | 8 fields to add, 1 to remove |
-| 13 | Delete the Refund Request e-form | 18273 | Eliminated by proposed workflow |
+| 8 | Add contact number and email to Address Change | 18237 | 2 fields to add, 1 to remove |
+| 9 | Add renovation scope, dates, worker list, applicant contact to A&A form | 18271 | 9 fields to add, 3 to remove; restructure Q1 into separate fields |
+| 10 | Add moving direction, time slot, contractor PIC to Moving form | 18272 | 4 fields to add, 3 to remove |
+| 11 | Add vehicle plate, IU, make/model, vehicle type, document uploads, deposit payment to Vehicle Registration | 18238 | 6 fields to add (consolidate from 18239), 1 to remove |
+| 12 | Add card holder details, quantity, replacement reason, payment upload to Access Card | 18274 | 4 fields to add, 2 to remove |
+| 13 | Expand Occupancy Registration with occupant details, tenancy period, emergency contact, consent | 18276 | 8 fields to add, 1 to remove |
+| 14 | Delete the Refund Request e-form | 18273 | Eliminated by proposed workflow |
 
 ### 5.3 Facility Booking Configuration
 
 | # | Action | Details |
 |---|--------|---------|
-| 14 | Reactivate "Renovation Deposit" facility category | deposit_switch=1, deposit=$1,000, enable_qa=0, booking_fee=$0 |
-| 15 | Reactivate "Moving Deposit" facility category | deposit_switch=1, deposit=$1,000, enable_qa=0, booking_fee=$0 |
-| 16 | Create "Carwash Bay" facility category | Pricing and rules TBD |
-| 17 | Create "EV Lot" facility category | Pricing and rules TBD |
-| 18 | Create "Temporary Overnight Parking" facility category | Pricing and rules TBD |
-| 19 | Enable booking Q&A for Function Room and Dining Pavilion | Guest count, event type |
-| 20 | Determine approach for Visitor Parking and Loading/Unloading Bay | Facility Booking vs E-form vs VMS integration |
+| 15 | Reactivate "Renovation Deposit" facility category | deposit_switch=1, deposit=$1,000, enable_qa=0, booking_fee=$0 |
+| 16 | Reactivate "Moving Deposit" facility category | deposit_switch=1, deposit=$1,000, enable_qa=0, booking_fee=$0 |
+| 17 | Create "Carwash Bay" facility category | Pricing and rules TBD |
+| 18 | Create "EV Lot" facility category | Pricing and rules TBD |
+| 19 | Create "Temporary Overnight Parking" facility category | Pricing and rules TBD |
+| 20 | Enable booking Q&A for Function Room and Dining Pavilion | Guest count, event type |
+| 21 | Determine approach for Visitor Parking and Loading/Unloading Bay | Facility Booking vs E-form vs VMS integration |
 
 ### 5.4 New E-Forms to Build
 
 | # | Form Name | Fields | Complexity |
 |---|-----------|--------|------------|
-| 21 | Pet Registration | 8 | Low |
-| 22 | Visitor Management System (VMS) | 7 | Medium |
-| 23 | Instructor/Coach Registration | 7 | Medium |
-| 24 | Completion & Inspection Request | 4 | Low |
+| 22 | Pet Registration | 8 | Low |
+| 23 | Visitor Management System (VMS) | 7 | Medium |
+| 24 | Instructor/Coach Registration | 7 | Medium |
+| 25 | Completion & Inspection Request | 4 | Low |
 
 ### 5.5 Testing & Rollout
 
 | # | Action | Details |
 |---|--------|---------|
-| 25 | Publish Form A (Address Change) as pilot | Lowest risk, near-complete |
-| 26 | Publish Form H (Bicycle Tag) as second pilot | Also near-complete |
-| 27 | Test full 3-step deposit workflow end-to-end | E-form submission, Facility Booking deposit, inspection, refund/forfeit |
-| 28 | Publish remaining e-forms in batches | Non-deposit forms first, then deposit forms |
-| 29 | Communicate to residents | Provide guide on digital submission process |
-| 30 | Decommission paper forms | After digital equivalents are stable |
+| 26 | Publish Form A (Address Change) as pilot | Lowest risk, near-complete |
+| 27 | Publish Form H (Bicycle Tag) as second pilot | Also near-complete |
+| 28 | Test full 3-step deposit workflow end-to-end | E-form submission, Facility Booking deposit, inspection, refund/forfeit |
+| 29 | Publish remaining e-forms in batches | Non-deposit forms first, then deposit forms |
+| 30 | Communicate to residents | Provide guide on digital submission process |
+| 31 | Decommission paper forms | After digital equivalents are stable |

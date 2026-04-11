@@ -1316,7 +1316,8 @@
           <tr><td>3</td><td>Replace "KINGSFORD HURAY DEVELOPMENT PTE LTD" with "MCST 4932"</td><td>All forms</td></tr>
           <tr><td>4</td><td>Remove all cheque/cash references; update to PayNow/Bank Transfer/Credit Card</td><td>18271, 18272, 18273, 18274</td></tr>
           <tr><td>5</td><td>Clarify credit card processing fees with Hilife (per-transaction costs, surcharge on deposits, 6-month expiry, refund handling)</td><td>All deposit workflows</td></tr>
-          <tr><td>6</td><td>Confirm pricing with MCST council (Tennis $10 vs $10.90, Function Room $100 vs $109)</td><td>Facility categories</td></tr>
+          <tr><td>6</td><td>Check with Hilife whether credit card charges apply when collecting and refunding a deposit without any booking fee &mdash; i.e., does a deposit-only transaction (no booking fee) still incur processing fees for the MCST on both charge and refund?</td><td>Renovation, Moving, Vehicle Reg deposit workflows</td></tr>
+          <tr><td>7</td><td>Confirm pricing with MCST council (Tennis $10 vs $10.90, Function Room $100 vs $109)</td><td>Facility categories</td></tr>
         </tbody>
       </table>
     </div>
@@ -1326,13 +1327,13 @@
       <table>
         <thead><tr><th>#</th><th>Action</th><th>E-Form ID</th><th>Details</th></tr></thead>
         <tbody>
-          <tr><td>7</td><td>Add contact number and email to Address Change</td><td>18237</td><td>2 fields to add, 1 to remove</td></tr>
-          <tr><td>8</td><td>Add renovation scope, dates, worker list, applicant contact to A&amp;A form</td><td>18271</td><td>9 fields to add, 3 to remove; restructure Q1 into separate fields</td></tr>
-          <tr><td>9</td><td>Add moving direction, time slot, contractor PIC to Moving form</td><td>18272</td><td>4 fields to add, 3 to remove</td></tr>
-          <tr><td>10</td><td>Add vehicle plate, IU, make/model, vehicle type, document uploads to Vehicle Registration</td><td>18238</td><td>5 fields to add (consolidate from 18239), 1 to remove</td></tr>
-          <tr><td>11</td><td>Add card holder details, quantity, replacement reason, payment upload to Access Card</td><td>18274</td><td>4 fields to add, 2 to remove</td></tr>
-          <tr><td>12</td><td>Expand Occupancy Registration with occupant details, tenancy period, emergency contact, consent</td><td>18276</td><td>8 fields to add, 1 to remove</td></tr>
-          <tr><td>13</td><td>Delete the Refund Request e-form</td><td>18273</td><td>Eliminated by proposed workflow</td></tr>
+          <tr><td>8</td><td>Add contact number and email to Address Change</td><td>18237</td><td>2 fields to add, 1 to remove</td></tr>
+          <tr><td>9</td><td>Add renovation scope, dates, worker list, applicant contact to A&amp;A form</td><td>18271</td><td>9 fields to add, 3 to remove; restructure Q1 into separate fields</td></tr>
+          <tr><td>10</td><td>Add moving direction, time slot, contractor PIC to Moving form</td><td>18272</td><td>4 fields to add, 3 to remove</td></tr>
+          <tr><td>11</td><td>Add vehicle plate, IU, make/model, vehicle type, document uploads, deposit payment to Vehicle Registration</td><td>18238</td><td>6 fields to add (consolidate from 18239), 1 to remove</td></tr>
+          <tr><td>12</td><td>Add card holder details, quantity, replacement reason, payment upload to Access Card</td><td>18274</td><td>4 fields to add, 2 to remove</td></tr>
+          <tr><td>13</td><td>Expand Occupancy Registration with occupant details, tenancy period, emergency contact, consent</td><td>18276</td><td>8 fields to add, 1 to remove</td></tr>
+          <tr><td>14</td><td>Delete the Refund Request e-form</td><td>18273</td><td>Eliminated by proposed workflow</td></tr>
         </tbody>
       </table>
     </div>
@@ -1342,13 +1343,13 @@
       <table>
         <thead><tr><th>#</th><th>Action</th><th>Details</th></tr></thead>
         <tbody>
-          <tr><td>14</td><td>Reactivate "Renovation Deposit" facility category</td><td>deposit_switch=1, deposit=$1,000, enable_qa=0, booking_fee=$0</td></tr>
-          <tr><td>15</td><td>Reactivate "Moving Deposit" facility category</td><td>deposit_switch=1, deposit=$1,000, enable_qa=0, booking_fee=$0</td></tr>
-          <tr><td>16</td><td>Create "Carwash Bay" facility category</td><td>Pricing and rules TBD</td></tr>
-          <tr><td>17</td><td>Create "EV Lot" facility category</td><td>Pricing and rules TBD</td></tr>
-          <tr><td>18</td><td>Create "Temporary Overnight Parking" facility category</td><td>Pricing and rules TBD</td></tr>
-          <tr><td>19</td><td>Enable booking Q&amp;A for Function Room and Dining Pavilion</td><td>Guest count, event type</td></tr>
-          <tr><td>20</td><td>Determine approach for Visitor Parking and Loading/Unloading Bay</td><td>Facility Booking vs E-form vs VMS integration</td></tr>
+          <tr><td>15</td><td>Reactivate "Renovation Deposit" facility category</td><td>deposit_switch=1, deposit=$1,000, enable_qa=0, booking_fee=$0</td></tr>
+          <tr><td>16</td><td>Reactivate "Moving Deposit" facility category</td><td>deposit_switch=1, deposit=$1,000, enable_qa=0, booking_fee=$0</td></tr>
+          <tr><td>17</td><td>Create "Carwash Bay" facility category</td><td>Pricing and rules TBD</td></tr>
+          <tr><td>18</td><td>Create "EV Lot" facility category</td><td>Pricing and rules TBD</td></tr>
+          <tr><td>19</td><td>Create "Temporary Overnight Parking" facility category</td><td>Pricing and rules TBD</td></tr>
+          <tr><td>20</td><td>Enable booking Q&amp;A for Function Room and Dining Pavilion</td><td>Guest count, event type</td></tr>
+          <tr><td>21</td><td>Determine approach for Visitor Parking and Loading/Unloading Bay</td><td>Facility Booking vs E-form vs VMS integration</td></tr>
         </tbody>
       </table>
     </div>
@@ -1358,10 +1359,10 @@
       <table>
         <thead><tr><th>#</th><th>Form Name</th><th>Fields</th><th>Complexity</th></tr></thead>
         <tbody>
-          <tr><td>21</td><td>Pet Registration</td><td>8</td><td><span class="badge badge-green">Low</span></td></tr>
-          <tr><td>22</td><td>Visitor Management System (VMS)</td><td>7</td><td><span class="badge badge-yellow">Medium</span></td></tr>
-          <tr><td>23</td><td>Instructor/Coach Registration</td><td>7</td><td><span class="badge badge-yellow">Medium</span></td></tr>
-          <tr><td>24</td><td>Completion &amp; Inspection Request</td><td>4</td><td><span class="badge badge-green">Low</span></td></tr>
+          <tr><td>22</td><td>Pet Registration</td><td>8</td><td><span class="badge badge-green">Low</span></td></tr>
+          <tr><td>23</td><td>Visitor Management System (VMS)</td><td>7</td><td><span class="badge badge-yellow">Medium</span></td></tr>
+          <tr><td>24</td><td>Instructor/Coach Registration</td><td>7</td><td><span class="badge badge-yellow">Medium</span></td></tr>
+          <tr><td>25</td><td>Completion &amp; Inspection Request</td><td>4</td><td><span class="badge badge-green">Low</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -1371,12 +1372,12 @@
       <table>
         <thead><tr><th>#</th><th>Action</th><th>Details</th></tr></thead>
         <tbody>
-          <tr><td>25</td><td>Publish Form A (Address Change) as pilot</td><td>Lowest risk, near-complete</td></tr>
-          <tr><td>26</td><td>Publish Form H (Bicycle Tag) as second pilot</td><td>Also near-complete</td></tr>
-          <tr><td>27</td><td>Test full 3-step deposit workflow end-to-end</td><td>E-form submission, Facility Booking deposit, inspection, refund/forfeit</td></tr>
-          <tr><td>28</td><td>Publish remaining e-forms in batches</td><td>Non-deposit forms first, then deposit forms</td></tr>
-          <tr><td>29</td><td>Communicate to residents</td><td>Provide guide on digital submission process</td></tr>
-          <tr><td>30</td><td>Decommission paper forms</td><td>After digital equivalents are stable</td></tr>
+          <tr><td>26</td><td>Publish Form A (Address Change) as pilot</td><td>Lowest risk, near-complete</td></tr>
+          <tr><td>27</td><td>Publish Form H (Bicycle Tag) as second pilot</td><td>Also near-complete</td></tr>
+          <tr><td>28</td><td>Test full 3-step deposit workflow end-to-end</td><td>E-form submission, Facility Booking deposit, inspection, refund/forfeit</td></tr>
+          <tr><td>29</td><td>Publish remaining e-forms in batches</td><td>Non-deposit forms first, then deposit forms</td></tr>
+          <tr><td>30</td><td>Communicate to residents</td><td>Provide guide on digital submission process</td></tr>
+          <tr><td>31</td><td>Decommission paper forms</td><td>After digital equivalents are stable</td></tr>
         </tbody>
       </table>
     </div>
