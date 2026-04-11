@@ -51,20 +51,6 @@ Hilife CMS provides two modules relevant to this migration:
 | K | Request for Refund of Deposit (Facilities) | None | Facility deposit refund request |
 | L | Registration of Residential Occupancy | None | Register occupants and tenancy details |
 
-### 2.2 New Digital-Only Forms
-
-Nine new forms have been identified that have no paper equivalent. These must be built from scratch in Hilife:
-
-- Pet Registration
-- Overnight Stay Visitor Registration (VMS)
-- Instructor/Coach Registration
-- Carwash Bay Booking
-- EV Lot Booking
-- Temporary Overnight Parking Permit
-- Visitor Parking
-- Loading/Unloading Bay Request
-- Bicycle Registration
-
 ---
 
 ## 3. E-Form Design
@@ -85,8 +71,9 @@ This section specifies the complete field requirements for each e-form. For exis
 | Dining / Function Room | I, J | N/A | N/A | N/A | N/A | N/A | Facility Booking |
 | Occupancy Registration | L | 18276 | 2 | 10 | 8 | 1 | Very sparse |
 | Pet Registration | New | N/A | 0 | 8 | 8 | 0 | Not started |
-| Overnight Stay Visitor Reg (VMS) | New | N/A | 0 | 7 | 7 | 0 | Not started |
+| Visitor Management (VMS) | New | N/A (Hilife VMS feature) | -- | -- | -- | -- | Use Hilife VMS |
 | Instructor Registration | New | N/A | 0 | 7 | 7 | 0 | Not started |
+| Temporary Overnight Parking Permit | New | N/A | 0 | 5 | 5 | 0 | Not started |
 
 ---
 
@@ -298,19 +285,9 @@ $50 refundable deposit is required for vehicle registration.
 
 ---
 
-### 3.11 New: Overnight Stay Visitor Registration (VMS)
+### 3.11 Visitor Management (VMS)
 
-**Not yet built in Hilife | Required: 7 fields**
-
-| # | Field | Type | Required | Hilife Status | Notes |
-|---|-------|------|----------|---------------|-------|
-| 1 | Visitor Name | Text | Yes | N/A | |
-| 2 | Visitor Contact Number | Text | No | N/A | |
-| 3 | Visit Date | Date | Yes | N/A | |
-| 4 | Expected Time of Arrival | Time | No | N/A | |
-| 5 | Vehicle Number (if driving) | Text | No | N/A | For carpark access |
-| 6 | Purpose of Visit | Single Choice | No | N/A | Social / Delivery / Service / Others |
-| 7 | Number of Visitors | Number | No | N/A | Default 1 |
+**Uses Hilife's built-in VMS feature, not an e-form.** Hilife already has a VMS module for visitor registration (including vehicle access, visitor passes, etc.). This does not need to be built as an e-form. Configure and align the VMS module settings with the handbook rules.
 
 ---
 
@@ -330,7 +307,21 @@ $50 refundable deposit is required for vehicle registration.
 
 ---
 
-### 3.13 Cross-Cutting Issues
+### 3.13 New: Temporary Overnight Parking Permit
+
+**Not yet built in Hilife | Required: 5 fields**
+
+| # | Field | Type | Required | Hilife Status | Notes |
+|---|-------|------|----------|---------------|-------|
+| 1 | Vehicle Registration Plate No. | Text | Yes | N/A | |
+| 2 | Parking Date(s) | Date | Yes | N/A | Start date; may need end date for multi-day |
+| 3 | Number of Nights | Number | Yes | N/A | |
+| 4 | Reason for Overnight Parking | Text | No | N/A | e.g., visiting guest, temporary vehicle |
+| 5 | PDPA Consent | Single Choice (checkbox) | Yes | N/A | |
+
+---
+
+### 3.14 Cross-Cutting Issues
 
 The following issues affect multiple forms and must be resolved before any e-form is published:
 
@@ -372,7 +363,7 @@ Simple e-form submission and approval flow:
    Resident receives outcome notification
 ```
 
-**Applies to:** Form A (Address Change), Form H (Bicycle Tag), Form L (Occupancy Registration), Pet Registration, Overnight Stay Visitor Reg (VMS), Instructor/Coach Registration, Bicycle Registration.
+**Applies to:** Form A (Address Change), Form H (Bicycle Tag), Form L (Occupancy Registration), Pet Registration, Instructor/Coach Registration, Bicycle Registration, Temporary Overnight Parking Permit.
 
 Note: Forms that require fee or deposit collection use separate workflows -- see Section 4.2 (Fee Collection) and Section 4.3 (Deposit-Required).
 
@@ -561,11 +552,6 @@ The Facility Booking module is already working for Function Rooms, Dining Pavili
 - Form J (Function Room Booking) -- replaced by Facility Booking module
 - Form K (Refund Request) -- eliminated (auto-refund or MA-driven)
 
-**New facility categories to create:**
-- Carwash Bay (pricing TBD)
-- EV Lot (pricing TBD)
-- Temporary Overnight Parking (pricing TBD)
-
 **Current deposit amounts:**
 
 | Facility | Deposit | Booking Fee |
@@ -575,10 +561,8 @@ The Facility Booking module is already working for Function Rooms, Dining Pavili
 | Tennis Court | $0 | $10/hr |
 
 **Improvements needed:**
-- Align pricing between handbook and Hilife configuration (resolve the ~9% discrepancy)
+- Align pricing between handbook and Hilife configuration (update handbook to GST-inclusive amounts)
 - Enable booking Q&A (`enable_qa`) for categories where additional info is needed (e.g., guest count for function rooms)
-- Configure cancellation windows for new categories
-- Determine whether Visitor Parking and Loading/Unloading Bay should be facility bookings or e-forms
 
 ---
 
@@ -622,8 +606,8 @@ Before committing to the Facility Booking module for deposit collection, the fol
 | # | Form | Fields | Complexity |
 |---|------|--------|------------|
 | 8 | Pet Registration | 8 | Low |
-| 9 | Overnight Stay Visitor Registration (VMS) | 7 | Medium |
 | 10 | Instructor/Coach Registration | 7 | Medium |
+| 11 | Temporary Overnight Parking Permit | 5 | Low |
 
 #### Cross-Cutting Fixes (All E-Forms)
 

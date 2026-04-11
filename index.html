@@ -530,7 +530,6 @@
     <a href="#overview">1. Overview</a>
     <a href="#paper-forms">2. Paper Forms (A-L)</a>
     <a href="#paper-inventory" class="sub">Inventory</a>
-    <a href="#paper-new" class="sub">New Digital-Only Forms</a>
     <a href="#eform-design">3. E-Form Design</a>
     <a href="#eform-summary" class="sub">Discrepancy Summary</a>
     <a href="#form-a" class="sub">Form A &mdash; Address Change</a>
@@ -543,7 +542,7 @@
     <a href="#form-ij" class="sub">Form I/J &mdash; Facility Booking</a>
     <a href="#form-l" class="sub">Form L &mdash; Occupancy</a>
     <a href="#form-pet" class="sub">New: Pet Registration</a>
-    <a href="#form-vms" class="sub">New: Overnight Stay Visitor Reg</a>
+    <a href="#form-vms" class="sub">VMS (Hilife Feature)</a>
     <a href="#form-instructor" class="sub">New: Instructor/Coach</a>
     <a href="#cross-cutting" class="sub">Cross-Cutting Issues</a>
     <a href="#workflows">4. Workflows</a>
@@ -620,23 +619,7 @@
       </table>
     </div>
 
-    <h3 id="paper-new">2.2 New Digital-Only Forms</h3>
-    <p>Nine new forms have been identified that have no paper equivalent. These must be built from scratch in Hilife:</p>
-    <ul>
-      <li>Pet Registration</li>
-      <li>Overnight Stay Visitor Registration (VMS)</li>
-      <li>Instructor/Coach Registration</li>
-      <li>Carwash Bay Booking</li>
-      <li>EV Lot Booking</li>
-      <li>Temporary Overnight Parking Permit</li>
-      <li>Visitor Parking</li>
-      <li>Loading/Unloading Bay Request</li>
-      <li>Bicycle Registration</li>
-    </ul>
-  </section>
-
-  <!-- ========== SECTION 3: E-FORM DESIGN ========== -->
-  <section id="eform-design">
+    <section id="eform-design">
     <h2>3. E-Form Design</h2>
     <p>This section specifies the complete field requirements for each e-form. For existing Hilife drafts, the <strong>Hilife Status</strong> column indicates whether each field already exists, partially exists, is missing, or should be removed.</p>
     <p>Status key: <span class="badge badge-green">Exists</span> <span class="badge badge-yellow">Exists (QX)</span> <span class="badge badge-yellow">Partial (QX)</span> <span class="badge badge-red">MISSING</span> <span class="badge badge-yellow">Remove</span> <span class="badge badge-red">N/A</span></p>
@@ -912,22 +895,11 @@
 
           <!-- Row 11: VMS -->
           <tr class="expandable-row" id="form-vms" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Overnight Stay Visitor Reg (VMS)</td><td>New</td><td>N/A</td><td>0</td><td>7</td><td>7</td><td>0</td><td><span class="badge badge-red">Not started</span></td>
+            <td><span class="arrow">&#9654;</span> Visitor Management (VMS)</td><td>New</td><td>N/A (Hilife VMS)</td><td>--</td><td>--</td><td>--</td><td>--</td><td><span class="badge badge-green">Use Hilife VMS</span></td>
           </tr>
           <tr class="detail-row">
             <td colspan="8">
-              <table>
-                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-                <tbody>
-                  <tr><td>1</td><td>Visitor Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-                  <tr><td>2</td><td>Visitor Contact Number</td><td>Text</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-                  <tr><td>3</td><td>Visit Date</td><td>Date</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-                  <tr><td>4</td><td>Expected Time of Arrival</td><td>Time</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-                  <tr><td>5</td><td>Vehicle Number (if driving)</td><td>Text</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td>For carpark access</td></tr>
-                  <tr><td>6</td><td>Purpose of Visit</td><td>Single Choice</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td>Social / Delivery / Service / Others</td></tr>
-                  <tr><td>7</td><td>Number of Visitors</td><td>Number</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td>Default 1</td></tr>
-                </tbody>
-              </table>
+              <p>Uses Hilife's built-in VMS feature, not an e-form. Hilife already has a VMS module for visitor registration (including vehicle access, visitor passes, etc.). Configure and align the VMS module settings with the handbook rules.</p>
             </td>
           </tr>
 
@@ -953,6 +925,24 @@
           </tr>
 
 
+          <!-- Row 13: Temporary Overnight Parking Permit -->
+          <tr class="expandable-row" id="form-overnight" onclick="toggleDetailRow(this)">
+            <td><span class="arrow">&#9654;</span> Temporary Overnight Parking Permit</td><td>New</td><td>N/A</td><td>0</td><td>5</td><td>5</td><td>0</td><td><span class="badge badge-red">Not started</span></td>
+          </tr>
+          <tr class="detail-row">
+            <td colspan="8">
+              <table>
+                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>Vehicle Registration Plate No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>2</td><td>Parking Date(s)</td><td>Date</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Start date; may need end date for multi-day</td></tr>
+                  <tr><td>3</td><td>Number of Nights</td><td>Number</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>4</td><td>Reason for Overnight Parking</td><td>Text</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td>e.g., visiting guest, temporary vehicle</td></tr>
+                  <tr><td>5</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
 
         </tbody>
       </table>
@@ -1020,7 +1010,7 @@
       </div>
     </div>
 
-    <p><strong>Applies to:</strong> Form A (Address Change), Form H (Bicycle Tag), Form L (Occupancy Registration), Pet Registration, Overnight Stay Visitor Reg (VMS), Instructor/Coach Registration, Bicycle Registration.</p>
+    <p><strong>Applies to:</strong> Form A (Address Change), Form H (Bicycle Tag), Form L (Occupancy Registration), Pet Registration, Instructor/Coach Registration, Bicycle Registration, Temporary Overnight Parking Permit.</p>
 
     <div class="info-box info-box-blue">
       <strong>Note:</strong> Forms that involve a fee or deposit use different workflows. See Section 4.2 (Fee Collection) and Section 4.3 (Deposit-Required) for those processes.
@@ -1200,7 +1190,6 @@
       <li>Form K (Refund Request) &mdash; eliminated (auto-refund or MA-driven)</li>
     </ul>
 
-    <p><strong>New facility categories to create:</strong> Carwash Bay, EV Lot, Temporary Overnight Parking (all pricing TBD).</p>
 
     <h4>Current Deposit Amounts</h4>
     <div class="table-wrap">
@@ -1219,7 +1208,6 @@
       <li>Align pricing between handbook and Hilife configuration (resolve the ~9% discrepancy).</li>
       <li>Enable booking Q&amp;A (<code>enable_qa</code>) for categories where additional info is needed (e.g., guest count for function rooms).</li>
       <li>Configure cancellation windows for new categories.</li>
-      <li>Determine whether Visitor Parking and Loading/Unloading Bay should be facility bookings or e-forms.</li>
     </ul>
   </section>
 
@@ -1278,8 +1266,8 @@
         <thead><tr><th>#</th><th>Form</th><th>Fields</th><th>Complexity</th></tr></thead>
         <tbody>
           <tr><td>8</td><td>Pet Registration</td><td>8</td><td><span class="badge badge-green">Low</span></td></tr>
-          <tr><td>9</td><td>Overnight Stay Visitor Registration (VMS)</td><td>7</td><td><span class="badge badge-yellow">Medium</span></td></tr>
           <tr><td>10</td><td>Instructor/Coach Registration</td><td>7</td><td><span class="badge badge-yellow">Medium</span></td></tr>
+          <tr><td>11</td><td>Temporary Overnight Parking Permit</td><td>5</td><td><span class="badge badge-green">Low</span></td></tr>
           
         </tbody>
       </table>
