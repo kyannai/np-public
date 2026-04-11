@@ -68,10 +68,8 @@ This section specifies the complete field requirements for each e-form. For exis
 | Vehicle Registration | F | 18238 | 4 | 9 | 6 | 1 | Incomplete |
 | Access Card | G | 18274 | 3 | 6 | 4 | 2 | Major gaps |
 | Bicycle Tag | H | 18275 | 4 | 4 | 0 | 1 | Near-complete |
-| Dining / Function Room | I, J | N/A | N/A | N/A | N/A | N/A | Facility Booking |
 | Occupancy Registration | L | 18276 | 2 | 10 | 8 | 1 | Very sparse |
 | Pet Registration | New | N/A | 0 | 8 | 8 | 0 | Not started |
-| Visitor Management (VMS) | New | N/A (Hilife VMS feature) | -- | -- | -- | -- | Use Hilife VMS |
 | Instructor Registration | New | N/A | 0 | 7 | 7 | 0 | Not started |
 | Temporary Overnight Parking Permit | New | N/A | 0 | 5 | 5 | 0 | Not started |
 
@@ -236,17 +234,7 @@ $50 refundable deposit is required for vehicle registration.
 
 ---
 
-### 3.8 Forms I/J -- Dining Pavilion / Function Room Booking
-
-**No e-form needed.** These are handled entirely by the Facility Booking module, which is already active and working.
-
-- **Dining Pavilion** (Form I) -- $200 deposit + $25-50 booking fee, via Facility Booking.
-- **Function Room** (Form J) -- $200 deposit + $100 booking fee, via Facility Booking.
-- **Form K** (Refund Request for Facilities) -- eliminated. Refunds are automatic or MA-driven through Deposit Records.
-
----
-
-### 3.9 Form L -- Registration of Residential Occupancy
+### 3.8 Form L -- Registration of Residential Occupancy
 
 **Hilife E-Form ID: 18276 | Current: 2 questions | Required: 10 fields**
 
@@ -268,7 +256,7 @@ $50 refundable deposit is required for vehicle registration.
 
 ---
 
-### 3.10 New: Pet Registration
+### 3.9 New: Pet Registration
 
 **Not yet built in Hilife | Required: 8 fields**
 
@@ -285,13 +273,7 @@ $50 refundable deposit is required for vehicle registration.
 
 ---
 
-### 3.11 Visitor Management (VMS)
-
-**Uses Hilife's built-in VMS feature, not an e-form.** Hilife already has a VMS module for visitor registration (including vehicle access, visitor passes, etc.). This does not need to be built as an e-form. Configure and align the VMS module settings with the handbook rules.
-
----
-
-### 3.12 New: Instructor/Coach Registration
+### 3.10 New: Instructor/Coach Registration
 
 **Not yet built in Hilife | Required: 7 fields**
 
@@ -307,7 +289,7 @@ $50 refundable deposit is required for vehicle registration.
 
 ---
 
-### 3.13 New: Temporary Overnight Parking Permit
+### 3.11 New: Temporary Overnight Parking Permit
 
 **Not yet built in Hilife | Required: 5 fields**
 
@@ -321,7 +303,7 @@ $50 refundable deposit is required for vehicle registration.
 
 ---
 
-### 3.14 Cross-Cutting Issues
+### 3.12 Cross-Cutting Issues
 
 The following issues affect multiple forms and must be resolved before any e-form is published:
 
