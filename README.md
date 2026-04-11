@@ -676,11 +676,18 @@ Before committing to the Facility Booking module for deposit collection, the fol
 
 Pending the outcome of Section 5.1 (Hilife credit card fee clarification), decide the collection method for each form:
 
+#### Decided: PayNow
+
+| Form | Amount | Type | Decision | Reason |
+|------|--------|------|----------|--------|
+| Vehicle Reg (F) | $50 | Refundable deposit | **PayNow** | Deposit may be held for years (duration of vehicle ownership) -- exceeds Hilife's 6-month expiry |
+| Access Card (G) | $50/card | Non-refundable fee | **PayNow** | Fee collection, not a deposit. Variable quantity. |
+
+#### To Decide: Facility Booking or PayNow
+
 | Form | Amount | Type | Option A: Facility Booking | Option B: PayNow |
 |------|--------|------|---------------------------|-------------------|
-| Renovation (B-1) | $1,000 | Refundable deposit | Credit card hold, auto-lifecycle tracking, MA refund/forfeit | Resident pays via PayNow, uploads screenshot, MA creates manual deposit record, MA refunds via bank transfer |
-| Moving (D-1) | $1,000 | Refundable deposit | Same as above | Same as above |
-| Vehicle Reg (F) | $50 | Refundable deposit | Same as above (smaller amount) | Same as above |
-| Access Card (G) | $50/card | Non-refundable fee | Booking fee per slot (awkward for variable qty) | Resident pays via PayNow, uploads screenshot in e-form |
+| Renovation (B-1) | $1,000 | Refundable deposit (1-3 months) | Credit card hold, auto-lifecycle tracking, MA refund/forfeit | PayNow + screenshot, MA manual deposit record, bank transfer refund |
+| Moving (D-1) | $1,000 | Refundable deposit (1-4 weeks) | Same as above | Same as above |
 
 **Recommendation:** Confirm exact fee structure with Hilife first, then decide. If there is no fee, and the max duration is enough, use the credit card flow for simplicity. If fees are material ($20-30 per cycle), use PayNow.
