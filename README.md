@@ -62,13 +62,13 @@ This section specifies the complete field requirements for each e-form. For exis
 | Form | Paper Form ID | Hilife ID | Current Qs | Required Fields | Missing | To Remove | Readiness |
 |------|---------------|-----------|-----------|----------------|---------|-----------|-----------|
 | Address Change | A | 18237 | 4 | 5 | 2 | 1 | Near-complete |
-| Renovation/A&A + Contractor | B-1, B-2, B-3, C | 18271 | 8 | 20 | 9 | 3 | Major gaps |
-| Moving In/Out | D-1, D-2 | 18272 | 5 | 10 | 4 | 3 | Major gaps |
+| Renovation/A&A + Contractor | B-1, B-2, B-3, C | 18271 | 8 | 20 | 9 | 3 | Incomplete |
+| Moving In/Out | D-1, D-2 | 18272 | 5 | 10 | 4 | 3 | Incomplete |
 | Refund of Deposit | E, K | 18273 | 5 | 0 | 0 | 0 | ELIMINATED |
 | Vehicle Registration | F | 18238 | 4 | 9 | 6 | 1 | Incomplete |
-| Access Card | G | 18274 | 3 | 6 | 4 | 2 | Major gaps |
+| Access Card | G | 18274 | 3 | 6 | 4 | 2 | Incomplete |
 | Bicycle Tag | H | 18275 | 4 | 4 | 0 | 1 | Near-complete |
-| Occupancy Registration | L | 18276 | 2 | 10 | 8 | 1 | Very sparse |
+| Occupancy Registration | L | 18276 | 2 | 10 | 8 | 1 | Incomplete |
 | Pet Registration | New | N/A | 0 | 8 | 8 | 0 | Not started |
 | Instructor Registration | New | N/A | 0 | 7 | 7 | 0 | Not started |
 | Temporary Overnight Parking Permit | New | N/A | 0 | 5 | 5 | 0 | Not started |
@@ -129,7 +129,7 @@ Merged form combining paper Forms B-1, B-2, B-3, and C.
 | - | ~~Official Use x2~~ | ~~Header~~ | Remove | Exists (Q6, Q8 -- remove) | MA uses approval workflow |
 | - | ~~Deposit Cheque Number~~ | ~~Text~~ | Remove | N/A | Deposit collected via Facility Booking module |
 
-**Notes:** Major gaps. The merge of B-1/B-2/B-3/C is correct in concept, but the form lacks renovation scope details, dates, worker list, and applicant contact info. The contractor info fields exist but are crammed into a single Multiple Choice question and need restructuring into separate text fields. NRIC field must be removed before publishing. Deposit collection is handled by Facility Booking module (Step 2 of the deposit workflow).
+**Notes:** Incomplete. The merge of B-1/B-2/B-3/C is correct in concept, but the form lacks renovation scope details, dates, worker list, and applicant contact info. The contractor info fields exist but are crammed into a single Multiple Choice question and need restructuring into separate text fields. NRIC field must be removed before publishing. Deposit collection is handled by Facility Booking module (Step 2 of the deposit workflow).
 
 ---
 
@@ -157,7 +157,7 @@ Merged form combining paper Forms D-1 and D-2.
 | - | ~~Deposit Cheque Number~~ | ~~Text~~ | Remove | Exists (Q2 -- remove) | Deposit via Facility Booking |
 | - | ~~Official Use~~ | ~~Header~~ | Remove | Exists (Q5 -- remove) | |
 
-**Notes:** Major gaps. Cannot distinguish moving in from moving out. Missing time slot preference. Cheque reference and NRIC field must be removed. Deposit collection is handled by Facility Booking module.
+**Notes:** Incomplete. Cannot distinguish moving in from moving out. Missing time slot preference. Cheque reference and NRIC field must be removed. Deposit collection is handled by Facility Booking module.
 
 ---
 
@@ -214,7 +214,7 @@ $50 refundable deposit is required for vehicle registration.
 | - | ~~Cash/Cheque Reference~~ | ~~Text~~ | Remove | Exists (Q3 -- remove) | Payment via PayNow |
 | - | ~~Official Use~~ | ~~Header~~ | Remove | Exists (Q3 -- remove) | |
 
-**Notes:** Major gaps. Missing card holder details, quantity, and replacement reason. The $50/card fee should be collected via PayNow with screenshot upload as payment confirmation (see Section 4.1 special case).
+**Notes:** Incomplete. Missing card holder details, quantity, and replacement reason. The $50/card fee should be collected via PayNow with screenshot upload as payment confirmation (see Section 4.1 special case).
 
 ---
 
@@ -252,7 +252,7 @@ $50 refundable deposit is required for vehicle registration.
 | 10 | PDPA Consent | Single Choice (checkbox) | Yes | MISSING | |
 | - | ~~Official Use~~ | ~~Header~~ | Remove | Exists (Q2 -- remove) | |
 
-**Notes:** Very sparse. Only one actual resident-facing field exists (Q1 "Tenant Info"). The paper form collects significantly more detail. Eight fields must be added to bring this form to parity.
+**Notes:** Incomplete. Only one actual resident-facing field exists (Q1 "Tenant Info"). The paper form collects significantly more detail. Eight fields must be added to bring this form to parity.
 
 ---
 
