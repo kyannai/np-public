@@ -73,21 +73,21 @@ This section specifies the complete field requirements for each e-form. For exis
 
 ### Discrepancy Summary
 
-| Form | Hilife ID | Current Qs | Required Fields | Missing | To Remove | Readiness |
-|------|-----------|-----------|----------------|---------|-----------|-----------|
-| A -- Address Change | 18237 | 4 | 5 | 2 | 1 | Near-complete |
-| B-1 -- Renovation/A&A | 18271 | 8 | 20 | 9 | 3 | Major gaps |
-| D-1 -- Moving In/Out | 18272 | 5 | 10 | 4 | 3 | Major gaps |
-| E/K -- Refund of Deposit | 18273 | 5 | 0 | 0 | 0 | ELIMINATED |
-| F -- Vehicle Registration | 18238 | 4 | 9 | 6 | 1 | Incomplete |
-| G -- Access Card | 18274 | 3 | 6 | 4 | 2 | Major gaps |
-| H -- Bicycle Tag | 18275 | 4 | 4 | 0 | 1 | Near-complete |
-| I/J -- Dining / Function Room | N/A | N/A | N/A | N/A | N/A | Facility Booking |
-| L -- Occupancy Registration | 18276 | 2 | 10 | 8 | 1 | Very sparse |
-| Pet Registration | N/A | 0 | 8 | 8 | 0 | Not started |
-| VMS | N/A | 0 | 7 | 7 | 0 | Not started |
-| Instructor Registration | N/A | 0 | 7 | 7 | 0 | Not started |
-| Completion & Inspection | N/A | 0 | 4 | 4 | 0 | Not started |
+| Form | Paper Form ID | Hilife ID | Current Qs | Required Fields | Missing | To Remove | Readiness |
+|------|---------------|-----------|-----------|----------------|---------|-----------|-----------|
+| Address Change | A | 18237 | 4 | 5 | 2 | 1 | Near-complete |
+| Renovation/A&A + Contractor | B-1, B-2, B-3, C | 18271 | 8 | 20 | 9 | 3 | Major gaps |
+| Moving In/Out | D-1, D-2 | 18272 | 5 | 10 | 4 | 3 | Major gaps |
+| Refund of Deposit | E, K | 18273 | 5 | 0 | 0 | 0 | ELIMINATED |
+| Vehicle Registration | F | 18238 | 4 | 9 | 6 | 1 | Incomplete |
+| Access Card | G | 18274 | 3 | 6 | 4 | 2 | Major gaps |
+| Bicycle Tag | H | 18275 | 4 | 4 | 0 | 1 | Near-complete |
+| Dining / Function Room | I, J | N/A | N/A | N/A | N/A | N/A | Facility Booking |
+| Occupancy Registration | L | 18276 | 2 | 10 | 8 | 1 | Very sparse |
+| Pet Registration | New | N/A | 0 | 8 | 8 | 0 | Not started |
+| VMS | New | N/A | 0 | 7 | 7 | 0 | Not started |
+| Instructor Registration | New | N/A | 0 | 7 | 7 | 0 | Not started |
+| Completion & Inspection | Replaces E, K | N/A | 0 | 4 | 4 | 0 | Not started |
 
 ---
 
