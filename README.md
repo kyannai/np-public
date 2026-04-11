@@ -474,9 +474,7 @@ For the deposit payment step, there are two options:
 - On completion, MA refunds via bank transfer.
 - **No credit card fees**, but requires more manual effort from both resident and MA.
 
-#### Proposed Workflow (Payment Method Agnostic)
-
-Regardless of whether deposit is collected via credit card or PayNow, the overall workflow is the same:
+#### Proposed Workflow -- Flow A: Credit Card via Facility Booking
 
 ```
 STEP 1: E-FORM APPLICATION
@@ -494,13 +492,17 @@ STEP 1: E-FORM APPLICATION
    MA approves e-form
         |
         v
-STEP 2: DEPOSIT PAYMENT
-   MA instructs resident to pay deposit
-   (via credit card in Facility Booking, or via PayNow)
+STEP 2: DEPOSIT PAYMENT (Credit Card)
+   MA instructs resident via reply thread:
+   "Approved. Please proceed to Facility Booking to pay the deposit."
         |
         v
-   Resident pays deposit
-   Deposit status = "In Use"
+   Resident opens Facility Booking module
+   Selects "Renovation Deposit" or "Moving Deposit" category
+   Pays deposit via credit card hold
+        |
+        v
+   Deposit status = "In Use" (auto-tracked in Deposit Records)
    Work/move may commence
         |
         v
@@ -513,9 +515,56 @@ STEP 3: COMPLETION AND REFUND
         |
    [Damage found?]
         |
-       No --> MA processes refund --> Deposit returned
+       No --> MA clicks "Refund" in Deposit Records --> Deposit returned to credit card
         |
-       Yes --> MA processes forfeit --> Full/partial deduction
+       Yes --> MA clicks "Forfeit" in Deposit Records --> Full/partial deduction
+```
+
+#### Proposed Workflow -- Flow B: PayNow
+
+```
+STEP 1: E-FORM APPLICATION
+   Resident submits e-form with full details
+   (contractor info, work scope, dates, attachments, signatures)
+        |
+        v
+   MA reviews application
+        |
+   [Need more info?] --Yes--> MA uses reply thread --> Resident replies
+        |
+       No
+        |
+        v
+   MA approves e-form
+        |
+        v
+STEP 2: DEPOSIT PAYMENT (PayNow)
+   MA instructs resident via reply thread:
+   "Approved. Please pay $X,XXX via PayNow to MCST 4932
+    and upload the payment screenshot here."
+        |
+        v
+   Resident pays via PayNow to MCST bank account
+   Uploads payment confirmation screenshot in e-form reply thread
+        |
+        v
+   MA verifies payment
+   MA creates manual deposit record in Hilife Deposit Records
+   Work/move may commence
+        |
+        v
+STEP 3: COMPLETION AND REFUND
+   Resident notifies MA via e-form reply thread:
+   "Work completed. Please arrange inspection."
+        |
+        v
+   MA inspects common areas
+        |
+   [Damage found?]
+        |
+       No --> MA processes refund via bank transfer --> Deposit returned
+        |
+       Yes --> MA deducts damages, refunds remainder via bank transfer
 ```
 
 ---

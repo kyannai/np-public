@@ -1153,62 +1153,75 @@
       </table>
     </div>
 
-    <h4>Proposed Workflow (Payment Method Agnostic)</h4>
-    <p>Regardless of whether deposit is collected via credit card or PayNow, the overall workflow is the same:</p>
+    <h4>Flow A: Credit Card via Facility Booking</h4>
 
     <div class="flow-diagram">
       <div class="flow-section-label">Step 1: E-Form Application</div>
-      <div class="flow-step flow-step-action">
-        <span class="flow-step-label">Step 1</span>
-        Resident submits e-form with full details (contractor info, work scope, dates, attachments, signatures)
-      </div>
+      <div class="flow-step flow-step-action"><span class="flow-step-label">Step 1</span>Resident submits e-form with full details (contractor info, work scope, dates, attachments, signatures)</div>
       <div class="flow-arrow"></div>
       <div class="flow-step flow-step-action">MA reviews application</div>
       <div class="flow-arrow"></div>
       <div class="flow-step flow-step-decision">Need more info?</div>
       <div class="flow-branch">
-        <div>
-          <div class="flow-arrow-label">Yes</div>
-          <div class="flow-arrow"></div>
-          <div class="flow-step flow-step-action" style="font-size:12px;">MA posts in reply thread &rarr; Resident replies &rarr; MA reviews</div>
-        </div>
-        <div>
-          <div class="flow-arrow-label">No</div>
-          <div class="flow-arrow"></div>
-          <div class="flow-step flow-step-outcome-good">MA approves e-form</div>
-        </div>
+        <div><div class="flow-arrow-label">Yes</div><div class="flow-arrow"></div><div class="flow-step flow-step-action" style="font-size:12px;">MA posts in reply thread &rarr; Resident replies &rarr; MA reviews</div></div>
+        <div><div class="flow-arrow-label">No</div><div class="flow-arrow"></div><div class="flow-step flow-step-outcome-good">MA approves e-form</div></div>
       </div>
       <div class="flow-arrow"></div>
 
-      <div class="flow-section-label">Step 2: Deposit Payment</div>
-      <div class="flow-step flow-step-action">
-        <span class="flow-step-label">Step 2</span>
-        MA instructs resident to pay deposit (via credit card in Facility Booking, or via PayNow)
-      </div>
+      <div class="flow-section-label">Step 2: Deposit Payment (Credit Card)</div>
+      <div class="flow-step flow-step-action"><span class="flow-step-label">Step 2</span>MA instructs resident: "Please proceed to Facility Booking to pay the deposit."</div>
       <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-outcome-good">Resident pays deposit &mdash; status = "In Use" &mdash; work/move may commence</div>
+      <div class="flow-step flow-step-action">Resident opens Facility Booking &rarr; selects "Renovation Deposit" or "Moving Deposit" &rarr; pays via credit card hold</div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step flow-step-outcome-good">Deposit status = "In Use" (auto-tracked in Deposit Records) &mdash; work/move may commence</div>
       <div class="flow-arrow"></div>
 
       <div class="flow-section-label">Step 3: Completion and Refund</div>
-      <div class="flow-step flow-step-action">
-        <span class="flow-step-label">Step 3</span>
-        Resident notifies MA via e-form reply thread: "Work completed. Please arrange inspection."
-      </div>
+      <div class="flow-step flow-step-action"><span class="flow-step-label">Step 3</span>Resident notifies MA via e-form reply thread: "Work completed. Please arrange inspection."</div>
       <div class="flow-arrow"></div>
       <div class="flow-step flow-step-action">MA inspects common areas</div>
       <div class="flow-arrow"></div>
       <div class="flow-step flow-step-decision">Damage found?</div>
       <div class="flow-branch">
-        <div>
-          <div class="flow-arrow-label">No</div>
-          <div class="flow-arrow"></div>
-          <div class="flow-step flow-step-outcome-good">MA processes refund &rarr; deposit returned</div>
-        </div>
-        <div>
-          <div class="flow-arrow-label">Yes</div>
-          <div class="flow-arrow"></div>
-          <div class="flow-step flow-step-outcome-bad">MA processes forfeit &rarr; full/partial deduction</div>
-        </div>
+        <div><div class="flow-arrow-label">No</div><div class="flow-arrow"></div><div class="flow-step flow-step-outcome-good">MA clicks "Refund" in Deposit Records &rarr; deposit returned to credit card</div></div>
+        <div><div class="flow-arrow-label">Yes</div><div class="flow-arrow"></div><div class="flow-step flow-step-outcome-bad">MA clicks "Forfeit" in Deposit Records &rarr; full/partial deduction</div></div>
+      </div>
+    </div>
+
+    <h4>Flow B: PayNow</h4>
+
+    <div class="flow-diagram">
+      <div class="flow-section-label">Step 1: E-Form Application</div>
+      <div class="flow-step flow-step-action"><span class="flow-step-label">Step 1</span>Resident submits e-form with full details (contractor info, work scope, dates, attachments, signatures)</div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step flow-step-action">MA reviews application</div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step flow-step-decision">Need more info?</div>
+      <div class="flow-branch">
+        <div><div class="flow-arrow-label">Yes</div><div class="flow-arrow"></div><div class="flow-step flow-step-action" style="font-size:12px;">MA posts in reply thread &rarr; Resident replies &rarr; MA reviews</div></div>
+        <div><div class="flow-arrow-label">No</div><div class="flow-arrow"></div><div class="flow-step flow-step-outcome-good">MA approves e-form</div></div>
+      </div>
+      <div class="flow-arrow"></div>
+
+      <div class="flow-section-label">Step 2: Deposit Payment (PayNow)</div>
+      <div class="flow-step flow-step-action"><span class="flow-step-label">Step 2</span>MA instructs resident: "Please pay $X,XXX via PayNow to MCST 4932 and upload the payment screenshot here."</div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step flow-step-action">Resident pays via PayNow &rarr; uploads payment confirmation screenshot in e-form reply thread</div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step flow-step-action">MA verifies payment &rarr; creates manual deposit record in Hilife Deposit Records</div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step flow-step-outcome-good">Work/move may commence</div>
+      <div class="flow-arrow"></div>
+
+      <div class="flow-section-label">Step 3: Completion and Refund</div>
+      <div class="flow-step flow-step-action"><span class="flow-step-label">Step 3</span>Resident notifies MA via e-form reply thread: "Work completed. Please arrange inspection."</div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step flow-step-action">MA inspects common areas</div>
+      <div class="flow-arrow"></div>
+      <div class="flow-step flow-step-decision">Damage found?</div>
+      <div class="flow-branch">
+        <div><div class="flow-arrow-label">No</div><div class="flow-arrow"></div><div class="flow-step flow-step-outcome-good">MA refunds via bank transfer &rarr; deposit returned</div></div>
+        <div><div class="flow-arrow-label">Yes</div><div class="flow-arrow"></div><div class="flow-step flow-step-outcome-bad">MA deducts damages, refunds remainder via bank transfer</div></div>
       </div>
     </div>
 
