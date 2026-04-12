@@ -640,12 +640,12 @@
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
-                  <tr><td>1</td><td>New Correspondence Address</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
-                  <tr><td>2</td><td>Effective Date of Change</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
+                  <tr><td>1</td><td>New Correspondence Address</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
+                  <tr><td>2</td><td>Effective Date of Change</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
                   <tr><td>3</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Mobile and/or home</td></tr>
                   <tr><td>4</td><td>Email Address</td><td>Text</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>For correspondence</td></tr>
-                  <tr><td>5</td><td>Consent (PDPA)</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove</span></td><td>MA uses approval workflow instead</td></tr>
+                  <tr><td>5</td><td>Consent (PDPA)</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
+                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q4)</span></td><td>MA uses approval workflow instead</td></tr>
                 </tbody>
               </table>
               <div class="form-notes">
@@ -656,7 +656,7 @@
 
           <!-- Row 2: Renovation/A&A + Contractor -->
           <tr class="expandable-row" id="form-b1" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Renovation/A&amp;A + Contractor</td><td>B-1, B-2, B-3, C</td><td>18271</td><td>8</td><td>20</td><td>9</td><td>3</td><td><span class="badge badge-yellow">Incomplete</span></td>
+            <td><span class="arrow">&#9654;</span> Renovation/A&amp;A + Contractor</td><td>B-1, B-2, B-3, C</td><td>18271</td><td>8</td><td>20</td><td>9</td><td>4</td><td><span class="badge badge-yellow">Incomplete</span></td>
           </tr>
           <tr class="detail-row">
             <td colspan="8">
@@ -674,11 +674,11 @@
                   <tr><td>6</td><td>Drawing Plans / Renovation Proposal</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Upload PDF/images</td></tr>
                   <tr><td>7</td><td>Hot Work Required?</td><td>Single Choice (Yes/No)</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>If yes, hot work permit applies</td></tr>
                   <tr class="section-header"><td colspan="6">Section: Contractor Info</td></tr>
-                  <tr><td>8</td><td>Name of Contractor Company</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Exists (QX)</span></td><td>Combined as Multiple Choice in Q1, needs restructuring</td></tr>
-                  <tr><td>9</td><td>Contractor Business Reg. No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Exists (QX)</span></td><td>Combined in Q1, needs separate field</td></tr>
-                  <tr><td>10</td><td>Contractor Address</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Exists (QX)</span></td><td>Combined in Q1, needs separate field</td></tr>
-                  <tr><td>11</td><td>Contractor Person-in-Charge</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Exists (QX)</span></td><td>Combined in Q1, needs separate field</td></tr>
-                  <tr><td>12</td><td>Contractor Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Exists (QX)</span></td><td>Combined in Q1, needs separate field</td></tr>
+                  <tr><td>8</td><td>Name of Contractor Company</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>Combined as Multiple Choice in Q1, needs restructuring</td></tr>
+                  <tr><td>9</td><td>Contractor Business Reg. No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>Combined in Q1, needs separate field</td></tr>
+                  <tr><td>10</td><td>Contractor Address</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>Combined in Q1, needs separate field</td></tr>
+                  <tr><td>11</td><td>Contractor Person-in-Charge</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>Combined in Q1, needs separate field</td></tr>
+                  <tr><td>12</td><td>Contractor Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>Combined in Q1, needs separate field</td></tr>
                   <tr><td>13</td><td>Contractor Email</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
                   <tr><td>14</td><td>Company Stamp</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
                   <tr class="section-header"><td colspan="6">Section: Worker Details</td></tr>
@@ -689,7 +689,8 @@
                   <tr><td>18</td><td>Terms and Conditions Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
                   <tr><td>19</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2/Q4)</span></td><td></td></tr>
                   <tr><td>20</td><td>Signed Contractor Indemnity Form</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q5)</span></td><td>Resident uploads contractor's signed indemnity document</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>NRIC Last 4 Digits</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove</span></td><td>PDPA non-compliant by 31 Dec 2026</td></tr>
+                  <tr class="remove-row"><td>-</td><td><s>Application Permit for Contractor</s></td><td><s>Multiple Choice</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q7)</span></td><td>Merged into main form; permit issued via approval workflow</td></tr>
+                  <tr class="remove-row"><td>-</td><td><s>NRIC Last 4 Digits</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q7)</span></td><td>PDPA non-compliant by 31 Dec 2026</td></tr>
                   <tr class="remove-row"><td>-</td><td><s>Official Use x2</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q6, Q8)</span></td><td>MA uses approval workflow</td></tr>
                   <tr class="remove-row"><td>-</td><td><s>Deposit Cheque Number</s></td><td><s>Text</s></td><td>Remove</td><td>N/A</td><td>Deposit collected via Facility Booking module</td></tr>
                 </tbody>
@@ -714,8 +715,8 @@
                   <tr><td>2</td><td>Date of Moving</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
                   <tr><td>3</td><td>Preferred Time Slot</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Morning (9am-1pm) / Afternoon (1pm-5pm)</td></tr>
                   <tr class="section-header"><td colspan="6">Section: Contractor Info</td></tr>
-                  <tr><td>4</td><td>Name of Moving Company</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Partial (QX)</span></td><td>Combined in Q3, needs restructuring</td></tr>
-                  <tr><td>5</td><td>Contractor Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Partial (QX)</span></td><td>Combined in Q3</td></tr>
+                  <tr><td>4</td><td>Name of Moving Company</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Partial (Q3)</span></td><td>Combined in Q3, needs restructuring</td></tr>
+                  <tr><td>5</td><td>Contractor Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Partial (Q3)</span></td><td>Combined in Q3</td></tr>
                   <tr><td>6</td><td>Contractor Person-in-Charge</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
                   <tr><td>7</td><td>Number of Workers</td><td>Number</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
                   <tr class="section-header"><td colspan="6">Section: Indemnity &amp; Acknowledgment</td></tr>
@@ -753,7 +754,7 @@
 
           <!-- Row 5: Vehicle Registration -->
           <tr class="expandable-row" id="form-f" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Vehicle Registration</td><td>F</td><td>18238</td><td>4</td><td>9</td><td>6</td><td>1</td><td><span class="badge badge-yellow">Incomplete</span></td>
+            <td><span class="arrow">&#9654;</span> Vehicle Registration</td><td>F</td><td>18238</td><td>4</td><td>10</td><td>6</td><td>1</td><td><span class="badge badge-yellow">Incomplete</span></td>
           </tr>
           <tr class="detail-row">
             <td colspan="8">
@@ -761,14 +762,15 @@
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
                   <tr><td>1</td><td>Applicant Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>"Subsidiary Proprietor" or "Tenant"</td></tr>
-                  <tr><td>2</td><td>Vehicle Registration Plate No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Exists in wrong form (18239)</td></tr>
-                  <tr><td>3</td><td>Vehicle IU Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Exists in wrong form (18239)</td></tr>
-                  <tr><td>4</td><td>Vehicle Make and Model</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Exists in wrong form (18239)</td></tr>
-                  <tr><td>5</td><td>Vehicle Type</td><td>Single Choice</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>Car / Motorcycle / Others</td></tr>
-                  <tr><td>6</td><td>Company Vehicle Letter</td><td>Attachment</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>Required if company-registered vehicle</td></tr>
-                  <tr><td>7</td><td>Tenancy Agreement Copy</td><td>Attachment</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>Required if tenant</td></tr>
-                  <tr><td>8</td><td>Consent + Rules Acknowledgment</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>PDPA + carpark rules</td></tr>
-                  <tr><td>9</td><td>Deposit Payment Confirmation</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Upload PayNow screenshot ($50 to MCST 4932)</td></tr>
+                  <tr><td>2</td><td>Tenant Info (if applicable)</td><td>Text (multi-line)</td><td>Conditional</td><td><span class="badge badge-green">Exists (Q2)</span></td><td>Required if tenant. Currently Multiple Choice placeholder &mdash; restructure to text field</td></tr>
+                  <tr><td>3</td><td>Vehicle Registration Plate No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Exists in wrong form (18239)</td></tr>
+                  <tr><td>4</td><td>Vehicle IU Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Exists in wrong form (18239)</td></tr>
+                  <tr><td>5</td><td>Vehicle Make and Model</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Exists in wrong form (18239)</td></tr>
+                  <tr><td>6</td><td>Vehicle Type</td><td>Single Choice</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>Car / Motorcycle / Others</td></tr>
+                  <tr><td>7</td><td>Company Vehicle Letter</td><td>Attachment</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>Required if company-registered vehicle</td></tr>
+                  <tr><td>8</td><td>Tenancy Agreement Copy</td><td>Attachment</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>Required if tenant</td></tr>
+                  <tr><td>9</td><td>Consent + Rules Acknowledgment</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>PDPA + carpark rules</td></tr>
+                  <tr><td>10</td><td>Deposit Payment Confirmation</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Upload PayNow screenshot ($50 to MCST 4932)</td></tr>
                   <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q4)</span></td><td></td></tr>
                 </tbody>
               </table>
@@ -841,7 +843,7 @@
                   <tr><td>4</td><td>Tenancy End Date</td><td>Date</td><td>Conditional</td><td><span class="badge badge-red">MISSING</span></td><td>Required if tenant</td></tr>
                   <tr><td>5</td><td>Tenancy Agreement</td><td>Attachment</td><td>Conditional</td><td><span class="badge badge-red">MISSING</span></td><td>Required if tenant</td></tr>
                   <tr><td>6</td><td>Number of Occupants</td><td>Number</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Maximum 6 unrelated persons per regulations</td></tr>
-                  <tr><td>7</td><td>Occupant Details</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-yellow">Partial (QX)</span></td><td>Q1 "Tenant Info" &mdash; very sparse, needs expansion</td></tr>
+                  <tr><td>7</td><td>Occupant Details</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-yellow">Partial (Q1)</span></td><td>Q1 "Tenant Info" &mdash; very sparse, needs expansion</td></tr>
                   <tr><td>8</td><td>Emergency Contact Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
                   <tr><td>9</td><td>Emergency Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
                   <tr><td>10</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>

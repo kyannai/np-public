@@ -62,10 +62,10 @@ This section specifies the complete field requirements for each e-form. For exis
 | Form | Paper Form ID | Hilife ID | Current Qs | Required Fields | Missing | To Remove | Readiness |
 |------|---------------|-----------|-----------|----------------|---------|-----------|-----------|
 | Address Change | A | 18237 | 4 | 5 | 2 | 1 | Near-complete |
-| Renovation/A&A + Contractor | B-1, B-2, B-3, C | 18271 | 8 | 20 | 9 | 3 | Incomplete |
+| Renovation/A&A + Contractor | B-1, B-2, B-3, C | 18271 | 8 | 20 | 9 | 4 | Incomplete |
 | Moving In/Out | D-1, D-2 | 18272 | 5 | 10 | 4 | 3 | Incomplete |
 | Refund of Deposit | E, K | 18273 | 5 | 0 | 0 | 0 | ELIMINATED |
-| Vehicle Registration | F | 18238 | 4 | 9 | 6 | 1 | Incomplete |
+| Vehicle Registration | F | 18238 | 4 | 10 | 6 | 1 | Incomplete |
 | Access Card | G | 18274 | 3 | 6 | 4 | 2 | Incomplete |
 | Bicycle Tag | H | 18275 | 4 | 4 | 0 | 1 | Near-complete |
 | Occupancy Registration | L | 18276 | 2 | 10 | 8 | 1 | Incomplete |
@@ -81,12 +81,12 @@ This section specifies the complete field requirements for each e-form. For exis
 
 | # | Field | Type | Required | Hilife Status | Notes |
 |---|-------|------|----------|---------------|-------|
-| 1 | New Correspondence Address | Text (multi-line) | Yes | Exists | |
-| 2 | Effective Date of Change | Date | Yes | Exists | |
+| 1 | New Correspondence Address | Text (multi-line) | Yes | Exists (Q1) | |
+| 2 | Effective Date of Change | Date | Yes | Exists (Q2) | |
 | 3 | Contact Number | Text | Yes | MISSING | Mobile and/or home |
 | 4 | Email Address | Text | No | MISSING | For correspondence |
-| 5 | Consent (PDPA) | Single Choice (checkbox) | Yes | Exists | |
-| - | ~~Official Use~~ | ~~Header~~ | Remove | Exists (remove) | MA uses approval workflow instead |
+| 5 | Consent (PDPA) | Single Choice (checkbox) | Yes | Exists (Q3) | |
+| - | ~~Official Use~~ | ~~Header~~ | Remove | Exists (Q4 -- remove) | MA uses approval workflow instead |
 
 **Notes:** Near-complete. Add contact number and email fields, then remove the "Official Use" section. Verify entity name reads "MCST 4932". This is the closest form to being publish-ready and is recommended as a pilot.
 
@@ -110,11 +110,11 @@ Merged form combining paper Forms B-1, B-2, B-3, and C.
 | 6 | Drawing Plans / Renovation Proposal | Attachment | Yes | MISSING | Upload PDF/images |
 | 7 | Hot Work Required? | Single Choice (Yes/No) | Yes | MISSING | If yes, hot work permit applies |
 | | **Section: Contractor Info** | | | | |
-| 8 | Name of Contractor Company | Text | Yes | Exists (QX) | Combined as Multiple Choice in Q1, needs restructuring |
-| 9 | Contractor Business Reg. No. | Text | Yes | Exists (QX) | Combined in Q1, needs separate field |
-| 10 | Contractor Address | Text | Yes | Exists (QX) | Combined in Q1, needs separate field |
-| 11 | Contractor Person-in-Charge | Text | Yes | Exists (QX) | Combined in Q1, needs separate field |
-| 12 | Contractor Contact Number | Text | Yes | Exists (QX) | Combined in Q1, needs separate field |
+| 8 | Name of Contractor Company | Text | Yes | Exists (Q1) | Combined as Multiple Choice in Q1, needs restructuring into separate fields |
+| 9 | Contractor Business Reg. No. | Text | Yes | Exists (Q1) | Combined in Q1, needs separate field |
+| 10 | Contractor Address | Text | Yes | Exists (Q1) | Combined in Q1, needs separate field |
+| 11 | Contractor Person-in-Charge | Text | Yes | Exists (Q1) | Combined in Q1, needs separate field |
+| 12 | Contractor Contact Number | Text | Yes | Exists (Q1) | Combined in Q1, needs separate field |
 | 13 | Contractor Email | Text | Yes | MISSING | |
 | 14 | Company Stamp | Attachment | Yes | Exists (Q3) | |
 | | **Section: Worker Details** | | | | |
@@ -125,7 +125,8 @@ Merged form combining paper Forms B-1, B-2, B-3, and C.
 | 18 | Terms and Conditions Acknowledgment | Single Choice (checkbox) | Yes | Exists (Q2) | |
 | 19 | PDPA Consent | Single Choice (checkbox) | Yes | Exists (Q2/Q4) | |
 | 20 | Signed Contractor Indemnity Form | Attachment | Yes | Exists (Q5) | Resident uploads contractor's signed indemnity document |
-| - | ~~NRIC Last 4 Digits~~ | ~~Text~~ | Remove | Exists (remove) | PDPA non-compliant by 31 Dec 2026 |
+| - | ~~Application Permit for Contractor~~ | ~~Multiple Choice~~ | Remove | Exists (Q7 -- remove) | Merged into main form; permit issued via approval workflow |
+| - | ~~NRIC Last 4 Digits~~ | ~~Text~~ | Remove | Exists (Q7 -- remove) | PDPA non-compliant by 31 Dec 2026 |
 | - | ~~Official Use x2~~ | ~~Header~~ | Remove | Exists (Q6, Q8 -- remove) | MA uses approval workflow |
 | - | ~~Deposit Cheque Number~~ | ~~Text~~ | Remove | N/A | Deposit collected via Facility Booking module |
 
@@ -145,8 +146,8 @@ Merged form combining paper Forms D-1 and D-2.
 | 2 | Date of Moving | Date | Yes | Exists (Q1) | |
 | 3 | Preferred Time Slot | Single Choice | Yes | MISSING | Morning (9am-1pm) / Afternoon (1pm-5pm) |
 | | **Section: Contractor Info** | | | | |
-| 4 | Name of Moving Company | Text | Yes | Partial (QX) | Combined in Q3, needs restructuring |
-| 5 | Contractor Contact Number | Text | Yes | Partial (QX) | Combined in Q3 |
+| 4 | Name of Moving Company | Text | Yes | Partial (Q3) | Combined in Q3, needs restructuring |
+| 5 | Contractor Contact Number | Text | Yes | Partial (Q3) | Combined in Q3 |
 | 6 | Contractor Person-in-Charge | Text | Yes | MISSING | |
 | 7 | Number of Workers | Number | No | MISSING | |
 | | **Section: Indemnity & Acknowledgment** | | | | |
@@ -178,21 +179,22 @@ The paper Forms E and K are eliminated. Completion notification is handled via t
 
 ### 3.5 Form F -- Application for Residential Vehicle Registration
 
-**Hilife E-Form ID: 18238 | Current: 4 questions | Required: 9 fields**
+**Hilife E-Form ID: 18238 | Current: 4 questions | Required: 10 fields**
 
 $50 refundable deposit is required for vehicle registration.
 
 | # | Field | Type | Required | Hilife Status | Notes |
 |---|-------|------|----------|---------------|-------|
 | 1 | Applicant Type | Single Choice | Yes | Exists (Q1) | "Subsidiary Proprietor" or "Tenant" |
-| 2 | Vehicle Registration Plate No. | Text | Yes | MISSING | Exists in wrong form (18239) |
-| 3 | Vehicle IU Number | Text | Yes | MISSING | Exists in wrong form (18239) |
-| 4 | Vehicle Make and Model | Text | Yes | MISSING | Exists in wrong form (18239) |
-| 5 | Vehicle Type | Single Choice | No | MISSING | Car / Motorcycle / Others |
-| 6 | Company Vehicle Letter | Attachment | No | MISSING | Required if company-registered vehicle |
-| 7 | Tenancy Agreement Copy | Attachment | No | MISSING | Required if tenant |
-| 8 | Consent + Rules Acknowledgment | Multiple Choice (checkboxes) | Yes | Exists (Q3) | PDPA + carpark rules |
-| 9 | Deposit Payment Confirmation | Attachment | Yes | MISSING | Upload PayNow screenshot ($50 to MCST 4932) |
+| 2 | Tenant Info (if applicable) | Text (multi-line) | Conditional | Exists (Q2) | Required if tenant. Currently a Multiple Choice placeholder -- restructure to text field for tenant name, contact, tenancy period |
+| 3 | Vehicle Registration Plate No. | Text | Yes | MISSING | Exists in wrong form (18239) |
+| 4 | Vehicle IU Number | Text | Yes | MISSING | Exists in wrong form (18239) |
+| 5 | Vehicle Make and Model | Text | Yes | MISSING | Exists in wrong form (18239) |
+| 6 | Vehicle Type | Single Choice | No | MISSING | Car / Motorcycle / Others |
+| 7 | Company Vehicle Letter | Attachment | No | MISSING | Required if company-registered vehicle |
+| 8 | Tenancy Agreement Copy | Attachment | No | MISSING | Required if tenant |
+| 9 | Consent + Rules Acknowledgment | Multiple Choice (checkboxes) | Yes | Exists (Q3) | PDPA + carpark rules |
+| 10 | Deposit Payment Confirmation | Attachment | Yes | MISSING | Upload PayNow screenshot ($50 to MCST 4932) |
 | - | ~~Official Use~~ | ~~Header~~ | Remove | Exists (Q4 -- remove) | |
 
 **Notes:** Incomplete. The critical vehicle details (plate, IU, make/model) are missing -- they exist in a separate form (ID 18239) and must be consolidated. $50 deposit collection is needed; since this is a refundable deposit, it follows the same deposit workflow concern as renovation/moving (credit card via Facility Booking or PayNow with screenshot upload).
@@ -246,7 +248,7 @@ $50 refundable deposit is required for vehicle registration.
 | 4 | Tenancy End Date | Date | Conditional | MISSING | Required if tenant |
 | 5 | Tenancy Agreement | Attachment | Conditional | MISSING | Required if tenant |
 | 6 | Number of Occupants | Number | Yes | MISSING | Maximum 6 unrelated persons |
-| 7 | Occupant Details | Text (multi-line) | Yes | Partial (QX) | Q1 "Tenant Info" -- very sparse, needs expansion |
+| 7 | Occupant Details | Text (multi-line) | Yes | Partial (Q1) | Q1 "Tenant Info" -- very sparse, needs expansion |
 | 8 | Emergency Contact Name | Text | Yes | MISSING | |
 | 9 | Emergency Contact Number | Text | Yes | MISSING | |
 | 10 | PDPA Consent | Single Choice (checkbox) | Yes | MISSING | |
