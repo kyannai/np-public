@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Normanton Park (MCST 4932) -- Forms Digitisation Analysis</title>
+<title>Normanton Park (MCST 4932) -- Reports</title>
 <style>
   :root {
     --color-bg: #f8f9fa;
@@ -16,17 +16,10 @@
     --color-border-light: #e8ecf0;
     --color-green: #276749;
     --color-green-bg: #c6f6d5;
-    --color-green-border: #9ae6b4;
     --color-yellow: #975a16;
     --color-yellow-bg: #fefcbf;
-    --color-yellow-border: #f6e05e;
     --color-red: #9b2c2c;
     --color-red-bg: #fed7d7;
-    --color-red-border: #fc8181;
-    --color-sidebar-width: 280px;
-    --color-flow-step: #ebf4ff;
-    --color-flow-arrow: #2c5282;
-    --color-flow-decision: #fefcbf;
   }
 
   * {
@@ -43,1306 +36,183 @@
     font-size: 15px;
   }
 
-  /* Sidebar TOC */
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: var(--color-sidebar-width);
-    height: 100vh;
-    background: var(--color-white);
-    border-right: 1px solid var(--color-border);
-    overflow-y: auto;
-    z-index: 100;
-    padding: 24px 0;
+  .page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 32px 80px;
   }
 
-  .sidebar-header {
-    padding: 0 20px 16px;
-    border-bottom: 1px solid var(--color-border-light);
-    margin-bottom: 12px;
-  }
-
-  .sidebar-header h2 {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .sidebar-header p {
-    font-size: 11px;
-    color: var(--color-text-light);
-    margin-top: 4px;
-  }
-
-  .sidebar nav a {
-    display: block;
-    padding: 7px 20px;
-    color: var(--color-text-light);
-    text-decoration: none;
-    font-size: 13px;
-    border-left: 3px solid transparent;
-    transition: all 0.15s ease;
-  }
-
-  .sidebar nav a:hover,
-  .sidebar nav a.active {
-    background: var(--color-primary-light);
-    color: var(--color-primary);
-    border-left-color: var(--color-primary);
-  }
-
-  .sidebar nav a.sub {
-    padding-left: 36px;
-    font-size: 12px;
-  }
-
-  /* Main content */
-  .main {
-    margin-left: var(--color-sidebar-width);
-    max-width: 1200px;
-    padding: 40px 48px 80px;
-  }
-
-  .doc-header {
-    margin-bottom: 40px;
+  .page-header {
+    text-align: center;
+    margin-bottom: 48px;
     padding-bottom: 24px;
     border-bottom: 2px solid var(--color-primary);
   }
 
-  .doc-header h1 {
+  .page-header h1 {
     font-size: 28px;
     font-weight: 700;
     color: var(--color-primary);
     margin-bottom: 8px;
   }
 
-  .doc-header .meta {
+  .page-header .meta {
     font-size: 13px;
     color: var(--color-text-light);
   }
 
-  .doc-header .meta span {
-    margin-right: 24px;
-  }
-
-  /* Sections */
-  section {
-    margin-bottom: 40px;
-  }
-
-  h2 {
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--color-primary);
-    margin-bottom: 16px;
-    padding-top: 8px;
-  }
-
-  h3 {
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--color-text);
-    margin-top: 24px;
-    margin-bottom: 12px;
-  }
-
-  h4 {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--color-text);
-    margin-top: 16px;
-    margin-bottom: 8px;
-  }
-
-  p {
-    margin-bottom: 12px;
-  }
-
-  ul, ol {
-    margin-bottom: 12px;
-    padding-left: 24px;
-  }
-
-  li {
-    margin-bottom: 4px;
-  }
-
-  strong {
-    font-weight: 600;
-  }
-
-  /* Tables */
-  .table-wrap {
-    overflow-x: auto;
-    margin-bottom: 20px;
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 13px;
-  }
-
-  thead th {
-    background: var(--color-primary);
-    color: #fff;
-    font-weight: 600;
-    text-align: left;
-    padding: 10px 12px;
-    white-space: nowrap;
-  }
-
-  tbody td {
-    padding: 9px 12px;
-    border-bottom: 1px solid var(--color-border-light);
-    vertical-align: top;
-  }
-
-  tbody tr:nth-child(even) {
-    background: #f7fafc;
-  }
-
-  tbody tr:hover {
-    background: var(--color-primary-light);
-  }
-
-  /* Status badges */
-  .badge {
-    display: inline-block;
-    padding: 2px 10px;
-    border-radius: 12px;
-    font-size: 11px;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
-  .badge-green {
-    background: var(--color-green-bg);
-    color: var(--color-green);
-    border: 1px solid var(--color-green-border);
-  }
-
-  .badge-yellow {
-    background: var(--color-yellow-bg);
-    color: var(--color-yellow);
-    border: 1px solid var(--color-yellow-border);
-  }
-
-  .badge-red {
-    background: var(--color-red-bg);
-    color: var(--color-red);
-    border: 1px solid var(--color-red-border);
-  }
-
-  .badge-gray {
-    background: #edf2f7;
-    color: #4a5568;
-    border: 1px solid #cbd5e0;
-  }
-
-  /* Collapsible sections */
-  .collapsible {
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    margin-bottom: 12px;
-    background: var(--color-white);
-  }
-
-  .collapsible-toggle {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--color-text);
-    text-align: left;
-  }
-
-  .collapsible-toggle:hover {
-    background: #f7fafc;
-  }
-
-  .collapsible-toggle .arrow {
-    transition: transform 0.2s ease;
-    font-size: 12px;
-    color: var(--color-text-light);
-  }
-
-  .collapsible.open .collapsible-toggle .arrow {
-    transform: rotate(90deg);
-  }
-
-  .collapsible-content {
-    display: none;
-    padding: 0 16px 16px;
-    font-size: 14px;
-  }
-
-  .collapsible.open .collapsible-content {
-    display: block;
-  }
-
-  .issue-list {
-    padding-left: 20px;
-  }
-
-  .issue-list li {
-    margin-bottom: 6px;
-    line-height: 1.5;
-  }
-
-  /* Flow diagrams */
-  .flow-diagram {
+  .cards {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 24px 16px;
-    margin: 20px 0;
+    gap: 20px;
+  }
+
+  .card {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
     background: var(--color-white);
     border: 1px solid var(--color-border);
     border-radius: 8px;
+    padding: 24px;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
 
-  .flow-step {
-    width: 100%;
-    max-width: 520px;
-    padding: 14px 20px;
-    border-radius: 6px;
-    text-align: center;
-    font-size: 13px;
-    font-weight: 500;
-    position: relative;
+  .card:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 2px 8px rgba(44, 82, 130, 0.1);
   }
 
-  .flow-step-action {
-    background: var(--color-flow-step);
-    border: 2px solid var(--color-primary);
-    color: var(--color-primary);
-  }
-
-  .flow-step-decision {
-    background: var(--color-flow-decision);
-    border: 2px solid #d69e2e;
-    color: var(--color-yellow);
-    border-radius: 4px;
-  }
-
-  .flow-step-outcome-good {
-    background: var(--color-green-bg);
-    border: 2px solid var(--color-green-border);
-    color: var(--color-green);
-  }
-
-  .flow-step-outcome-bad {
-    background: var(--color-red-bg);
-    border: 2px solid var(--color-red-border);
-    color: var(--color-red);
-  }
-
-  .flow-step-label {
-    position: absolute;
-    top: -10px;
-    left: 16px;
-    background: var(--color-primary);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 1px 8px;
-    border-radius: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .flow-arrow {
-    width: 2px;
-    height: 28px;
-    background: var(--color-flow-arrow);
-    position: relative;
-  }
-
-  .flow-arrow::after {
-    content: "";
-    position: absolute;
-    bottom: -4px;
-    left: -4px;
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 6px solid var(--color-flow-arrow);
-  }
-
-  .flow-arrow-label {
-    font-size: 11px;
-    color: var(--color-text-light);
-    margin: 4px 0;
-    font-style: italic;
-  }
-
-  .flow-branch {
+  .card-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
     display: flex;
-    gap: 20px;
-    width: 100%;
-    max-width: 520px;
-    justify-content: center;
-  }
-
-  .flow-branch > div {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
     align-items: center;
-  }
-
-  .flow-section-label {
-    width: 100%;
-    max-width: 520px;
-    text-align: left;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--color-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-top: 16px;
-    margin-bottom: 8px;
-    padding: 2px 8px;
-    border-left: 3px solid var(--color-primary);
-  }
-
-  /* Info boxes */
-  .info-box {
-    padding: 14px 18px;
-    border-radius: 6px;
-    margin: 16px 0;
-    font-size: 14px;
-  }
-
-  .info-box-blue {
+    justify-content: center;
     background: var(--color-primary-light);
-    border-left: 4px solid var(--color-primary);
+    border-radius: 8px;
   }
 
-  .info-box-green {
-    background: var(--color-green-bg);
-    border-left: 4px solid var(--color-green);
+  .card-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: var(--color-primary);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
-  .info-box-yellow {
-    background: var(--color-yellow-bg);
-    border-left: 4px solid #d69e2e;
+  .card-body {
+    flex: 1;
   }
 
-  .info-box-red {
-    background: var(--color-red-bg);
-    border-left: 4px solid var(--color-red);
+  .card-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 4px;
   }
 
-  /* Section header rows in field tables */
-  .section-header td {
-    font-weight: bold;
-    background: var(--color-primary-light) !important;
-    border-bottom: 1px solid var(--color-border);
+  .card-desc {
+    font-size: 14px;
+    color: var(--color-text-light);
+    line-height: 1.5;
   }
 
-  /* Remove rows */
-  .remove-row {
-    color: var(--color-red);
-  }
-  .remove-row td {
-    color: var(--color-red);
-  }
-
-  /* Expandable table rows */
-  .expandable-row { cursor: pointer; }
-  .expandable-row:hover { background: var(--color-primary-light) !important; }
-  .expandable-row td:first-child .arrow { display: inline-block; width: 16px; transition: transform 0.2s; }
-  .expandable-row.open td:first-child .arrow { transform: rotate(90deg); }
-  .detail-row { display: none; }
-  .detail-row.open { display: table-row; }
-  .detail-row td { padding: 16px 24px; background: #f8f9fa; }
-  .detail-row table { margin: 0; width: 100%; }
-  .detail-row .form-notes { margin-top: 12px; padding: 10px 14px; background: #fff; border-left: 3px solid var(--color-primary); font-size: 13px; }
-
-  /* Print styles */
-  @media print {
-    .sidebar {
-      display: none;
-    }
-    .main {
-      margin-left: 0;
-      padding: 20px;
-      max-width: 100%;
-    }
-    .collapsible-content {
-      display: block !important;
-    }
-    .detail-row {
-      display: table-row !important;
-    }
-    .flow-diagram {
-      break-inside: avoid;
-    }
-    table {
-      font-size: 11px;
-    }
-    h2 {
-      break-after: avoid;
-    }
-    section {
-      break-inside: avoid;
-    }
-    body {
-      font-size: 12px;
-    }
+  .card-arrow {
+    flex-shrink: 0;
+    align-self: center;
+    color: var(--color-border);
+    transition: color 0.15s ease;
   }
 
-  /* Responsive */
-  @media (max-width: 900px) {
-    .sidebar {
-      display: none;
+  .card:hover .card-arrow {
+    color: var(--color-primary);
+  }
+
+  .card-arrow svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 48px;
+    font-size: 12px;
+    color: var(--color-text-light);
+  }
+
+  @media (max-width: 600px) {
+    .page {
+      padding: 32px 16px 48px;
     }
-    .main {
-      margin-left: 0;
-      padding: 24px 20px;
+    .card {
+      padding: 16px;
+      gap: 14px;
     }
   }
 </style>
 </head>
 <body>
-
-<!-- Sidebar TOC -->
-<aside class="sidebar">
-  <div class="sidebar-header">
-    <h2>Table of Contents</h2>
-    <p>MCST 4932 &mdash; Forms Digitisation</p>
-  </div>
-  <nav>
-    <a href="#overview">1. Overview</a>
-    <a href="#paper-forms">2. Paper Forms (A-L)</a>
-    <a href="#paper-inventory" class="sub">Inventory</a>
-    <a href="#eform-design">3. E-Form Design</a>
-    <a href="#eform-summary" class="sub">Discrepancy Summary</a>
-    <a href="#form-a" class="sub">Form A &mdash; Address Change</a>
-    <a href="#form-b1" class="sub">Form B-1 &mdash; Renovation</a>
-    <a href="#form-d1" class="sub">Form D-1 &mdash; Moving</a>
-    <a href="#form-ek" class="sub">Form E/K &mdash; Eliminated</a>
-    <a href="#form-f" class="sub">Form F &mdash; Vehicle Reg</a>
-    <a href="#form-g" class="sub">Form G &mdash; Access Card</a>
-    <a href="#form-h" class="sub">Form H &mdash; Bicycle Tag</a>
-    <a href="#form-l" class="sub">Form L &mdash; Occupancy</a>
-    <a href="#form-pet" class="sub">New: Pet Registration</a>
-    <a href="#form-instructor" class="sub">New: Instructor/Coach</a>
-    <a href="#cross-cutting" class="sub">Cross-Cutting Issues</a>
-    <a href="#workflows">4. Workflows</a>
-    <a href="#wf-non-deposit" class="sub">4.1 Non-Deposit Forms</a>
-    <a href="#wf-fee" class="sub">4.2 Fee Collection</a>
-    <a href="#wf-deposit" class="sub">4.3 Deposit-Required</a>
-    <a href="#wf-facility" class="sub">4.4 Facility Bookings</a>
-    <a href="#actions">5. Action Items</a>
-    <a href="#act-hilife" class="sub">5.1 Hilife Credit Card Fees</a>
-    <a href="#act-eform" class="sub">5.2 E-Form Completion</a>
-    <a href="#act-decide" class="sub">5.3 Fee/Deposit Collection</a>
-  </nav>
-</aside>
-
-<!-- Main content -->
-<div class="main">
-
-  <div class="doc-header">
-    <h1>Normanton Park (MCST 4932) &mdash; Forms Digitisation Analysis</h1>
-    <div class="meta">
-      <span><strong>Date:</strong> 11 April 2026</span>
-      <span><strong>MCST:</strong> 4932</span>
-      <span><strong>Scope:</strong> Paper-to-Hilife CMS Migration</span>
-    </div>
+<div class="page">
+  <div class="page-header">
+    <h1>Normanton Park (MCST 4932)</h1>
+    <p class="meta">Reports</p>
   </div>
 
-  <!-- ========== SECTION 1: OVERVIEW ========== -->
-  <section id="overview">
-    <h2>1. Overview</h2>
-    <p>Normanton Park condominium (MCST 4932) is migrating its suite of twelve paper-based resident application forms to the Hilife CMS digital platform. The paper forms cover renovation permits, moving requests, vehicle registration, access cards, facility bookings, and occupancy registration, all of which currently require physical submission, manual processing by the Management Agent (MA), and cheque-based deposit collection.</p>
-    <p>Hilife CMS provides two modules relevant to this migration:</p>
-    <ul>
-      <li><strong>E-Form Module</strong> &mdash; for application submissions with approval workflows, reply threads, and signature collection.</li>
-      <li><strong>Facility Booking Module</strong> &mdash; for venue reservations with integrated deposit collection via credit card hold, booking fees, and automated refund lifecycle.</li>
-    </ul>
-    <p><strong>Current state:</strong> Nine draft e-forms have been created in Hilife, but only the EV Questionnaire (a survey, not an application form) has been published. The Facility Booking module is already operational for the Dining Pavilions, Function Rooms, and Tennis Court. Significant gaps remain in field completeness, payment handling, and workflow coverage across the draft e-forms.</p>
-    <div class="info-box info-box-blue">
-      <strong>Key insight:</strong> By combining the E-Form module (rich application details, signatures, communication) with the Facility Booking module (deposit collection, lifecycle tracking, refund/forfeit), full digital coverage is achievable without any platform changes.
-    </div>
-  </section>
-
-  <!-- ========== SECTION 2: PAPER FORMS ========== -->
-  <section id="paper-forms">
-    <h2>2. Paper Forms (A-L)</h2>
-
-    <h3 id="paper-inventory">2.1 Inventory</h3>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Form ID</th>
-            <th>Name</th>
-            <th>Deposit</th>
-            <th>Key Purpose</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>A</td><td>Notice of Change of Correspondence Address (Strata Roll)</td><td>None</td><td>Update mailing address on strata roll</td></tr>
-          <tr><td>B-1</td><td>Application for Residential A&amp;A (Renovation)</td><td>$1,000</td><td>Renovation permit and contractor registration</td></tr>
-          <tr><td>B-2</td><td>Contractor's Indemnity Form for A&amp;A</td><td>None</td><td>Contractor liability undertaking (merged into B-1)</td></tr>
-          <tr><td>B-3</td><td>Application for Permit for Contractor</td><td>None</td><td>Contractor access permit (merged into B-1)</td></tr>
-          <tr><td>C</td><td>Approval for A&amp;A Work / House Removal</td><td>None</td><td>MA approval form (merged into B-1)</td></tr>
-          <tr><td>D-1</td><td>Application for Moving In / Moving Out</td><td>$1,000</td><td>Moving logistics and deposit</td></tr>
-          <tr><td>D-2</td><td>Contractor's Indemnity Form for Moving In/Out</td><td>None</td><td>Mover liability undertaking (merged into D-1)</td></tr>
-          <tr><td>E</td><td>Request for Refund of Deposit (A&amp;A / Moving)</td><td>None</td><td>Resident-initiated deposit refund request</td></tr>
-          <tr><td>F</td><td>Application for Residential Vehicle Registration</td><td>$50</td><td>Register vehicle for carpark access</td></tr>
-          <tr><td>G</td><td>Application for Access Card</td><td>$50/card (fee)</td><td>Replacement or additional access cards</td></tr>
-          <tr><td>H</td><td>Application for Bicycle Tag</td><td>None</td><td>Bicycle parking tag</td></tr>
-          <tr><td>I</td><td>Application for Dining Pavilion Booking</td><td>$200 + fee</td><td>Reserve dining pavilion</td></tr>
-          <tr><td>J</td><td>Application for Function Room Booking</td><td>$200 + fee</td><td>Reserve function room</td></tr>
-          <tr><td>K</td><td>Request for Refund of Deposit (Facilities)</td><td>None</td><td>Facility deposit refund request</td></tr>
-          <tr><td>L</td><td>Registration of Residential Occupancy</td><td>None</td><td>Register occupants and tenancy details</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <section id="eform-design">
-    <h2>3. E-Form Design</h2>
-    <p>This section specifies the complete field requirements for each e-form. For existing Hilife drafts, the <strong>Hilife Status</strong> column indicates whether each field already exists, partially exists, is missing, or should be removed.</p>
-    <p>Status key: <span class="badge badge-green">Exists</span> <span class="badge badge-yellow">Exists (QX)</span> <span class="badge badge-yellow">Partial (QX)</span> <span class="badge badge-red">MISSING</span> <span class="badge badge-yellow">Remove</span> <span class="badge badge-red">N/A</span></p>
-
-    <h3 id="eform-summary">Discrepancy Summary</h3>
-    <p>Click any row to expand field details.</p>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Form</th><th>Paper Form ID</th><th>Hilife ID</th><th>Current Qs</th><th>Required Fields</th><th>Missing</th><th>To Remove</th><th>Readiness</th></tr>
-        </thead>
-        <tbody>
-
-          <!-- Row 1: Address Change -->
-          <tr class="expandable-row" id="form-a" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Address Change</td><td>A</td><td>18237</td><td>4</td><td>5</td><td>2</td><td>1</td><td><span class="badge badge-green">Near-complete</span></td>
-          </tr>
-          <tr class="detail-row">
-            <td colspan="8">
-              <table>
-                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-                <tbody>
-                  <tr><td>1</td><td>New Correspondence Address</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
-                  <tr><td>2</td><td>Effective Date of Change</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
-                  <tr><td>3</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Mobile and/or home</td></tr>
-                  <tr><td>4</td><td>Email Address</td><td>Text</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>For correspondence</td></tr>
-                  <tr><td>5</td><td>Consent (PDPA)</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q4)</span></td><td>MA uses approval workflow instead</td></tr>
-                </tbody>
-              </table>
-              <div class="form-notes">
-                <strong>Assessment:</strong> Near-complete. Add contact number and email fields, remove the "Official Use" section, verify entity name reads "MCST 4932". Recommended as a pilot form.
-              </div>
-            </td>
-          </tr>
-
-          <!-- Row 2: Renovation/A&A + Contractor -->
-          <tr class="expandable-row" id="form-b1" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Renovation/A&amp;A + Contractor</td><td>B-1, B-2, B-3, C</td><td>18271</td><td>8</td><td>20</td><td>9</td><td>4</td><td><span class="badge badge-yellow">Incomplete</span></td>
-          </tr>
-          <tr class="detail-row">
-            <td colspan="8">
-              <p style="margin-bottom:12px;">Merged form combining paper Forms B-1, B-2, B-3, and C.</p>
-              <table>
-                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-                <tbody>
-                  <tr class="section-header"><td colspan="6">Section: Applicant Info</td></tr>
-                  <tr><td>1</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Mobile</td></tr>
-                  <tr><td>2</td><td>Email Address</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-                  <tr class="section-header"><td colspan="6">Section: Renovation Details</td></tr>
-                  <tr><td>3</td><td>Summary of Proposed Renovation Works</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Description of scope</td></tr>
-                  <tr><td>4</td><td>Date of Commencement</td><td>Date</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-                  <tr><td>5</td><td>Expected Date of Completion</td><td>Date</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-                  <tr><td>6</td><td>Drawing Plans / Renovation Proposal</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Upload PDF/images</td></tr>
-                  <tr><td>7</td><td>Hot Work Required?</td><td>Single Choice (Yes/No)</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>If yes, hot work permit applies</td></tr>
-                  <tr class="section-header"><td colspan="6">Section: Contractor Info</td></tr>
-                  <tr><td>8</td><td>Name of Contractor Company</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>Combined as Multiple Choice in Q1, needs restructuring</td></tr>
-                  <tr><td>9</td><td>Contractor Business Reg. No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>Combined in Q1, needs separate field</td></tr>
-                  <tr><td>10</td><td>Contractor Address</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>Combined in Q1, needs separate field</td></tr>
-                  <tr><td>11</td><td>Contractor Person-in-Charge</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>Combined in Q1, needs separate field</td></tr>
-                  <tr><td>12</td><td>Contractor Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>Combined in Q1, needs separate field</td></tr>
-                  <tr><td>13</td><td>Contractor Email</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-                  <tr><td>14</td><td>Company Stamp</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
-                  <tr class="section-header"><td colspan="6">Section: Worker Details</td></tr>
-                  <tr><td>15</td><td>Number of Workers</td><td>Number</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-                  <tr><td>16</td><td>Worker Names and ID Numbers</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Name + work permit/passport no. Do NOT collect NRIC.</td></tr>
-                  <tr class="section-header"><td colspan="6">Section: Indemnity &amp; Acknowledgment</td></tr>
-                  <tr><td>17</td><td>Contractor Indemnity Undertaking</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td>Lift protection, common area clauses</td></tr>
-                  <tr><td>18</td><td>Terms and Conditions Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
-                  <tr><td>19</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2/Q4)</span></td><td></td></tr>
-                  <tr><td>20</td><td>Signed Contractor Indemnity Form</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q5)</span></td><td>Resident uploads contractor's signed indemnity document</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Application Permit for Contractor</s></td><td><s>Multiple Choice</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q7)</span></td><td>Merged into main form; permit issued via approval workflow</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>NRIC Last 4 Digits</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q7)</span></td><td>PDPA non-compliant by 31 Dec 2026</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Official Use x2</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q6, Q8)</span></td><td>MA uses approval workflow</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Deposit Cheque Number</s></td><td><s>Text</s></td><td>Remove</td><td>N/A</td><td>Deposit collected via Facility Booking module</td></tr>
-                </tbody>
-              </table>
-              <div class="form-notes">
-                <strong>Assessment:</strong> Major gaps. The merge of B-1/B-2/B-3/C is correct in concept, but the form lacks renovation scope details, dates, worker list, and applicant contact info. Contractor info fields exist but are crammed into a single Multiple Choice question and need restructuring into separate text fields. NRIC field must be removed. Deposit handled via Facility Booking module.
-              </div>
-            </td>
-          </tr>
-
-          <!-- Row 3: Moving In/Out -->
-          <tr class="expandable-row" id="form-d1" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Moving In/Out</td><td>D-1, D-2</td><td>18272</td><td>5</td><td>10</td><td>4</td><td>3</td><td><span class="badge badge-yellow">Incomplete</span></td>
-          </tr>
-          <tr class="detail-row">
-            <td colspan="8">
-              <p style="margin-bottom:12px;">Merged form combining paper Forms D-1 and D-2.</p>
-              <table>
-                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-                <tbody>
-                  <tr><td>1</td><td>Moving Direction</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>"Moving In" or "Moving Out"</td></tr>
-                  <tr><td>2</td><td>Date of Moving</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
-                  <tr><td>3</td><td>Preferred Time Slot</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Morning (9am-1pm) / Afternoon (1pm-5pm)</td></tr>
-                  <tr class="section-header"><td colspan="6">Section: Contractor Info</td></tr>
-                  <tr><td>4</td><td>Name of Moving Company</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Partial (Q3)</span></td><td>Combined in Q3, needs restructuring</td></tr>
-                  <tr><td>5</td><td>Contractor Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Partial (Q3)</span></td><td>Combined in Q3</td></tr>
-                  <tr><td>6</td><td>Contractor Person-in-Charge</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-                  <tr><td>7</td><td>Number of Workers</td><td>Number</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-                  <tr class="section-header"><td colspan="6">Section: Indemnity &amp; Acknowledgment</td></tr>
-                  <tr><td>8</td><td>Contractor Indemnity Undertaking</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td>Lift protection, common area protection</td></tr>
-                  <tr><td>9</td><td>Terms and Conditions Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
-                  <tr><td>10</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3/Q4)</span></td><td></td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>NRIC Last 4 Digits</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q4)</span></td><td>PDPA non-compliant</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Deposit Cheque Number</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q2)</span></td><td>Deposit via Facility Booking</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q5)</span></td><td></td></tr>
-                </tbody>
-              </table>
-              <div class="form-notes">
-                <strong>Assessment:</strong> Major gaps. Cannot distinguish moving in from moving out. Missing time slot preference. Cheque reference and NRIC field must be removed. Deposit handled via Facility Booking module.
-              </div>
-            </td>
-          </tr>
-
-          <!-- Row 4: Refund of Deposit (ELIMINATED) -->
-          <tr class="expandable-row" id="form-ek" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Refund of Deposit</td><td>E, K</td><td>18273</td><td>5</td><td>0</td><td>0</td><td>0</td><td><span class="badge badge-red">ELIMINATED</span></td>
-          </tr>
-          <tr class="detail-row">
-            <td colspan="8">
-              <p>This form is <strong>eliminated</strong> from the digital platform. The current Hilife draft (ID 18273) conflates two different refund processes and should be deleted.</p>
-              <div class="form-notes">
-                <strong>Rationale:</strong> Under the proposed dual-module workflow, deposit refunds are no longer resident-initiated "requests." They are mandatory MA actions triggered at process closure:
-                <ul style="margin-top:8px;">
-                  <li><strong>A&amp;A/Moving deposit refunds</strong> &mdash; MA processes via the Deposit Records page after inspection.</li>
-                  <li><strong>Facility booking deposit refunds</strong> &mdash; handled automatically by the Facility Booking module, or MA clicks Refund/Forfeit in Deposit Records.</li>
-                </ul>
-              </div>
-              <p style="margin-top:12px;">The paper Forms E and K are eliminated. Completion notification is handled via the <strong>reply thread</strong> of the original e-form (renovation or moving application) &mdash; the resident simply posts "work completed, please arrange inspection" in the thread. No separate form is needed.</p>
-            </td>
-          </tr>
-
-          <!-- Row 5: Vehicle Registration -->
-          <tr class="expandable-row" id="form-f" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Vehicle Registration</td><td>F</td><td>18238</td><td>4</td><td>10</td><td>6</td><td>1</td><td><span class="badge badge-yellow">Incomplete</span></td>
-          </tr>
-          <tr class="detail-row">
-            <td colspan="8">
-              <table>
-                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-                <tbody>
-                  <tr><td>1</td><td>Applicant Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>"Subsidiary Proprietor" or "Tenant"</td></tr>
-                  <tr><td>2</td><td>Tenant Info (if applicable)</td><td>Text (multi-line)</td><td>Conditional</td><td><span class="badge badge-green">Exists (Q2)</span></td><td>Required if tenant. Currently Multiple Choice placeholder &mdash; restructure to text field</td></tr>
-                  <tr><td>3</td><td>Vehicle Registration Plate No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Exists in wrong form (18239)</td></tr>
-                  <tr><td>4</td><td>Vehicle IU Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Exists in wrong form (18239)</td></tr>
-                  <tr><td>5</td><td>Vehicle Make and Model</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Exists in wrong form (18239)</td></tr>
-                  <tr><td>6</td><td>Vehicle Type</td><td>Single Choice</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>Car / Motorcycle / Others</td></tr>
-                  <tr><td>7</td><td>Company Vehicle Letter</td><td>Attachment</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>Required if company-registered vehicle</td></tr>
-                  <tr><td>8</td><td>Tenancy Agreement Copy</td><td>Attachment</td><td>No</td><td><span class="badge badge-red">MISSING</span></td><td>Required if tenant</td></tr>
-                  <tr><td>9</td><td>Consent + Rules Acknowledgment</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>PDPA + carpark rules</td></tr>
-                  <tr><td>10</td><td>Deposit Payment Confirmation</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Upload PayNow screenshot ($50 to MCST 4932)</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q4)</span></td><td></td></tr>
-                </tbody>
-              </table>
-              <p style="margin-top:12px;"><strong>Note:</strong> The $50 deposit is refundable upon de-registration of the vehicle.</p>
-              <div class="form-notes">
-                <strong>Assessment:</strong> Incomplete. Critical vehicle details (plate, IU, make/model) are missing from this form &mdash; they exist in a separate form (ID 18239) and must be consolidated. Vehicle type and supporting document uploads need to be added.
-              </div>
-            </td>
-          </tr>
-
-          <!-- Row 6: Access Card -->
-          <tr class="expandable-row" id="form-g" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Access Card</td><td>G</td><td>18274</td><td>3</td><td>6</td><td>4</td><td>2</td><td><span class="badge badge-yellow">Incomplete</span></td>
-          </tr>
-          <tr class="detail-row">
-            <td colspan="8">
-              <table>
-                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-                <tbody>
-                  <tr><td>1</td><td>Application Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>"Replacement" or "Additional Card"</td></tr>
-                  <tr><td>2</td><td>Number of Cards Required</td><td>Number</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-                  <tr><td>3</td><td>Card Holder Details</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Name and relationship to SP per card</td></tr>
-                  <tr><td>4</td><td>Reason for Replacement</td><td>Text</td><td>Conditional</td><td><span class="badge badge-red">MISSING</span></td><td>Required if "Replacement"</td></tr>
-                  <tr><td>5</td><td>Payment Confirmation</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Upload PayNow screenshot ($50/card to MCST 4932)</td></tr>
-                  <tr><td>6</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Cash/Cheque Reference</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q3)</span></td><td>Payment via PayNow</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q3)</span></td><td></td></tr>
-                </tbody>
-              </table>
-              <div class="form-notes">
-                <strong>Assessment:</strong> Major gaps. Missing card holder details, quantity, and replacement reason. The $50/card fee should be collected via PayNow with screenshot upload as payment confirmation.
-              </div>
-            </td>
-          </tr>
-
-          <!-- Row 7: Bicycle Tag -->
-          <tr class="expandable-row" id="form-h" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Bicycle Tag</td><td>H</td><td>18275</td><td>4</td><td>4</td><td>0</td><td>1</td><td><span class="badge badge-green">Near-complete</span></td>
-          </tr>
-          <tr class="detail-row">
-            <td colspan="8">
-              <table>
-                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-                <tbody>
-                  <tr><td>1</td><td>Number of Bicycle Tags</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
-                  <tr><td>2</td><td>Application Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td>"First-time" or "Replacement"</td></tr>
-                  <tr><td>3</td><td>Terms and Conditions Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>Bicycle parking rules</td></tr>
-                  <tr><td>4</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q4)</span></td><td></td></tr>
-                </tbody>
-              </table>
-              <div class="form-notes">
-                <strong>Assessment:</strong> Near-complete. All required fields exist. Only action needed is removing the "Official Use" section and verifying entity name. Recommended as a pilot alongside Form A.
-              </div>
-            </td>
-          </tr>
-
-          <!-- Row 8: Occupancy Registration -->
-          <tr class="expandable-row" id="form-l" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Occupancy Registration</td><td>L</td><td>18276</td><td>2</td><td>10</td><td>8</td><td>1</td><td><span class="badge badge-yellow">Incomplete</span></td>
-          </tr>
-          <tr class="detail-row">
-            <td colspan="8">
-              <table>
-                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-                <tbody>
-                  <tr><td>1</td><td>Registration Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>"New Occupancy" or "Change of Occupancy"</td></tr>
-                  <tr><td>2</td><td>Owner Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Auto-populate from Hilife profile if possible</td></tr>
-                  <tr><td>3</td><td>Tenancy Start Date</td><td>Date</td><td>Conditional</td><td><span class="badge badge-red">MISSING</span></td><td>Required if tenant</td></tr>
-                  <tr><td>4</td><td>Tenancy End Date</td><td>Date</td><td>Conditional</td><td><span class="badge badge-red">MISSING</span></td><td>Required if tenant</td></tr>
-                  <tr><td>5</td><td>Tenancy Agreement</td><td>Attachment</td><td>Conditional</td><td><span class="badge badge-red">MISSING</span></td><td>Required if tenant</td></tr>
-                  <tr><td>6</td><td>Number of Occupants</td><td>Number</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td>Maximum 6 unrelated persons per regulations</td></tr>
-                  <tr><td>7</td><td>Occupant Details</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-yellow">Partial (Q1)</span></td><td>Q1 "Tenant Info" &mdash; very sparse, needs expansion</td></tr>
-                  <tr><td>8</td><td>Emergency Contact Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-                  <tr><td>9</td><td>Emergency Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-                  <tr><td>10</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">MISSING</span></td><td></td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q2)</span></td><td></td></tr>
-                </tbody>
-              </table>
-              <div class="form-notes">
-                <strong>Assessment:</strong> Very sparse. Only one actual resident-facing field exists (Q1 "Tenant Info"). The paper form collects significantly more detail. Eight fields must be added.
-              </div>
-            </td>
-          </tr>
-
-          <!-- Row 10: Pet Registration -->
-          <tr class="expandable-row" id="form-pet" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Pet Registration</td><td>New</td><td>N/A</td><td>0</td><td>8</td><td>8</td><td>0</td><td><span class="badge badge-red">Not started</span></td>
-          </tr>
-          <tr class="detail-row">
-            <td colspan="8">
-              <table>
-                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-                <tbody>
-                  <tr><td>1</td><td>Pet Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Dog / Cat / Others</td></tr>
-                  <tr><td>2</td><td>Breed</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-                  <tr><td>3</td><td>Pet Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-                  <tr><td>4</td><td>Pet Photo</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>For identification</td></tr>
-                  <tr><td>5</td><td>AVS License Number</td><td>Text</td><td>Conditional</td><td><span class="badge badge-red">N/A</span></td><td>Required for dogs</td></tr>
-                  <tr><td>6</td><td>Vaccination Certificate</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Up-to-date vaccination proof</td></tr>
-                  <tr><td>7</td><td>Rules Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>"I agree to abide by the pet rules and regulations"</td></tr>
-                  <tr><td>8</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-
-          <!-- Row 10: Instructor Reg -->
-          <tr class="expandable-row" id="form-instructor" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Instructor Reg</td><td>New</td><td>N/A</td><td>0</td><td>7</td><td>7</td><td>0</td><td><span class="badge badge-red">Not started</span></td>
-          </tr>
-          <tr class="detail-row">
-            <td colspan="8">
-              <table>
-                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-                <tbody>
-                  <tr><td>1</td><td>Instructor/Coach Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-                  <tr><td>2</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-                  <tr><td>3</td><td>Activity/Sport</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Swimming / Tennis / Gym / Yoga / Others</td></tr>
-                  <tr><td>4</td><td>Schedule</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Days and times</td></tr>
-                  <tr><td>5</td><td>Insurance/Certification Proof</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-                  <tr><td>6</td><td>Sponsoring Resident (Unit No.)</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Resident who engaged the coach</td></tr>
-                  <tr><td>7</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-
-
-          <!-- Row 13: Temporary Overnight Parking Permit -->
-          <tr class="expandable-row" id="form-overnight" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Temporary Overnight Parking Permit</td><td>New</td><td>N/A</td><td>0</td><td>5</td><td>5</td><td>0</td><td><span class="badge badge-red">Not started</span></td>
-          </tr>
-          <tr class="detail-row">
-            <td colspan="8">
-              <table>
-                <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
-                <tbody>
-                  <tr><td>1</td><td>Vehicle Registration Plate No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-                  <tr><td>2</td><td>Parking Date(s)</td><td>Date</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Start date; may need end date for multi-day</td></tr>
-                  <tr><td>3</td><td>Number of Nights</td><td>Number</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-                  <tr><td>4</td><td>Reason for Overnight Parking</td><td>Text</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td>e.g., visiting guest, temporary vehicle</td></tr>
-                  <tr><td>5</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-
-        </tbody>
-      </table>
-    </div>
-
-    <!-- ===== Cross-Cutting Issues ===== -->
-    <h3 id="cross-cutting">Cross-Cutting Issues</h3>
-    <p>The following issues affect multiple forms and must be resolved before any e-form is published:</p>
-
-    <div class="info-box info-box-red">
-      <strong>NRIC last-4-digit collection must stop by 31 December 2026.</strong> Affected forms: 18271 (Renovation), 18272 (Moving In/Out). Remove all NRIC fields. Replace with alternative identification where necessary (e.g., passport or work permit number for foreign workers).
-    </div>
-
-    <div class="info-box info-box-yellow">
-      <strong>All "Official Use" sections should be removed</strong> from resident-facing e-forms. These paper-era fields confuse residents. Use Hilife's built-in approval workflow (Pending/Approved/Rejected/Cancelled) and reply thread for MA processing notes instead.
-    </div>
-
-    <div class="info-box info-box-yellow">
-      <strong>Entity naming:</strong> Replace "KINGSFORD HURAY DEVELOPMENT PTE LTD" with "MCST 4932" in all forms, notifications, and system references. The developer name is no longer applicable post-handover.
-    </div>
-
-    <div class="info-box info-box-yellow">
-      <strong>Payment references:</strong> Eliminate all cheque/cash references. Use PayNow/Bank Transfer/Credit Card as accepted payment modes. Affected forms: 18271, 18272, 18274.
-    </div>
-
-    <div class="info-box info-box-yellow">
-      <strong>Pricing alignment:</strong> Tennis Court is $10 in the handbook but $10.90 in Hilife; Function Room is $100 vs $109. The difference is GST (9%). Handbook prices should be updated to reflect GST-inclusive amounts to match what residents see in Hilife.
-    </div>
-
-  </section>
-
-  <!-- ========== SECTION 4: WORKFLOWS ========== -->
-  <section id="workflows">
-    <h2>4. Workflows</h2>
-
-    <!-- 4.1 Non-Deposit -->
-    <h3 id="wf-non-deposit">4.1 Non-Deposit Forms</h3>
-    <p>Simple e-form submission and approval flow.</p>
-
-    <div class="flow-diagram">
-      <div class="flow-step flow-step-action">
-        <span class="flow-step-label">Start</span>
-        Resident submits e-form
+  <div class="cards">
+    <a class="card" href="eform.html">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
       </div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">MA receives notification and reviews application</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-decision">Need more info?</div>
-      <div class="flow-branch">
-        <div>
-          <div class="flow-arrow-label">Yes</div>
-          <div class="flow-arrow"></div>
-          <div class="flow-step flow-step-action" style="font-size:12px;">MA posts in reply thread &rarr; Resident replies &rarr; MA reviews again</div>
-        </div>
-        <div>
-          <div class="flow-arrow-label">No</div>
-          <div class="flow-arrow"></div>
-          <div class="flow-step flow-step-outcome-good">MA approves or rejects</div>
-        </div>
+      <div class="card-body">
+        <div class="card-title">E-Form Digitisation Analysis</div>
+        <div class="card-desc">Review of all Hilife e-forms, their current digitisation status, identified issues, and recommendations for improvement.</div>
       </div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-outcome-good">
-        <span class="flow-step-label">End</span>
-        Resident receives outcome notification
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
       </div>
-    </div>
+    </a>
 
-    <p><strong>Applies to:</strong> Form A (Address Change), Form H (Bicycle Tag), Form L (Occupancy Registration), Pet Registration, Instructor/Coach Registration, Bicycle Registration, Temporary Overnight Parking Permit.</p>
-
-    <div class="info-box info-box-blue">
-      <strong>Note:</strong> Forms that involve a fee or deposit use different workflows. See Section 4.2 (Fee Collection) and Section 4.3 (Deposit-Required) for those processes.
-    </div>
-
-    <!-- 4.2 Fee Collection -->
-    <h3 id="wf-fee">4.2 Fee Collection Forms</h3>
-    <p>For non-refundable fees, the resident pays via PayNow and uploads a screenshot as proof of payment within the e-form.</p>
-    <div class="info-box info-box-yellow">
-      <strong>Status convention:</strong> The e-form stays in <strong>Pending</strong> throughout the entire process. MA only marks it as <strong>Approved</strong> when the case is fully closed (payment verified, request fulfilled). All communication and intermediate steps are managed via the <strong>reply thread</strong>.
-    </div>
-
-    <div class="flow-diagram">
-      <div class="flow-step flow-step-action">
-        <span class="flow-step-label">Pending</span>
-        Resident submits e-form (status: PENDING)
+    <a class="card" href="facilities.html">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
       </div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">MA reviews via reply thread (all back-and-forth happens here)</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">MA replies with PayNow instruction</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">Resident pays via PayNow, uploads screenshot in reply thread</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">MA verifies payment, processes request (issues card, decal, etc.)</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-outcome-good">
-        <span class="flow-step-label">Approved</span>
-        MA marks e-form as APPROVED (status: APPROVED = case closed)
+      <div class="card-body">
+        <div class="card-title">Facility Utilization Report</div>
+        <div class="card-desc">12-month analysis of facility bookings, utilization rates, cancellation patterns, revenue trends, and under-utilized facilities.</div>
       </div>
-    </div>
-
-    <p><strong>Applies to:</strong> Access Card (Form G) &mdash; $50 per card (non-refundable).</p>
-
-    <div class="info-box info-box-blue">
-      <strong>Why not Facility Booking?</strong> Facility Booking fees are per-slot, not per-quantity. Access Card fees are charged per card ordered, making the PayNow screenshot workflow a better fit.
-    </div>
-
-    <!-- 4.3 Deposit-Required -->
-    <h3 id="wf-deposit">4.3 Deposit-Required Forms</h3>
-
-    <p><strong>Applies to:</strong> Renovation (A&amp;A) &mdash; $1,000 deposit. Moving In/Out &mdash; $1,000 deposit. Vehicle Registration &mdash; $50 deposit.</p>
-
-    <div class="info-box info-box-blue">
-      <strong>Forms eliminated:</strong> Form E (Refund of A&amp;A Deposit) and Form K (Refund of Facility Deposit). Refund is now an MA-driven action at process closure, not a resident request.
-    </div>
-
-    <h4>The Problem</h4>
-    <p>Hilife's E-Form module <strong>cannot collect deposits</strong>. The Facility Booking module <strong>can collect deposits</strong> via credit card hold. However, the two modules are completely separate &mdash; there is no linkage between an e-form submission and a facility booking.</p>
-
-    <h4>Option 1: Use Facility Booking for Everything (Form + Deposit)</h4>
-    <p>The Facility Booking module supports Q&amp;A questions (<code>enable_qa</code>) which can serve as a basic form. The archived "Renovation Deposit" and "Moving Deposit" categories previously used this approach.</p>
-    <div class="info-box info-box-yellow">
-      <strong>Downside:</strong> Residents would need to look for their renovation or moving application under "Facility Booking" rather than "E-Forms", which is confusing. The Q&amp;A is also more limited than e-forms (no signatures, limited question types, no reply thread for back-and-forth).
-    </div>
-
-    <h4>Option 2: Split E-Form and Deposit Payment (Recommended)</h4>
-    <p>Use E-Form for the application (rich form, signatures, reply thread) and Facility Booking purely for deposit collection. The two are not linked in the system, but the MA manages the connection manually.</p>
-    <div class="info-box info-box-green">
-      <strong>Advantage:</strong> Each module does what it is best at. Residents submit applications where they expect to (E-Forms) and pay deposits where the system supports it (Facility Booking). The e-form reply thread enables back-and-forth communication throughout the process.
-    </div>
-
-    <h4>Payment Method Options</h4>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Method</th><th>How It Works</th><th>Pros</th><th>Cons</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><strong>Credit Card via Facility Booking</strong></td>
-            <td>Resident pays deposit via credit card hold in Facility Booking module. MA refunds/forfeits via Deposit Records.</td>
-            <td>Automated lifecycle tracking (In Use / Refunded / Forfeited). Simpler for residents.</td>
-            <td>Credit card processing fees may apply on both charge and refund &mdash; MCST may lose $20&ndash;$30 per $1,000 cycle. Must clarify with Hilife (see Action Item 5.1).</td>
-          </tr>
-          <tr>
-            <td><strong>PayNow / Bank Transfer</strong></td>
-            <td>Resident pays via PayNow, uploads screenshot in e-form reply. MA creates manual deposit record. MA refunds via bank transfer.</td>
-            <td>No credit card fees.</td>
-            <td>More manual effort for both resident and MA. No automated lifecycle tracking.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="info-box info-box-yellow">
-      <strong>Status convention:</strong> The e-form stays in <strong>Pending</strong> throughout the entire process &mdash; application, deposit payment, work in progress, inspection, and refund. MA only marks it as <strong>Approved</strong> when the deposit has been fully refunded (or forfeited) and the case is closed. All communication and intermediate steps are managed via the <strong>reply thread</strong>.
-    </div>
-
-    <h4>Flow A: Credit Card via Facility Booking</h4>
-
-    <div class="flow-diagram">
-      <div class="flow-step flow-step-action"><span class="flow-step-label">Pending</span>Resident submits e-form with full details (status: PENDING)</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">MA reviews via reply thread (all back-and-forth happens here)</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">MA replies: "Please proceed to Facility Booking to pay the deposit."</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">Resident pays deposit via credit card hold in Facility Booking. Deposit = "In Use".</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">Work/move commences (communicate via reply thread as needed)</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">Resident notifies via reply thread: "Work completed."</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">MA inspects common areas</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-decision">Damage?</div>
-      <div class="flow-branch">
-        <div><div class="flow-arrow-label">No</div><div class="flow-arrow"></div><div class="flow-step flow-step-outcome-good">MA clicks "Refund" in Deposit Records</div></div>
-        <div><div class="flow-arrow-label">Yes</div><div class="flow-arrow"></div><div class="flow-step flow-step-outcome-bad">MA clicks "Forfeit" in Deposit Records</div></div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
       </div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-outcome-good"><span class="flow-step-label">Approved</span>MA marks e-form as APPROVED (status: APPROVED = case closed)</div>
-    </div>
+    </a>
 
-    <h4>Flow B: PayNow</h4>
-
-    <div class="flow-diagram">
-      <div class="flow-step flow-step-action"><span class="flow-step-label">Pending</span>Resident submits e-form with full details (status: PENDING)</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">MA reviews via reply thread (all back-and-forth happens here)</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">MA replies: "Please pay $X,XXX via PayNow to MCST 4932 and upload the screenshot here."</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">Resident pays via PayNow, uploads screenshot in reply thread</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">MA verifies payment, creates manual deposit record</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">Work/move commences (communicate via reply thread as needed)</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">Resident notifies via reply thread: "Work completed."</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">MA inspects common areas</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-decision">Damage?</div>
-      <div class="flow-branch">
-        <div><div class="flow-arrow-label">No</div><div class="flow-arrow"></div><div class="flow-step flow-step-outcome-good">MA refunds via bank transfer</div></div>
-        <div><div class="flow-arrow-label">Yes</div><div class="flow-arrow"></div><div class="flow-step flow-step-outcome-bad">MA deducts damages, refunds remainder</div></div>
+    <a class="card" href="feedback.html">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
       </div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-outcome-good"><span class="flow-step-label">Approved</span>MA marks e-form as APPROVED (status: APPROVED = case closed)</div>
-    </div>
-
-    <!-- 4.4 Facility Bookings -->
-    <h3 id="wf-facility">4.4 Facility Bookings</h3>
-    <p>The Facility Booking module is already working for Function Rooms, Dining Pavilions, and Tennis Court.</p>
-
-    <div class="flow-diagram">
-      <div class="flow-step flow-step-action">
-        <span class="flow-step-label">Start</span>
-        Resident selects facility and time slot
+      <div class="card-body">
+        <div class="card-title">Feedback Analysis Report</div>
+        <div class="card-desc">Monthly feedback summary covering case categories, block-level heatmap, outstanding issues, ratings, and action items.</div>
       </div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">System collects booking fee (non-refundable) and places deposit hold on credit card (if applicable)</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">MA approves booking (if approval required)</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">Event occurs</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-decision">Damage found?</div>
-      <div class="flow-branch">
-        <div>
-          <div class="flow-arrow-label">No</div>
-          <div class="flow-arrow"></div>
-          <div class="flow-step flow-step-outcome-good">Auto-refund deposit (or MA clicks Refund)</div>
-        </div>
-        <div>
-          <div class="flow-arrow-label">Yes</div>
-          <div class="flow-arrow"></div>
-          <div class="flow-step flow-step-outcome-bad">MA clicks Forfeit</div>
-        </div>
+      <div class="card-arrow">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
       </div>
-    </div>
+    </a>
+  </div>
 
-    <p><strong>Forms replaced:</strong></p>
-    <ul>
-      <li>Form I (Dining Pavilion Booking) &mdash; replaced by Facility Booking module</li>
-      <li>Form J (Function Room Booking) &mdash; replaced by Facility Booking module</li>
-      <li>Form K (Refund Request) &mdash; eliminated (auto-refund or MA-driven)</li>
-    </ul>
-
-
-    <h4>Current Deposit Amounts</h4>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Facility</th><th>Deposit</th><th>Booking Fee</th></tr></thead>
-        <tbody>
-          <tr><td>Function Room</td><td>$200</td><td>$100/session</td></tr>
-          <tr><td>Dining Pavilion</td><td>$200</td><td>$25-50/session</td></tr>
-          <tr><td>Tennis Court</td><td>$0</td><td>$10/hr</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <p><strong>Improvements needed:</strong></p>
-    <ul>
-      <li>Align pricing between handbook and Hilife configuration (resolve the ~9% discrepancy).</li>
-      <li>Enable booking Q&amp;A (<code>enable_qa</code>) for categories where additional info is needed (e.g., guest count for function rooms).</li>
-      <li>Configure cancellation windows for new categories.</li>
-    </ul>
-  </section>
-
-  <!-- ========== SECTION 5: ACTION ITEMS ========== -->
-  <section id="actions">
-    <h2>5. Action Items</h2>
-
-    <h3 id="act-hilife">5.1 Check with Hilife on Credit Card Fees</h3>
-    <p>Before committing to the Facility Booking module for deposit collection, the following must be clarified:</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>#</th><th>Question</th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td>What are the credit card processing fees for deposit collection and refund via the Facility Booking module?</td></tr>
-          <tr><td>2</td><td>Does a deposit-only transaction (no booking fee) still incur processing fees for the MCST on both the charge and the refund?</td></tr>
-          <tr><td>3</td><td>On full refund, does the resident receive 100% of the deposit, or is any processing fee deducted from the resident?</td></tr>
-          <tr><td>4</td><td>What happens when a deposit reaches its 6-month expiry &mdash; auto-refund, flag for MA action, or extension?</td></tr>
-          <tr><td>5</td><td>Are PayNow or bank transfer available as alternative deposit collection modes within the Facility Booking module?</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="info-box info-box-yellow">
-      <strong>Estimated impact if fees apply:</strong> On a $1,000 deposit charge-and-refund cycle, MCST may lose $20&ndash;$30 in processing fees. Across ~50 renovation/moving deposits per year, that is $1,000&ndash;$1,500 annually.
-    </div>
-
-    <h3 id="act-eform">5.2 E-Form Completion</h3>
-
-    <h4>Forms to Update</h4>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>#</th><th>Form</th><th>Hilife ID</th><th>Action Required</th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td>Address Change</td><td>18237</td><td>Add contact number and email (2 fields). Remove "Official Use" section.</td></tr>
-          <tr><td>2</td><td>Renovation A&amp;A + Contractor</td><td>18271</td><td>Add renovation scope, dates, worker list, applicant contact, contractor email, hot work question (9 fields). Restructure Q1 into separate text fields. Remove NRIC, "Official Use" x2, deposit cheque ref.</td></tr>
-          <tr><td>3</td><td>Moving In/Out</td><td>18272</td><td>Add moving direction, time slot, contractor PIC, number of workers (4 fields). Remove NRIC, deposit cheque ref, "Official Use".</td></tr>
-          <tr><td>4</td><td>Vehicle Registration</td><td>18238</td><td>Add vehicle plate, IU, make/model, vehicle type, company letter upload, tenancy agreement upload, deposit payment confirmation (6 fields). Consolidate from form 18239. Remove "Official Use".</td></tr>
-          <tr><td>5</td><td>Access Card</td><td>18274</td><td>Add number of cards, card holder details, replacement reason, payment confirmation (4 fields). Remove cash/cheque ref, "Official Use".</td></tr>
-          <tr><td>6</td><td>Occupancy Registration</td><td>18276</td><td>Add registration type, owner name, tenancy dates, tenancy agreement, number of occupants, occupant details, emergency contact x2, PDPA consent (8 fields). Remove "Official Use".</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h4>Forms to Delete</h4>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>#</th><th>Form</th><th>Hilife ID</th><th>Reason</th></tr></thead>
-        <tbody>
-          <tr><td>7</td><td>Request for Refund of Deposit</td><td>18273</td><td>Eliminated &mdash; refund is now MA-driven at process closure, not a resident request.</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h4>Forms to Create</h4>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>#</th><th>Form</th><th>Fields</th><th>Complexity</th></tr></thead>
-        <tbody>
-          <tr><td>8</td><td>Pet Registration</td><td>8</td><td><span class="badge badge-green">Low</span></td></tr>
-          <tr><td>10</td><td>Instructor/Coach Registration</td><td>7</td><td><span class="badge badge-yellow">Medium</span></td></tr>
-          <tr><td>11</td><td>Temporary Overnight Parking Permit</td><td>5</td><td><span class="badge badge-green">Low</span></td></tr>
-          
-        </tbody>
-      </table>
-    </div>
-
-    <h4>Cross-Cutting Fixes (All E-Forms)</h4>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>#</th><th>Action</th></tr></thead>
-        <tbody>
-          <tr><td>12</td><td>Remove all NRIC last-4-digit collection fields (PDPA deadline: 31 Dec 2026)</td></tr>
-          <tr><td>13</td><td>Remove all "Official Use" sections from resident-facing e-forms</td></tr>
-          <tr><td>14</td><td>Replace all "KINGSFORD HURAY DEVELOPMENT PTE LTD" with "MCST 4932"</td></tr>
-          <tr><td>15</td><td>Remove all cheque/cash references; update payment instructions to PayNow/Bank Transfer/Credit Card</td></tr>
-          <tr><td>16</td><td>Update handbook prices to reflect GST-inclusive amounts (e.g., Tennis $10.90, Function Room $109)</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h3 id="act-decide">5.3 Decide: Fee and Deposit Collection via Facility Booking or PayNow</h3>
-    <h4>Decided: PayNow</h4>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Form</th><th>Amount</th><th>Type</th><th>Decision</th><th>Reason</th></tr></thead>
-        <tbody>
-          <tr><td>Vehicle Reg (F)</td><td>$50</td><td>Refundable deposit</td><td><span class="badge badge-green">PayNow</span></td><td>Deposit may be held for years (duration of vehicle ownership) &mdash; exceeds Hilife's 6-month expiry</td></tr>
-          <tr><td>Access Card (G)</td><td>$50/card</td><td>Non-refundable fee</td><td><span class="badge badge-green">PayNow</span></td><td>Fee collection, not a deposit. Variable quantity.</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h4>To Decide: Facility Booking or PayNow</h4>
-    <p>Pending the outcome of Section 5.1 (Hilife credit card fee clarification):</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Form</th><th>Amount</th><th>Type</th><th>Option A: Facility Booking</th><th>Option B: PayNow</th></tr></thead>
-        <tbody>
-          <tr><td>Renovation (B-1)</td><td>$1,000</td><td>Refundable deposit (1-3 months)</td><td>Credit card hold, auto-lifecycle tracking, MA refund/forfeit</td><td>PayNow + screenshot, MA manual deposit record, bank transfer refund</td></tr>
-          <tr><td>Moving (D-1)</td><td>$1,000</td><td>Refundable deposit (1-4 weeks)</td><td>Same as above</td><td>Same as above</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="info-box info-box-green">
-      <strong>Recommendation:</strong> Confirm exact fee structure with Hilife first, then decide. If there is no fee, and the max duration is enough, use the credit card flow for simplicity. If fees are material ($20&ndash;$30 per cycle), use PayNow.
-    </div>
-  </section>
-
+  <div class="footer">
+    Normanton Park MCST 4932
+  </div>
 </div>
-
-<script>
-function toggleCollapsible(button) {
-  var panel = button.parentElement;
-  panel.classList.toggle('open');
-}
-
-function toggleDetailRow(row) {
-  var detailRow = row.nextElementSibling;
-  row.classList.toggle('open');
-  detailRow.classList.toggle('open');
-}
-
-// TOC scroll tracking
-(function() {
-  var links = document.querySelectorAll('.sidebar nav a');
-  var sections = [];
-
-  links.forEach(function(link) {
-    var href = link.getAttribute('href');
-    if (href && href.startsWith('#')) {
-      var target = document.getElementById(href.substring(1));
-      if (target) {
-        sections.push({ link: link, target: target });
-      }
-    }
-  });
-
-  function updateActive() {
-    var scrollPos = window.scrollY + 120;
-    var current = null;
-
-    for (var i = sections.length - 1; i >= 0; i--) {
-      if (sections[i].target.offsetTop <= scrollPos) {
-        current = sections[i].link;
-        break;
-      }
-    }
-
-    links.forEach(function(link) {
-      link.classList.remove('active');
-    });
-
-    if (current) {
-      current.classList.add('active');
-    }
-  }
-
-  window.addEventListener('scroll', updateActive);
-  updateActive();
-})();
-</script>
-
 </body>
 </html>

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Normanton Park -- Feedback Analysis Report (March 2026)</title>
+<style>
+
+  :root {
+    --color-bg: #f8f9fa;
+    --color-white: #ffffff;
+    --color-text: #2c3e50;
+    --color-text-light: #5a6c7d;
+    --color-primary: #2c5282;
+    --color-primary-light: #ebf4ff;
+    --color-border: #d1d9e0;
+    --color-border-light: #e8ecf0;
+    --color-green: #276749;
+    --color-green-bg: #c6f6d5;
+    --color-green-border: #9ae6b4;
+    --color-yellow: #975a16;
+    --color-yellow-bg: #fefcbf;
+    --color-yellow-border: #f6e05e;
+    --color-red: #9b2c2c;
+    --color-red-bg: #fed7d7;
+    --color-red-border: #fc8181;
+    --color-sidebar-width: 280px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--color-text); background: var(--color-bg); line-height: 1.6;
+    font-size: 15px;
+  }
+
+  .container { max-width: 1000px; margin: 0 auto; padding: 40px 48px 80px; }
+
+  h1 {
+    font-size: 28px; color: var(--color-primary); margin-bottom: 8px;
+    font-weight: 700;
+  }
+  h2 {
+    font-size: 22px; color: var(--color-primary); margin: 40px 0 16px;
+    border-bottom: 2px solid var(--color-primary); padding-bottom: 8px;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 17px; color: var(--color-text); margin: 24px 0 12px;
+    font-weight: 600;
+  }
+
+  .subtitle {
+    color: var(--color-text-light); font-size: 13px; margin-bottom: 24px;
+    padding-bottom: 24px; border-bottom: 2px solid var(--color-primary);
+  }
+
+  .card {
+    background: var(--color-white); border-radius: 8px; padding: 20px;
+    margin-bottom: 20px; border: 1px solid var(--color-border);
+  }
+
+  .summary-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 14px; margin: 14px 0;
+  }
+
+  .metric {
+    background: var(--color-primary-light); border-radius: 6px;
+    padding: 14px; text-align: center; border: 1px solid var(--color-border-light);
+  }
+  .metric .value {
+    font-size: 1.8em; font-weight: 700; color: var(--color-primary);
+  }
+  .metric .label {
+    font-size: 12px; color: var(--color-text-light); margin-top: 2px;
+  }
+
+  ol, ul { padding-left: 24px; margin-bottom: 12px; }
+  li { margin-bottom: 4px; }
+
+  table {
+    width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px;
+  }
+  th {
+    background: var(--color-primary); color: #fff; padding: 10px 8px;
+    text-align: left; font-weight: 600;
+  }
+  td {
+    padding: 8px 6px; border-bottom: 1px solid var(--color-border-light);
+  }
+  tbody tr:nth-child(even) { background: #f7fafc; }
+  tbody tr:hover td { background: var(--color-primary-light); }
+
+  .dist-bar {
+    display: inline-block; height: 16px; background: var(--color-primary);
+    border-radius: 3px; vertical-align: middle;
+  }
+
+  .heatmap-table th {
+    font-size: 11px; padding: 5px 3px; text-align: center; white-space: nowrap;
+  }
+  .heatmap-table td {
+    text-align: center; padding: 4px 3px; font-size: 12px; font-weight: 600;
+    border: 1px solid var(--color-border-light);
+  }
+  .heatmap-table td.block-col {
+    background: var(--color-primary); color: #fff; font-weight: 700;
+    text-align: center; min-width: 40px;
+  }
+  .heatmap-table tr:last-child td {
+    font-weight: 700; background: var(--color-primary-light) !important;
+    color: var(--color-primary) !important;
+  }
+
+  .outstanding-group { margin: 12px 0; }
+
+  .toggle-btn {
+    cursor: pointer; background: var(--color-primary-light);
+    border: 1px solid var(--color-border); border-radius: 6px;
+    padding: 8px 14px; font-size: 14px; font-weight: 600;
+    color: var(--color-primary); width: 100%;
+    text-align: left; display: flex; justify-content: space-between;
+    align-items: center;
+  }
+  .toggle-btn:hover { background: var(--color-border-light); }
+  .toggle-content { display: none; padding: 8px 0; }
+  .toggle-content.open { display: block; }
+
+  .case-tag {
+    display: inline-block; background: var(--color-primary-light);
+    color: var(--color-primary); border-radius: 3px; padding: 1px 6px;
+    font-size: 12px; margin: 1px; font-weight: 600;
+  }
+
+  .action-card {
+    background: var(--color-white); border-left: 4px solid var(--color-primary);
+    padding: 14px 18px; margin: 10px 0; border-radius: 0 6px 6px 0;
+    border: 1px solid var(--color-border); border-left: 4px solid var(--color-primary);
+  }
+  .action-card h3 { margin: 0 0 6px; color: var(--color-primary); }
+  .action-card ul { margin: 6px 0 8px 18px; }
+  .action-card li { margin: 4px 0; }
+
+  .status-pending { color: var(--color-yellow); font-weight: 600; }
+  .status-inprogress { color: var(--color-primary); font-weight: 600; }
+
+  .rating-bar {
+    display: inline-block; height: 14px; background: var(--color-yellow);
+    border-radius: 2px; vertical-align: middle;
+  }
+  .rating-low { background: var(--color-red); }
+  .low-rating-row { background: var(--color-red-bg) !important; }
+
+  details summary {
+    cursor: pointer; font-size: 13px; color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .card { border: 1px solid #ddd; }
+    .toggle-content { display: block !important; }
+    .container { max-width: 100%; padding: 10px; }
+    h1 { font-size: 1.4em; }
+    h2 { font-size: 1.2em; }
+  }
+
+  @media (max-width: 800px) {
+    .container { padding: 16px; }
+    .heatmap-table { font-size: 10px; }
+    .heatmap-table th, .heatmap-table td { padding: 2px 1px; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Normanton Park -- Feedback Analysis Report</h1>
+<p class="subtitle">March 2026</p>
+<h2>1. Summary</h2>
+<div class="card">
+<div class="summary-grid">
+<div class="metric"><div class="value">209</div><div class="label">Total Cases</div></div>
+<div class="metric"><div class="value">179</div><div class="label">Closed</div></div>
+<div class="metric"><div class="value">30</div><div class="label">Outstanding</div></div>
+<div class="metric"><div class="value">85.6%</div><div class="label">Closure Rate</div></div>
+<div class="metric"><div class="value">4.76</div><div class="label">Avg Rating (of 5)</div></div>
+<div class="metric"><div class="value">179</div><div class="label">Reviews Received</div></div>
+</div>
+<h3>Top 5 Categories</h3><ol>
+<li><strong>Security & Access</strong> -- 26 cases (12.4%)</li>
+<li><strong>Lifts</strong> -- 23 cases (11.0%)</li>
+<li><strong>Noise & Neighbour</strong> -- 20 cases (9.6%)</li>
+<li><strong>Parking & Traffic</strong> -- 19 cases (9.1%)</li>
+<li><strong>Pest & Animals</strong> -- 18 cases (8.6%)</li>
+</ol></div>
+<h2>2. Category Distribution</h2>
+<div class="card">
+<table><thead><tr><th>#</th><th>Category</th><th>Count</th><th>%</th><th></th></tr></thead><tbody>
+<tr><td>1</td><td>Security & Access</td><td>26</td><td>12.4%</td><td><span class="dist-bar" style="width:200px"></span></td></tr>
+<tr><td>2</td><td>Lifts</td><td>23</td><td>11.0%</td><td><span class="dist-bar" style="width:176px"></span></td></tr>
+<tr><td>3</td><td>Noise & Neighbour</td><td>20</td><td>9.6%</td><td><span class="dist-bar" style="width:153px"></span></td></tr>
+<tr><td>4</td><td>Parking & Traffic</td><td>19</td><td>9.1%</td><td><span class="dist-bar" style="width:146px"></span></td></tr>
+<tr><td>5</td><td>Pest & Animals</td><td>18</td><td>8.6%</td><td><span class="dist-bar" style="width:138px"></span></td></tr>
+<tr><td>6</td><td>Cleanliness</td><td>16</td><td>7.7%</td><td><span class="dist-bar" style="width:123px"></span></td></tr>
+<tr><td>7</td><td>Waste & Recycling</td><td>15</td><td>7.2%</td><td><span class="dist-bar" style="width:115px"></span></td></tr>
+<tr><td>8</td><td>Building Maintenance</td><td>14</td><td>6.7%</td><td><span class="dist-bar" style="width:107px"></span></td></tr>
+<tr><td>9</td><td>Gym & Fitness</td><td>13</td><td>6.2%</td><td><span class="dist-bar" style="width:100px"></span></td></tr>
+<tr><td>10</td><td>Facilities</td><td>11</td><td>5.3%</td><td><span class="dist-bar" style="width:84px"></span></td></tr>
+<tr><td>11</td><td>Admin & General</td><td>10</td><td>4.8%</td><td><span class="dist-bar" style="width:76px"></span></td></tr>
+<tr><td>12</td><td>Intercom & Smart Home</td><td>8</td><td>3.8%</td><td><span class="dist-bar" style="width:61px"></span></td></tr>
+<tr><td>13</td><td>Lighting</td><td>7</td><td>3.3%</td><td><span class="dist-bar" style="width:53px"></span></td></tr>
+<tr><td>14</td><td>Common Area & Corridor</td><td>4</td><td>1.9%</td><td><span class="dist-bar" style="width:30px"></span></td></tr>
+<tr><td>15</td><td>Water & Plumbing</td><td>3</td><td>1.4%</td><td><span class="dist-bar" style="width:23px"></span></td></tr>
+<tr><td>16</td><td>Others</td><td>2</td><td>1.0%</td><td><span class="dist-bar" style="width:15px"></span></td></tr>
+<tr style="font-weight:700;background:#ebf4ff"><td></td><td>Total</td><td>209</td><td>100%</td><td></td></tr>
+</tbody></table></div>
+<h2>3. Heatmap: Block vs Category</h2>
+<div class="card" style="overflow-x:auto">
+<table class="heatmap-table"><thead><tr><th>Block</th>
+<th>Security</th>
+<th>Lifts</th>
+<th>Noise</th>
+<th>Parking</th>
+<th>Pest</th>
+<th>Cleanliness</th>
+<th>Waste/Rec</th>
+<th>Bldg.Maint</th>
+<th>Gym</th>
+<th>Facilities</th>
+<th>Admin</th>
+<th>Intercom</th>
+<th>Lighting</th>
+<th>Com.Area</th>
+<th>Water</th>
+<th>Others</th>
+<th>Total</th></tr></thead><tbody>
+<tr><td class="block-col">45</td>
+<td style="background:#c6f6d5;color:#2c3e50">2</td>
+<td style="background:#276749;color:#ffffff">6</td>
+<td style="background:#c6f6d5;color:#2c3e50">2</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#c6f6d5;color:#2c3e50">2</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#c6f6d5;color:#2c3e50">2</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:700">21</td></tr>
+<tr><td class="block-col">47</td>
+<td style="background:#276749;color:#ffffff">8</td>
+<td style="background:#276749;color:#ffffff">6</td>
+<td style="background:#276749;color:#ffffff">7</td>
+<td style="background:#276749;color:#ffffff">7</td>
+<td style="background:#276749;color:#ffffff">7</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#68d391;color:#2c3e50">4</td>
+<td style="background:#276749;color:#ffffff">5</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#c6f6d5;color:#2c3e50">2</td>
+<td style="background:#68d391;color:#2c3e50">4</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:700">60</td></tr>
+<tr><td class="block-col">49</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#68d391;color:#2c3e50">4</td>
+<td style="background:#276749;color:#ffffff">5</td>
+<td style="background:#c6f6d5;color:#2c3e50">2</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#c6f6d5;color:#2c3e50">2</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:700">22</td></tr>
+<tr><td class="block-col">51</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:700">10</td></tr>
+<tr><td class="block-col">53</td>
+<td style="background:#276749;color:#ffffff">6</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#c6f6d5;color:#2c3e50">2</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#68d391;color:#2c3e50">4</td>
+<td style="background:#c6f6d5;color:#2c3e50">2</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:700">30</td></tr>
+<tr><td class="block-col">55</td>
+<td style="background:#68d391;color:#2c3e50">4</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#c6f6d5;color:#2c3e50">2</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:700">8</td></tr>
+<tr><td class="block-col">57</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#c6f6d5;color:#2c3e50">2</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:700">12</td></tr>
+<tr><td class="block-col">59</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#68d391;color:#2c3e50">4</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:700">16</td></tr>
+<tr><td class="block-col">61</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#c6f6d5;color:#2c3e50">2</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#c6f6d5;color:#2c3e50">2</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#c6f6d5;color:#2c3e50">2</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:700">23</td></tr>
+<tr><td class="block-col">TH</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#68d391;color:#2c3e50">3</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#f0fff4;color:#2c3e50">1</td>
+<td style="background:#ffffff;color:#333333">.</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:700">7</td></tr>
+<tr><td class="block-col" style="background:#2c5282">Total</td>
+<td>26</td>
+<td>23</td>
+<td>20</td>
+<td>19</td>
+<td>18</td>
+<td>16</td>
+<td>15</td>
+<td>14</td>
+<td>13</td>
+<td>11</td>
+<td>10</td>
+<td>8</td>
+<td>7</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>209</td></tr>
+</tbody></table>
+<div style="margin-top:10px;font-size:0.82em;color:#666">
+<strong>Legend:</strong> 
+<span style="display:inline-block;width:18px;height:14px;background:#ffffff;border:1px solid #ccc;vertical-align:middle"></span> 0 &nbsp;
+<span style="display:inline-block;width:18px;height:14px;background:#f0fff4;border:1px solid #ccc;vertical-align:middle"></span> 1 &nbsp;
+<span style="display:inline-block;width:18px;height:14px;background:#c6f6d5;border:1px solid #ccc;vertical-align:middle"></span> 2 &nbsp;
+<span style="display:inline-block;width:18px;height:14px;background:#68d391;border:1px solid #ccc;vertical-align:middle"></span> 3-4 &nbsp;
+<span style="display:inline-block;width:18px;height:14px;background:#276749;border:1px solid #ccc;vertical-align:middle"></span> 5+ &nbsp;
+</div>
+</div>
+<h2>4. Outstanding Cases</h2>
+<div class="card"><p>Total outstanding: <strong>30</strong> cases (Pending or In Progress)</p>
+<div class="outstanding-group">
+<button class="toggle-btn" onclick="toggleGroup('Admin_and_General')">
+Admin & General (1 cases)
+<span id="arrow_Admin_and_General">&#9660;</span></button>
+<div class="toggle-content" id="group_Admin_and_General">
+<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4737</td><td>47</td><td>Blk 47</td><td>Hilife - Folder (Announcements)</td><td class="status-pending">Pending</td><td>25</td></tr>
+</tbody></table></div></div>
+<div class="outstanding-group">
+<button class="toggle-btn" onclick="toggleGroup('Building_Maintenance')">
+Building Maintenance (3 cases)
+<span id="arrow_Building_Maintenance">&#9660;</span></button>
+<div class="toggle-content" id="group_Building_Maintenance">
+<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4636</td><td>47</td><td>Blk 47</td><td>previously reported - leaking and mouldy ceiling</td><td class="status-inprogress">In Progress</td><td>39</td></tr>
+<tr><td>1292-4714</td><td>47</td><td>Blk 47</td><td>Maintenance Work - Blk 47 B1 Lobby</td><td class="status-inprogress">In Progress</td><td>28</td></tr>
+<tr><td>1292-4798</td><td>53</td><td>Blk 53</td><td>Maintenance and Security</td><td class="status-inprogress">In Progress</td><td>14</td></tr>
+</tbody></table></div></div>
+<div class="outstanding-group">
+<button class="toggle-btn" onclick="toggleGroup('Cleanliness')">
+Cleanliness (2 cases)
+<span id="arrow_Cleanliness">&#9660;</span></button>
+<div class="toggle-content" id="group_Cleanliness">
+<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4670</td><td>53</td><td>Blk 53</td><td>dirty sign board</td><td class="status-inprogress">In Progress</td><td>33</td></tr>
+<tr><td>1292-4731</td><td>53</td><td>Blk 53</td><td>Rust stain left by signage</td><td class="status-inprogress">In Progress</td><td>25</td></tr>
+</tbody></table></div></div>
+<div class="outstanding-group">
+<button class="toggle-btn" onclick="toggleGroup('Facilities')">
+Facilities (3 cases)
+<span id="arrow_Facilities">&#9660;</span></button>
+<div class="toggle-content" id="group_Facilities">
+<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4701</td><td>TH</td><td>Terrace House</td><td>Swimming pool (Terrace House) maintenance</td><td class="status-inprogress">In Progress</td><td>29</td></tr>
+<tr><td>1292-4801</td><td>53</td><td>Blk 53</td><td>Pavilion</td><td class="status-inprogress">In Progress</td><td>13</td></tr>
+<tr><td>1292-4812</td><td>47</td><td>Blk 47</td><td>Family Pool - Life Bouy has been removed.</td><td class="status-pending">Pending</td><td>12</td></tr>
+</tbody></table></div></div>
+<div class="outstanding-group">
+<button class="toggle-btn" onclick="toggleGroup('Gym_and_Fitness')">
+Gym & Fitness (6 cases)
+<span id="arrow_Gym_and_Fitness">&#9660;</span></button>
+<div class="toggle-content" id="group_Gym_and_Fitness">
+<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4655</td><td>47</td><td>Blk 47</td><td>three treadmill down again</td><td class="status-inprogress">In Progress</td><td>36</td></tr>
+<tr><td>1292-4680</td><td>47</td><td>Blk 47</td><td>Complaint Regarding Unusable Treadmills and Insuff</td><td class="status-inprogress">In Progress</td><td>33</td></tr>
+<tr><td>1292-4688</td><td>55</td><td>Blk 55</td><td>Treadmills Unfixed for Months</td><td class="status-inprogress">In Progress</td><td>32</td></tr>
+<tr><td>1292-4683</td><td>59</td><td>Blk 59</td><td>GYM room</td><td class="status-inprogress">In Progress</td><td>32</td></tr>
+<tr><td>1292-4708</td><td>49</td><td>Blk 49</td><td>Treadmill spoil</td><td class="status-inprogress">In Progress</td><td>28</td></tr>
+<tr><td>1292-4718</td><td>47</td><td>Blk 47</td><td>spoilt treadmill</td><td class="status-inprogress">In Progress</td><td>27</td></tr>
+</tbody></table></div></div>
+<div class="outstanding-group">
+<button class="toggle-btn" onclick="toggleGroup('Lifts')">
+Lifts (2 cases)
+<span id="arrow_Lifts">&#9660;</span></button>
+<div class="toggle-content" id="group_Lifts">
+<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4652</td><td>49</td><td>Blk 49</td><td>BLK 49 Lift FL3 Handle damaged</td><td class="status-inprogress">In Progress</td><td>37</td></tr>
+<tr><td>1292-4664</td><td>53</td><td>Blk 53</td><td>pl9 lift at block 53</td><td class="status-inprogress">In Progress</td><td>35</td></tr>
+</tbody></table></div></div>
+<div class="outstanding-group">
+<button class="toggle-btn" onclick="toggleGroup('Noise_and_Neighbour')">
+Noise & Neighbour (4 cases)
+<span id="arrow_Noise_and_Neighbour">&#9660;</span></button>
+<div class="toggle-content" id="group_Noise_and_Neighbour">
+<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4684</td><td>61</td><td>Blk 61</td><td>Noise Complain</td><td class="status-inprogress">In Progress</td><td>32</td></tr>
+<tr><td>1292-4682</td><td>53</td><td>Blk 53</td><td>Block 53 #XX-XX</td><td class="status-inprogress">In Progress</td><td>32</td></tr>
+<tr><td>1292-4715</td><td>47</td><td>Blk 47</td><td>Outdoor Pavillions</td><td class="status-inprogress">In Progress</td><td>28</td></tr>
+<tr><td>1292-4732</td><td>45</td><td>Blk 45</td><td>heavy Indian food cooking</td><td class="status-inprogress">In Progress</td><td>25</td></tr>
+</tbody></table></div></div>
+<div class="outstanding-group">
+<button class="toggle-btn" onclick="toggleGroup('Parking_and_Traffic')">
+Parking & Traffic (2 cases)
+<span id="arrow_Parking_and_Traffic">&#9660;</span></button>
+<div class="toggle-content" id="group_Parking_and_Traffic">
+<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4643</td><td>45</td><td>Blk 45</td><td>B2 carpark lobby 45</td><td class="status-inprogress">In Progress</td><td>38</td></tr>
+<tr><td>1292-4646</td><td>61</td><td>Blk 61</td><td>Stolen bicyle seats at Blk 61 B1 bicycle park</td><td class="status-inprogress">In Progress</td><td>37</td></tr>
+</tbody></table></div></div>
+<div class="outstanding-group">
+<button class="toggle-btn" onclick="toggleGroup('Pest_and_Animals')">
+Pest & Animals (1 cases)
+<span id="arrow_Pest_and_Animals">&#9660;</span></button>
+<div class="toggle-content" id="group_Pest_and_Animals">
+<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4811</td><td>47</td><td>Blk 47</td><td>Stray Cats in Estate</td><td class="status-pending">Pending</td><td>12</td></tr>
+</tbody></table></div></div>
+<div class="outstanding-group">
+<button class="toggle-btn" onclick="toggleGroup('Security_and_Access')">
+Security & Access (6 cases)
+<span id="arrow_Security_and_Access">&#9660;</span></button>
+<div class="toggle-content" id="group_Security_and_Access">
+<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4644</td><td>61</td><td>Blk 61</td><td>Stolen bicycle seat at Blk 61 B1 bicycle park area</td><td class="status-inprogress">In Progress</td><td>38</td></tr>
+<tr><td>1292-4639</td><td>53</td><td>Blk 53</td><td>Damaged area map</td><td class="status-inprogress">In Progress</td><td>38</td></tr>
+<tr><td>1292-4693</td><td>55</td><td>Blk 55</td><td>Blk 55 level 1 lift lobby</td><td class="status-inprogress">In Progress</td><td>31</td></tr>
+<tr><td>1292-4691</td><td>55</td><td>Blk 55</td><td>Blk 55 door level 1 is open all the time</td><td class="status-inprogress">In Progress</td><td>31</td></tr>
+<tr><td>1292-4786</td><td>45</td><td>Blk 45</td><td>Children roller blading outside corridor</td><td class="status-inprogress">In Progress</td><td>17</td></tr>
+<tr><td>1292-4784</td><td>45</td><td>Blk 45</td><td>Children roller blading outside corridor</td><td class="status-inprogress">In Progress</td><td>17</td></tr>
+</tbody></table></div></div>
+</div>
+<h2>5. Rating Analysis</h2>
+<div class="card">
+<p>Out of 209 cases, <strong>179</strong> received reviews.</p>
+<table style="max-width:500px"><thead><tr><th>Rating</th><th>Count</th><th>%</th><th></th></tr></thead><tbody>
+<tr><td>***** (5)</td><td>164</td><td>91.6%</td><td><span class="rating-bar" style="width:183px;display:inline-block;height:14px;border-radius:2px;vertical-align:middle"></span></td></tr>
+<tr><td>**** (4)</td><td>4</td><td>2.2%</td><td><span class="rating-bar" style="width:4px;display:inline-block;height:14px;border-radius:2px;vertical-align:middle"></span></td></tr>
+<tr><td>*** (3)</td><td>2</td><td>1.1%</td><td><span class="rating-low" style="width:2px;display:inline-block;height:14px;border-radius:2px;vertical-align:middle"></span></td></tr>
+<tr><td>** (2)</td><td>1</td><td>0.6%</td><td><span class="rating-low" style="width:1px;display:inline-block;height:14px;border-radius:2px;vertical-align:middle"></span></td></tr>
+<tr><td>* (1)</td><td>8</td><td>4.5%</td><td><span class="rating-low" style="width:9px;display:inline-block;height:14px;border-radius:2px;vertical-align:middle"></span></td></tr>
+</tbody></table>
+<h3>Low-rated Cases (1-3 stars): 11</h3>
+<table><thead><tr><th>Case Id</th><th>Rating</th><th>Category</th><th>Title</th><th>Review Comment</th></tr></thead><tbody>
+<tr class="low-rating-row"><td>1292-4793</td><td>1</td><td>Gym & Fitness</td><td>treadmills down since Dec</td><td></td></tr>
+<tr class="low-rating-row"><td>1292-4791</td><td>1</td><td>Security & Access</td><td>Fire Safety Hazard Obstruction at Common Corridor</td><td></td></tr>
+<tr class="low-rating-row"><td>1292-4778</td><td>3</td><td>Security & Access</td><td>Enquiry on visitors screening</td><td>Thank you for your clarification. I appreciate that the infrastructure is being ...</td></tr>
+<tr class="low-rating-row"><td>1292-4754</td><td>3</td><td>Pest & Animals</td><td>rude security staff</td><td></td></tr>
+<tr class="low-rating-row"><td>1292-4752</td><td>1</td><td>Gym & Fitness</td><td>Gym Facilities</td><td>the reply is totally wrong and irrelevant to the feedback I have sent.</td></tr>
+<tr class="low-rating-row"><td>1292-4748</td><td>1</td><td>Parking & Traffic</td><td>carpark traffic flow safety</td><td>no discussion. I had 2 near misses this week alone</td></tr>
+<tr class="low-rating-row"><td>1292-4711</td><td>1</td><td>Parking & Traffic</td><td>Bulky Refuse - Block 55 Wheelchair Lot</td><td>Thanks [staff] - then dont close this feedback first , please keep as pending unt...</td></tr>
+<tr class="low-rating-row"><td>1292-4696</td><td>1</td><td>Waste & Recycling</td><td>bulky item at level 6 of block 47</td><td>Item is not removed yet</td></tr>
+<tr class="low-rating-row"><td>1292-4671</td><td>1</td><td>Cleanliness</td><td>“BICYCLE AREA” AT B1 BLK 55 FILTHY</td><td></td></tr>
+<tr class="low-rating-row"><td>1292-4659</td><td>1</td><td>Parking & Traffic</td><td>Motorcycle of delivery man</td><td>You guys are not doing your job!!!</td></tr>
+<tr class="low-rating-row"><td>1292-4657</td><td>2</td><td>Security & Access</td><td>Entrance door is open</td><td>To add on, we have also noticed that there are grab drivers, contractors, anyone...</td></tr>
+</tbody></table>
+</div>
+<h2>6. Action Items</h2>
+<div class="card"><p>The following action items cover all <strong>30</strong> outstanding cases.</p></div>
+<div class="action-card">
+<h3>1. Complete Pending Administrative Actions</h3>
+<p style="font-size:0.88em;color:#666">Category: <strong>Admin & General</strong> | 1 cases</p>
+<p>
+<span class="case-tag">1292-4737</span>
+</p><ul>
+<li>Amend HiLife folder names for council meeting minutes as requested.</li>
+<li>Standardize announcement naming convention across all HiLife folders.</li>
+</ul>
+<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
+<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4737</td><td>47</td><td>Blk 47</td><td>Hilife - Folder (Announcements)</td><td class="status-pending">Pending</td><td>25</td></tr>
+</tbody></table></details>
+</div>
+<div class="action-card">
+<h3>2. Complete Outstanding Building Repairs</h3>
+<p style="font-size:0.88em;color:#666">Category: <strong>Building Maintenance</strong> | 3 cases</p>
+<p>
+<span class="case-tag">1292-4798</span>
+<span class="case-tag">1292-4714</span>
+<span class="case-tag">1292-4636</span>
+</p><ul>
+<li>Schedule rust stain removal (hi-jet cleaning) as committed to resident.</li>
+<li>Investigate root cause of Blk 47 B1 lobby ceiling leak (aircon ducting) and repair plasterboard.</li>
+<li>Arrange contractor to repair damaged area map and other signage across estate.</li>
+<li>Expedite B2 carpark tile repair and buzzing noise part replacement at Blk 45.</li>
+</ul>
+<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
+<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4798</td><td>53</td><td>Blk 53</td><td>Maintenance and Security</td><td class="status-inprogress">In Progress</td><td>14</td></tr>
+<tr><td>1292-4714</td><td>47</td><td>Blk 47</td><td>Maintenance Work - Blk 47 B1 Lobby</td><td class="status-inprogress">In Progress</td><td>28</td></tr>
+<tr><td>1292-4636</td><td>47</td><td>Blk 47</td><td>previously reported - leaking and mouldy ceiling</td><td class="status-inprogress">In Progress</td><td>39</td></tr>
+</tbody></table></details>
+</div>
+<div class="action-card">
+<h3>3. Improve Estate Cleanliness Standards</h3>
+<p style="font-size:0.88em;color:#666">Category: <strong>Cleanliness</strong> | 2 cases</p>
+<p>
+<span class="case-tag">1292-4731</span>
+<span class="case-tag">1292-4670</span>
+</p><ul>
+<li>Conduct audit of cleaning contractor performance across all blocks.</li>
+<li>Ensure cleaning team addresses specific areas highlighted in outstanding feedback.</li>
+</ul>
+<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
+<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4731</td><td>53</td><td>Blk 53</td><td>Rust stain left by signage</td><td class="status-inprogress">In Progress</td><td>25</td></tr>
+<tr><td>1292-4670</td><td>53</td><td>Blk 53</td><td>dirty sign board</td><td class="status-inprogress">In Progress</td><td>33</td></tr>
+</tbody></table></details>
+</div>
+<div class="action-card">
+<h3>4. Repair and Maintain Common Facilities</h3>
+<p style="font-size:0.88em;color:#666">Category: <strong>Facilities</strong> | 3 cases</p>
+<p>
+<span class="case-tag">1292-4812</span>
+<span class="case-tag">1292-4801</span>
+<span class="case-tag">1292-4701</span>
+</p><ul>
+<li>Arrange pool vendor to address algae/water quality issue at Terrace House swimming pool urgently.</li>
+<li>Secure security guard attention on pavilion over-time usage enforcement after 10pm.</li>
+</ul>
+<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
+<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4812</td><td>47</td><td>Blk 47</td><td>Family Pool - Life Bouy has been removed.</td><td class="status-pending">Pending</td><td>12</td></tr>
+<tr><td>1292-4801</td><td>53</td><td>Blk 53</td><td>Pavilion</td><td class="status-inprogress">In Progress</td><td>13</td></tr>
+<tr><td>1292-4701</td><td>TH</td><td>Terrace House</td><td>Swimming pool (Terrace House) maintenance</td><td class="status-inprogress">In Progress</td><td>29</td></tr>
+</tbody></table></details>
+</div>
+<div class="action-card">
+<h3>5. Expedite Treadmill Replacement and Gym Equipment Maintenance</h3>
+<p style="font-size:0.88em;color:#666">Category: <strong>Gym & Fitness</strong> | 6 cases</p>
+<p>
+<span class="case-tag">1292-4718</span>
+<span class="case-tag">1292-4708</span>
+<span class="case-tag">1292-4688</span>
+<span class="case-tag">1292-4683</span>
+<span class="case-tag">1292-4680</span>
+<span class="case-tag">1292-4655</span>
+</p><ul>
+<li>Confirm delivery date for new treadmills with the supplier and communicate a firm timeline to affected residents.</li>
+<li>Publish an estate-wide notice on HiLife with the expected completion date (target: 3rd-4th week of April 2026).</li>
+<li>Evaluate whether temporary additional equipment (e.g. stationary bikes) can be deployed in the interim.</li>
+</ul>
+<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
+<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4718</td><td>47</td><td>Blk 47</td><td>spoilt treadmill</td><td class="status-inprogress">In Progress</td><td>27</td></tr>
+<tr><td>1292-4708</td><td>49</td><td>Blk 49</td><td>Treadmill spoil</td><td class="status-inprogress">In Progress</td><td>28</td></tr>
+<tr><td>1292-4688</td><td>55</td><td>Blk 55</td><td>Treadmills Unfixed for Months</td><td class="status-inprogress">In Progress</td><td>32</td></tr>
+<tr><td>1292-4683</td><td>59</td><td>Blk 59</td><td>GYM room</td><td class="status-inprogress">In Progress</td><td>32</td></tr>
+<tr><td>1292-4680</td><td>47</td><td>Blk 47</td><td>Complaint Regarding Unusable Treadmills and Insuff</td><td class="status-inprogress">In Progress</td><td>33</td></tr>
+<tr><td>1292-4655</td><td>47</td><td>Blk 47</td><td>three treadmill down again</td><td class="status-inprogress">In Progress</td><td>36</td></tr>
+</tbody></table></details>
+</div>
+<div class="action-card">
+<h3>6. Resolve Lift Door Safety Issues</h3>
+<p style="font-size:0.88em;color:#666">Category: <strong>Lifts</strong> | 2 cases</p>
+<p>
+<span class="case-tag">1292-4664</span>
+<span class="case-tag">1292-4652</span>
+</p><ul>
+<li>Follow up with KONE on the Blk 53 PL9 lift door fault -- confirm repair completion.</li>
+<li>Follow up with KONE on Blk 49 FL3 loose handle -- schedule tightening or replacement.</li>
+<li>Verify post-repair status of Blk 45 PL2 motor bearing replacement.</li>
+</ul>
+<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
+<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4664</td><td>53</td><td>Blk 53</td><td>pl9 lift at block 53</td><td class="status-inprogress">In Progress</td><td>35</td></tr>
+<tr><td>1292-4652</td><td>49</td><td>Blk 49</td><td>BLK 49 Lift FL3 Handle damaged</td><td class="status-inprogress">In Progress</td><td>37</td></tr>
+</tbody></table></details>
+</div>
+<div class="action-card">
+<h3>7. Address Persistent Noise and Nuisance Complaints</h3>
+<p style="font-size:0.88em;color:#666">Category: <strong>Noise & Neighbour</strong> | 4 cases</p>
+<p>
+<span class="case-tag">1292-4732</span>
+<span class="case-tag">1292-4715</span>
+<span class="case-tag">1292-4684</span>
+<span class="case-tag">1292-4682</span>
+</p><ul>
+<li>Send formal advisory letters to identified units causing repeated disturbance (cooking smell, singing, knocking).</li>
+<li>Increase security patrol frequency during quiet hours (10pm-7am) at affected blocks.</li>
+<li>Draft and issue estate-wide circular reminding residents of quiet hour by-laws.</li>
+</ul>
+<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
+<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4732</td><td>45</td><td>Blk 45</td><td>heavy Indian food cooking</td><td class="status-inprogress">In Progress</td><td>25</td></tr>
+<tr><td>1292-4715</td><td>47</td><td>Blk 47</td><td>Outdoor Pavillions</td><td class="status-inprogress">In Progress</td><td>28</td></tr>
+<tr><td>1292-4684</td><td>61</td><td>Blk 61</td><td>Noise Complain</td><td class="status-inprogress">In Progress</td><td>32</td></tr>
+<tr><td>1292-4682</td><td>53</td><td>Blk 53</td><td>Block 53 #XX-XX</td><td class="status-inprogress">In Progress</td><td>32</td></tr>
+</tbody></table></details>
+</div>
+<div class="action-card">
+<h3>8. Enforce Parking Regulations and Traffic Safety</h3>
+<p style="font-size:0.88em;color:#666">Category: <strong>Parking & Traffic</strong> | 2 cases</p>
+<p>
+<span class="case-tag">1292-4646</span>
+<span class="case-tag">1292-4643</span>
+</p><ul>
+<li>Complete LPR system commissioning to improve vehicle tracking and enforcement.</li>
+<li>Step up patrols targeting motorcycle illegal parking and visitor lot abuse.</li>
+</ul>
+<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
+<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4646</td><td>61</td><td>Blk 61</td><td>Stolen bicyle seats at Blk 61 B1 bicycle park</td><td class="status-inprogress">In Progress</td><td>37</td></tr>
+<tr><td>1292-4643</td><td>45</td><td>Blk 45</td><td>B2 carpark lobby 45</td><td class="status-inprogress">In Progress</td><td>38</td></tr>
+</tbody></table></details>
+</div>
+<div class="action-card">
+<h3>9. Address Outstanding Pest & Animals Issues</h3>
+<p style="font-size:0.88em;color:#666">Category: <strong>Pest & Animals</strong> | 1 cases</p>
+<p>
+<span class="case-tag">1292-4811</span>
+</p><ul>
+<li>Review and resolve all 1 pending pest & animals cases.</li>
+<li>Assign responsible staff and set target resolution dates.</li>
+<li>Communicate progress updates to affected residents.</li>
+</ul>
+<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
+<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4811</td><td>47</td><td>Blk 47</td><td>Stray Cats in Estate</td><td class="status-pending">Pending</td><td>12</td></tr>
+</tbody></table></details>
+</div>
+<div class="action-card">
+<h3>10. Strengthen Access Control and Security Response</h3>
+<p style="font-size:0.88em;color:#666">Category: <strong>Security & Access</strong> | 6 cases</p>
+<p>
+<span class="case-tag">1292-4786</span>
+<span class="case-tag">1292-4784</span>
+<span class="case-tag">1292-4693</span>
+<span class="case-tag">1292-4691</span>
+<span class="case-tag">1292-4644</span>
+<span class="case-tag">1292-4639</span>
+</p><ul>
+<li>Investigate door mechanism at Blk 55 Level 1 -- arrange for technician to check stopper and magnetic latch.</li>
+<li>Conduct immediate review of CCTV coverage at Blk 61 B1 bicycle parking area to support stolen property cases.</li>
+<li>Brief security contractor on protocol for monitoring doors and challenging roller-blading in corridors.</li>
+<li>Engage parents of children roller-blading at Blk 45 corridor as committed in prior responses.</li>
+</ul>
+<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
+<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
+<tr><td>1292-4786</td><td>45</td><td>Blk 45</td><td>Children roller blading outside corridor</td><td class="status-inprogress">In Progress</td><td>17</td></tr>
+<tr><td>1292-4784</td><td>45</td><td>Blk 45</td><td>Children roller blading outside corridor</td><td class="status-inprogress">In Progress</td><td>17</td></tr>
+<tr><td>1292-4693</td><td>55</td><td>Blk 55</td><td>Blk 55 level 1 lift lobby</td><td class="status-inprogress">In Progress</td><td>31</td></tr>
+<tr><td>1292-4691</td><td>55</td><td>Blk 55</td><td>Blk 55 door level 1 is open all the time</td><td class="status-inprogress">In Progress</td><td>31</td></tr>
+<tr><td>1292-4644</td><td>61</td><td>Blk 61</td><td>Stolen bicycle seat at Blk 61 B1 bicycle park area</td><td class="status-inprogress">In Progress</td><td>38</td></tr>
+<tr><td>1292-4639</td><td>53</td><td>Blk 53</td><td>Damaged area map</td><td class="status-inprogress">In Progress</td><td>38</td></tr>
+</tbody></table></details>
+</div>
+<p style="margin-top:30px;font-size:0.85em;color:#999;text-align:center"></p>
+
+<script>
+function toggleGroup(id) {
+  var el = document.getElementById('group_' + id);
+  var arrow = document.getElementById('arrow_' + id);
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    arrow.innerHTML = '&#9660;';
+  } else {
+    el.classList.add('open');
+    arrow.innerHTML = '&#9650;';
+  }
+}
+</script>
+</div>
+
+</body>
+</html>
