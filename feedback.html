@@ -137,6 +137,20 @@
   .case-expand summary:hover { text-decoration: underline; }
   .case-content { margin-top: 8px; padding: 10px; background: var(--color-bg); border-radius: 4px; font-size: 12px; line-height: 1.5; }
   .case-content p { margin-bottom: 6px; }
+  .sub-cluster-detail {
+    margin: 4px 0 4px 12px; border-left: 3px solid var(--color-border);
+  }
+  .sub-cluster-detail summary {
+    cursor: pointer; padding: 8px 14px; font-size: 13px; font-weight: 600;
+    color: var(--color-primary); background: var(--color-primary-light);
+    border-radius: 4px; margin-bottom: 2px;
+    list-style: none;
+  }
+  .sub-cluster-detail summary::-webkit-details-marker { display: none; }
+  .sub-cluster-detail summary::before { content: "\25B6 "; font-size: 0.7em; margin-right: 6px; transition: transform 0.2s; display: inline-block; }
+  .sub-cluster-detail[open] summary::before { transform: rotate(90deg); }
+  .sub-cluster-detail summary:hover { background: var(--color-border-light); }
+  .sub-cluster-detail .cluster-cases-table { margin: 8px 0 8px 0; }
   .sub-cluster-header td {
     background: var(--color-primary-light); font-weight: 600; font-size: 13px;
     color: var(--color-primary); padding: 8px 12px; border-top: 2px solid var(--color-border);
@@ -586,8 +600,9 @@ function toggleSection(id) {
 <details class="cluster-detail">
 <summary>Noise &amp; Neighbour (190 cases) -- (MA - Ocean IFM)</summary>
 <p class="cluster-desc">Noise complaints, smoking on balconies, loud music/parties, Airbnb, cooking smell, littering from above, cigarette butts.</p>
+<details class="sub-cluster-detail">
+<summary>Smoking (68 cases)</summary>
 <table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
-<tr class="sub-cluster-header"><td colspan="5">Smoking (68 cases)</td></tr>
 <tr><td>1292-4780</td><td>2026-03-25</td><td>Blk 49</td><td><details class="case-expand"><summary>Smoking at balcony</summary><div class="case-content"><p><strong>Description:</strong> Hi, there are neighbors who smoke at their balcony. Would appreciate MCST to send an reminder via this platform for reminder or place a note on every level</p><p><strong>MA Reply:</strong> [26 Mar 2026] Dear Ms SA, 
 
 Thank you for your feedback. May we know if there is any specific unit that you suspect is smoking? 
@@ -1142,7 +1157,11 @@ Any enquires do drop us feedback.</p></div></details></td><td>Closed</td></tr>
 <tr><td>1292-2982</td><td>2025-04-02</td><td>Blk 59</td><td><details class="case-expand"><summary>Smoking in the staircase</summary><div class="case-content"><p><strong>Description:</strong> In Normanton block 59, I saw people smoking on the staircases at level 7 and level 12. Can find ash and cigarette butt.</p><p><strong>MA Reply:</strong> [03 Apr 2025] Thank you for the feedback.
 We noted on this matter.
 No smoking sign will be pasted at the staircase to remind the resident of the level Meanwhile, we have informed the cleaner to clean the affected area.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Noise Disturbance (64 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Noise Disturbance (64 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4799</td><td>2026-03-29</td><td>Blk 61</td><td><details class="case-expand"><summary>Escalation of Ongoing Noise Disturbance</summary><div class="case-content"><p><strong>Description:</strong> As I previously reported (Case ID: [phone]), I have been experiencing persistent noise disturbances for over a month. The issue involves furniture-dragging noises lasting several minutes to up to half an hour, occurring almost every night around or after midnight.
 
 I initially suspected that the noise originated from Unit #61 21-80. However, after contacting them, they informed me that they were not the source and that they had heard the same noise at the same time. They believe the noise may be coming from an upper-level unit. I am now completely unsure of the source of the noise, but the disturbance consistently occurs during quiet hours and is significantly disrupting our rest.
@@ -1716,7 +1735,11 @@ Thank you for your help.</p><p><strong>MA Reply:</strong> [05 Apr 2025] Dear Vla
 Nevertheless, we have instructed security to keep an ear on the situation and take a more proactive approach to stop any such singing after 10pm to prevent any other disturbances.
 
 On your end, we urge you to call security at [phone] (24 hours) should you hear the noise again. As no further action is necessary, we will close this feedback accordingly. Wishing you a pleasant day ahead.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Other Neighbour Issues (37 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Other Neighbour Issues (37 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4786</td><td>2026-03-26</td><td>Blk 45</td><td><details class="case-expand"><summary>Children roller blading outside corridor</summary><div class="case-content"><p><strong>Description:</strong> Refer to attached photo with regards to earlier feedback</p><p><strong>MA Reply:</strong> [27 Mar 2026] Dear Ms Jane, 
 
 Thank you for your feedback.
@@ -1984,7 +2007,11 @@ Additionally, we will be issuing a general reminder to all residents regarding p
 We appreciate your patience and cooperation as we work towards a resolution. Please do not hesitate to reach out if you have any further concerns.</p></div></details></td><td>Closed</td></tr>
 <tr><td>1292-3003</td><td>2025-04-06</td><td>Blk 51</td><td><details class="case-expand"><summary>inconsiderate neighbor</summary><div class="case-content"><p><strong>Description:</strong> 21-34 - FYA do something about it please</p><p><strong>MA Reply:</strong> [07 Apr 2025] Thank you for the feedback.
 We noted and will advise the resident regarding this matter.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">High-Rise Littering (19 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>High-Rise Littering (19 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4741</td><td>2026-03-19</td><td>Blk 51</td><td><details class="case-expand"><summary>high rise littering</summary><div class="case-content"><p><strong>Description:</strong> saw the notice on high rise littering. I stay at 11-29, and always witness tissues, plastics being thrown from above my floor. there&#x27;s even bunch of brown dog hair thrown and landed on my balcony.</p><p><strong>MA Reply:</strong> [20 Mar 2026] Dear Mr Dave Liang,
 
 Thank you for your feedback. Let&#x27;s hope with this notice they will be more considerate and mindful in the future.
@@ -2123,7 +2150,11 @@ Thanks again.
 <tr><td>1292-3032</td><td>2025-04-11</td><td>Blk 59</td><td><details class="case-expand"><summary>another throwing</summary><div class="case-content"><p><strong>Description:</strong> Blk 59 in 5 hours…</p><p><strong>MA Reply:</strong> [11 Apr 2025] Dear Jessica, thanks for the feedback. We will get the security to look out for this item during their routine patrolling.
 
 Thanks again.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Airbnb / Short Stay (1 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Airbnb / Short Stay (1 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4723</td><td>2026-03-17</td><td>Blk 45</td><td><details class="case-expand"><summary>11-03 Airbnb</summary><div class="case-content"><p><strong>Description:</strong> Hi I have noticed every few weeks there are different people staying in unit 11-03 as it has been posted as Airbnb. this is illegal and not allowed. What action are going to take?</p><p><strong>MA Reply:</strong> [17 Mar 2026] Thank you for your feedback. We understand that different people have been staying in Unit 11-03 every few weeks. Please note that Airbnb is not allowed, and we take this matter very seriously.
 
 Could you please share the link with us so that we can report this unit to the relevant authorities?
@@ -2131,7 +2162,11 @@ Best Regards - Joanne
 ---
 [18 Mar 2026] For this unit, they have checked that the tenant has a valid tenancy agreement.
 Thank you</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Cooking Smell (1 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Cooking Smell (1 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-3877</td><td>2025-10-06</td><td>Blk 57</td><td><details class="case-expand"><summary>Cooking Smell from Unit [unit] After 9:00pm</summary><div class="case-content"><p><strong>Description:</strong> Dear MCST Team,
 
 I hope this message finds you well.
@@ -2149,11 +2184,13 @@ We understand how unpleasant and disruptive strong cooking odors can be, especia
 We will be reaching out to the residents of unit [unit] to kindly advise them to keep their kitchen windows and balcony doors closed while cooking, particularly during the late evening hours, to help minimize the spread of odors to neighboring units.</p></div></details></td><td>Closed</td></tr>
 </tbody></table>
 </details>
+</details>
 <details class="cluster-detail">
 <summary>Cleanliness (175 cases) -- ABM Century Pte Ltd</summary>
 <p class="cluster-desc">Dirty corridors, lobbies, lifts, common areas. Cleaning frequency and quality concerns.</p>
+<details class="sub-cluster-detail">
+<summary>Other Cleanliness (85 cases)</summary>
 <table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
-<tr class="sub-cluster-header"><td colspan="5">Other Cleanliness (85 cases)</td></tr>
 <tr><td>1292-4750</td><td>2026-03-20</td><td>Blk 59</td><td><details class="case-expand"><summary>[phone]</summary><div class="case-content"><p><strong>Description:</strong> <em>No description</em></p><p><strong>MA Reply:</strong> [25 Mar 2026] Dear Mr Kelvin, 
 
 Thank you for your feedback regarding the placement of the rubbish and recycling bins at Blk 59 B1.
@@ -2561,7 +2598,11 @@ After which they are schedule to clean the from level 24 down to level 2
 We are working closely with the cleaning company to find ways to improve the upkeep of our estate. If you have any concerns or feedback, please feel free to reach out to us.
 
 Thank you for your cooperation.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Dirty Corridor / Lobby (63 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Dirty Corridor / Lobby (63 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4730</td><td>2026-03-18</td><td>Blk 61</td><td><details class="case-expand"><summary>spillage along corridor</summary><div class="case-content"><p><strong>Description:</strong> block 61, level 16. some one spilled sauce while throwing rubbish.</p><p><strong>MA Reply:</strong> [18 Mar 2026] Dear Sir/Mdm, 
 Thank you for your feedback. We have informed our cleaner to clean the affected area.
 Best Regards, 
@@ -2917,7 +2958,11 @@ Thanks again.</p></div></details></td><td>Closed</td></tr>
 <tr><td>1292-2978</td><td>2025-04-02</td><td>Blk 59</td><td><details class="case-expand"><summary>4 Days since corridor has been cleaned</summary><div class="case-content"><p><strong>Description:</strong> Hi, can I check how frequenct is the corridor cleaned? Have been like this for 4 days</p><p><strong>MA Reply:</strong> [02 Apr 2025] Thank for the feedback.
 We have noted on this and informed to block cleaner to clean the area.
 Sorry for any inconvenience.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Dirty Lift (17 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Dirty Lift (17 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4674</td><td>2026-03-10</td><td>Blk 49</td><td><details class="case-expand"><summary>Mirror in the lift</summary><div class="case-content"><p><strong>Description:</strong> May we clarify if the mirror in all the lifts are clean daily? It was at the same spot for more than a week for all lift</p><p><strong>MA Reply:</strong> [11 Mar 2026] Hi Ms SA, thanks for the feedback. The is a stainless-steel metal mirror and not the normal glass mirror and the cleaner wipe it every day. It seems that this is a stubborn stain which is unable to remove it, so we have contacted the lift service provider KONE, to assess whether additional polishing or rectification works are required.
 
 We appreciate your feedback and patience while we address this matter
@@ -3013,7 +3058,11 @@ Thanks again.</p></div></details></td><td>Closed</td></tr>
 <tr><td>1292-2986</td><td>2025-04-02</td><td>Blk 57</td><td><details class="case-expand"><summary>Smelly lift</summary><div class="case-content"><p><strong>Description:</strong> this lady is taking the rubbish and took the passenger lift resulted the whole lift very smelly.  please communicate with the cleaner to conceal the rubbish bag and take the fire lift to clear the rubbish. it has happened many times and the lift are very smelly. please be considerate and conceal the rubbish bag</p><p><strong>MA Reply:</strong> [03 Apr 2025] Thank you for the feedback.
 We have spoken to the cleaner they will conceal and tied the trash bag in the future cleaning process and take the fire man lifts.
 Sorry for any inconvenience causes</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Dirty Common Area (10 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Dirty Common Area (10 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4568</td><td>2026-02-20</td><td>Blk 57</td><td><details class="case-expand"><summary>Feedback Regarding Cleaning Staff Behavior at 57</summary><div class="case-content"><p><strong>Description:</strong> Dear Normanton Park Management Team, ​I am writing to raise an ongoing issue regarding the behavior of a member of the cleaning staff (older chinese lady) who is frequently stationed at the ground floor public area of my block (block 57). On multiple occasions, this staff member has made unprovoked, negative comments whenever I walk my dog past the area. Please note that my is always kept under strict control, and has never once approached or touched this individual. It is highly disappointing to be made to feel unwelcome in the common areas of my own residence. If this staff member is uncomfortable around pets, sitting in a shared public space where residents routinely walk their dogs is not appropriate. Her ongoing commentary is uncalled for and is becoming a nuisance to residents who are simply trying to enjoy the estate in peace. I would appreciate it if management could speak with the cleaning contractor or the individual directly to remind them of the expected professional conduct while on the premises, ensuring a respectful environment for all residents. ​Thank you for your prompt attention to this matter.</p><p><strong>MA Reply:</strong> [21 Feb 2026] Dear Fel,
 
 We refer to your feedback regarding the above subject matter with thanks.
@@ -3066,6 +3115,7 @@ Thanks again.</p></div></details></td><td>Closed</td></tr>
 
 Thanks again.</p></div></details></td><td>Closed</td></tr>
 </tbody></table>
+</details>
 </details>
 <details class="cluster-detail">
 <summary>Admin &amp; General (151 cases) -- (MA - Ocean IFM)</summary>
@@ -4973,8 +5023,9 @@ Thanks again.</p></div></details></td><td>Closed</td></tr>
 <details class="cluster-detail">
 <summary>Security &amp; Access (148 cases) -- Omega Security Services</summary>
 <p class="cluster-desc">Security guard conduct, gate/door access issues, unauthorized entry, lost access cards, CCTV requests.</p>
+<details class="sub-cluster-detail">
+<summary>Other Security (58 cases)</summary>
 <table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
-<tr class="sub-cluster-header"><td colspan="5">Other Security (58 cases)</td></tr>
 <tr><td>1292-4802</td><td>2026-03-30</td><td>Blk 53</td><td><details class="case-expand"><summary>Security</summary><div class="case-content"><p><strong>Description:</strong> please check did security allowed for this? photo taken at 2:40am</p><p><strong>MA Reply:</strong> [02 Apr 2026] Similar as earlier message (with photos)  We will use only the earlier feedback.
 
 Desmond</p></div></details></td><td>Closed</td></tr>
@@ -5383,7 +5434,11 @@ Thank you for your kind attention. As no further action is required from you, we
 <tr><td>1292-2972</td><td>2025-04-01</td><td>Blk 53</td><td><details class="case-expand"><summary>Couple stuffing junk mail</summary><div class="case-content"><p><strong>Description:</strong> please tell security to stop these two.</p><p><strong>MA Reply:</strong> [01 Apr 2025] Dear Darick, thank you for your feedback. We note this matter at hand and have forwarded it to the security team(both day and night shifts). We have advised security to keep a look out for such incidents and advised these people to stop flyer distribution and leave our premises if they are not lawfully visiting any unit.
 
 Rest assured that the security of our estate is one of our greatest concerns and we take such matters seriously. Thank you for your attention. As no further action is required from your end, we will be closing this feedback accordingly. Wishing you a pleasant day ahead.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Gate &amp; Door Access (53 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Gate &amp; Door Access (53 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4789</td><td>2026-03-26</td><td>Blk 49</td><td><details class="case-expand"><summary>gate at AYE bus stop</summary><div class="case-content"><p><strong>Description:</strong> it does not lock when closed. I think it’s been a week or so now. has anyone reported? is there a way security or MA can monitor these access points and ensure such faults are attended to and rectified quickly?</p><p><strong>MA Reply:</strong> [30 Mar 2026] Dear Ms Vera, 
 
 Thank you for your feedback. Our technician has checked it was in working condition. 
@@ -5800,7 +5855,11 @@ Sorry for the inconvenience causes.</p></div></details></td><td>Closed</td></tr>
 <tr><td>1292-3029</td><td>2025-04-10</td><td>Blk 59</td><td><details class="case-expand"><summary>side gate faulty</summary><div class="case-content"><p><strong>Description:</strong> the side gate at the AYE bus stop is faulty and is not able to close and lock. discovered the issue on 10 Apr at 5.55pm.</p><p><strong>MA Reply:</strong> [11 Apr 2025] Thank you for the feedback.
 Our maintenance team has rectified the issue.
 Enclosed is the photo of the completed.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Access Cards (17 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Access Cards (17 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4778</td><td>2026-03-25</td><td>Blk 47</td><td><details class="case-expand"><summary>Enquiry on visitors screening</summary><div class="case-content"><p><strong>Description:</strong> Hi MA. Could you please share the current measures to ensure only residents or residents’ intended visitors are allowed to enter the facilities? Especially during peak hour at the dropoff. From what i observe, any random person can enter via grab to use our facilities. There is no record of who is entering or checking of access card to see if they are residents.</p><p><strong>MA Reply:</strong> [25 Mar 2026] Dear Jooo,
 
 Thank you for your feedback and for bringing this matter to our attention.
@@ -5870,7 +5929,11 @@ The issue may have occurred due to the card being demagnetized or exposed to a m
 Please visit the Management Office for assistance. Thank you.</p></div></details></td><td>Closed</td></tr>
 <tr><td>1292-3379</td><td>2025-06-19</td><td>Blk 49</td><td><details class="case-expand"><summary>suspension of access cards</summary><div class="case-content"><p><strong>Description:</strong> is there a way to suspend all my cards?</p><p><strong>MA Reply:</strong> [20 Jun 2025] Hi Chris, we will close this case since you have found the access card. Take care</p></div></details></td><td>Closed</td></tr>
 <tr><td>1292-3365</td><td>2025-06-15</td><td>Blk 59</td><td><details class="case-expand"><summary>apply additional access card</summary><div class="case-content"><p><strong>Description:</strong> Hi, please advise how do I apply and pay for additional access card, thank you.</p><p><strong>MA Reply:</strong> [16 Jun 2025] Hi Jimmy, I have email regarding the additional access card appication.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Security Guard (12 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Security Guard (12 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4754</td><td>2026-03-22</td><td>Blk 45</td><td><details class="case-expand"><summary>rude security staff</summary><div class="case-content"><p><strong>Description:</strong> I happened to bring my two puppies  down for a short walk and forgot to bring my poop bags and water down which I usually did. hence when my puppies pooped unexpectedly as they usually don’t outside, i had to turn away from the poop to look for leaves to help clear the poop. but your security guard who was at the side monitoring me with an unfriendly expression saw me struggling with the two dogs who bring puppies were trying to go other ways, and she said this “ then u leave it like this?”, referring to the poop. but I wasn’t leaving it like this, based on bodily structure I had to leave the poop to take the leaves and was struggling with two dogs at the same time. her tone was accusatory and uncalled for. she could have been more helpful and understanding to clarify my intention before just shooting out words like this and accusing people of things which may not be their intention. the security is here to help keep order with the end aim of creating a safe environment to live in. but how safe is it when we have to dismay at meeting such security guards when just walking out of our house to enjoy the estate? is there a better way the guard could have communicate that may result in a better outcome? I explained to her I was going to look for leaves to clear the poop, and can she be kinder and more understanding before just accusing? I asked her what’s her name and she mumbled something unclear (why are u afraid to say clearly when you were clearly accusing people of doing things just a few moments ago)? and she continue to say why? I’m just doing my job. very unkind  and one day u will know how it feels to be treated the same. please educate your security to moderate their behaviour and don’t behave as if they own the entire place. thank you.</p><p><strong>MA Reply:</strong> [24 Mar 2026] Dear Ms Victoria, 
 
 Thank you for bringing this matter to our attention.
@@ -5918,7 +5981,11 @@ We hope this explains why security may register taxis when they are found at the
 <tr><td>1292-2999</td><td>2025-04-05</td><td>Blk 59</td><td><details class="case-expand"><summary>extremly rude security</summary><div class="case-content"><p><strong>Description:</strong> we have repetedly asked security to please respect our play time when we are paying tennis and to not ask for a signiture while playing. they continue to interrupt our play time every single time and behave increadibly rudely and condecendingly when we are asking respectfuly for a favor. we pay about $12 per hour to play and we want to enjoy and their interactions always leave a very bad taste. whoever the security guard at 4:45 pm in the tennis court was was extremly rude.</p><p><strong>MA Reply:</strong> [07 Apr 2025] Dear Sir/Mdm, 
 Thank you for your feedback. We have informed the security team regarding this matter and will educate them accordingly.</p></div></details></td><td>Closed</td></tr>
 <tr><td>1292-2997</td><td>2025-04-05</td><td>Blk 57</td><td><details class="case-expand"><summary>Security watching video</summary><div class="case-content"><p><strong>Description:</strong> Are Security guard on duty suspose to be watching video or talking on the phone? they should not be on their device all the time as the post should not be their rest post os soemthing.   on 5 April 230pm, i walked pass the gate and the security guard sitting there is watching a video with volumn fell blast. something must be done to to why security guard is always on their devices.</p><p><strong>MA Reply:</strong> [07 Apr 2025] Thank you for bringing this matter to our attention. We understand the importance of having attentive and focused security staff at all times. Rest assured, we will look into this issue and ensure that proper measures are taken to address the situation. Our security team will be reminded of their responsibilities and the standards expected of them during their shifts.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">CCTV &amp; Surveillance (5 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>CCTV &amp; Surveillance (5 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-3911</td><td>2025-10-14</td><td>Blk 53</td><td><details class="case-expand"><summary>Possible Attempt to Access My Apartment</summary><div class="case-content"><p><strong>Description:</strong> I am writing to report a security concern that occurred this morning, 9:15 - 9:25 AM. I cannot record the exact timing, but during that time, I heard multiple attempts on my door lock keypad — it sounded as though someone was trying to enter my apartment by testing the password, approximately 2 to 3 times, before leaving.  
 When I went to check what was happening, I also heard footsteps moving away from my door, someone might had been standing right outside. However, when I checked the door monitor immediately afterward, I did not see anyone at the corridor. Initially, I assumed it might have been a delivery, but there were no parcel or delivery notices left at my door step.
 
@@ -5967,7 +6034,11 @@ We apologize for any inconvenience caused and appreciate your understanding as w
 <tr><td>1292-3000</td><td>2025-04-05</td><td>Blk 49</td><td><details class="case-expand"><summary>Blk 49 Basement 1 lobby main door</summary><div class="case-content"><p><strong>Description:</strong> EM lock mechanism was found on the floor and now the door can&#x27;t be locked. MA can you kindly review CCTV to rule out vandalism and make police report as need. Currently, the door is free for all to enter!</p><p><strong>MA Reply:</strong> [07 Apr 2025] Our maintenance team has rectified the identified issue, and we will continue to investigate the matter further to ensure there are no ongoing concerns.
 
 We apologize for any inconvenience caused and appreciate your understanding as we work to maintain a comfortable living environment for all residents.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Stolen / Theft (3 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Stolen / Theft (3 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-3672</td><td>2025-08-24</td><td>Blk 57</td><td><details class="case-expand"><summary>Letterbox</summary><div class="case-content"><p><strong>Description:</strong> we noticed someone open our letterbox and changed the digital lock password and took away our original lock which was keep inside the letterbox. we unsure any other letters are taken. This is an serious matters. Can MCST install security camera at the letter box area, to prevent theft for the letter box</p><p><strong>MA Reply:</strong> [25 Aug 2025] Dear Peilu Tang, thank you for your feedback. Installation of CCTV cameras comes at a significant cost to the MCST and such decision will be reserved for the Management Council upon its formation after the 1st Annual General Meeting.
 
 With regards to your current situation, we recommend that you lodge a police report should you believe that foul play is involved with regards to your letterbox. We hope that we have responded amicably to your feedback. As no further response is required, we will be closing this feedback automatically. Wishing you a pleasant day ahead.</p></div></details></td><td>Closed</td></tr>
@@ -6000,11 +6071,13 @@ We will provide a more detailed update, including a proposed timeline, once we h
 Please feel free to contact us should you have further queries or suggestions.</p></div></details></td><td>Closed</td></tr>
 </tbody></table>
 </details>
+</details>
 <details class="cluster-detail">
 <summary>Building Maintenance (145 cases) -- (MA - Ocean IFM)</summary>
 <p class="cluster-desc">Wall/ceiling damage, door locks, broken signage, tile cracks, rust, paint peeling, railings.</p>
+<details class="sub-cluster-detail">
+<summary>Door &amp; Lock (60 cases)</summary>
 <table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
-<tr class="sub-cluster-header"><td colspan="5">Door &amp; Lock (60 cases)</td></tr>
 <tr><td>1292-4806</td><td>2026-03-30</td><td>Blk 51</td><td><details class="case-expand"><summary>Drawer lock</summary><div class="case-content"><p><strong>Description:</strong> Not sure if this is the right place to ask this query but the drawer lock in one of my almirah has got locked ..Is there anyway to get this opened . Iam sure that this is a common issue</p><p><strong>MA Reply:</strong> [31 Mar 2026] Dear Sir,
 
 Thank you for your feedback. 
@@ -6344,7 +6417,11 @@ We apologize for any inconvenience caused and appreciate your understanding as w
 <tr><td>1292-2993</td><td>2025-04-04</td><td>Blk 47</td><td><details class="case-expand"><summary>Block47 aircon</summary><div class="case-content"><p><strong>Description:</strong> Hi, Kindly do a check on block 47 basement lobby as I noticed the aircon has not been working for the past few days.</p><p><strong>MA Reply:</strong> [04 Apr 2025] Dear Max Zhang, thanks for the feedback. We are aware of the aircon issue and already contacted the aircon service provider. Now waiting for their schedule to come over to rectify the issue.
 
 Thanks again.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Other Maintenance (54 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Other Maintenance (54 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4785</td><td>2026-03-26</td><td>Blk 59</td><td><details class="case-expand"><summary>Ladies Shower Room 1 shower Head Faulty</summary><div class="case-content"><p><strong>Description:</strong> the ladies room shower head faulty kindly make replacement. thanks</p><p><strong>MA Reply:</strong> [27 Mar 2026] Dear Mr Belmont,
 
 Thank you for your feedback. We have informed our technical team, and they will replace the defective shower head. 
@@ -6671,7 +6748,11 @@ We sincerely apologize for any inconvenience caused and appreciate your patience
 We will rectify the fallen notice.
 sorry for any inconvenience causes.</p></div></details></td><td>Closed</td></tr>
 <tr><td>1292-2970</td><td>2025-04-01</td><td>Blk 61</td><td><details class="case-expand"><summary>[phone]</summary><div class="case-content"><p><strong>Description:</strong> every time had to feedback the same problem again and again. this issue is coming back all the time. how many time exactly you want the resident here to face the same problem all the time. this time round it’s faulty for near to a week and nothing has been fixed yet.</p><p><strong>MA Reply:</strong> [01 Apr 2025] Thank you for your feedback and patience. The main contractor is aware of the issue and has assured us that it will be properly addressed and fixed. While it may take some time to fully verify and resolve the root cause, rest assured that efforts are being made to ensure this is resolved as quickly as possible. We understand your frustration, and we appreciate your understanding as we work through this matter.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Wall &amp; Ceiling (19 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Wall &amp; Ceiling (19 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4605</td><td>2026-03-01</td><td>Blk 47</td><td><details class="case-expand"><summary>Arrival Hall CNY Decor is damaged</summary><div class="case-content"><p><strong>Description:</strong> Hi MA team, please see photo at Arrival area : The CNY ceiling decorations 春 word has came off, suggest to remove the loose parts but keep the remaining decor and lanterns hung until last day of CNY (3rd Mar). Then remove all the CNY decors on 4th Mar morning. Thanks!</p><p><strong>MA Reply:</strong> [02 Mar 2026] Hi Samantha See, thanks for the feedback. Our technician team have made good to the CNY decorations so we will maintain it until the last day of the CNY.
 
 Best regards, Shafiee</p></div></details></td><td>Closed</td></tr>
@@ -6768,7 +6849,11 @@ Thanks again.</p></div></details></td><td>In Progress</td></tr>
 We have noted your concern and have forwarded the matter to the developer for further review. We are currently awaiting their response and will update you once we receive any updates from their end.
 
 We appreciate your patience and understanding in the meantime.</p></div></details></td><td>In Progress</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Signage (12 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Signage (12 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4745</td><td>2026-03-20</td><td>Blk 59</td><td><details class="case-expand"><summary>Improve Privacy at Toilets near Function Rooms</summary><div class="case-content"><p><strong>Description:</strong> Hi Sir/Mdm, good morning. I would like to propose to install a simple partition at the entrance of each male and female toilet. This will help to greatly improve the privacy of users using the toilets. Moreover, a simple partition with a reasonable aesthetic design should not be too expensive too. Thank you.</p><p><strong>MA Reply:</strong> [20 Mar 2026] Dear Orange,
 
 Thank you for your feedback. We have also noticed that many times, the door to the toilet are left opened. We have instructed our staff (cleaner/security) to help to close the door whenever is left opened. 
@@ -6866,11 +6951,13 @@ The signages has been removed from the door.
 Any enquiries, please do drop us feedback.</p></div></details></td><td>Closed</td></tr>
 </tbody></table>
 </details>
+</details>
 <details class="cluster-detail">
 <summary>Lift Issues (139 cases) -- Kone</summary>
 <p class="cluster-desc">Lift malfunctions, unusual noises, door problems, stuck lifts, faulty buttons, out-of-service lifts.</p>
+<details class="sub-cluster-detail">
+<summary>Other Lift (56 cases)</summary>
 <table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
-<tr class="sub-cluster-header"><td colspan="5">Other Lift (56 cases)</td></tr>
 <tr><td>1292-4803</td><td>2026-03-30</td><td>Blk 47</td><td><details class="case-expand"><summary>lift</summary><div class="case-content"><p><strong>Description:</strong> how is such floor protection allowed. it is mot secure and ugly. who will be responsible if it trips anyone? must? how is this presentable too? this condo has too many loose rules.</p><p><strong>MA Reply:</strong> [01 Apr 2026] Dear Kaii, 
 
 Thank you for your feedback. 
@@ -7193,7 +7280,11 @@ Thank you for the feedback. We will follow up and fix it.
 Thank you for the feedback =)</p></div></details></td><td>Closed</td></tr>
 <tr><td>1292-3035</td><td>2025-04-11</td><td>Blk 53</td><td><details class="case-expand"><summary>Elevator license</summary><div class="case-content"><p><strong>Description:</strong> Hi the following 2 elevators’ licenses papers are damaged or not visible due to dirty cover. They have been in that condition for more than a week. Please show the licenses properly as per law. from Block 53 PL10, FL5</p><p><strong>MA Reply:</strong> [11 Apr 2025] Thank you for the feedback.
 We have replaced it with the new PTO. and have informed the cleaner to clean of the paint at the fireman lift.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Lift Malfunction (51 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Lift Malfunction (51 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4653</td><td>2026-03-06</td><td>Blk 53</td><td><details class="case-expand"><summary>issues with lift at blk 53</summary><div class="case-content"><p><strong>Description:</strong> one of the lifts in blk 53 is not working.</p><p><strong>MA Reply:</strong> [06 Mar 2026] Hi p3ngu1n, thanks for the feedback. We have assigned our security officers to check on the lift issues and so far, all the three lifts are working.
 
 Anyway, we will inform the KONE team about this matter.
@@ -7489,7 +7580,11 @@ Thanks again.</p></div></details></td><td>Closed</td></tr>
 <tr><td>1292-2991</td><td>2025-04-04</td><td>Blk 51</td><td><details class="case-expand"><summary>Blk 51 lift faulty</summary><div class="case-content"><p><strong>Description:</strong> one of the lift stuck at level 7. it’s not opening</p><p><strong>MA Reply:</strong> [04 Apr 2025] Dear Heydong, thanks for the feedback and good morning. We will inform KONE lift about this matter.
 
 Thanks again.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Lift Noise (17 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Lift Noise (17 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4729</td><td>2026-03-17</td><td>Blk 45</td><td><details class="case-expand"><summary>Urgent: Lift Noise Issue at Block 45</summary><div class="case-content"><p><strong>Description:</strong> Dear Management,
 
 I would like to bring to your attention that the lift located at Block 45 has been producing loud and disruptive noise during operation. The situation is particularly distressing during the late-night and early morning hours.
@@ -7659,7 +7754,11 @@ Thanks again.</p></div></details></td><td>Closed</td></tr>
 <tr><td>1292-3267</td><td>2025-05-23</td><td>Blk 57</td><td><details class="case-expand"><summary>lift</summary><div class="case-content"><p><strong>Description:</strong> hi MA, there is a loud scraping, scratching sound in one of the lifts at Blk 57 when it is moving. pls take a look.</p><p><strong>MA Reply:</strong> [23 May 2025] Dear Mr Izwan, thanks for the feedback. We have checked the scraping and scratching sound, and the noise is coming from FL7. We will inform the KONE team to attend on the issue.
 
 Thanks again.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Lift Door (15 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Lift Door (15 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4664</td><td>2026-03-08</td><td>Blk 53</td><td><details class="case-expand"><summary>pl9 lift at block 53</summary><div class="case-content"><p><strong>Description:</strong> hi, one week ago I logged a case on pl9 lift at block 53 and one week later today the same issue happen again. the lift door is opening itself in between floor. can you guys do another check ? thanks</p><p><strong>MA Reply:</strong> [09 Mar 2026] Dear Mindy,
 
 We refer to your feedback regarding the above subject matter with thanks.
@@ -7809,11 +7908,13 @@ We appreciate your patience and understanding, and we will continue to monitor t
 The lifts contractor has replaced the part and has rectified the issue</p></div></details></td><td>Closed</td></tr>
 </tbody></table>
 </details>
+</details>
 <details class="cluster-detail">
 <summary>Common Area Obstruction (107 cases) -- (MA - Ocean IFM)</summary>
 <p class="cluster-desc">Items left in corridors, bulky waste, furniture blocking fire exits, messy bicycle parking.</p>
+<details class="sub-cluster-detail">
+<summary>Other Obstruction (46 cases)</summary>
 <table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
-<tr class="sub-cluster-header"><td colspan="5">Other Obstruction (46 cases)</td></tr>
 <tr><td>1292-4790</td><td>2026-03-27</td><td>Blk 61</td><td><details class="case-expand"><summary>unwanted items in common area Blk 61 lvl 21</summary><div class="case-content"><p><strong>Description:</strong> hi, the management put up a notice for close to 1 month to informed on this illegal item placed in the common area. since then, no one have come forward to claim this. given that it has been almost 1 month since the notice is issued. can o suggest to clear it.</p><p><strong>MA Reply:</strong> [27 Mar 2026] Dear Mr Ong, 
 
 Thank you for your feedback.
@@ -8126,7 +8227,11 @@ Thanks again.</p></div></details></td><td>Closed</td></tr>
 <tr><td>1292-3004</td><td>2025-04-06</td><td>Blk 45</td><td><details class="case-expand"><summary>inconsiderate neighbour</summary><div class="case-content"><p><strong>Description:</strong> found this on 6 April around/after 12am midnight at blk 45 level 12. for your action to remind residents to dump their rubbish/trash in a responsible way please. Thanks</p><p><strong>MA Reply:</strong> [07 Apr 2025] Dear Ms Lina Wong, thanks for the feedback. We will the cleaners to clear the rubbish. We have already pasted the poster on the main wooden door of the rubbish bin chute as to remind all resident on the proper way of the waste management.
 
 Thanks again.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Bicycle Parking (25 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Bicycle Parking (25 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4753</td><td>2026-03-21</td><td>Blk 49</td><td><details class="case-expand"><summary>bicycle parking</summary><div class="case-content"><p><strong>Description:</strong> hi wonder whether you guys taking action on the parking matter as cny has already over and this has been more than a year issue that I have brought up.</p><p><strong>MA Reply:</strong> [25 Mar 2026] Dear Mr Eric, 
 
 Thank you for your feedback.
@@ -8288,7 +8393,11 @@ Thank you once again for your feedback =) and have a great weekend.
 [22 Apr 2025] We will close this Feeback. Any inquiry, please drop us feedback.</p></div></details></td><td>Closed</td></tr>
 <tr><td>1292-2981</td><td>2025-04-02</td><td>Blk 59</td><td><details class="case-expand"><summary>Staircase obstruction</summary><div class="case-content"><p><strong>Description:</strong> In Normanton block 59 at level 23, there is an electric bike locked within the staircase obstructing the shelter door to be closed if needed.</p><p><strong>MA Reply:</strong> [03 Apr 2025] Thank you for your feedback. 
 A Notice of Encroachment will be placed on the bicycle as a reminder to park it at the B1 car park or within the resident&#x27;s unit.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Corridor Items (22 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Corridor Items (22 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4791</td><td>2026-03-27</td><td>Blk 49</td><td><details class="case-expand"><summary>Fire Safety Hazard Obstruction at Common Corridor</summary><div class="case-content"><p><strong>Description:</strong> Hi Management,
 I would like to report a fire safety hazard at the common corridor outside unit 23-19.
 There are items/cartons that have been placed there for many days. These items appear to be positioned directly beside / in front of the fire safety cabinet area, which may obstruct emergency access or delay response during a fire incident.
@@ -8443,7 +8552,11 @@ To address this, we will be putting up a notice at the affected unit, informing 
 <tr><td>1292-3085</td><td>2025-04-19</td><td>Blk 57</td><td><details class="case-expand"><summary>refuse carton box not disposed</summary><div class="case-content"><p><strong>Description:</strong> hi, this red carton box has been left on the ground along the block 57 level 2 corridor by one of our neighbours for a week but still not disposed by the cleaner. it is obvious that it is rubbish as it is torn and only empty wrappers inside. May I know if the cleaner indeed cleans the corridor floor daily (Mon to Fri) and if he doesn&#x27;t, how often does he do it? Can we request that he dispose of such rubbish in future as it has become a common occurrence along our floor this year.</p><p><strong>MA Reply:</strong> [21 Apr 2025] Dear Ms Rachel Chew, thanks for the feedback. we will inform the cleaner to remove the rubbish immediately and sorry for any inconvenience.
 
 Thanks again.</p></div></details></td><td>Closed</td></tr>
-<tr class="sub-cluster-header"><td colspan="5">Bulky Waste (14 cases)</td></tr>
+</tbody></table>
+</details>
+<details class="sub-cluster-detail">
+<summary>Bulky Waste (14 cases)</summary>
+<table class="cluster-cases-table"><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
 <tr><td>1292-4761</td><td>2026-03-22</td><td>Blk 47</td><td><details class="case-expand"><summary>Bulky Waste - Blk 55</summary><div class="case-content"><p><strong>Description:</strong> Dear MA Team, photo is taken on Sun about 8.20pm as you may note the bulky waste being disposed outside the Bin - Materials are mainly paper &amp; cardboards &amp; odd size styrofoam boxes. Please retrieve from CCTV lift records to trace the irresponsible owner if we could , and issue a warning letter to him/her for common area littering , inform them also of the violation , what kind of hazards and risks that comes with dumping. Also we already have sufficient photo evidences for Blk 55 resident dumpsters behaviour - will we be able to combine all the previous photos gathered and put up on continuous reminder of how and where to dispose their trash , post on the ground floor notice board + announce on hilife? Thanks</p><p><strong>MA Reply:</strong> [26 Mar 2026] Dear Samantha,
 
 Thank you for your feedback and for bringing this matter to our attention.
@@ -8547,6 +8660,7 @@ We understand your concerns regarding the mattress obstructing the corridor and 
 
 We appreciate your vigilance in helping to maintain a safe and pleasant living environment. Should you encounter any similar issues in the future, please do not hesitate to contact us.</p></div></details></td><td>Closed</td></tr>
 </tbody></table>
+</details>
 </details>
 <details class="cluster-detail">
 <summary>Parking &amp; Traffic (89 cases) -- (MA - Ocean IFM)</summary>
