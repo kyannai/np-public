@@ -3,819 +3,1707 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Normanton Park -- Feedback Analysis Report (March 2026)</title>
+<title>Normanton Park -- 12-Month Feedback Analysis (Apr 2025 - Mar 2026)</title>
 <style>
-
   :root {
-    --color-bg: #f8f9fa;
-    --color-white: #ffffff;
-    --color-text: #2c3e50;
-    --color-text-light: #5a6c7d;
     --color-primary: #2c5282;
-    --color-primary-light: #ebf4ff;
-    --color-border: #d1d9e0;
-    --color-border-light: #e8ecf0;
+    --color-primary-light: #ebf0f7;
+    --color-primary-dark: #1a365d;
     --color-green: #276749;
-    --color-green-bg: #c6f6d5;
-    --color-green-border: #9ae6b4;
-    --color-yellow: #975a16;
-    --color-yellow-bg: #fefcbf;
-    --color-yellow-border: #f6e05e;
     --color-red: #9b2c2c;
-    --color-red-bg: #fed7d7;
-    --color-red-border: #fc8181;
-    --color-sidebar-width: 280px;
+    --color-yellow: #975a16;
+    --color-bg: #f7f8fc;
+    --color-card: #ffffff;
+    --color-text: #2d3748;
+    --color-muted: #718096;
+    --sidebar-width: 240px;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     color: var(--color-text); background: var(--color-bg); line-height: 1.6;
-    font-size: 15px;
   }
-
+  /* Sidebar */
   .sidebar {
-    position: fixed; top: 0; left: 0; height: 100vh; width: 240px;
-    background: var(--color-white); border-right: 1px solid var(--color-border);
-    padding: 24px 0; overflow-y: auto; z-index: 100;
+    position: fixed; top: 0; left: 0; width: var(--sidebar-width); height: 100vh;
+    background: var(--color-primary-dark); color: #e2e8f0; overflow-y: auto;
+    padding: 20px 0; z-index: 100;
   }
-  .sidebar h3 {
-    font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;
-    color: var(--color-primary); margin: 0 0 12px; padding: 0 20px; font-weight: 700;
+  .sidebar h2 {
+    color: #fff; font-size: 1em; padding: 0 16px; margin-bottom: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 12px;
   }
-  .sidebar nav a {
-    color: var(--color-text-light); font-size: 13px; display: block;
-    padding: 7px 20px; border-left: 3px solid transparent;
-    transition: all 0.15s ease; text-decoration: none;
+  .sidebar a {
+    display: block; padding: 7px 16px; color: #cbd5e0; text-decoration: none;
+    font-size: 0.84em; transition: background 0.15s;
   }
-  .sidebar nav a:hover {
-    background: var(--color-primary-light); color: var(--color-primary);
-    border-left-color: var(--color-primary); text-decoration: none;
+  .sidebar a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  .sidebar .nav-group { margin-bottom: 12px; }
+  .sidebar .nav-label {
+    font-size: 0.72em; text-transform: uppercase; letter-spacing: 0.06em;
+    color: #a0aec0; padding: 8px 16px 3px; font-weight: 600;
   }
-  .main {
-    margin-left: 240px; max-width: 1200px; padding: 40px 48px 80px;
-  }
-
-  h1 {
-    font-size: 28px; color: var(--color-primary); margin-bottom: 8px;
-    font-weight: 700;
-  }
+  /* Main content */
+  .main { margin-left: var(--sidebar-width); max-width: 1200px; padding: 24px 32px 60px; }
+  h1 { font-size: 1.7em; color: var(--color-primary-dark); margin-bottom: 4px; }
   h2 {
-    font-size: 22px; color: var(--color-primary); margin: 40px 0 16px;
-    border-bottom: 2px solid var(--color-primary); padding-bottom: 8px;
-    font-weight: 700;
+    font-size: 1.3em; color: var(--color-primary); margin: 36px 0 14px;
+    border-bottom: 2px solid #c5cfe0; padding-bottom: 6px;
   }
-  h3 {
-    font-size: 17px; color: var(--color-text); margin: 24px 0 12px;
-    font-weight: 600;
-  }
-
-  .subtitle {
-    color: var(--color-text-light); font-size: 13px; margin-bottom: 24px;
-    padding-bottom: 24px; border-bottom: 2px solid var(--color-primary);
-  }
-
+  h3 { font-size: 1.05em; color: #37474f; margin: 16px 0 8px; }
+  .subtitle { color: var(--color-muted); font-size: 0.92em; margin-bottom: 20px; }
   .card {
-    background: var(--color-white); border-radius: 8px; padding: 20px;
-    margin-bottom: 20px; border: 1px solid var(--color-border);
+    background: var(--color-card); border-radius: 8px; padding: 20px;
+    margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   }
-
   .summary-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 14px; margin: 14px 0;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px; margin: 12px 0;
   }
-
   .metric {
     background: var(--color-primary-light); border-radius: 6px;
-    padding: 14px; text-align: center; border: 1px solid var(--color-border-light);
+    padding: 14px; text-align: center;
   }
-  .metric .value {
-    font-size: 1.8em; font-weight: 700; color: var(--color-primary);
-  }
-  .metric .label {
-    font-size: 12px; color: var(--color-text-light); margin-top: 2px;
-  }
-
-  ol, ul { padding-left: 24px; margin-bottom: 12px; }
-  li { margin-bottom: 4px; }
-
-  table {
-    width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 13px;
-  }
+  .metric .value { font-size: 1.7em; font-weight: 700; color: var(--color-primary); }
+  .metric .label { font-size: 0.82em; color: var(--color-muted); margin-top: 2px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.86em; }
   th {
-    background: var(--color-primary); color: #fff; padding: 10px 8px;
-    text-align: left; font-weight: 600;
+    background: var(--color-primary); color: #fff; padding: 8px 6px;
+    text-align: left; font-weight: 600; font-size: 0.88em;
   }
-  td {
-    padding: 8px 6px; border-bottom: 1px solid var(--color-border-light);
+  td { padding: 6px; border-bottom: 1px solid #e2e8f0; }
+  tr:hover td { background: #f7fafc; }
+  .bar-container { position: relative; height: 18px; background: #edf2f7; border-radius: 3px; }
+  .bar-fill {
+    height: 100%; border-radius: 3px; transition: width 0.3s;
+    display: inline-block; vertical-align: middle;
   }
-  tbody tr:nth-child(even) { background: #f7fafc; }
-  tbody tr:hover td { background: var(--color-primary-light); }
-
-  .dist-bar {
-    display: inline-block; height: 16px; background: var(--color-primary);
-    border-radius: 3px; vertical-align: middle;
-  }
-
-  .heatmap-table th {
-    font-size: 11px; padding: 5px 3px; text-align: center; white-space: nowrap;
-  }
+  .bar-primary { background: var(--color-primary); }
+  .bar-green { background: var(--color-green); }
+  .bar-red { background: var(--color-red); }
+  .bar-yellow { background: var(--color-yellow); }
+  .trend-up { color: var(--color-red); font-weight: 600; }
+  .trend-down { color: var(--color-green); font-weight: 600; }
+  .trend-stable { color: var(--color-muted); }
+  /* Heatmap */
+  .heatmap-table th { font-size: 0.76em; padding: 5px 3px; text-align: center; white-space: nowrap; }
   .heatmap-table td {
-    text-align: center; padding: 4px 3px; font-size: 12px; font-weight: 600;
-    border: 1px solid var(--color-border-light);
+    text-align: center; padding: 4px 3px; font-size: 0.82em;
+    font-weight: 600; border: 1px solid #e2e8f0;
   }
-  .heatmap-table td.block-col {
-    background: var(--color-primary); color: #fff; font-weight: 700;
-    text-align: center; min-width: 40px;
+  .heatmap-table td.label-col {
+    text-align: left; font-weight: 600; min-width: 70px;
+    background: var(--color-primary-dark); color: #fff; padding-left: 6px;
   }
-  .heatmap-table tr:last-child td {
-    font-weight: 700; background: var(--color-primary-light) !important;
-    color: var(--color-primary) !important;
+  .heatmap-total-row td { font-weight: 700; background: var(--color-primary-light) !important; color: var(--color-primary) !important; }
+  /* Collapsible */
+  .collapsible-btn {
+    cursor: pointer; background: var(--color-primary-light); border: 1px solid #c5cfe0;
+    border-radius: 6px; padding: 10px 16px; font-size: 0.94em; font-weight: 600;
+    color: var(--color-primary); width: 100%; text-align: left;
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 2px;
   }
-
-  .outstanding-group { margin: 12px 0; }
-
-  .toggle-btn {
-    cursor: pointer; background: var(--color-primary-light);
-    border: 1px solid var(--color-border); border-radius: 6px;
-    padding: 8px 14px; font-size: 14px; font-weight: 600;
-    color: var(--color-primary); width: 100%;
-    text-align: left; display: flex; justify-content: space-between;
-    align-items: center;
-  }
-  .toggle-btn:hover { background: var(--color-border-light); }
-  .toggle-content { display: none; padding: 8px 0; }
-  .toggle-content.open { display: block; }
-
-  .case-tag {
-    display: inline-block; background: var(--color-primary-light);
-    color: var(--color-primary); border-radius: 3px; padding: 1px 6px;
-    font-size: 12px; margin: 1px; font-weight: 600;
-  }
-
-  .action-card {
-    background: var(--color-white); border-left: 4px solid var(--color-primary);
-    padding: 14px 18px; margin: 10px 0; border-radius: 0 6px 6px 0;
-    border: 1px solid var(--color-border); border-left: 4px solid var(--color-primary);
-  }
-  .action-card h3 { margin: 0 0 6px; color: var(--color-primary); }
-  .action-card ul { margin: 6px 0 8px 18px; }
-  .action-card li { margin: 4px 0; }
-
-  .status-pending { color: var(--color-yellow); font-weight: 600; }
-  .status-inprogress { color: var(--color-primary); font-weight: 600; }
-
-  .rating-bar {
-    display: inline-block; height: 14px; background: var(--color-yellow);
-    border-radius: 2px; vertical-align: middle;
-  }
-  .rating-low { background: var(--color-red); }
-  .low-rating-row { background: var(--color-red-bg) !important; }
-
-  details summary {
-    cursor: pointer; font-size: 13px; color: var(--color-primary);
-    font-weight: 600;
-  }
-
+  .collapsible-btn:hover { background: #d4dff0; }
+  .collapsible-content { display: none; padding: 12px 0; }
+  .collapsible-content.open { display: block; }
+  .chevron { transition: transform 0.2s; font-size: 0.8em; }
+  .chevron.open { transform: rotate(90deg); }
+  .highlight-list { margin: 8px 0 8px 20px; }
+  .highlight-list li { margin: 4px 0; font-size: 0.9em; }
+  /* Print */
   @media print {
     body { background: #fff; }
-    .card { border: 1px solid #ddd; }
-    .toggle-content { display: block !important; }
-    .main { max-width: 100%; padding: 10px; }
     .sidebar { display: none; }
-    .main { margin-left: 0; }
+    .main { margin-left: 0; max-width: 100%; padding: 10px; }
+    .card { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
+    .collapsible-content { display: block !important; }
     h1 { font-size: 1.4em; }
-    h2 { font-size: 1.2em; }
+    h2 { font-size: 1.15em; }
+    table { font-size: 0.8em; }
   }
-
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     .sidebar { display: none; }
-    .main { margin-left: 0; padding: 24px 16px; }
-    .heatmap-table { font-size: 10px; }
+    .main { margin-left: 0; padding: 16px; }
+    .heatmap-table { font-size: 0.7em; }
     .heatmap-table th, .heatmap-table td { padding: 2px 1px; }
   }
-
 </style>
-</head>
-<body>
-
-<aside class="sidebar">
-    <h3>Contents</h3>
-    <nav>
-        <a href="#sec-summary">1. Summary</a>
-        <a href="#sec-categories">2. Category Distribution</a>
-        <a href="#sec-heatmap">3. Block vs Category Heatmap</a>
-        <a href="#sec-outstanding">4. Outstanding Cases</a>
-        <a href="#sec-rating">5. Rating Analysis</a>
-        <a href="#sec-actions">6. Action Items</a>
-    </nav>
-</aside>
-
-<div class="main">
-
-<h1>Normanton Park -- Feedback Analysis Report</h1>
-<p class="subtitle">March 2026</p>
-<h2 id="sec-summary">1. Summary</h2>
-<div class="card">
-<div class="summary-grid">
-<div class="metric"><div class="value">209</div><div class="label">Total Cases</div></div>
-<div class="metric"><div class="value">179</div><div class="label">Closed</div></div>
-<div class="metric"><div class="value">30</div><div class="label">Outstanding</div></div>
-<div class="metric"><div class="value">85.6%</div><div class="label">Closure Rate</div></div>
-<div class="metric"><div class="value">4.76</div><div class="label">Avg Rating (of 5)</div></div>
-<div class="metric"><div class="value">179</div><div class="label">Reviews Received</div></div>
-</div>
-<h3>Top 5 Categories</h3><ol>
-<li><strong>Security & Access</strong> -- 26 cases (12.4%)</li>
-<li><strong>Lifts</strong> -- 23 cases (11.0%)</li>
-<li><strong>Noise & Neighbour</strong> -- 20 cases (9.6%)</li>
-<li><strong>Parking & Traffic</strong> -- 19 cases (9.1%)</li>
-<li><strong>Pest & Animals</strong> -- 18 cases (8.6%)</li>
-</ol></div>
-<h2 id="sec-categories">2. Category Distribution</h2>
-<div class="card">
-<table><thead><tr><th>#</th><th>Category</th><th>Count</th><th>%</th><th></th></tr></thead><tbody>
-<tr><td>1</td><td>Security & Access</td><td>26</td><td>12.4%</td><td><span class="dist-bar" style="width:200px"></span></td></tr>
-<tr><td>2</td><td>Lifts</td><td>23</td><td>11.0%</td><td><span class="dist-bar" style="width:176px"></span></td></tr>
-<tr><td>3</td><td>Noise & Neighbour</td><td>20</td><td>9.6%</td><td><span class="dist-bar" style="width:153px"></span></td></tr>
-<tr><td>4</td><td>Parking & Traffic</td><td>19</td><td>9.1%</td><td><span class="dist-bar" style="width:146px"></span></td></tr>
-<tr><td>5</td><td>Pest & Animals</td><td>18</td><td>8.6%</td><td><span class="dist-bar" style="width:138px"></span></td></tr>
-<tr><td>6</td><td>Cleanliness</td><td>16</td><td>7.7%</td><td><span class="dist-bar" style="width:123px"></span></td></tr>
-<tr><td>7</td><td>Waste & Recycling</td><td>15</td><td>7.2%</td><td><span class="dist-bar" style="width:115px"></span></td></tr>
-<tr><td>8</td><td>Building Maintenance</td><td>14</td><td>6.7%</td><td><span class="dist-bar" style="width:107px"></span></td></tr>
-<tr><td>9</td><td>Gym & Fitness</td><td>13</td><td>6.2%</td><td><span class="dist-bar" style="width:100px"></span></td></tr>
-<tr><td>10</td><td>Facilities</td><td>11</td><td>5.3%</td><td><span class="dist-bar" style="width:84px"></span></td></tr>
-<tr><td>11</td><td>Admin & General</td><td>10</td><td>4.8%</td><td><span class="dist-bar" style="width:76px"></span></td></tr>
-<tr><td>12</td><td>Intercom & Smart Home</td><td>8</td><td>3.8%</td><td><span class="dist-bar" style="width:61px"></span></td></tr>
-<tr><td>13</td><td>Lighting</td><td>7</td><td>3.3%</td><td><span class="dist-bar" style="width:53px"></span></td></tr>
-<tr><td>14</td><td>Common Area & Corridor</td><td>4</td><td>1.9%</td><td><span class="dist-bar" style="width:30px"></span></td></tr>
-<tr><td>15</td><td>Water & Plumbing</td><td>3</td><td>1.4%</td><td><span class="dist-bar" style="width:23px"></span></td></tr>
-<tr><td>16</td><td>Others</td><td>2</td><td>1.0%</td><td><span class="dist-bar" style="width:15px"></span></td></tr>
-<tr style="font-weight:700;background:#ebf4ff"><td></td><td>Total</td><td>209</td><td>100%</td><td></td></tr>
-</tbody></table></div>
-<h2 id="sec-heatmap">3. Heatmap: Block vs Category</h2>
-<div class="card" style="overflow-x:auto">
-<table class="heatmap-table"><thead><tr><th>Block</th>
-<th>Security</th>
-<th>Lifts</th>
-<th>Noise</th>
-<th>Parking</th>
-<th>Pest</th>
-<th>Cleanliness</th>
-<th>Waste/Rec</th>
-<th>Bldg.Maint</th>
-<th>Gym</th>
-<th>Facilities</th>
-<th>Admin</th>
-<th>Intercom</th>
-<th>Lighting</th>
-<th>Com.Area</th>
-<th>Water</th>
-<th>Others</th>
-<th>Total</th></tr></thead><tbody>
-<tr><td class="block-col">45</td>
-<td style="background:#c6f6d5;color:#2c3e50">2</td>
-<td style="background:#276749;color:#ffffff">6</td>
-<td style="background:#c6f6d5;color:#2c3e50">2</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#c6f6d5;color:#2c3e50">2</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#c6f6d5;color:#2c3e50">2</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ebf4ff;color:#2c5282;font-weight:700">21</td></tr>
-<tr><td class="block-col">47</td>
-<td style="background:#276749;color:#ffffff">8</td>
-<td style="background:#276749;color:#ffffff">6</td>
-<td style="background:#276749;color:#ffffff">7</td>
-<td style="background:#276749;color:#ffffff">7</td>
-<td style="background:#276749;color:#ffffff">7</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#68d391;color:#2c3e50">4</td>
-<td style="background:#276749;color:#ffffff">5</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#c6f6d5;color:#2c3e50">2</td>
-<td style="background:#68d391;color:#2c3e50">4</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ebf4ff;color:#2c5282;font-weight:700">60</td></tr>
-<tr><td class="block-col">49</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#68d391;color:#2c3e50">4</td>
-<td style="background:#276749;color:#ffffff">5</td>
-<td style="background:#c6f6d5;color:#2c3e50">2</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#c6f6d5;color:#2c3e50">2</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ebf4ff;color:#2c5282;font-weight:700">22</td></tr>
-<tr><td class="block-col">51</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ebf4ff;color:#2c5282;font-weight:700">10</td></tr>
-<tr><td class="block-col">53</td>
-<td style="background:#276749;color:#ffffff">6</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#c6f6d5;color:#2c3e50">2</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#68d391;color:#2c3e50">4</td>
-<td style="background:#c6f6d5;color:#2c3e50">2</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ebf4ff;color:#2c5282;font-weight:700">30</td></tr>
-<tr><td class="block-col">55</td>
-<td style="background:#68d391;color:#2c3e50">4</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#c6f6d5;color:#2c3e50">2</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ebf4ff;color:#2c5282;font-weight:700">8</td></tr>
-<tr><td class="block-col">57</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#c6f6d5;color:#2c3e50">2</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ebf4ff;color:#2c5282;font-weight:700">12</td></tr>
-<tr><td class="block-col">59</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#68d391;color:#2c3e50">4</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ebf4ff;color:#2c5282;font-weight:700">16</td></tr>
-<tr><td class="block-col">61</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#c6f6d5;color:#2c3e50">2</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#c6f6d5;color:#2c3e50">2</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#c6f6d5;color:#2c3e50">2</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ebf4ff;color:#2c5282;font-weight:700">23</td></tr>
-<tr><td class="block-col">TH</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#68d391;color:#2c3e50">3</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#f0fff4;color:#2c3e50">1</td>
-<td style="background:#ffffff;color:#333333">.</td>
-<td style="background:#ebf4ff;color:#2c5282;font-weight:700">7</td></tr>
-<tr><td class="block-col" style="background:#2c5282">Total</td>
-<td>26</td>
-<td>23</td>
-<td>20</td>
-<td>19</td>
-<td>18</td>
-<td>16</td>
-<td>15</td>
-<td>14</td>
-<td>13</td>
-<td>11</td>
-<td>10</td>
-<td>8</td>
-<td>7</td>
-<td>4</td>
-<td>3</td>
-<td>2</td>
-<td>209</td></tr>
-</tbody></table>
-<div style="margin-top:10px;font-size:0.82em;color:#666">
-<strong>Legend:</strong> 
-<span style="display:inline-block;width:18px;height:14px;background:#ffffff;border:1px solid #ccc;vertical-align:middle"></span> 0 &nbsp;
-<span style="display:inline-block;width:18px;height:14px;background:#f0fff4;border:1px solid #ccc;vertical-align:middle"></span> 1 &nbsp;
-<span style="display:inline-block;width:18px;height:14px;background:#c6f6d5;border:1px solid #ccc;vertical-align:middle"></span> 2 &nbsp;
-<span style="display:inline-block;width:18px;height:14px;background:#68d391;border:1px solid #ccc;vertical-align:middle"></span> 3-4 &nbsp;
-<span style="display:inline-block;width:18px;height:14px;background:#276749;border:1px solid #ccc;vertical-align:middle"></span> 5+ &nbsp;
-</div>
-</div>
-<h2 id="sec-outstanding">4. Outstanding Cases</h2>
-<div class="card"><p>Total outstanding: <strong>30</strong> cases (Pending or In Progress)</p>
-<div class="outstanding-group">
-<button class="toggle-btn" onclick="toggleGroup('Admin_and_General')">
-Admin & General (1 cases)
-<span id="arrow_Admin_and_General">&#9660;</span></button>
-<div class="toggle-content" id="group_Admin_and_General">
-<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4737</td><td>47</td><td>Blk 47</td><td>Hilife - Folder (Announcements)</td><td class="status-pending">Pending</td><td>25</td></tr>
-</tbody></table></div></div>
-<div class="outstanding-group">
-<button class="toggle-btn" onclick="toggleGroup('Building_Maintenance')">
-Building Maintenance (3 cases)
-<span id="arrow_Building_Maintenance">&#9660;</span></button>
-<div class="toggle-content" id="group_Building_Maintenance">
-<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4636</td><td>47</td><td>Blk 47</td><td>previously reported - leaking and mouldy ceiling</td><td class="status-inprogress">In Progress</td><td>39</td></tr>
-<tr><td>1292-4714</td><td>47</td><td>Blk 47</td><td>Maintenance Work - Blk 47 B1 Lobby</td><td class="status-inprogress">In Progress</td><td>28</td></tr>
-<tr><td>1292-4798</td><td>53</td><td>Blk 53</td><td>Maintenance and Security</td><td class="status-inprogress">In Progress</td><td>14</td></tr>
-</tbody></table></div></div>
-<div class="outstanding-group">
-<button class="toggle-btn" onclick="toggleGroup('Cleanliness')">
-Cleanliness (2 cases)
-<span id="arrow_Cleanliness">&#9660;</span></button>
-<div class="toggle-content" id="group_Cleanliness">
-<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4670</td><td>53</td><td>Blk 53</td><td>dirty sign board</td><td class="status-inprogress">In Progress</td><td>33</td></tr>
-<tr><td>1292-4731</td><td>53</td><td>Blk 53</td><td>Rust stain left by signage</td><td class="status-inprogress">In Progress</td><td>25</td></tr>
-</tbody></table></div></div>
-<div class="outstanding-group">
-<button class="toggle-btn" onclick="toggleGroup('Facilities')">
-Facilities (3 cases)
-<span id="arrow_Facilities">&#9660;</span></button>
-<div class="toggle-content" id="group_Facilities">
-<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4701</td><td>TH</td><td>Terrace House</td><td>Swimming pool (Terrace House) maintenance</td><td class="status-inprogress">In Progress</td><td>29</td></tr>
-<tr><td>1292-4801</td><td>53</td><td>Blk 53</td><td>Pavilion</td><td class="status-inprogress">In Progress</td><td>13</td></tr>
-<tr><td>1292-4812</td><td>47</td><td>Blk 47</td><td>Family Pool - Life Bouy has been removed.</td><td class="status-pending">Pending</td><td>12</td></tr>
-</tbody></table></div></div>
-<div class="outstanding-group">
-<button class="toggle-btn" onclick="toggleGroup('Gym_and_Fitness')">
-Gym & Fitness (6 cases)
-<span id="arrow_Gym_and_Fitness">&#9660;</span></button>
-<div class="toggle-content" id="group_Gym_and_Fitness">
-<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4655</td><td>47</td><td>Blk 47</td><td>three treadmill down again</td><td class="status-inprogress">In Progress</td><td>36</td></tr>
-<tr><td>1292-4680</td><td>47</td><td>Blk 47</td><td>Complaint Regarding Unusable Treadmills and Insuff</td><td class="status-inprogress">In Progress</td><td>33</td></tr>
-<tr><td>1292-4688</td><td>55</td><td>Blk 55</td><td>Treadmills Unfixed for Months</td><td class="status-inprogress">In Progress</td><td>32</td></tr>
-<tr><td>1292-4683</td><td>59</td><td>Blk 59</td><td>GYM room</td><td class="status-inprogress">In Progress</td><td>32</td></tr>
-<tr><td>1292-4708</td><td>49</td><td>Blk 49</td><td>Treadmill spoil</td><td class="status-inprogress">In Progress</td><td>28</td></tr>
-<tr><td>1292-4718</td><td>47</td><td>Blk 47</td><td>spoilt treadmill</td><td class="status-inprogress">In Progress</td><td>27</td></tr>
-</tbody></table></div></div>
-<div class="outstanding-group">
-<button class="toggle-btn" onclick="toggleGroup('Lifts')">
-Lifts (2 cases)
-<span id="arrow_Lifts">&#9660;</span></button>
-<div class="toggle-content" id="group_Lifts">
-<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4652</td><td>49</td><td>Blk 49</td><td>BLK 49 Lift FL3 Handle damaged</td><td class="status-inprogress">In Progress</td><td>37</td></tr>
-<tr><td>1292-4664</td><td>53</td><td>Blk 53</td><td>pl9 lift at block 53</td><td class="status-inprogress">In Progress</td><td>35</td></tr>
-</tbody></table></div></div>
-<div class="outstanding-group">
-<button class="toggle-btn" onclick="toggleGroup('Noise_and_Neighbour')">
-Noise & Neighbour (4 cases)
-<span id="arrow_Noise_and_Neighbour">&#9660;</span></button>
-<div class="toggle-content" id="group_Noise_and_Neighbour">
-<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4684</td><td>61</td><td>Blk 61</td><td>Noise Complain</td><td class="status-inprogress">In Progress</td><td>32</td></tr>
-<tr><td>1292-4682</td><td>53</td><td>Blk 53</td><td>Block 53 #XX-XX</td><td class="status-inprogress">In Progress</td><td>32</td></tr>
-<tr><td>1292-4715</td><td>47</td><td>Blk 47</td><td>Outdoor Pavillions</td><td class="status-inprogress">In Progress</td><td>28</td></tr>
-<tr><td>1292-4732</td><td>45</td><td>Blk 45</td><td>heavy Indian food cooking</td><td class="status-inprogress">In Progress</td><td>25</td></tr>
-</tbody></table></div></div>
-<div class="outstanding-group">
-<button class="toggle-btn" onclick="toggleGroup('Parking_and_Traffic')">
-Parking & Traffic (2 cases)
-<span id="arrow_Parking_and_Traffic">&#9660;</span></button>
-<div class="toggle-content" id="group_Parking_and_Traffic">
-<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4643</td><td>45</td><td>Blk 45</td><td>B2 carpark lobby 45</td><td class="status-inprogress">In Progress</td><td>38</td></tr>
-<tr><td>1292-4646</td><td>61</td><td>Blk 61</td><td>Stolen bicyle seats at Blk 61 B1 bicycle park</td><td class="status-inprogress">In Progress</td><td>37</td></tr>
-</tbody></table></div></div>
-<div class="outstanding-group">
-<button class="toggle-btn" onclick="toggleGroup('Pest_and_Animals')">
-Pest & Animals (1 cases)
-<span id="arrow_Pest_and_Animals">&#9660;</span></button>
-<div class="toggle-content" id="group_Pest_and_Animals">
-<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4811</td><td>47</td><td>Blk 47</td><td>Stray Cats in Estate</td><td class="status-pending">Pending</td><td>12</td></tr>
-</tbody></table></div></div>
-<div class="outstanding-group">
-<button class="toggle-btn" onclick="toggleGroup('Security_and_Access')">
-Security & Access (6 cases)
-<span id="arrow_Security_and_Access">&#9660;</span></button>
-<div class="toggle-content" id="group_Security_and_Access">
-<table><thead><tr><th>Case Id</th><th>Block</th><th>Unit No</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4644</td><td>61</td><td>Blk 61</td><td>Stolen bicycle seat at Blk 61 B1 bicycle park area</td><td class="status-inprogress">In Progress</td><td>38</td></tr>
-<tr><td>1292-4639</td><td>53</td><td>Blk 53</td><td>Damaged area map</td><td class="status-inprogress">In Progress</td><td>38</td></tr>
-<tr><td>1292-4693</td><td>55</td><td>Blk 55</td><td>Blk 55 level 1 lift lobby</td><td class="status-inprogress">In Progress</td><td>31</td></tr>
-<tr><td>1292-4691</td><td>55</td><td>Blk 55</td><td>Blk 55 door level 1 is open all the time</td><td class="status-inprogress">In Progress</td><td>31</td></tr>
-<tr><td>1292-4786</td><td>45</td><td>Blk 45</td><td>Children roller blading outside corridor</td><td class="status-inprogress">In Progress</td><td>17</td></tr>
-<tr><td>1292-4784</td><td>45</td><td>Blk 45</td><td>Children roller blading outside corridor</td><td class="status-inprogress">In Progress</td><td>17</td></tr>
-</tbody></table></div></div>
-</div>
-<h2 id="sec-rating">5. Rating Analysis</h2>
-<div class="card">
-<p>Out of 209 cases, <strong>179</strong> received reviews.</p>
-<table style="max-width:500px"><thead><tr><th>Rating</th><th>Count</th><th>%</th><th></th></tr></thead><tbody>
-<tr><td>***** (5)</td><td>164</td><td>91.6%</td><td><span class="rating-bar" style="width:183px;display:inline-block;height:14px;border-radius:2px;vertical-align:middle"></span></td></tr>
-<tr><td>**** (4)</td><td>4</td><td>2.2%</td><td><span class="rating-bar" style="width:4px;display:inline-block;height:14px;border-radius:2px;vertical-align:middle"></span></td></tr>
-<tr><td>*** (3)</td><td>2</td><td>1.1%</td><td><span class="rating-low" style="width:2px;display:inline-block;height:14px;border-radius:2px;vertical-align:middle"></span></td></tr>
-<tr><td>** (2)</td><td>1</td><td>0.6%</td><td><span class="rating-low" style="width:1px;display:inline-block;height:14px;border-radius:2px;vertical-align:middle"></span></td></tr>
-<tr><td>* (1)</td><td>8</td><td>4.5%</td><td><span class="rating-low" style="width:9px;display:inline-block;height:14px;border-radius:2px;vertical-align:middle"></span></td></tr>
-</tbody></table>
-<h3>Low-rated Cases (1-3 stars): 11</h3>
-<table><thead><tr><th>Case Id</th><th>Rating</th><th>Category</th><th>Title</th><th>Review Comment</th></tr></thead><tbody>
-<tr class="low-rating-row"><td>1292-4793</td><td>1</td><td>Gym & Fitness</td><td>treadmills down since Dec</td><td></td></tr>
-<tr class="low-rating-row"><td>1292-4791</td><td>1</td><td>Security & Access</td><td>Fire Safety Hazard Obstruction at Common Corridor</td><td></td></tr>
-<tr class="low-rating-row"><td>1292-4778</td><td>3</td><td>Security & Access</td><td>Enquiry on visitors screening</td><td>Thank you for your clarification. I appreciate that the infrastructure is being ...</td></tr>
-<tr class="low-rating-row"><td>1292-4754</td><td>3</td><td>Pest & Animals</td><td>rude security staff</td><td></td></tr>
-<tr class="low-rating-row"><td>1292-4752</td><td>1</td><td>Gym & Fitness</td><td>Gym Facilities</td><td>the reply is totally wrong and irrelevant to the feedback I have sent.</td></tr>
-<tr class="low-rating-row"><td>1292-4748</td><td>1</td><td>Parking & Traffic</td><td>carpark traffic flow safety</td><td>no discussion. I had 2 near misses this week alone</td></tr>
-<tr class="low-rating-row"><td>1292-4711</td><td>1</td><td>Parking & Traffic</td><td>Bulky Refuse - Block 55 Wheelchair Lot</td><td>Thanks [staff] - then dont close this feedback first , please keep as pending unt...</td></tr>
-<tr class="low-rating-row"><td>1292-4696</td><td>1</td><td>Waste & Recycling</td><td>bulky item at level 6 of block 47</td><td>Item is not removed yet</td></tr>
-<tr class="low-rating-row"><td>1292-4671</td><td>1</td><td>Cleanliness</td><td>“BICYCLE AREA” AT B1 BLK 55 FILTHY</td><td></td></tr>
-<tr class="low-rating-row"><td>1292-4659</td><td>1</td><td>Parking & Traffic</td><td>Motorcycle of delivery man</td><td>You guys are not doing your job!!!</td></tr>
-<tr class="low-rating-row"><td>1292-4657</td><td>2</td><td>Security & Access</td><td>Entrance door is open</td><td>To add on, we have also noticed that there are grab drivers, contractors, anyone...</td></tr>
-</tbody></table>
-</div>
-<h2 id="sec-actions">6. Action Items</h2>
-<div class="card"><p>The following action items cover all <strong>30</strong> outstanding cases.</p></div>
-<div class="action-card">
-<h3>1. Complete Pending Administrative Actions</h3>
-<p style="font-size:0.88em;color:#666">Category: <strong>Admin & General</strong> | 1 cases</p>
-<p>
-<span class="case-tag">1292-4737</span>
-</p><ul>
-<li>Amend HiLife folder names for council meeting minutes as requested.</li>
-<li>Standardize announcement naming convention across all HiLife folders.</li>
-</ul>
-<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
-<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4737</td><td>47</td><td>Blk 47</td><td>Hilife - Folder (Announcements)</td><td class="status-pending">Pending</td><td>25</td></tr>
-</tbody></table></details>
-</div>
-<div class="action-card">
-<h3>2. Complete Outstanding Building Repairs</h3>
-<p style="font-size:0.88em;color:#666">Category: <strong>Building Maintenance</strong> | 3 cases</p>
-<p>
-<span class="case-tag">1292-4798</span>
-<span class="case-tag">1292-4714</span>
-<span class="case-tag">1292-4636</span>
-</p><ul>
-<li>Schedule rust stain removal (hi-jet cleaning) as committed to resident.</li>
-<li>Investigate root cause of Blk 47 B1 lobby ceiling leak (aircon ducting) and repair plasterboard.</li>
-<li>Arrange contractor to repair damaged area map and other signage across estate.</li>
-<li>Expedite B2 carpark tile repair and buzzing noise part replacement at Blk 45.</li>
-</ul>
-<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
-<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4798</td><td>53</td><td>Blk 53</td><td>Maintenance and Security</td><td class="status-inprogress">In Progress</td><td>14</td></tr>
-<tr><td>1292-4714</td><td>47</td><td>Blk 47</td><td>Maintenance Work - Blk 47 B1 Lobby</td><td class="status-inprogress">In Progress</td><td>28</td></tr>
-<tr><td>1292-4636</td><td>47</td><td>Blk 47</td><td>previously reported - leaking and mouldy ceiling</td><td class="status-inprogress">In Progress</td><td>39</td></tr>
-</tbody></table></details>
-</div>
-<div class="action-card">
-<h3>3. Improve Estate Cleanliness Standards</h3>
-<p style="font-size:0.88em;color:#666">Category: <strong>Cleanliness</strong> | 2 cases</p>
-<p>
-<span class="case-tag">1292-4731</span>
-<span class="case-tag">1292-4670</span>
-</p><ul>
-<li>Conduct audit of cleaning contractor performance across all blocks.</li>
-<li>Ensure cleaning team addresses specific areas highlighted in outstanding feedback.</li>
-</ul>
-<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
-<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4731</td><td>53</td><td>Blk 53</td><td>Rust stain left by signage</td><td class="status-inprogress">In Progress</td><td>25</td></tr>
-<tr><td>1292-4670</td><td>53</td><td>Blk 53</td><td>dirty sign board</td><td class="status-inprogress">In Progress</td><td>33</td></tr>
-</tbody></table></details>
-</div>
-<div class="action-card">
-<h3>4. Repair and Maintain Common Facilities</h3>
-<p style="font-size:0.88em;color:#666">Category: <strong>Facilities</strong> | 3 cases</p>
-<p>
-<span class="case-tag">1292-4812</span>
-<span class="case-tag">1292-4801</span>
-<span class="case-tag">1292-4701</span>
-</p><ul>
-<li>Arrange pool vendor to address algae/water quality issue at Terrace House swimming pool urgently.</li>
-<li>Secure security guard attention on pavilion over-time usage enforcement after 10pm.</li>
-</ul>
-<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
-<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4812</td><td>47</td><td>Blk 47</td><td>Family Pool - Life Bouy has been removed.</td><td class="status-pending">Pending</td><td>12</td></tr>
-<tr><td>1292-4801</td><td>53</td><td>Blk 53</td><td>Pavilion</td><td class="status-inprogress">In Progress</td><td>13</td></tr>
-<tr><td>1292-4701</td><td>TH</td><td>Terrace House</td><td>Swimming pool (Terrace House) maintenance</td><td class="status-inprogress">In Progress</td><td>29</td></tr>
-</tbody></table></details>
-</div>
-<div class="action-card">
-<h3>5. Expedite Treadmill Replacement and Gym Equipment Maintenance</h3>
-<p style="font-size:0.88em;color:#666">Category: <strong>Gym & Fitness</strong> | 6 cases</p>
-<p>
-<span class="case-tag">1292-4718</span>
-<span class="case-tag">1292-4708</span>
-<span class="case-tag">1292-4688</span>
-<span class="case-tag">1292-4683</span>
-<span class="case-tag">1292-4680</span>
-<span class="case-tag">1292-4655</span>
-</p><ul>
-<li>Confirm delivery date for new treadmills with the supplier and communicate a firm timeline to affected residents.</li>
-<li>Publish an estate-wide notice on HiLife with the expected completion date (target: 3rd-4th week of April 2026).</li>
-<li>Evaluate whether temporary additional equipment (e.g. stationary bikes) can be deployed in the interim.</li>
-</ul>
-<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
-<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4718</td><td>47</td><td>Blk 47</td><td>spoilt treadmill</td><td class="status-inprogress">In Progress</td><td>27</td></tr>
-<tr><td>1292-4708</td><td>49</td><td>Blk 49</td><td>Treadmill spoil</td><td class="status-inprogress">In Progress</td><td>28</td></tr>
-<tr><td>1292-4688</td><td>55</td><td>Blk 55</td><td>Treadmills Unfixed for Months</td><td class="status-inprogress">In Progress</td><td>32</td></tr>
-<tr><td>1292-4683</td><td>59</td><td>Blk 59</td><td>GYM room</td><td class="status-inprogress">In Progress</td><td>32</td></tr>
-<tr><td>1292-4680</td><td>47</td><td>Blk 47</td><td>Complaint Regarding Unusable Treadmills and Insuff</td><td class="status-inprogress">In Progress</td><td>33</td></tr>
-<tr><td>1292-4655</td><td>47</td><td>Blk 47</td><td>three treadmill down again</td><td class="status-inprogress">In Progress</td><td>36</td></tr>
-</tbody></table></details>
-</div>
-<div class="action-card">
-<h3>6. Resolve Lift Door Safety Issues</h3>
-<p style="font-size:0.88em;color:#666">Category: <strong>Lifts</strong> | 2 cases</p>
-<p>
-<span class="case-tag">1292-4664</span>
-<span class="case-tag">1292-4652</span>
-</p><ul>
-<li>Follow up with KONE on the Blk 53 PL9 lift door fault -- confirm repair completion.</li>
-<li>Follow up with KONE on Blk 49 FL3 loose handle -- schedule tightening or replacement.</li>
-<li>Verify post-repair status of Blk 45 PL2 motor bearing replacement.</li>
-</ul>
-<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
-<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4664</td><td>53</td><td>Blk 53</td><td>pl9 lift at block 53</td><td class="status-inprogress">In Progress</td><td>35</td></tr>
-<tr><td>1292-4652</td><td>49</td><td>Blk 49</td><td>BLK 49 Lift FL3 Handle damaged</td><td class="status-inprogress">In Progress</td><td>37</td></tr>
-</tbody></table></details>
-</div>
-<div class="action-card">
-<h3>7. Address Persistent Noise and Nuisance Complaints</h3>
-<p style="font-size:0.88em;color:#666">Category: <strong>Noise & Neighbour</strong> | 4 cases</p>
-<p>
-<span class="case-tag">1292-4732</span>
-<span class="case-tag">1292-4715</span>
-<span class="case-tag">1292-4684</span>
-<span class="case-tag">1292-4682</span>
-</p><ul>
-<li>Send formal advisory letters to identified units causing repeated disturbance (cooking smell, singing, knocking).</li>
-<li>Increase security patrol frequency during quiet hours (10pm-7am) at affected blocks.</li>
-<li>Draft and issue estate-wide circular reminding residents of quiet hour by-laws.</li>
-</ul>
-<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
-<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4732</td><td>45</td><td>Blk 45</td><td>heavy Indian food cooking</td><td class="status-inprogress">In Progress</td><td>25</td></tr>
-<tr><td>1292-4715</td><td>47</td><td>Blk 47</td><td>Outdoor Pavillions</td><td class="status-inprogress">In Progress</td><td>28</td></tr>
-<tr><td>1292-4684</td><td>61</td><td>Blk 61</td><td>Noise Complain</td><td class="status-inprogress">In Progress</td><td>32</td></tr>
-<tr><td>1292-4682</td><td>53</td><td>Blk 53</td><td>Block 53 #XX-XX</td><td class="status-inprogress">In Progress</td><td>32</td></tr>
-</tbody></table></details>
-</div>
-<div class="action-card">
-<h3>8. Enforce Parking Regulations and Traffic Safety</h3>
-<p style="font-size:0.88em;color:#666">Category: <strong>Parking & Traffic</strong> | 2 cases</p>
-<p>
-<span class="case-tag">1292-4646</span>
-<span class="case-tag">1292-4643</span>
-</p><ul>
-<li>Complete LPR system commissioning to improve vehicle tracking and enforcement.</li>
-<li>Step up patrols targeting motorcycle illegal parking and visitor lot abuse.</li>
-</ul>
-<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
-<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4646</td><td>61</td><td>Blk 61</td><td>Stolen bicyle seats at Blk 61 B1 bicycle park</td><td class="status-inprogress">In Progress</td><td>37</td></tr>
-<tr><td>1292-4643</td><td>45</td><td>Blk 45</td><td>B2 carpark lobby 45</td><td class="status-inprogress">In Progress</td><td>38</td></tr>
-</tbody></table></details>
-</div>
-<div class="action-card">
-<h3>9. Address Outstanding Pest & Animals Issues</h3>
-<p style="font-size:0.88em;color:#666">Category: <strong>Pest & Animals</strong> | 1 cases</p>
-<p>
-<span class="case-tag">1292-4811</span>
-</p><ul>
-<li>Review and resolve all 1 pending pest & animals cases.</li>
-<li>Assign responsible staff and set target resolution dates.</li>
-<li>Communicate progress updates to affected residents.</li>
-</ul>
-<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
-<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4811</td><td>47</td><td>Blk 47</td><td>Stray Cats in Estate</td><td class="status-pending">Pending</td><td>12</td></tr>
-</tbody></table></details>
-</div>
-<div class="action-card">
-<h3>10. Strengthen Access Control and Security Response</h3>
-<p style="font-size:0.88em;color:#666">Category: <strong>Security & Access</strong> | 6 cases</p>
-<p>
-<span class="case-tag">1292-4786</span>
-<span class="case-tag">1292-4784</span>
-<span class="case-tag">1292-4693</span>
-<span class="case-tag">1292-4691</span>
-<span class="case-tag">1292-4644</span>
-<span class="case-tag">1292-4639</span>
-</p><ul>
-<li>Investigate door mechanism at Blk 55 Level 1 -- arrange for technician to check stopper and magnetic latch.</li>
-<li>Conduct immediate review of CCTV coverage at Blk 61 B1 bicycle parking area to support stolen property cases.</li>
-<li>Brief security contractor on protocol for monitoring doors and challenging roller-blading in corridors.</li>
-<li>Engage parents of children roller-blading at Blk 45 corridor as committed in prior responses.</li>
-</ul>
-<details><summary style="cursor:pointer;font-size:0.88em;color:#2c5282;font-weight:600">View affected cases</summary>
-<table style="font-size:0.85em;margin-top:6px"><thead><tr><th>Case Id</th><th>Block</th><th>Unit</th><th>Title</th><th>Status</th><th>Days Open</th></tr></thead><tbody>
-<tr><td>1292-4786</td><td>45</td><td>Blk 45</td><td>Children roller blading outside corridor</td><td class="status-inprogress">In Progress</td><td>17</td></tr>
-<tr><td>1292-4784</td><td>45</td><td>Blk 45</td><td>Children roller blading outside corridor</td><td class="status-inprogress">In Progress</td><td>17</td></tr>
-<tr><td>1292-4693</td><td>55</td><td>Blk 55</td><td>Blk 55 level 1 lift lobby</td><td class="status-inprogress">In Progress</td><td>31</td></tr>
-<tr><td>1292-4691</td><td>55</td><td>Blk 55</td><td>Blk 55 door level 1 is open all the time</td><td class="status-inprogress">In Progress</td><td>31</td></tr>
-<tr><td>1292-4644</td><td>61</td><td>Blk 61</td><td>Stolen bicycle seat at Blk 61 B1 bicycle park area</td><td class="status-inprogress">In Progress</td><td>38</td></tr>
-<tr><td>1292-4639</td><td>53</td><td>Blk 53</td><td>Damaged area map</td><td class="status-inprogress">In Progress</td><td>38</td></tr>
-</tbody></table></details>
-</div>
-<p style="margin-top:30px;font-size:0.85em;color:#999;text-align:center"></p>
-
 <script>
-function toggleGroup(id) {
-  var el = document.getElementById('group_' + id);
-  var arrow = document.getElementById('arrow_' + id);
+function toggleSection(id) {
+  var el = document.getElementById(id);
+  var btn = el.previousElementSibling;
+  var chevron = btn.querySelector('.chevron');
   if (el.classList.contains('open')) {
     el.classList.remove('open');
-    arrow.innerHTML = '&#9660;';
+    if (chevron) chevron.classList.remove('open');
   } else {
     el.classList.add('open');
-    arrow.innerHTML = '&#9650;';
+    if (chevron) chevron.classList.add('open');
   }
 }
 </script>
+</head>
+<body>
+<nav class="sidebar">
+<h2>Feedback Analysis</h2>
+<div class="nav-group">
+<div class="nav-label">Overview</div>
+<a href="#overall-summary">Overall Summary</a>
+<a href="#issue-cluster-trend">Issue Cluster Trend</a>
+<a href="#vendor-performance">Vendor Performance</a>
+<a href="#block-heatmap">Block Heatmap</a>
+<a href="#resolution-time">Resolution Time</a>
+<a href="#sentiment">Sentiment Analysis</a>
+<a href="#rating-by-cluster">Rating by Cluster</a>
+<a href="#recurring-issues">Recurring Issues</a>
+<a href="#overall-highlights">Key Findings</a>
 </div>
-
+<div class="nav-group">
+<div class="nav-label">Monthly</div>
+<a href="#month-2025-04">Apr 2025</a>
+<a href="#month-2025-05">May 2025</a>
+<a href="#month-2025-06">Jun 2025</a>
+<a href="#month-2025-07">Jul 2025</a>
+<a href="#month-2025-08">Aug 2025</a>
+<a href="#month-2025-09">Sep 2025</a>
+<a href="#month-2025-10">Oct 2025</a>
+<a href="#month-2025-11">Nov 2025</a>
+<a href="#month-2025-12">Dec 2025</a>
+<a href="#month-2026-01">Jan 2026</a>
+<a href="#month-2026-02">Feb 2026</a>
+<a href="#month-2026-03">Mar 2026</a>
+</div>
+</nav>
+<div class="main">
+<h1>Normanton Park -- 12-Month Feedback Analysis</h1>
+<p class="subtitle">April 2025 to March 2026 -- 1,844 cases analysed</p>
+<h2 id="overall-summary">1. Overall Summary</h2>
+<div class="card">
+<div class="summary-grid">
+<div class="metric"><div class="value">1844</div><div class="label">Total Cases</div></div>
+<div class="metric"><div class="value">1786</div><div class="label">Closed</div></div>
+<div class="metric"><div class="value">58</div><div class="label">Outstanding</div></div>
+<div class="metric"><div class="value">96.9%</div><div class="label">Closure Rate</div></div>
+<div class="metric"><div class="value">4.69</div><div class="label">Avg Rating (of 5)</div></div>
+<div class="metric"><div class="value">1690</div><div class="label">Reviews</div></div>
+</div>
+<h3>Monthly Case Volume</h3>
+<table><thead><tr><th>Month</th><th>Cases</th><th>Closed</th><th>Rate</th><th>Avg Rating</th><th style="width:35%">Volume</th></tr></thead><tbody>
+<tr><td>Apr 2025</td><td>178</td><td>174</td><td>97.8%</td><td>4.15</td><td><span class="bar-fill bar-primary" style="width:85%;height:16px;display:inline-block;border-radius:3px;" title="178 cases"></span></td></tr>
+<tr><td>May 2025</td><td>158</td><td>158</td><td>100.0%</td><td>4.72</td><td><span class="bar-fill bar-primary" style="width:75%;height:16px;display:inline-block;border-radius:3px;" title="158 cases"></span></td></tr>
+<tr><td>Jun 2025</td><td>115</td><td>113</td><td>98.3%</td><td>4.71</td><td><span class="bar-fill bar-primary" style="width:55%;height:16px;display:inline-block;border-radius:3px;" title="115 cases"></span></td></tr>
+<tr><td>Jul 2025</td><td>145</td><td>142</td><td>97.9%</td><td>4.7</td><td><span class="bar-fill bar-primary" style="width:69%;height:16px;display:inline-block;border-radius:3px;" title="145 cases"></span></td></tr>
+<tr><td>Aug 2025</td><td>146</td><td>146</td><td>100.0%</td><td>4.64</td><td><span class="bar-fill bar-primary" style="width:69%;height:16px;display:inline-block;border-radius:3px;" title="146 cases"></span></td></tr>
+<tr><td>Sep 2025</td><td>127</td><td>127</td><td>100.0%</td><td>4.78</td><td><span class="bar-fill bar-primary" style="width:60%;height:16px;display:inline-block;border-radius:3px;" title="127 cases"></span></td></tr>
+<tr><td>Oct 2025</td><td>144</td><td>143</td><td>99.3%</td><td>4.68</td><td><span class="bar-fill bar-primary" style="width:68%;height:16px;display:inline-block;border-radius:3px;" title="144 cases"></span></td></tr>
+<tr><td>Nov 2025</td><td>117</td><td>116</td><td>99.1%</td><td>4.83</td><td><span class="bar-fill bar-primary" style="width:55%;height:16px;display:inline-block;border-radius:3px;" title="117 cases"></span></td></tr>
+<tr><td>Dec 2025</td><td>148</td><td>145</td><td>98.0%</td><td>4.69</td><td><span class="bar-fill bar-primary" style="width:70%;height:16px;display:inline-block;border-radius:3px;" title="148 cases"></span></td></tr>
+<tr><td>Jan 2026</td><td>164</td><td>163</td><td>99.4%</td><td>4.64</td><td><span class="bar-fill bar-primary" style="width:78%;height:16px;display:inline-block;border-radius:3px;" title="164 cases"></span></td></tr>
+<tr><td>Feb 2026</td><td>193</td><td>180</td><td>93.3%</td><td>4.74</td><td><span class="bar-fill bar-primary" style="width:92%;height:16px;display:inline-block;border-radius:3px;" title="193 cases"></span></td></tr>
+<tr><td>Mar 2026</td><td>209</td><td>179</td><td>85.6%</td><td>4.76</td><td><span class="bar-fill bar-primary" style="width:100%;height:16px;display:inline-block;border-radius:3px;" title="209 cases"></span></td></tr>
+</tbody></table>
+<h3>Top 3 Issue Clusters (Overall)</h3><ol>
+<li><strong>Pest &amp; Animals</strong> -- 372 cases (20.2%)</li>
+<li><strong>Security &amp; Access</strong> -- 206 cases (11.2%)</li>
+<li><strong>Lift Issues</strong> -- 184 cases (10.0%)</li>
+</ol>
+</div>
+<h2 id="issue-cluster-trend">2. Issue Cluster Trend (12 Months)</h2>
+<div class="card" style="overflow-x:auto">
+<table class="heatmap-table"><thead><tr><th style="text-align:left">Issue Cluster</th>
+<th>Apr<br>2025</th>
+<th>May<br>2025</th>
+<th>Jun<br>2025</th>
+<th>Jul<br>2025</th>
+<th>Aug<br>2025</th>
+<th>Sep<br>2025</th>
+<th>Oct<br>2025</th>
+<th>Nov<br>2025</th>
+<th>Dec<br>2025</th>
+<th>Jan<br>2026</th>
+<th>Feb<br>2026</th>
+<th>Mar<br>2026</th>
+<th>Total</th><th>Trend</th></tr></thead><tbody>
+<tr><td class="label-col">Pest &amp; Animals</td>
+<td style="background:#2c5282;color:#fff">32</td>
+<td style="background:#2c5282;color:#fff">35</td>
+<td style="background:#6fa8d6;color:#fff">25</td>
+<td style="background:#3d7bbe;color:#fff">29</td>
+<td style="background:#2c5282;color:#fff">32</td>
+<td style="background:#3d7bbe;color:#fff">26</td>
+<td style="background:#2c5282;color:#fff">31</td>
+<td style="background:#6fa8d6;color:#fff">21</td>
+<td style="background:#2c5282;color:#fff">35</td>
+<td style="background:#2c5282;color:#fff">36</td>
+<td style="background:#2c5282;color:#fff">34</td>
+<td style="background:#2c5282;color:#fff">36</td>
+<td style="font-weight:700">372</td><td class="trend-stable">-- Stable</td></tr>
+<tr><td class="label-col">Security &amp; Access</td>
+<td style="background:#6fa8d6;color:#fff">24</td>
+<td style="background:#a8ccec;color:#333">14</td>
+<td style="background:#a8ccec;color:#333">15</td>
+<td style="background:#6fa8d6;color:#fff">19</td>
+<td style="background:#d4e4f7;color:#333">10</td>
+<td style="background:#a8ccec;color:#333">15</td>
+<td style="background:#6fa8d6;color:#fff">20</td>
+<td style="background:#d4e4f7;color:#333">8</td>
+<td style="background:#a8ccec;color:#333">12</td>
+<td style="background:#a8ccec;color:#333">17</td>
+<td style="background:#6fa8d6;color:#fff">22</td>
+<td style="background:#3d7bbe;color:#fff">30</td>
+<td style="font-weight:700">206</td><td class="trend-stable">-- Stable</td></tr>
+<tr><td class="label-col">Lift Issues</td>
+<td style="background:#a8ccec;color:#333">16</td>
+<td style="background:#a8ccec;color:#333">13</td>
+<td style="background:#a8ccec;color:#333">12</td>
+<td style="background:#6fa8d6;color:#fff">21</td>
+<td style="background:#6fa8d6;color:#fff">24</td>
+<td style="background:#a8ccec;color:#333">16</td>
+<td style="background:#d4e4f7;color:#333">7</td>
+<td style="background:#d4e4f7;color:#333">9</td>
+<td style="background:#a8ccec;color:#333">11</td>
+<td style="background:#a8ccec;color:#333">17</td>
+<td style="background:#6fa8d6;color:#fff">20</td>
+<td style="background:#6fa8d6;color:#fff">18</td>
+<td style="font-weight:700">184</td><td class="trend-stable">-- Stable</td></tr>
+<tr><td class="label-col">Waste &amp; Recycling</td>
+<td style="background:#a8ccec;color:#333">16</td>
+<td style="background:#a8ccec;color:#333">12</td>
+<td style="background:#a8ccec;color:#333">13</td>
+<td style="background:#a8ccec;color:#333">14</td>
+<td style="background:#a8ccec;color:#333">13</td>
+<td style="background:#a8ccec;color:#333">11</td>
+<td style="background:#6fa8d6;color:#fff">21</td>
+<td style="background:#d4e4f7;color:#333">10</td>
+<td style="background:#a8ccec;color:#333">11</td>
+<td style="background:#a8ccec;color:#333">16</td>
+<td style="background:#a8ccec;color:#333">17</td>
+<td style="background:#a8ccec;color:#333">13</td>
+<td style="font-weight:700">167</td><td class="trend-stable">-- Stable</td></tr>
+<tr><td class="label-col">Cleanliness</td>
+<td style="background:#d4e4f7;color:#333">8</td>
+<td style="background:#a8ccec;color:#333">15</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#d4e4f7;color:#333">9</td>
+<td style="background:#d4e4f7;color:#333">6</td>
+<td style="background:#d4e4f7;color:#333">9</td>
+<td style="background:#a8ccec;color:#333">15</td>
+<td style="background:#d4e4f7;color:#333">6</td>
+<td style="background:#a8ccec;color:#333">15</td>
+<td style="background:#d4e4f7;color:#333">8</td>
+<td style="background:#a8ccec;color:#333">17</td>
+<td style="background:#a8ccec;color:#333">14</td>
+<td style="font-weight:700">127</td><td class="trend-up">^ Increasing</td></tr>
+<tr><td class="label-col">Others</td>
+<td style="background:#a8ccec;color:#333">14</td>
+<td style="background:#d4e4f7;color:#333">7</td>
+<td style="background:#d4e4f7;color:#333">8</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#d4e4f7;color:#333">8</td>
+<td style="background:#a8ccec;color:#333">12</td>
+<td style="background:#a8ccec;color:#333">11</td>
+<td style="background:#d4e4f7;color:#333">6</td>
+<td style="background:#a8ccec;color:#333">14</td>
+<td style="background:#d4e4f7;color:#333">8</td>
+<td style="background:#d4e4f7;color:#333">10</td>
+<td style="background:#d4e4f7;color:#333">9</td>
+<td style="font-weight:700">109</td><td class="trend-stable">-- Stable</td></tr>
+<tr><td class="label-col">Parking &amp; Traffic</td>
+<td style="background:#a8ccec;color:#333">13</td>
+<td style="background:#a8ccec;color:#333">11</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#d4e4f7;color:#333">7</td>
+<td style="background:#d4e4f7;color:#333">10</td>
+<td style="background:#d4e4f7;color:#333">6</td>
+<td style="background:#d4e4f7;color:#333">9</td>
+<td style="background:#d4e4f7;color:#333">8</td>
+<td style="background:#d4e4f7;color:#333">7</td>
+<td style="background:#d4e4f7;color:#333">9</td>
+<td style="background:#d4e4f7;color:#333">7</td>
+<td style="background:#d4e4f7;color:#333">9</td>
+<td style="font-weight:700">98</td><td class="trend-stable">-- Stable</td></tr>
+<tr><td class="label-col">Building Maintenance</td>
+<td style="background:#a8ccec;color:#333">12</td>
+<td style="background:#a8ccec;color:#333">11</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#d4e4f7;color:#333">9</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">4</td>
+<td style="background:#d4e4f7;color:#333">10</td>
+<td style="background:#d4e4f7;color:#333">9</td>
+<td style="background:#d4e4f7;color:#333">7</td>
+<td style="background:#a8ccec;color:#333">11</td>
+<td style="background:#a8ccec;color:#333">12</td>
+<td style="font-weight:700">97</td><td class="trend-stable">-- Stable</td></tr>
+<tr><td class="label-col">Common Area Obstruction</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#d4e4f7;color:#333">6</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#d4e4f7;color:#333">6</td>
+<td style="background:#a8ccec;color:#333">11</td>
+<td style="background:#d4e4f7;color:#333">7</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#d4e4f7;color:#333">9</td>
+<td style="background:#f0f4f8;color:#333">4</td>
+<td style="background:#6fa8d6;color:#fff">20</td>
+<td style="background:#a8ccec;color:#333">17</td>
+<td style="font-weight:700">92</td><td class="trend-up">^ Increasing</td></tr>
+<tr><td class="label-col">Gym Equipment</td>
+<td style="background:#d4e4f7;color:#333">7</td>
+<td style="background:#d4e4f7;color:#333">6</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#d4e4f7;color:#333">7</td>
+<td style="background:#d4e4f7;color:#333">6</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#f0f4f8;color:#333">4</td>
+<td style="background:#d4e4f7;color:#333">7</td>
+<td style="background:#d4e4f7;color:#333">7</td>
+<td style="background:#a8ccec;color:#333">15</td>
+<td style="background:#d4e4f7;color:#333">7</td>
+<td style="background:#a8ccec;color:#333">13</td>
+<td style="font-weight:700">82</td><td class="trend-up">^ Increasing</td></tr>
+<tr><td class="label-col">Noise &amp; Neighbour</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#f0f4f8;color:#333">4</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#d4e4f7;color:#333">6</td>
+<td style="background:#d4e4f7;color:#333">7</td>
+<td style="background:#d4e4f7;color:#333">6</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#d4e4f7;color:#333">6</td>
+<td style="background:#f0f4f8;color:#333">4</td>
+<td style="background:#d4e4f7;color:#333">8</td>
+<td style="font-weight:700">55</td><td class="trend-up">^ Increasing</td></tr>
+<tr><td class="label-col">Intercom &amp; Smart Home</td>
+<td style="background:#f0f4f8;color:#333">4</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#d4e4f7;color:#333">8</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#f0f4f8;color:#333">4</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#d4e4f7;color:#333">6</td>
+<td style="background:#d4e4f7;color:#333">7</td>
+<td style="background:#f0f4f8;color:#333">4</td>
+<td style="background:#d4e4f7;color:#333">9</td>
+<td style="font-weight:700">54</td><td class="trend-up">^ Increasing</td></tr>
+<tr><td class="label-col">Pool &amp; Water Features</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#d4e4f7;color:#333">10</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="font-weight:700">46</td><td class="trend-stable">-- Stable</td></tr>
+<tr><td class="label-col">Admin &amp; General</td>
+<td style="background:#d4e4f7;color:#333">6</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">4</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="font-weight:700">38</td><td class="trend-stable">-- Stable</td></tr>
+<tr><td class="label-col">Lighting</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#f0f4f8;color:#333">4</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="font-weight:700">27</td><td class="trend-stable">-- Stable</td></tr>
+<tr><td class="label-col">Water &amp; Plumbing</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#f0f4f8;color:#333">4</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="font-weight:700">27</td><td class="trend-stable">-- Stable</td></tr>
+<tr><td class="label-col">Landscaping</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">4</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="font-weight:700">21</td><td class="trend-down">v Decreasing</td></tr>
+<tr><td class="label-col">Playground &amp; Kids</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="font-weight:700">18</td><td class="trend-stable">-- Stable</td></tr>
+<tr><td class="label-col">Fire Safety</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="font-weight:700">15</td><td class="trend-up">^ Increasing</td></tr>
+<tr><td class="label-col">Electrical</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="font-weight:700">9</td><td class="trend-stable">-- Stable</td></tr>
+<tr class="heatmap-total-row"><td class="label-col">Total</td>
+<td>178</td>
+<td>158</td>
+<td>115</td>
+<td>145</td>
+<td>146</td>
+<td>127</td>
+<td>144</td>
+<td>117</td>
+<td>148</td>
+<td>164</td>
+<td>193</td>
+<td>209</td>
+<td>1844</td><td></td></tr>
+</tbody></table>
+</div>
+<h2 id="vendor-performance">3. Vendor Performance</h2>
+<div class="card" style="overflow-x:auto">
+<table><thead><tr><th>Vendor</th><th>Cluster(s)</th><th>Cases</th><th>Closed</th><th>Rate</th><th>Avg Rating</th><th>Avg Days to Close</th></tr></thead><tbody>
+<tr><td>(MA - Ocean IFM)</td><td style="font-size:0.82em">Admin &amp; General, Building Maintenance, Common Area Obstruction, Noise &amp; Neighbour, Parking &amp; Traffic, Playground &amp; Kids</td><td>507</td><td>489</td><td>96.4%</td><td>4.7</td><td>4.8</td></tr>
+<tr><td>Elite Pest Management</td><td style="font-size:0.82em">Pest &amp; Animals</td><td>372</td><td>363</td><td>97.6%</td><td>4.71</td><td>5.0</td></tr>
+<tr><td>Omega Security Services</td><td style="font-size:0.82em">Security &amp; Access</td><td>206</td><td>195</td><td>94.7%</td><td>4.54</td><td>4.5</td></tr>
+<tr><td>Kone</td><td style="font-size:0.82em">Lift Issues</td><td>184</td><td>182</td><td>98.9%</td><td>4.83</td><td>2.6</td></tr>
+<tr><td>Cora Environment / Stream Environment</td><td style="font-size:0.82em">Waste &amp; Recycling</td><td>167</td><td>167</td><td>100.0%</td><td>4.8</td><td>2.0</td></tr>
+<tr><td>ABM Century Pte Ltd</td><td style="font-size:0.82em">Cleanliness</td><td>127</td><td>123</td><td>96.9%</td><td>4.73</td><td>1.7</td></tr>
+<tr><td>Active Lifestyle Pte Ltd</td><td style="font-size:0.82em">Gym Equipment</td><td>82</td><td>75</td><td>91.5%</td><td>4.14</td><td>1.9</td></tr>
+<tr><td>Hilife</td><td style="font-size:0.82em">Intercom &amp; Smart Home</td><td>54</td><td>52</td><td>96.3%</td><td>4.76</td><td>1.2</td></tr>
+<tr><td>Wateronic</td><td style="font-size:0.82em">Pool &amp; Water Features</td><td>46</td><td>45</td><td>97.8%</td><td>4.8</td><td>1.4</td></tr>
+<tr><td>Action Engineering / LEW Electrical</td><td style="font-size:0.82em">Electrical, Lighting</td><td>36</td><td>34</td><td>94.4%</td><td>4.5</td><td>7.0</td></tr>
+<tr><td>MK Jetting</td><td style="font-size:0.82em">Water &amp; Plumbing</td><td>27</td><td>26</td><td>96.3%</td><td>4.88</td><td>4.0</td></tr>
+<tr><td>Nature Landscape / Spring Landscape</td><td style="font-size:0.82em">Landscaping</td><td>21</td><td>21</td><td>100.0%</td><td>4.58</td><td>2.4</td></tr>
+<tr><td>BS Engineering / Ademco</td><td style="font-size:0.82em">Fire Safety</td><td>15</td><td>14</td><td>93.3%</td><td>4.85</td><td>1.2</td></tr>
+</tbody></table>
+</div>
+<h2 id="block-heatmap">4. Block vs Issue Cluster Heatmap</h2>
+<div class="card" style="overflow-x:auto">
+<table class="heatmap-table"><thead><tr><th>Block</th>
+<th>Pest/Animals</th>
+<th>Security/Acce.</th>
+<th>Lift Issues</th>
+<th>Waste/Recycli.</th>
+<th>Cleanliness</th>
+<th>Others</th>
+<th>Parking/Traff.</th>
+<th>Building Main.</th>
+<th>Obstruction</th>
+<th>Gym Equipment</th>
+<th>Noise/Neighbo.</th>
+<th>Intercom/Smar.</th>
+<th>Total</th></tr></thead><tbody>
+<tr><td class="label-col">Blk 45</td>
+<td style="background:#a8ccec;color:#333">28</td>
+<td style="background:#a8ccec;color:#333">19</td>
+<td style="background:#f0f4f8;color:#333">9</td>
+<td style="background:#d4e4f7;color:#333">17</td>
+<td style="background:#d4e4f7;color:#333">16</td>
+<td style="background:#d4e4f7;color:#333">15</td>
+<td style="background:#f0f4f8;color:#333">8</td>
+<td style="background:#f0f4f8;color:#333">8</td>
+<td style="background:#f0f4f8;color:#333">8</td>
+<td style="background:#f0f4f8;color:#333">8</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="font-weight:700">146</td></tr>
+<tr><td class="label-col">Blk 47</td>
+<td style="background:#2c5282;color:#fff">55</td>
+<td style="background:#a8ccec;color:#333">27</td>
+<td style="background:#a8ccec;color:#333">23</td>
+<td style="background:#a8ccec;color:#333">30</td>
+<td style="background:#a8ccec;color:#333">26</td>
+<td style="background:#d4e4f7;color:#333">18</td>
+<td style="background:#d4e4f7;color:#333">16</td>
+<td style="background:#a8ccec;color:#333">21</td>
+<td style="background:#a8ccec;color:#333">25</td>
+<td style="background:#f0f4f8;color:#333">9</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#f0f4f8;color:#333">9</td>
+<td style="font-weight:700">262</td></tr>
+<tr><td class="label-col">Blk 49</td>
+<td style="background:#a8ccec;color:#333">21</td>
+<td style="background:#a8ccec;color:#333">22</td>
+<td style="background:#a8ccec;color:#333">19</td>
+<td style="background:#d4e4f7;color:#333">16</td>
+<td style="background:#f0f4f8;color:#333">7</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#d4e4f7;color:#333">16</td>
+<td style="background:#f0f4f8;color:#333">9</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#f0f4f8;color:#333">7</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="font-weight:700">132</td></tr>
+<tr><td class="label-col">Blk 51</td>
+<td style="background:#a8ccec;color:#333">20</td>
+<td style="background:#f0f4f8;color:#333">9</td>
+<td style="background:#d4e4f7;color:#333">14</td>
+<td style="background:#d4e4f7;color:#333">10</td>
+<td style="background:#f0f4f8;color:#333">6</td>
+<td style="background:#d4e4f7;color:#333">10</td>
+<td style="background:#f0f4f8;color:#333">8</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#f0f4f8;color:#333">4</td>
+<td style="background:#f0f4f8;color:#333">3</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#f0f4f8;color:#333">6</td>
+<td style="font-weight:700">98</td></tr>
+<tr><td class="label-col">Blk 53</td>
+<td style="background:#2c5282;color:#fff">63</td>
+<td style="background:#6fa8d6;color:#fff">36</td>
+<td style="background:#a8ccec;color:#333">26</td>
+<td style="background:#d4e4f7;color:#333">11</td>
+<td style="background:#d4e4f7;color:#333">12</td>
+<td style="background:#d4e4f7;color:#333">13</td>
+<td style="background:#d4e4f7;color:#333">10</td>
+<td style="background:#d4e4f7;color:#333">16</td>
+<td style="background:#d4e4f7;color:#333">17</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#d4e4f7;color:#333">10</td>
+<td style="background:#f0f4f8;color:#333">7</td>
+<td style="font-weight:700">226</td></tr>
+<tr><td class="label-col">Blk 55</td>
+<td style="background:#6fa8d6;color:#fff">40</td>
+<td style="background:#a8ccec;color:#333">26</td>
+<td style="background:#6fa8d6;color:#fff">36</td>
+<td style="background:#d4e4f7;color:#333">16</td>
+<td style="background:#f0f4f8;color:#333">9</td>
+<td style="background:#d4e4f7;color:#333">10</td>
+<td style="background:#d4e4f7;color:#333">15</td>
+<td style="background:#d4e4f7;color:#333">11</td>
+<td style="background:#f0f4f8;color:#333">8</td>
+<td style="background:#a8ccec;color:#333">24</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">4</td>
+<td style="font-weight:700">201</td></tr>
+<tr><td class="label-col">Blk 57</td>
+<td style="background:#6fa8d6;color:#fff">42</td>
+<td style="background:#a8ccec;color:#333">19</td>
+<td style="background:#a8ccec;color:#333">26</td>
+<td style="background:#d4e4f7;color:#333">12</td>
+<td style="background:#d4e4f7;color:#333">14</td>
+<td style="background:#f0f4f8;color:#333">7</td>
+<td style="background:#f0f4f8;color:#333">8</td>
+<td style="background:#d4e4f7;color:#333">11</td>
+<td style="background:#f0f4f8;color:#333">8</td>
+<td style="background:#d4e4f7;color:#333">10</td>
+<td style="background:#d4e4f7;color:#333">10</td>
+<td style="background:#f0f4f8;color:#333">4</td>
+<td style="font-weight:700">171</td></tr>
+<tr><td class="label-col">Blk 59</td>
+<td style="background:#6fa8d6;color:#fff">44</td>
+<td style="background:#a8ccec;color:#333">25</td>
+<td style="background:#a8ccec;color:#333">19</td>
+<td style="background:#a8ccec;color:#333">25</td>
+<td style="background:#d4e4f7;color:#333">14</td>
+<td style="background:#a8ccec;color:#333">21</td>
+<td style="background:#f0f4f8;color:#333">6</td>
+<td style="background:#f0f4f8;color:#333">8</td>
+<td style="background:#d4e4f7;color:#333">10</td>
+<td style="background:#f0f4f8;color:#333">8</td>
+<td style="background:#f0f4f8;color:#333">4</td>
+<td style="background:#f0f4f8;color:#333">7</td>
+<td style="font-weight:700">191</td></tr>
+<tr><td class="label-col">Blk 61</td>
+<td style="background:#3d7bbe;color:#fff">45</td>
+<td style="background:#a8ccec;color:#333">21</td>
+<td style="background:#d4e4f7;color:#333">12</td>
+<td style="background:#a8ccec;color:#333">25</td>
+<td style="background:#a8ccec;color:#333">22</td>
+<td style="background:#d4e4f7;color:#333">11</td>
+<td style="background:#f0f4f8;color:#333">9</td>
+<td style="background:#f0f4f8;color:#333">8</td>
+<td style="background:#f0f4f8;color:#333">6</td>
+<td style="background:#d4e4f7;color:#333">10</td>
+<td style="background:#f0f4f8;color:#333">8</td>
+<td style="background:#d4e4f7;color:#333">10</td>
+<td style="font-weight:700">187</td></tr>
+<tr><td class="label-col">Terrace</td>
+<td style="background:#d4e4f7;color:#333">14</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#f0f4f8;color:#333">5</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">2</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="background:#f0f4f8;color:#333">1</td>
+<td style="background:#ffffff;color:#333">-</td>
+<td style="font-weight:700">29</td></tr>
+<tr class="heatmap-total-row"><td class="label-col">Total</td>
+<td>372</td>
+<td>206</td>
+<td>184</td>
+<td>167</td>
+<td>127</td>
+<td>109</td>
+<td>98</td>
+<td>97</td>
+<td>92</td>
+<td>82</td>
+<td>55</td>
+<td>54</td>
+<td>1643</td></tr>
+</tbody></table>
+</div>
+<h2 id="resolution-time">5. Resolution Time by Cluster</h2>
+<div class="card">
+<table><thead><tr><th>Issue Cluster</th><th>Resolved Cases</th><th>Avg Days</th><th>Min</th><th>Max</th><th style="width:30%"></th></tr></thead><tbody>
+<tr><td>Building Maintenance</td><td>92</td><td>13.0</td><td>0.4</td><td>232.5</td><td><span class="bar-fill bar-red" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="13.0 days avg"></span></td></tr>
+<tr><td>Noise &amp; Neighbour</td><td>48</td><td>8.0</td><td>0.4</td><td>100.4</td><td><span class="bar-fill bar-red" style="width:61%;height:14px;display:inline-block;border-radius:3px;" title="8.0 days avg"></span></td></tr>
+<tr><td>Lighting</td><td>25</td><td>7.1</td><td>0.5</td><td>105.5</td><td><span class="bar-fill bar-red" style="width:54%;height:14px;display:inline-block;border-radius:3px;" title="7.1 days avg"></span></td></tr>
+<tr><td>Electrical</td><td>9</td><td>6.6</td><td>0.6</td><td>36.6</td><td><span class="bar-fill bar-yellow" style="width:50%;height:14px;display:inline-block;border-radius:3px;" title="6.6 days avg"></span></td></tr>
+<tr><td>Pest &amp; Animals</td><td>363</td><td>5.0</td><td>0.4</td><td>249.5</td><td><span class="bar-fill bar-yellow" style="width:38%;height:14px;display:inline-block;border-radius:3px;" title="5.0 days avg"></span></td></tr>
+<tr><td>Security &amp; Access</td><td>195</td><td>4.5</td><td>0.4</td><td>225.5</td><td><span class="bar-fill bar-yellow" style="width:34%;height:14px;display:inline-block;border-radius:3px;" title="4.5 days avg"></span></td></tr>
+<tr><td>Water &amp; Plumbing</td><td>26</td><td>4.0</td><td>0.4</td><td>59.5</td><td><span class="bar-fill bar-yellow" style="width:30%;height:14px;display:inline-block;border-radius:3px;" title="4.0 days avg"></span></td></tr>
+<tr><td>Playground &amp; Kids</td><td>17</td><td>3.7</td><td>0.4</td><td>32.6</td><td><span class="bar-fill bar-yellow" style="width:28%;height:14px;display:inline-block;border-radius:3px;" title="3.7 days avg"></span></td></tr>
+<tr><td>Others</td><td>108</td><td>3.5</td><td>0.4</td><td>223.5</td><td><span class="bar-fill bar-yellow" style="width:26%;height:14px;display:inline-block;border-radius:3px;" title="3.5 days avg"></span></td></tr>
+<tr><td>Lift Issues</td><td>182</td><td>2.6</td><td>0.4</td><td>97.5</td><td><span class="bar-fill bar-green" style="width:20%;height:14px;display:inline-block;border-radius:3px;" title="2.6 days avg"></span></td></tr>
+<tr><td>Landscaping</td><td>21</td><td>2.4</td><td>0.4</td><td>16.4</td><td><span class="bar-fill bar-green" style="width:18%;height:14px;display:inline-block;border-radius:3px;" title="2.4 days avg"></span></td></tr>
+<tr><td>Waste &amp; Recycling</td><td>167</td><td>2.0</td><td>0.4</td><td>54.7</td><td><span class="bar-fill bar-green" style="width:15%;height:14px;display:inline-block;border-radius:3px;" title="2.0 days avg"></span></td></tr>
+<tr><td>Gym Equipment</td><td>75</td><td>1.9</td><td>0.4</td><td>22.7</td><td><span class="bar-fill bar-green" style="width:14%;height:14px;display:inline-block;border-radius:3px;" title="1.9 days avg"></span></td></tr>
+<tr><td>Cleanliness</td><td>123</td><td>1.7</td><td>0.4</td><td>27.7</td><td><span class="bar-fill bar-green" style="width:13%;height:14px;display:inline-block;border-radius:3px;" title="1.7 days avg"></span></td></tr>
+<tr><td>Parking &amp; Traffic</td><td>96</td><td>1.6</td><td>0.4</td><td>9.7</td><td><span class="bar-fill bar-green" style="width:12%;height:14px;display:inline-block;border-radius:3px;" title="1.6 days avg"></span></td></tr>
+<tr><td>Pool &amp; Water Features</td><td>45</td><td>1.4</td><td>0.4</td><td>11.5</td><td><span class="bar-fill bar-green" style="width:10%;height:14px;display:inline-block;border-radius:3px;" title="1.4 days avg"></span></td></tr>
+<tr><td>Common Area Obstruction</td><td>90</td><td>1.4</td><td>0.4</td><td>4.7</td><td><span class="bar-fill bar-green" style="width:10%;height:14px;display:inline-block;border-radius:3px;" title="1.4 days avg"></span></td></tr>
+<tr><td>Fire Safety</td><td>14</td><td>1.2</td><td>0.5</td><td>2.7</td><td><span class="bar-fill bar-green" style="width:9%;height:14px;display:inline-block;border-radius:3px;" title="1.2 days avg"></span></td></tr>
+<tr><td>Intercom &amp; Smart Home</td><td>52</td><td>1.2</td><td>0.4</td><td>4.6</td><td><span class="bar-fill bar-green" style="width:9%;height:14px;display:inline-block;border-radius:3px;" title="1.2 days avg"></span></td></tr>
+<tr><td>Admin &amp; General</td><td>38</td><td>1.0</td><td>0.4</td><td>2.5</td><td><span class="bar-fill bar-green" style="width:7%;height:14px;display:inline-block;border-radius:3px;" title="1.0 days avg"></span></td></tr>
+</tbody></table>
+</div>
+<h2 id="sentiment">6. Sentiment Trend</h2>
+<div class="card">
+<table><thead><tr><th>Month</th><th>Total</th><th>Negative</th><th>Neg %</th><th>Positive</th><th style="width:30%">Negative Sentiment</th></tr></thead><tbody>
+<tr><td>Apr 2025</td><td>178</td><td>10</td><td>5.6%</td><td>27</td><td><span class="bar-fill bar-red" style="width:45%;height:14px;display:inline-block;border-radius:3px;" title="5.6% negative"></span></td></tr>
+<tr><td>May 2025</td><td>158</td><td>12</td><td>7.6%</td><td>17</td><td><span class="bar-fill bar-red" style="width:62%;height:14px;display:inline-block;border-radius:3px;" title="7.6% negative"></span></td></tr>
+<tr><td>Jun 2025</td><td>115</td><td>14</td><td>12.2%</td><td>20</td><td><span class="bar-fill bar-red" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="12.2% negative"></span></td></tr>
+<tr><td>Jul 2025</td><td>145</td><td>12</td><td>8.3%</td><td>26</td><td><span class="bar-fill bar-red" style="width:68%;height:14px;display:inline-block;border-radius:3px;" title="8.3% negative"></span></td></tr>
+<tr><td>Aug 2025</td><td>146</td><td>15</td><td>10.3%</td><td>23</td><td><span class="bar-fill bar-red" style="width:84%;height:14px;display:inline-block;border-radius:3px;" title="10.3% negative"></span></td></tr>
+<tr><td>Sep 2025</td><td>127</td><td>10</td><td>7.9%</td><td>24</td><td><span class="bar-fill bar-red" style="width:64%;height:14px;display:inline-block;border-radius:3px;" title="7.9% negative"></span></td></tr>
+<tr><td>Oct 2025</td><td>144</td><td>11</td><td>7.6%</td><td>26</td><td><span class="bar-fill bar-red" style="width:62%;height:14px;display:inline-block;border-radius:3px;" title="7.6% negative"></span></td></tr>
+<tr><td>Nov 2025</td><td>117</td><td>7</td><td>6.0%</td><td>21</td><td><span class="bar-fill bar-red" style="width:49%;height:14px;display:inline-block;border-radius:3px;" title="6.0% negative"></span></td></tr>
+<tr><td>Dec 2025</td><td>148</td><td>9</td><td>6.1%</td><td>26</td><td><span class="bar-fill bar-red" style="width:50%;height:14px;display:inline-block;border-radius:3px;" title="6.1% negative"></span></td></tr>
+<tr><td>Jan 2026</td><td>164</td><td>16</td><td>9.8%</td><td>27</td><td><span class="bar-fill bar-red" style="width:80%;height:14px;display:inline-block;border-radius:3px;" title="9.8% negative"></span></td></tr>
+<tr><td>Feb 2026</td><td>193</td><td>14</td><td>7.3%</td><td>35</td><td><span class="bar-fill bar-red" style="width:59%;height:14px;display:inline-block;border-radius:3px;" title="7.3% negative"></span></td></tr>
+<tr><td>Mar 2026</td><td>209</td><td>12</td><td>5.7%</td><td>36</td><td><span class="bar-fill bar-red" style="width:46%;height:14px;display:inline-block;border-radius:3px;" title="5.7% negative"></span></td></tr>
+</tbody></table>
+</div>
+<h2 id="rating-by-cluster">7. Average Rating by Cluster</h2>
+<div class="card">
+<table><thead><tr><th>Issue Cluster</th><th>Avg Rating</th><th style="width:40%"></th></tr></thead><tbody>
+<tr><td>Gym Equipment</td><td>4.14</td><td><span class="bar-fill bar-yellow" style="width:82%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.14/5"></span></td></tr>
+<tr><td>Lighting</td><td>4.36</td><td><span class="bar-fill bar-green" style="width:87%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.36/5"></span></td></tr>
+<tr><td>Common Area Obstruction</td><td>4.52</td><td><span class="bar-fill bar-green" style="width:90%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.52/5"></span></td></tr>
+<tr><td>Security &amp; Access</td><td>4.54</td><td><span class="bar-fill bar-green" style="width:90%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.54/5"></span></td></tr>
+<tr><td>Building Maintenance</td><td>4.56</td><td><span class="bar-fill bar-green" style="width:91%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.56/5"></span></td></tr>
+<tr><td>Landscaping</td><td>4.58</td><td><span class="bar-fill bar-green" style="width:91%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.58/5"></span></td></tr>
+<tr><td>Noise &amp; Neighbour</td><td>4.7</td><td><span class="bar-fill bar-green" style="width:94%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.7/5"></span></td></tr>
+<tr><td>Pest &amp; Animals</td><td>4.71</td><td><span class="bar-fill bar-green" style="width:94%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.71/5"></span></td></tr>
+<tr><td>Cleanliness</td><td>4.73</td><td><span class="bar-fill bar-green" style="width:94%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.73/5"></span></td></tr>
+<tr><td>Intercom &amp; Smart Home</td><td>4.76</td><td><span class="bar-fill bar-green" style="width:95%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.76/5"></span></td></tr>
+<tr><td>Parking &amp; Traffic</td><td>4.78</td><td><span class="bar-fill bar-green" style="width:95%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.78/5"></span></td></tr>
+<tr><td>Waste &amp; Recycling</td><td>4.8</td><td><span class="bar-fill bar-green" style="width:96%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.8/5"></span></td></tr>
+<tr><td>Pool &amp; Water Features</td><td>4.8</td><td><span class="bar-fill bar-green" style="width:96%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.8/5"></span></td></tr>
+<tr><td>Admin &amp; General</td><td>4.82</td><td><span class="bar-fill bar-green" style="width:96%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.82/5"></span></td></tr>
+<tr><td>Others</td><td>4.83</td><td><span class="bar-fill bar-green" style="width:96%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.83/5"></span></td></tr>
+<tr><td>Lift Issues</td><td>4.83</td><td><span class="bar-fill bar-green" style="width:96%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.83/5"></span></td></tr>
+<tr><td>Fire Safety</td><td>4.85</td><td><span class="bar-fill bar-green" style="width:97%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.85/5"></span></td></tr>
+<tr><td>Water &amp; Plumbing</td><td>4.88</td><td><span class="bar-fill bar-green" style="width:97%;height:14px;display:inline-block;border-radius:3px;" title="Rating 4.88/5"></span></td></tr>
+<tr><td>Electrical</td><td>5.0</td><td><span class="bar-fill bar-green" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="Rating 5.0/5"></span></td></tr>
+<tr><td>Playground &amp; Kids</td><td>5.0</td><td><span class="bar-fill bar-green" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="Rating 5.0/5"></span></td></tr>
+</tbody></table>
+</div>
+<h2 id="recurring-issues">8. Recurring Issues</h2>
+<div class="card">
+<p style="font-size:0.88em;color:var(--color-muted);margin-bottom:10px">Issues appearing in the same block + cluster across 3 or more months.</p>
+<table><thead><tr><th>Block</th><th>Issue Cluster</th><th>Months</th><th>Count</th></tr></thead><tbody>
+<tr><td>Blk 53</td><td>Security &amp; Access</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>12</td></tr>
+<tr><td>Blk 53</td><td>Pest &amp; Animals</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>12</td></tr>
+<tr><td>Blk 57</td><td>Pest &amp; Animals</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>12</td></tr>
+<tr><td>Blk 59</td><td>Pest &amp; Animals</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>12</td></tr>
+<tr><td>Blk 49</td><td>Pest &amp; Animals</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>12</td></tr>
+<tr><td>Blk 47</td><td>Pest &amp; Animals</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>12</td></tr>
+<tr><td>Blk 55</td><td>Pest &amp; Animals</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26</td><td>11</td></tr>
+<tr><td>Blk 49</td><td>Parking &amp; Traffic</td><td style="font-size:0.82em">Apr 25, May 25, Jul 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>11</td></tr>
+<tr><td>Blk 47</td><td>Waste &amp; Recycling</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Aug 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>11</td></tr>
+<tr><td>Blk 61</td><td>Pest &amp; Animals</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Jan 26, Mar 26</td><td>11</td></tr>
+<tr><td>Blk 55</td><td>Security &amp; Access</td><td style="font-size:0.82em">Apr 25, May 25, Jul 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>11</td></tr>
+<tr><td>Blk 47</td><td>Security &amp; Access</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>10</td></tr>
+<tr><td>Blk 57</td><td>Lift Issues</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26</td><td>10</td></tr>
+<tr><td>Blk 45</td><td>Pest &amp; Animals</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Aug 25, Sep 25, Oct 25, Jan 26, Feb 26, Mar 26</td><td>10</td></tr>
+<tr><td>Blk 47</td><td>Lift Issues</td><td style="font-size:0.82em">Apr 25, Jun 25, Jul 25, Aug 25, Sep 25, Oct 25, Nov 25, Jan 26, Feb 26, Mar 26</td><td>10</td></tr>
+<tr><td>Blk 59</td><td>Waste &amp; Recycling</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Aug 25, Sep 25, Oct 25, Nov 25, Jan 26, Mar 26</td><td>10</td></tr>
+<tr><td>Blk 59</td><td>Security &amp; Access</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Aug 25, Sep 25, Oct 25, Nov 25, Jan 26, Mar 26</td><td>10</td></tr>
+<tr><td>Blk 49</td><td>Waste &amp; Recycling</td><td style="font-size:0.82em">Apr 25, May 25, Jul 25, Aug 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>10</td></tr>
+<tr><td>Blk 45</td><td>Cleanliness</td><td style="font-size:0.82em">May 25, Jun 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>10</td></tr>
+<tr><td>Blk 53</td><td>Building Maintenance</td><td style="font-size:0.82em">May 25, Jun 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>10</td></tr>
+<tr><td>Blk 51</td><td>Pest &amp; Animals</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Aug 25, Sep 25, Nov 25, Dec 25, Mar 26</td><td>9</td></tr>
+<tr><td>Blk 53</td><td>Others</td><td style="font-size:0.82em">Apr 25, May 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26</td><td>9</td></tr>
+<tr><td>Blk 49</td><td>Security &amp; Access</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Aug 25, Oct 25, Dec 25, Feb 26, Mar 26</td><td>9</td></tr>
+<tr><td>Blk 47</td><td>Others</td><td style="font-size:0.82em">Apr 25, May 25, Jul 25, Aug 25, Sep 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>9</td></tr>
+<tr><td>Blk 55</td><td>Parking &amp; Traffic</td><td style="font-size:0.82em">Apr 25, May 25, Jul 25, Aug 25, Sep 25, Nov 25, Dec 25, Jan 26, Feb 26</td><td>9</td></tr>
+<tr><td>Blk 45</td><td>Others</td><td style="font-size:0.82em">Apr 25, May 25, Jul 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Feb 26</td><td>9</td></tr>
+<tr><td>Blk 61</td><td>Cleanliness</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Sep 25, Oct 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>9</td></tr>
+<tr><td>Blk 53</td><td>Lift Issues</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Aug 25, Sep 25, Oct 25, Dec 25, Feb 26, Mar 26</td><td>9</td></tr>
+<tr><td>Blk 61</td><td>Security &amp; Access</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Sep 25, Oct 25, Jan 26, Feb 26, Mar 26</td><td>9</td></tr>
+<tr><td>Blk 47</td><td>Cleanliness</td><td style="font-size:0.82em">Apr 25, Jul 25, Aug 25, Sep 25, Oct 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>9</td></tr>
+<tr><td>Blk 55</td><td>Gym Equipment</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Nov 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>9</td></tr>
+<tr><td>Blk 55</td><td>Lift Issues</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Aug 25, Sep 25, Dec 25, Jan 26, Feb 26</td><td>9</td></tr>
+<tr><td>Blk 59</td><td>Others</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Sep 25, Oct 25, Nov 25, Dec 25, Feb 26, Mar 26</td><td>9</td></tr>
+<tr><td>Blk 53</td><td>Common Area Obstruction</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Aug 25, Sep 25, Nov 25, Jan 26, Feb 26, Mar 26</td><td>9</td></tr>
+<tr><td>Blk 47</td><td>Common Area Obstruction</td><td style="font-size:0.82em">Apr 25, May 25, Jul 25, Aug 25, Sep 25, Nov 25, Dec 25, Feb 26, Mar 26</td><td>9</td></tr>
+<tr><td>Blk 55</td><td>Waste &amp; Recycling</td><td style="font-size:0.82em">Apr 25, May 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26</td><td>9</td></tr>
+<tr><td>Blk 45</td><td>Security &amp; Access</td><td style="font-size:0.82em">Apr 25, May 25, Jul 25, Aug 25, Sep 25, Oct 25, Dec 25, Jan 26, Mar 26</td><td>9</td></tr>
+<tr><td>Blk 61</td><td>Waste &amp; Recycling</td><td style="font-size:0.82em">May 25, Jun 25, Jul 25, Aug 25, Sep 25, Oct 25, Jan 26, Feb 26, Mar 26</td><td>9</td></tr>
+<tr><td>Blk 59</td><td>Lift Issues</td><td style="font-size:0.82em">Jun 25, Jul 25, Aug 25, Sep 25, Oct 25, Nov 25, Jan 26, Feb 26, Mar 26</td><td>9</td></tr>
+<tr><td>Blk 53</td><td>Cleanliness</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>8</td></tr>
+<tr><td>Blk 47</td><td>Building Maintenance</td><td style="font-size:0.82em">Apr 25, Jun 25, Jul 25, Oct 25, Nov 25, Dec 25, Jan 26, Mar 26</td><td>8</td></tr>
+<tr><td>Blk 55</td><td>Cleanliness</td><td style="font-size:0.82em">Apr 25, Jun 25, Sep 25, Oct 25, Nov 25, Dec 25, Jan 26, Mar 26</td><td>8</td></tr>
+<tr><td>Terrace</td><td>Pest &amp; Animals</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>8</td></tr>
+<tr><td>Blk 53</td><td>Noise &amp; Neighbour</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Aug 25, Nov 25, Jan 26, Feb 26, Mar 26</td><td>8</td></tr>
+<tr><td>Blk 57</td><td>Cleanliness</td><td style="font-size:0.82em">Apr 25, May 25, Jul 25, Aug 25, Oct 25, Nov 25, Dec 25, Mar 26</td><td>8</td></tr>
+<tr><td>Blk 49</td><td>Lift Issues</td><td style="font-size:0.82em">Apr 25, Jun 25, Jul 25, Nov 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>8</td></tr>
+<tr><td>Blk 57</td><td>Security &amp; Access</td><td style="font-size:0.82em">Apr 25, Jun 25, Aug 25, Sep 25, Oct 25, Jan 26, Feb 26, Mar 26</td><td>8</td></tr>
+<tr><td>Blk 57</td><td>Waste &amp; Recycling</td><td style="font-size:0.82em">May 25, Jul 25, Sep 25, Oct 25, Nov 25, Dec 25, Feb 26, Mar 26</td><td>8</td></tr>
+<tr><td>Blk 47</td><td>Parking &amp; Traffic</td><td style="font-size:0.82em">May 25, Jul 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Mar 26</td><td>8</td></tr>
+<tr><td>Blk 59</td><td>Cleanliness</td><td style="font-size:0.82em">May 25, Jun 25, Jul 25, Oct 25, Nov 25, Dec 25, Feb 26, Mar 26</td><td>8</td></tr>
+<tr><td>Blk 57</td><td>Common Area Obstruction</td><td style="font-size:0.82em">Jul 25, Aug 25, Sep 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26</td><td>8</td></tr>
+<tr><td>Blk 61</td><td>Others</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Sep 25, Oct 25, Dec 25, Mar 26</td><td>7</td></tr>
+<tr><td>Blk 45</td><td>Waste &amp; Recycling</td><td style="font-size:0.82em">Apr 25, Jun 25, Oct 25, Nov 25, Dec 25, Jan 26, Mar 26</td><td>7</td></tr>
+<tr><td>Blk 51</td><td>Lift Issues</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Sep 25, Oct 25, Mar 26</td><td>7</td></tr>
+<tr><td>Blk 53</td><td>Waste &amp; Recycling</td><td style="font-size:0.82em">Apr 25, May 25, Jul 25, Sep 25, Oct 25, Jan 26, Feb 26</td><td>7</td></tr>
+<tr><td>Blk 45</td><td>Gym Equipment</td><td style="font-size:0.82em">Apr 25, Jul 25, Aug 25, Oct 25, Nov 25, Jan 26, Feb 26</td><td>7</td></tr>
+<tr><td>Blk 61</td><td>Intercom &amp; Smart Home</td><td style="font-size:0.82em">May 25, Jul 25, Oct 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>7</td></tr>
+<tr><td>Blk 45</td><td>Building Maintenance</td><td style="font-size:0.82em">May 25, Aug 25, Oct 25, Dec 25, Jan 26, Feb 26, Mar 26</td><td>7</td></tr>
+<tr><td>Blk 53</td><td>Parking &amp; Traffic</td><td style="font-size:0.82em">May 25, Jul 25, Aug 25, Oct 25, Nov 25, Dec 25, Jan 26</td><td>7</td></tr>
+<tr><td>Blk 61</td><td>Noise &amp; Neighbour</td><td style="font-size:0.82em">May 25, Jun 25, Jul 25, Aug 25, Sep 25, Oct 25, Feb 26</td><td>7</td></tr>
+<tr><td>Blk 55</td><td>Admin &amp; General</td><td style="font-size:0.82em">May 25, Jun 25, Jul 25, Aug 25, Sep 25, Dec 25, Feb 26</td><td>7</td></tr>
+<tr><td>Blk 51</td><td>Security &amp; Access</td><td style="font-size:0.82em">Apr 25, Jun 25, Aug 25, Sep 25, Nov 25, Mar 26</td><td>6</td></tr>
+<tr><td>Blk 57</td><td>Gym Equipment</td><td style="font-size:0.82em">Apr 25, Jul 25, Aug 25, Nov 25, Jan 26, Mar 26</td><td>6</td></tr>
+<tr><td>Blk 55</td><td>Others</td><td style="font-size:0.82em">Apr 25, Oct 25, Nov 25, Dec 25, Jan 26, Feb 26</td><td>6</td></tr>
+<tr><td>Blk 61</td><td>Parking &amp; Traffic</td><td style="font-size:0.82em">Apr 25, May 25, Aug 25, Dec 25, Jan 26, Mar 26</td><td>6</td></tr>
+<tr><td>Blk 57</td><td>Parking &amp; Traffic</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Nov 25, Jan 26, Feb 26</td><td>6</td></tr>
+<tr><td>Blk 61</td><td>Building Maintenance</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Sep 25, Feb 26, Mar 26</td><td>6</td></tr>
+<tr><td>Blk 51</td><td>Waste &amp; Recycling</td><td style="font-size:0.82em">Apr 25, Jun 25, Oct 25, Nov 25, Dec 25, Feb 26</td><td>6</td></tr>
+<tr><td>Blk 47</td><td>Pool &amp; Water Features</td><td style="font-size:0.82em">Apr 25, Jun 25, Jul 25, Aug 25, Sep 25, Nov 25</td><td>6</td></tr>
+<tr><td>Blk 49</td><td>Building Maintenance</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Aug 25, Dec 25, Mar 26</td><td>6</td></tr>
+<tr><td>Blk 53</td><td>Intercom &amp; Smart Home</td><td style="font-size:0.82em">Apr 25, Jul 25, Aug 25, Sep 25, Nov 25, Jan 26</td><td>6</td></tr>
+<tr><td>Blk 57</td><td>Others</td><td style="font-size:0.82em">Apr 25, Jun 25, Aug 25, Nov 25, Dec 25, Jan 26</td><td>6</td></tr>
+<tr><td>Blk 57</td><td>Building Maintenance</td><td style="font-size:0.82em">Apr 25, May 25, Jul 25, Jan 26, Feb 26, Mar 26</td><td>6</td></tr>
+<tr><td>Blk 59</td><td>Parking &amp; Traffic</td><td style="font-size:0.82em">Apr 25, Jul 25, Aug 25, Nov 25, Jan 26, Mar 26</td><td>6</td></tr>
+<tr><td>Blk 59</td><td>Common Area Obstruction</td><td style="font-size:0.82em">May 25, Jul 25, Sep 25, Dec 25, Jan 26, Feb 26</td><td>6</td></tr>
+<tr><td>Blk 57</td><td>Noise &amp; Neighbour</td><td style="font-size:0.82em">May 25, Sep 25, Oct 25, Dec 25, Jan 26, Feb 26</td><td>6</td></tr>
+<tr><td>Blk 51</td><td>Others</td><td style="font-size:0.82em">Jun 25, Aug 25, Oct 25, Dec 25, Feb 26, Mar 26</td><td>6</td></tr>
+<tr><td>Blk 57</td><td>Pool &amp; Water Features</td><td style="font-size:0.82em">Jun 25, Oct 25, Nov 25, Dec 25, Feb 26, Mar 26</td><td>6</td></tr>
+<tr><td>Blk 45</td><td>Common Area Obstruction</td><td style="font-size:0.82em">Jul 25, Aug 25, Nov 25, Dec 25, Feb 26, Mar 26</td><td>6</td></tr>
+<tr><td>Blk 47</td><td>Gym Equipment</td><td style="font-size:0.82em">Aug 25, Sep 25, Nov 25, Jan 26, Feb 26, Mar 26</td><td>6</td></tr>
+<tr><td>Blk 51</td><td>Parking &amp; Traffic</td><td style="font-size:0.82em">Apr 25, Jun 25, Aug 25, Sep 25, Feb 26</td><td>5</td></tr>
+<tr><td>Blk 45</td><td>Parking &amp; Traffic</td><td style="font-size:0.82em">Apr 25, Jul 25, Sep 25, Dec 25, Jan 26</td><td>5</td></tr>
+<tr><td>Blk 47</td><td>Intercom &amp; Smart Home</td><td style="font-size:0.82em">Apr 25, Jul 25, Sep 25, Dec 25, Mar 26</td><td>5</td></tr>
+<tr><td>Blk 53</td><td>Admin &amp; General</td><td style="font-size:0.82em">Apr 25, Jul 25, Jan 26, Feb 26, Mar 26</td><td>5</td></tr>
+<tr><td>Blk 45</td><td>Lift Issues</td><td style="font-size:0.82em">Apr 25, May 25, Sep 25, Feb 26, Mar 26</td><td>5</td></tr>
+<tr><td>Blk 59</td><td>Pool &amp; Water Features</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25, Jul 25, Dec 25</td><td>5</td></tr>
+<tr><td>Blk 51</td><td>Intercom &amp; Smart Home</td><td style="font-size:0.82em">Apr 25, May 25, Jul 25, Nov 25, Mar 26</td><td>5</td></tr>
+<tr><td>Blk 55</td><td>Building Maintenance</td><td style="font-size:0.82em">Apr 25, Aug 25, Nov 25, Dec 25, Feb 26</td><td>5</td></tr>
+<tr><td>Blk 47</td><td>Admin &amp; General</td><td style="font-size:0.82em">Apr 25, Sep 25, Nov 25, Feb 26, Mar 26</td><td>5</td></tr>
+<tr><td>Blk 59</td><td>Gym Equipment</td><td style="font-size:0.82em">Apr 25, Oct 25, Jan 26, Feb 26, Mar 26</td><td>5</td></tr>
+<tr><td>Blk 55</td><td>Common Area Obstruction</td><td style="font-size:0.82em">Apr 25, Jul 25, Aug 25, Dec 25, Feb 26</td><td>5</td></tr>
+<tr><td>Blk 61</td><td>Lift Issues</td><td style="font-size:0.82em">May 25, Jul 25, Sep 25, Dec 25, Jan 26</td><td>5</td></tr>
+<tr><td>Blk 45</td><td>Intercom &amp; Smart Home</td><td style="font-size:0.82em">May 25, Jul 25, Sep 25, Dec 25, Feb 26</td><td>5</td></tr>
+<tr><td>Blk 59</td><td>Intercom &amp; Smart Home</td><td style="font-size:0.82em">May 25, Sep 25, Jan 26, Feb 26, Mar 26</td><td>5</td></tr>
+<tr><td>Blk 61</td><td>Common Area Obstruction</td><td style="font-size:0.82em">May 25, Sep 25, Oct 25, Dec 25, Mar 26</td><td>5</td></tr>
+<tr><td>Blk 61</td><td>Gym Equipment</td><td style="font-size:0.82em">May 25, Jun 25, Dec 25, Jan 26, Mar 26</td><td>5</td></tr>
+<tr><td>Blk 59</td><td>Building Maintenance</td><td style="font-size:0.82em">May 25, Jul 25, Aug 25, Nov 25, Feb 26</td><td>5</td></tr>
+<tr><td>Blk 49</td><td>Cleanliness</td><td style="font-size:0.82em">Jul 25, Sep 25, Nov 25, Feb 26, Mar 26</td><td>5</td></tr>
+<tr><td>Blk 55</td><td>Water &amp; Plumbing</td><td style="font-size:0.82em">Apr 25, Nov 25, Jan 26, Feb 26</td><td>4</td></tr>
+<tr><td>Blk 55</td><td>Intercom &amp; Smart Home</td><td style="font-size:0.82em">Apr 25, Jun 25, Dec 25, Jan 26</td><td>4</td></tr>
+<tr><td>Blk 57</td><td>Lighting</td><td style="font-size:0.82em">Apr 25, Jun 25, Nov 25, Jan 26</td><td>4</td></tr>
+<tr><td>Blk 59</td><td>Admin &amp; General</td><td style="font-size:0.82em">Apr 25, Sep 25, Jan 26, Feb 26</td><td>4</td></tr>
+<tr><td>Terrace</td><td>Landscaping</td><td style="font-size:0.82em">Apr 25, May 25, Oct 25, Dec 25</td><td>4</td></tr>
+<tr><td>Blk 59</td><td>Playground &amp; Kids</td><td style="font-size:0.82em">Apr 25, Sep 25, Nov 25, Mar 26</td><td>4</td></tr>
+<tr><td>Blk 59</td><td>Noise &amp; Neighbour</td><td style="font-size:0.82em">Apr 25, Nov 25, Feb 26, Mar 26</td><td>4</td></tr>
+<tr><td>Blk 53</td><td>Lighting</td><td style="font-size:0.82em">May 25, Jul 25, Jan 26, Mar 26</td><td>4</td></tr>
+<tr><td>Blk 53</td><td>Pool &amp; Water Features</td><td style="font-size:0.82em">May 25, Jan 26, Feb 26, Mar 26</td><td>4</td></tr>
+<tr><td>Blk 49</td><td>Common Area Obstruction</td><td style="font-size:0.82em">Jun 25, Aug 25, Dec 25, Mar 26</td><td>4</td></tr>
+<tr><td>Blk 51</td><td>Noise &amp; Neighbour</td><td style="font-size:0.82em">Jun 25, Sep 25, Oct 25, Nov 25</td><td>4</td></tr>
+<tr><td>Blk 57</td><td>Intercom &amp; Smart Home</td><td style="font-size:0.82em">Jul 25, Dec 25, Jan 26, Mar 26</td><td>4</td></tr>
+<tr><td>Blk 53</td><td>Water &amp; Plumbing</td><td style="font-size:0.82em">Jul 25, Aug 25, Sep 25, Mar 26</td><td>4</td></tr>
+<tr><td>Blk 61</td><td>Admin &amp; General</td><td style="font-size:0.82em">Jul 25, Oct 25, Feb 26, Mar 26</td><td>4</td></tr>
+<tr><td>Blk 45</td><td>Noise &amp; Neighbour</td><td style="font-size:0.82em">Aug 25, Nov 25, Jan 26, Mar 26</td><td>4</td></tr>
+<tr><td>Blk 53</td><td>Gym Equipment</td><td style="font-size:0.82em">Oct 25, Nov 25, Jan 26, Mar 26</td><td>4</td></tr>
+<tr><td>Blk 45</td><td>Playground &amp; Kids</td><td style="font-size:0.82em">Nov 25, Dec 25, Jan 26, Feb 26</td><td>4</td></tr>
+<tr><td>Blk 49</td><td>Fire Safety</td><td style="font-size:0.82em">Apr 25, Sep 25, Nov 25</td><td>3</td></tr>
+<tr><td>Blk 55</td><td>Landscaping</td><td style="font-size:0.82em">Apr 25, May 25, Jun 25</td><td>3</td></tr>
+<tr><td>Blk 51</td><td>Cleanliness</td><td style="font-size:0.82em">Apr 25, May 25, Jul 25</td><td>3</td></tr>
+<tr><td>Terrace</td><td>Waste &amp; Recycling</td><td style="font-size:0.82em">Apr 25, Jul 25, Feb 26</td><td>3</td></tr>
+<tr><td>Blk 47</td><td>Water &amp; Plumbing</td><td style="font-size:0.82em">Apr 25, Sep 25, Oct 25</td><td>3</td></tr>
+<tr><td>Blk 45</td><td>Fire Safety</td><td style="font-size:0.82em">Apr 25, Nov 25, Mar 26</td><td>3</td></tr>
+<tr><td>Blk 49</td><td>Noise &amp; Neighbour</td><td style="font-size:0.82em">Apr 25, Nov 25, Mar 26</td><td>3</td></tr>
+<tr><td>Blk 49</td><td>Landscaping</td><td style="font-size:0.82em">Apr 25, Jun 25, Dec 25</td><td>3</td></tr>
+<tr><td>Blk 49</td><td>Pool &amp; Water Features</td><td style="font-size:0.82em">May 25, Jan 26, Feb 26</td><td>3</td></tr>
+<tr><td>Blk 55</td><td>Pool &amp; Water Features</td><td style="font-size:0.82em">May 25, Aug 25, Oct 25</td><td>3</td></tr>
+<tr><td>Blk 51</td><td>Gym Equipment</td><td style="font-size:0.82em">May 25, Jul 25, Nov 25</td><td>3</td></tr>
+<tr><td>Blk 45</td><td>Pool &amp; Water Features</td><td style="font-size:0.82em">May 25, Jan 26, Feb 26</td><td>3</td></tr>
+<tr><td>Blk 61</td><td>Lighting</td><td style="font-size:0.82em">May 25, Jun 25, Oct 25</td><td>3</td></tr>
+<tr><td>Blk 47</td><td>Landscaping</td><td style="font-size:0.82em">Jun 25, Aug 25, Dec 25</td><td>3</td></tr>
+<tr><td>Blk 53</td><td>Electrical</td><td style="font-size:0.82em">Jun 25, Feb 26, Mar 26</td><td>3</td></tr>
+<tr><td>Blk 53</td><td>Playground &amp; Kids</td><td style="font-size:0.82em">Jun 25, Jul 25, Jan 26</td><td>3</td></tr>
+<tr><td>Blk 49</td><td>Gym Equipment</td><td style="font-size:0.82em">Jul 25, Aug 25, Mar 26</td><td>3</td></tr>
+<tr><td>Blk 45</td><td>Admin &amp; General</td><td style="font-size:0.82em">Jul 25, Aug 25, Nov 25</td><td>3</td></tr>
+<tr><td>Blk 49</td><td>Water &amp; Plumbing</td><td style="font-size:0.82em">Jul 25, Aug 25, Mar 26</td><td>3</td></tr>
+<tr><td>Blk 51</td><td>Common Area Obstruction</td><td style="font-size:0.82em">Aug 25, Jan 26, Mar 26</td><td>3</td></tr>
+<tr><td>Blk 47</td><td>Noise &amp; Neighbour</td><td style="font-size:0.82em">Nov 25, Jan 26, Mar 26</td><td>3</td></tr>
+</tbody></table>
+</div>
+<h2 id="overall-highlights">9. Key Findings and Action Items</h2>
+<div class="card">
+<h3>Issue Clusters Trending Up (Growing)</h3><ul class="highlight-list">
+<li><span class="trend-up">Cleanliness</span> -- 127 cases total, increasing trend</li>
+<li><span class="trend-up">Common Area Obstruction</span> -- 92 cases total, increasing trend</li>
+<li><span class="trend-up">Gym Equipment</span> -- 82 cases total, increasing trend</li>
+<li><span class="trend-up">Noise &amp; Neighbour</span> -- 55 cases total, increasing trend</li>
+<li><span class="trend-up">Intercom &amp; Smart Home</span> -- 54 cases total, increasing trend</li>
+<li><span class="trend-up">Fire Safety</span> -- 15 cases total, increasing trend</li>
+</ul>
+<h3>Issue Clusters Trending Down (Improving)</h3><ul class="highlight-list">
+<li><span class="trend-down">Landscaping</span> -- 21 cases total, decreasing trend</li>
+</ul>
+<h3>Persistent Issue Clusters (Consistently High)</h3><ul class="highlight-list">
+<li><strong>Pest &amp; Animals</strong> -- appeared in top 5 for 12 of 12 months</li>
+<li><strong>Lift Issues</strong> -- appeared in top 5 for 11 of 12 months</li>
+<li><strong>Security &amp; Access</strong> -- appeared in top 5 for 11 of 12 months</li>
+<li><strong>Waste &amp; Recycling</strong> -- appeared in top 5 for 9 of 12 months</li>
+</ul>
+<h3>Top Action Items</h3><ol class="highlight-list">
+<li>Security &amp; Access at Blk 53 recurred in 12 months -- investigate root cause.</li>
+<li>Pest &amp; Animals at Blk 53 recurred in 12 months -- investigate root cause.</li>
+<li>Pest &amp; Animals at Blk 57 recurred in 12 months -- investigate root cause.</li>
+<li>Pest &amp; Animals at Blk 59 recurred in 12 months -- investigate root cause.</li>
+<li>Pest &amp; Animals at Blk 49 recurred in 12 months -- investigate root cause.</li>
+<li>Cleanliness is trending upward (127 cases total) -- deploy preventive measures.</li>
+<li>Common Area Obstruction is trending upward (92 cases total) -- deploy preventive measures.</li>
+<li>Fire Safety is trending upward (15 cases total) -- deploy preventive measures.</li>
+<li>Gym Equipment is trending upward (82 cases total) -- deploy preventive measures.</li>
+<li>Intercom &amp; Smart Home is trending upward (54 cases total) -- deploy preventive measures.</li>
+</ol>
+</div>
+<h2 id="monthly-drill-down">10. Monthly Drill-Down</h2>
+<div id="month-2025-04" style="margin-bottom:8px">
+<button class="collapsible-btn" onclick="toggleSection('month-content-2025-04')"><span>Apr 2025 -- 178 cases, 97.8% closed, avg rating 4.15</span><span class="chevron">&#9654;</span></button>
+<div id="month-content-2025-04" class="collapsible-content">
+<div class="card">
+<div class="summary-grid">
+<div class="metric"><div class="value">178</div><div class="label">Cases</div></div>
+<div class="metric"><div class="value">174</div><div class="label">Closed</div></div>
+<div class="metric"><div class="value">4</div><div class="label">Outstanding</div></div>
+<div class="metric"><div class="value">97.8%</div><div class="label">Closure Rate</div></div>
+<div class="metric"><div class="value">4.15</div><div class="label">Avg Rating</div></div>
+<div class="metric"><div class="value">12.8</div><div class="label">Avg Days to Close</div></div>
+</div>
+<h3>Highlights</h3><ul class="highlight-list">
+<li>Top issue clusters: Pest &amp; Animals (32), Security &amp; Access (24), Waste &amp; Recycling (16).</li>
+<li>4 cases remain outstanding.</li>
+<li>14 low-rating cases (1-2 stars): Security &amp; Access (7), Pest &amp; Animals (4), Cleanliness (1).</li>
+</ul>
+<h3>Issue Cluster Distribution</h3>
+<table><thead><tr><th>#</th><th>Cluster</th><th>Count</th><th>%</th><th style="width:30%"></th></tr></thead><tbody>
+<tr><td>1</td><td>Pest &amp; Animals</td><td>32</td><td>18.0%</td><td><span class="bar-fill bar-primary" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="32 cases"></span></td></tr>
+<tr><td>2</td><td>Security &amp; Access</td><td>24</td><td>13.5%</td><td><span class="bar-fill bar-primary" style="width:75%;height:14px;display:inline-block;border-radius:3px;" title="24 cases"></span></td></tr>
+<tr><td>3</td><td>Waste &amp; Recycling</td><td>16</td><td>9.0%</td><td><span class="bar-fill bar-primary" style="width:50%;height:14px;display:inline-block;border-radius:3px;" title="16 cases"></span></td></tr>
+<tr><td>4</td><td>Lift Issues</td><td>16</td><td>9.0%</td><td><span class="bar-fill bar-primary" style="width:50%;height:14px;display:inline-block;border-radius:3px;" title="16 cases"></span></td></tr>
+<tr><td>5</td><td>Others</td><td>14</td><td>7.9%</td><td><span class="bar-fill bar-primary" style="width:43%;height:14px;display:inline-block;border-radius:3px;" title="14 cases"></span></td></tr>
+<tr><td>6</td><td>Parking &amp; Traffic</td><td>13</td><td>7.3%</td><td><span class="bar-fill bar-primary" style="width:40%;height:14px;display:inline-block;border-radius:3px;" title="13 cases"></span></td></tr>
+<tr><td>7</td><td>Building Maintenance</td><td>12</td><td>6.7%</td><td><span class="bar-fill bar-primary" style="width:37%;height:14px;display:inline-block;border-radius:3px;" title="12 cases"></span></td></tr>
+<tr><td>8</td><td>Cleanliness</td><td>8</td><td>4.5%</td><td><span class="bar-fill bar-primary" style="width:25%;height:14px;display:inline-block;border-radius:3px;" title="8 cases"></span></td></tr>
+<tr><td>9</td><td>Gym Equipment</td><td>7</td><td>3.9%</td><td><span class="bar-fill bar-primary" style="width:21%;height:14px;display:inline-block;border-radius:3px;" title="7 cases"></span></td></tr>
+<tr><td>10</td><td>Admin &amp; General</td><td>6</td><td>3.4%</td><td><span class="bar-fill bar-primary" style="width:18%;height:14px;display:inline-block;border-radius:3px;" title="6 cases"></span></td></tr>
+<tr><td>11</td><td>Water &amp; Plumbing</td><td>5</td><td>2.8%</td><td><span class="bar-fill bar-primary" style="width:15%;height:14px;display:inline-block;border-radius:3px;" title="5 cases"></span></td></tr>
+<tr><td>12</td><td>Landscaping</td><td>5</td><td>2.8%</td><td><span class="bar-fill bar-primary" style="width:15%;height:14px;display:inline-block;border-radius:3px;" title="5 cases"></span></td></tr>
+<tr><td>13</td><td>Noise &amp; Neighbour</td><td>5</td><td>2.8%</td><td><span class="bar-fill bar-primary" style="width:15%;height:14px;display:inline-block;border-radius:3px;" title="5 cases"></span></td></tr>
+<tr><td>14</td><td>Intercom &amp; Smart Home</td><td>4</td><td>2.2%</td><td><span class="bar-fill bar-primary" style="width:12%;height:14px;display:inline-block;border-radius:3px;" title="4 cases"></span></td></tr>
+<tr><td>15</td><td>Common Area Obstruction</td><td>3</td><td>1.7%</td><td><span class="bar-fill bar-primary" style="width:9%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>16</td><td>Fire Safety</td><td>2</td><td>1.1%</td><td><span class="bar-fill bar-primary" style="width:6%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>17</td><td>Pool &amp; Water Features</td><td>2</td><td>1.1%</td><td><span class="bar-fill bar-primary" style="width:6%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>18</td><td>Electrical</td><td>2</td><td>1.1%</td><td><span class="bar-fill bar-primary" style="width:6%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>19</td><td>Lighting</td><td>1</td><td>0.6%</td><td><span class="bar-fill bar-primary" style="width:3%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+<tr><td>20</td><td>Playground &amp; Kids</td><td>1</td><td>0.6%</td><td><span class="bar-fill bar-primary" style="width:3%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+</tbody></table>
+<h3>Block Breakdown</h3>
+<table><thead><tr><th>Block</th><th>Cases</th><th>Top Cluster</th></tr></thead><tbody>
+<tr><td>Blk 47</td><td>24</td><td>Building Maintenance (5)</td></tr>
+<tr><td>Blk 55</td><td>24</td><td>Water &amp; Plumbing (4)</td></tr>
+<tr><td>Blk 49</td><td>23</td><td>Security &amp; Access (6)</td></tr>
+<tr><td>Blk 59</td><td>22</td><td>Pest &amp; Animals (7)</td></tr>
+<tr><td>Blk 53</td><td>21</td><td>Security &amp; Access (4)</td></tr>
+<tr><td>Blk 57</td><td>19</td><td>Gym Equipment (4)</td></tr>
+<tr><td>Blk 51</td><td>15</td><td>Pest &amp; Animals (4)</td></tr>
+<tr><td>Blk 45</td><td>14</td><td>Parking &amp; Traffic (3)</td></tr>
+<tr><td>Blk 61</td><td>8</td><td>Others (2)</td></tr>
+<tr><td>Terrace</td><td>8</td><td>Pest &amp; Animals (3)</td></tr>
+</tbody></table>
+<h3>Outstanding Cases (4)</h3>
+<table><thead><tr><th>Case</th><th>Block</th><th>Cluster</th><th>Title</th><th>Status</th></tr></thead><tbody>
+<tr><td>1292-3135</td><td>Blk 55</td><td>Water &amp; Plumbing</td><td>hole in ceiling and leaking</td><td>In Progress</td></tr>
+<tr><td>1292-3113</td><td>Blk 61</td><td>Parking &amp; Traffic</td><td>Ceiling surface peeled off</td><td>In Progress</td></tr>
+<tr><td>1292-3033</td><td>Blk 57</td><td>Cleanliness</td><td>stains at Blk 57 basement</td><td>In Progress</td></tr>
+<tr><td>1292-3006</td><td>Blk 47</td><td>Building Maintenance</td><td>dirty external wall amd windows</td><td>In Progress</td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="month-2025-05" style="margin-bottom:8px">
+<button class="collapsible-btn" onclick="toggleSection('month-content-2025-05')"><span>May 2025 -- 158 cases, 100.0% closed, avg rating 4.72</span><span class="chevron">&#9654;</span></button>
+<div id="month-content-2025-05" class="collapsible-content">
+<div class="card">
+<div class="summary-grid">
+<div class="metric"><div class="value">158</div><div class="label">Cases</div></div>
+<div class="metric"><div class="value">158</div><div class="label">Closed</div></div>
+<div class="metric"><div class="value">0</div><div class="label">Outstanding</div></div>
+<div class="metric"><div class="value">100.0%</div><div class="label">Closure Rate</div></div>
+<div class="metric"><div class="value">4.72</div><div class="label">Avg Rating</div></div>
+<div class="metric"><div class="value">5.7</div><div class="label">Avg Days to Close</div></div>
+</div>
+<h3>Highlights</h3><ul class="highlight-list">
+<li>Top issue clusters: Pest &amp; Animals (35), Cleanliness (15), Security &amp; Access (14).</li>
+<li>Cleanliness spiked from 8 to 15 cases.</li>
+<li>Common Area Obstruction spiked from 3 to 6 cases.</li>
+<li>Pool &amp; Water Features spiked from 2 to 10 cases.</li>
+<li>11 low-rating cases (1-2 stars): Cleanliness (3), Others (1), Lift Issues (1).</li>
+</ul>
+<h3>Issue Cluster Distribution</h3>
+<table><thead><tr><th>#</th><th>Cluster</th><th>Count</th><th>%</th><th style="width:30%"></th></tr></thead><tbody>
+<tr><td>1</td><td>Pest &amp; Animals</td><td>35</td><td>22.2%</td><td><span class="bar-fill bar-primary" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="35 cases"></span></td></tr>
+<tr><td>2</td><td>Cleanliness</td><td>15</td><td>9.5%</td><td><span class="bar-fill bar-primary" style="width:42%;height:14px;display:inline-block;border-radius:3px;" title="15 cases"></span></td></tr>
+<tr><td>3</td><td>Security &amp; Access</td><td>14</td><td>8.9%</td><td><span class="bar-fill bar-primary" style="width:40%;height:14px;display:inline-block;border-radius:3px;" title="14 cases"></span></td></tr>
+<tr><td>4</td><td>Lift Issues</td><td>13</td><td>8.2%</td><td><span class="bar-fill bar-primary" style="width:37%;height:14px;display:inline-block;border-radius:3px;" title="13 cases"></span></td></tr>
+<tr><td>5</td><td>Waste &amp; Recycling</td><td>12</td><td>7.6%</td><td><span class="bar-fill bar-primary" style="width:34%;height:14px;display:inline-block;border-radius:3px;" title="12 cases"></span></td></tr>
+<tr><td>6</td><td>Building Maintenance</td><td>11</td><td>7.0%</td><td><span class="bar-fill bar-primary" style="width:31%;height:14px;display:inline-block;border-radius:3px;" title="11 cases"></span></td></tr>
+<tr><td>7</td><td>Parking &amp; Traffic</td><td>11</td><td>7.0%</td><td><span class="bar-fill bar-primary" style="width:31%;height:14px;display:inline-block;border-radius:3px;" title="11 cases"></span></td></tr>
+<tr><td>8</td><td>Pool &amp; Water Features</td><td>10</td><td>6.3%</td><td><span class="bar-fill bar-primary" style="width:28%;height:14px;display:inline-block;border-radius:3px;" title="10 cases"></span></td></tr>
+<tr><td>9</td><td>Others</td><td>7</td><td>4.4%</td><td><span class="bar-fill bar-primary" style="width:20%;height:14px;display:inline-block;border-radius:3px;" title="7 cases"></span></td></tr>
+<tr><td>10</td><td>Common Area Obstruction</td><td>6</td><td>3.8%</td><td><span class="bar-fill bar-primary" style="width:17%;height:14px;display:inline-block;border-radius:3px;" title="6 cases"></span></td></tr>
+<tr><td>11</td><td>Gym Equipment</td><td>6</td><td>3.8%</td><td><span class="bar-fill bar-primary" style="width:17%;height:14px;display:inline-block;border-radius:3px;" title="6 cases"></span></td></tr>
+<tr><td>12</td><td>Intercom &amp; Smart Home</td><td>5</td><td>3.2%</td><td><span class="bar-fill bar-primary" style="width:14%;height:14px;display:inline-block;border-radius:3px;" title="5 cases"></span></td></tr>
+<tr><td>13</td><td>Noise &amp; Neighbour</td><td>4</td><td>2.5%</td><td><span class="bar-fill bar-primary" style="width:11%;height:14px;display:inline-block;border-radius:3px;" title="4 cases"></span></td></tr>
+<tr><td>14</td><td>Lighting</td><td>3</td><td>1.9%</td><td><span class="bar-fill bar-primary" style="width:8%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>15</td><td>Landscaping</td><td>2</td><td>1.3%</td><td><span class="bar-fill bar-primary" style="width:5%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>16</td><td>Admin &amp; General</td><td>2</td><td>1.3%</td><td><span class="bar-fill bar-primary" style="width:5%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>17</td><td>Electrical</td><td>1</td><td>0.6%</td><td><span class="bar-fill bar-primary" style="width:2%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+<tr><td>18</td><td>Water &amp; Plumbing</td><td>1</td><td>0.6%</td><td><span class="bar-fill bar-primary" style="width:2%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+</tbody></table>
+<h3>Block Breakdown</h3>
+<table><thead><tr><th>Block</th><th>Cases</th><th>Top Cluster</th></tr></thead><tbody>
+<tr><td>Blk 53</td><td>29</td><td>Pest &amp; Animals (8)</td></tr>
+<tr><td>Blk 61</td><td>23</td><td>Building Maintenance (3)</td></tr>
+<tr><td>Blk 59</td><td>20</td><td>Pest &amp; Animals (8)</td></tr>
+<tr><td>Blk 55</td><td>19</td><td>Gym Equipment (3)</td></tr>
+<tr><td>Blk 51</td><td>16</td><td>Lift Issues (5)</td></tr>
+<tr><td>Blk 47</td><td>15</td><td>Pest &amp; Animals (4)</td></tr>
+<tr><td>Blk 57</td><td>12</td><td>Building Maintenance (3)</td></tr>
+<tr><td>Blk 45</td><td>11</td><td>Others (2)</td></tr>
+<tr><td>Blk 49</td><td>10</td><td>Pest &amp; Animals (3)</td></tr>
+<tr><td>Terrace</td><td>3</td><td>Pest &amp; Animals (1)</td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="month-2025-06" style="margin-bottom:8px">
+<button class="collapsible-btn" onclick="toggleSection('month-content-2025-06')"><span>Jun 2025 -- 115 cases, 98.3% closed, avg rating 4.71</span><span class="chevron">&#9654;</span></button>
+<div id="month-content-2025-06" class="collapsible-content">
+<div class="card">
+<div class="summary-grid">
+<div class="metric"><div class="value">115</div><div class="label">Cases</div></div>
+<div class="metric"><div class="value">113</div><div class="label">Closed</div></div>
+<div class="metric"><div class="value">2</div><div class="label">Outstanding</div></div>
+<div class="metric"><div class="value">98.3%</div><div class="label">Closure Rate</div></div>
+<div class="metric"><div class="value">4.71</div><div class="label">Avg Rating</div></div>
+<div class="metric"><div class="value">5.7</div><div class="label">Avg Days to Close</div></div>
+</div>
+<h3>Highlights</h3><ul class="highlight-list">
+<li>Top issue clusters: Pest &amp; Animals (25), Security &amp; Access (15), Waste &amp; Recycling (13).</li>
+<li>Case volume dropped 27% vs previous month (115 vs 158).</li>
+<li>Lighting spiked from 3 to 5 cases.</li>
+<li>2 cases remain outstanding.</li>
+<li>7 low-rating cases (1-2 stars): Common Area Obstruction (2), Landscaping (1), Waste &amp; Recycling (1).</li>
+</ul>
+<h3>Issue Cluster Distribution</h3>
+<table><thead><tr><th>#</th><th>Cluster</th><th>Count</th><th>%</th><th style="width:30%"></th></tr></thead><tbody>
+<tr><td>1</td><td>Pest &amp; Animals</td><td>25</td><td>21.7%</td><td><span class="bar-fill bar-primary" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="25 cases"></span></td></tr>
+<tr><td>2</td><td>Security &amp; Access</td><td>15</td><td>13.0%</td><td><span class="bar-fill bar-primary" style="width:60%;height:14px;display:inline-block;border-radius:3px;" title="15 cases"></span></td></tr>
+<tr><td>3</td><td>Waste &amp; Recycling</td><td>13</td><td>11.3%</td><td><span class="bar-fill bar-primary" style="width:52%;height:14px;display:inline-block;border-radius:3px;" title="13 cases"></span></td></tr>
+<tr><td>4</td><td>Lift Issues</td><td>12</td><td>10.4%</td><td><span class="bar-fill bar-primary" style="width:48%;height:14px;display:inline-block;border-radius:3px;" title="12 cases"></span></td></tr>
+<tr><td>5</td><td>Others</td><td>8</td><td>7.0%</td><td><span class="bar-fill bar-primary" style="width:32%;height:14px;display:inline-block;border-radius:3px;" title="8 cases"></span></td></tr>
+<tr><td>6</td><td>Cleanliness</td><td>5</td><td>4.3%</td><td><span class="bar-fill bar-primary" style="width:20%;height:14px;display:inline-block;border-radius:3px;" title="5 cases"></span></td></tr>
+<tr><td>7</td><td>Lighting</td><td>5</td><td>4.3%</td><td><span class="bar-fill bar-primary" style="width:20%;height:14px;display:inline-block;border-radius:3px;" title="5 cases"></span></td></tr>
+<tr><td>8</td><td>Building Maintenance</td><td>5</td><td>4.3%</td><td><span class="bar-fill bar-primary" style="width:20%;height:14px;display:inline-block;border-radius:3px;" title="5 cases"></span></td></tr>
+<tr><td>9</td><td>Pool &amp; Water Features</td><td>5</td><td>4.3%</td><td><span class="bar-fill bar-primary" style="width:20%;height:14px;display:inline-block;border-radius:3px;" title="5 cases"></span></td></tr>
+<tr><td>10</td><td>Landscaping</td><td>4</td><td>3.5%</td><td><span class="bar-fill bar-primary" style="width:16%;height:14px;display:inline-block;border-radius:3px;" title="4 cases"></span></td></tr>
+<tr><td>11</td><td>Noise &amp; Neighbour</td><td>3</td><td>2.6%</td><td><span class="bar-fill bar-primary" style="width:12%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>12</td><td>Gym Equipment</td><td>2</td><td>1.7%</td><td><span class="bar-fill bar-primary" style="width:8%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>13</td><td>Electrical</td><td>2</td><td>1.7%</td><td><span class="bar-fill bar-primary" style="width:8%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>14</td><td>Playground &amp; Kids</td><td>2</td><td>1.7%</td><td><span class="bar-fill bar-primary" style="width:8%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>15</td><td>Common Area Obstruction</td><td>2</td><td>1.7%</td><td><span class="bar-fill bar-primary" style="width:8%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>16</td><td>Parking &amp; Traffic</td><td>2</td><td>1.7%</td><td><span class="bar-fill bar-primary" style="width:8%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>17</td><td>Admin &amp; General</td><td>2</td><td>1.7%</td><td><span class="bar-fill bar-primary" style="width:8%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>18</td><td>Fire Safety</td><td>2</td><td>1.7%</td><td><span class="bar-fill bar-primary" style="width:8%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>19</td><td>Intercom &amp; Smart Home</td><td>1</td><td>0.9%</td><td><span class="bar-fill bar-primary" style="width:4%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+</tbody></table>
+<h3>Block Breakdown</h3>
+<table><thead><tr><th>Block</th><th>Cases</th><th>Top Cluster</th></tr></thead><tbody>
+<tr><td>Blk 61</td><td>18</td><td>Pest &amp; Animals (5)</td></tr>
+<tr><td>Blk 53</td><td>15</td><td>Security &amp; Access (3)</td></tr>
+<tr><td>Blk 59</td><td>15</td><td>Waste &amp; Recycling (3)</td></tr>
+<tr><td>Blk 47</td><td>14</td><td>Pest &amp; Animals (4)</td></tr>
+<tr><td>Blk 51</td><td>13</td><td>Others (3)</td></tr>
+<tr><td>Blk 49</td><td>11</td><td>Security &amp; Access (3)</td></tr>
+<tr><td>Blk 55</td><td>10</td><td>Pest &amp; Animals (3)</td></tr>
+<tr><td>Blk 57</td><td>9</td><td>Pool &amp; Water Features (2)</td></tr>
+<tr><td>Blk 45</td><td>8</td><td>Pest &amp; Animals (5)</td></tr>
+<tr><td>Terrace</td><td>2</td><td>Pest &amp; Animals (2)</td></tr>
+</tbody></table>
+<h3>Outstanding Cases (2)</h3>
+<table><thead><tr><th>Case</th><th>Block</th><th>Cluster</th><th>Title</th><th>Status</th></tr></thead><tbody>
+<tr><td>1292-3419</td><td>Blk 61</td><td>Noise &amp; Neighbour</td><td>To Block 61, [unit]</td><td>In Progress</td></tr>
+<tr><td>1292-3359</td><td>Blk 55</td><td>Intercom &amp; Smart Home</td><td>Block 55  Carpark Main entrance</td><td>In Progress</td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="month-2025-07" style="margin-bottom:8px">
+<button class="collapsible-btn" onclick="toggleSection('month-content-2025-07')"><span>Jul 2025 -- 145 cases, 97.9% closed, avg rating 4.7</span><span class="chevron">&#9654;</span></button>
+<div id="month-content-2025-07" class="collapsible-content">
+<div class="card">
+<div class="summary-grid">
+<div class="metric"><div class="value">145</div><div class="label">Cases</div></div>
+<div class="metric"><div class="value">142</div><div class="label">Closed</div></div>
+<div class="metric"><div class="value">3</div><div class="label">Outstanding</div></div>
+<div class="metric"><div class="value">97.9%</div><div class="label">Closure Rate</div></div>
+<div class="metric"><div class="value">4.7</div><div class="label">Avg Rating</div></div>
+<div class="metric"><div class="value">4.1</div><div class="label">Avg Days to Close</div></div>
+</div>
+<h3>Highlights</h3><ul class="highlight-list">
+<li>Top issue clusters: Pest &amp; Animals (29), Lift Issues (21), Security &amp; Access (19).</li>
+<li>Case volume spiked 26% vs previous month (145 vs 115).</li>
+<li>Cleanliness spiked from 5 to 9 cases.</li>
+<li>Common Area Obstruction spiked from 2 to 6 cases.</li>
+<li>Gym Equipment spiked from 2 to 7 cases.</li>
+</ul>
+<h3>Issue Cluster Distribution</h3>
+<table><thead><tr><th>#</th><th>Cluster</th><th>Count</th><th>%</th><th style="width:30%"></th></tr></thead><tbody>
+<tr><td>1</td><td>Pest &amp; Animals</td><td>29</td><td>20.0%</td><td><span class="bar-fill bar-primary" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="29 cases"></span></td></tr>
+<tr><td>2</td><td>Lift Issues</td><td>21</td><td>14.5%</td><td><span class="bar-fill bar-primary" style="width:72%;height:14px;display:inline-block;border-radius:3px;" title="21 cases"></span></td></tr>
+<tr><td>3</td><td>Security &amp; Access</td><td>19</td><td>13.1%</td><td><span class="bar-fill bar-primary" style="width:65%;height:14px;display:inline-block;border-radius:3px;" title="19 cases"></span></td></tr>
+<tr><td>4</td><td>Waste &amp; Recycling</td><td>14</td><td>9.7%</td><td><span class="bar-fill bar-primary" style="width:48%;height:14px;display:inline-block;border-radius:3px;" title="14 cases"></span></td></tr>
+<tr><td>5</td><td>Cleanliness</td><td>9</td><td>6.2%</td><td><span class="bar-fill bar-primary" style="width:31%;height:14px;display:inline-block;border-radius:3px;" title="9 cases"></span></td></tr>
+<tr><td>6</td><td>Intercom &amp; Smart Home</td><td>8</td><td>5.5%</td><td><span class="bar-fill bar-primary" style="width:27%;height:14px;display:inline-block;border-radius:3px;" title="8 cases"></span></td></tr>
+<tr><td>7</td><td>Parking &amp; Traffic</td><td>7</td><td>4.8%</td><td><span class="bar-fill bar-primary" style="width:24%;height:14px;display:inline-block;border-radius:3px;" title="7 cases"></span></td></tr>
+<tr><td>8</td><td>Gym Equipment</td><td>7</td><td>4.8%</td><td><span class="bar-fill bar-primary" style="width:24%;height:14px;display:inline-block;border-radius:3px;" title="7 cases"></span></td></tr>
+<tr><td>9</td><td>Common Area Obstruction</td><td>6</td><td>4.1%</td><td><span class="bar-fill bar-primary" style="width:20%;height:14px;display:inline-block;border-radius:3px;" title="6 cases"></span></td></tr>
+<tr><td>10</td><td>Building Maintenance</td><td>5</td><td>3.4%</td><td><span class="bar-fill bar-primary" style="width:17%;height:14px;display:inline-block;border-radius:3px;" title="5 cases"></span></td></tr>
+<tr><td>11</td><td>Lighting</td><td>4</td><td>2.8%</td><td><span class="bar-fill bar-primary" style="width:13%;height:14px;display:inline-block;border-radius:3px;" title="4 cases"></span></td></tr>
+<tr><td>12</td><td>Admin &amp; General</td><td>4</td><td>2.8%</td><td><span class="bar-fill bar-primary" style="width:13%;height:14px;display:inline-block;border-radius:3px;" title="4 cases"></span></td></tr>
+<tr><td>13</td><td>Water &amp; Plumbing</td><td>3</td><td>2.1%</td><td><span class="bar-fill bar-primary" style="width:10%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>14</td><td>Pool &amp; Water Features</td><td>3</td><td>2.1%</td><td><span class="bar-fill bar-primary" style="width:10%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>15</td><td>Playground &amp; Kids</td><td>2</td><td>1.4%</td><td><span class="bar-fill bar-primary" style="width:6%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>16</td><td>Others</td><td>2</td><td>1.4%</td><td><span class="bar-fill bar-primary" style="width:6%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>17</td><td>Landscaping</td><td>1</td><td>0.7%</td><td><span class="bar-fill bar-primary" style="width:3%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+<tr><td>18</td><td>Noise &amp; Neighbour</td><td>1</td><td>0.7%</td><td><span class="bar-fill bar-primary" style="width:3%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+</tbody></table>
+<h3>Block Breakdown</h3>
+<table><thead><tr><th>Block</th><th>Cases</th><th>Top Cluster</th></tr></thead><tbody>
+<tr><td>Blk 47</td><td>27</td><td>Security &amp; Access (6)</td></tr>
+<tr><td>Blk 55</td><td>22</td><td>Lift Issues (6)</td></tr>
+<tr><td>Blk 61</td><td>19</td><td>Pest &amp; Animals (8)</td></tr>
+<tr><td>Blk 49</td><td>16</td><td>Lift Issues (6)</td></tr>
+<tr><td>Blk 59</td><td>14</td><td>Lift Issues (4)</td></tr>
+<tr><td>Blk 53</td><td>14</td><td>Pest &amp; Animals (4)</td></tr>
+<tr><td>Blk 57</td><td>11</td><td>Pest &amp; Animals (3)</td></tr>
+<tr><td>Blk 45</td><td>10</td><td>Pest &amp; Animals (3)</td></tr>
+<tr><td>Blk 51</td><td>9</td><td>Pest &amp; Animals (3)</td></tr>
+<tr><td>Terrace</td><td>3</td><td>Waste &amp; Recycling (2)</td></tr>
+</tbody></table>
+<h3>Outstanding Cases (3)</h3>
+<table><thead><tr><th>Case</th><th>Block</th><th>Cluster</th><th>Title</th><th>Status</th></tr></thead><tbody>
+<tr><td>1292-3494</td><td>Blk 47</td><td>Security &amp; Access</td><td>excessive smoking</td><td>In Progress</td></tr>
+<tr><td>1292-3444</td><td>Blk 53</td><td>Lighting</td><td>algae forming around lighting point</td><td>In Progress</td></tr>
+<tr><td>1292-3443</td><td>Blk 53</td><td>Lighting</td><td>algae</td><td>In Progress</td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="month-2025-08" style="margin-bottom:8px">
+<button class="collapsible-btn" onclick="toggleSection('month-content-2025-08')"><span>Aug 2025 -- 146 cases, 100.0% closed, avg rating 4.64</span><span class="chevron">&#9654;</span></button>
+<div id="month-content-2025-08" class="collapsible-content">
+<div class="card">
+<div class="summary-grid">
+<div class="metric"><div class="value">146</div><div class="label">Cases</div></div>
+<div class="metric"><div class="value">146</div><div class="label">Closed</div></div>
+<div class="metric"><div class="value">0</div><div class="label">Outstanding</div></div>
+<div class="metric"><div class="value">100.0%</div><div class="label">Closure Rate</div></div>
+<div class="metric"><div class="value">4.64</div><div class="label">Avg Rating</div></div>
+<div class="metric"><div class="value">1.7</div><div class="label">Avg Days to Close</div></div>
+</div>
+<h3>Highlights</h3><ul class="highlight-list">
+<li>Top issue clusters: Pest &amp; Animals (32), Lift Issues (24), Waste &amp; Recycling (13).</li>
+<li>Building Maintenance spiked from 5 to 9 cases.</li>
+<li>Common Area Obstruction spiked from 6 to 11 cases.</li>
+<li>Others spiked from 2 to 8 cases.</li>
+<li>12 low-rating cases (1-2 stars): Common Area Obstruction (2), Pest &amp; Animals (2), Waste &amp; Recycling (2).</li>
+</ul>
+<h3>Issue Cluster Distribution</h3>
+<table><thead><tr><th>#</th><th>Cluster</th><th>Count</th><th>%</th><th style="width:30%"></th></tr></thead><tbody>
+<tr><td>1</td><td>Pest &amp; Animals</td><td>32</td><td>21.9%</td><td><span class="bar-fill bar-primary" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="32 cases"></span></td></tr>
+<tr><td>2</td><td>Lift Issues</td><td>24</td><td>16.4%</td><td><span class="bar-fill bar-primary" style="width:75%;height:14px;display:inline-block;border-radius:3px;" title="24 cases"></span></td></tr>
+<tr><td>3</td><td>Waste &amp; Recycling</td><td>13</td><td>8.9%</td><td><span class="bar-fill bar-primary" style="width:40%;height:14px;display:inline-block;border-radius:3px;" title="13 cases"></span></td></tr>
+<tr><td>4</td><td>Common Area Obstruction</td><td>11</td><td>7.5%</td><td><span class="bar-fill bar-primary" style="width:34%;height:14px;display:inline-block;border-radius:3px;" title="11 cases"></span></td></tr>
+<tr><td>5</td><td>Parking &amp; Traffic</td><td>10</td><td>6.8%</td><td><span class="bar-fill bar-primary" style="width:31%;height:14px;display:inline-block;border-radius:3px;" title="10 cases"></span></td></tr>
+<tr><td>6</td><td>Security &amp; Access</td><td>10</td><td>6.8%</td><td><span class="bar-fill bar-primary" style="width:31%;height:14px;display:inline-block;border-radius:3px;" title="10 cases"></span></td></tr>
+<tr><td>7</td><td>Building Maintenance</td><td>9</td><td>6.2%</td><td><span class="bar-fill bar-primary" style="width:28%;height:14px;display:inline-block;border-radius:3px;" title="9 cases"></span></td></tr>
+<tr><td>8</td><td>Others</td><td>8</td><td>5.5%</td><td><span class="bar-fill bar-primary" style="width:25%;height:14px;display:inline-block;border-radius:3px;" title="8 cases"></span></td></tr>
+<tr><td>9</td><td>Cleanliness</td><td>6</td><td>4.1%</td><td><span class="bar-fill bar-primary" style="width:18%;height:14px;display:inline-block;border-radius:3px;" title="6 cases"></span></td></tr>
+<tr><td>10</td><td>Gym Equipment</td><td>6</td><td>4.1%</td><td><span class="bar-fill bar-primary" style="width:18%;height:14px;display:inline-block;border-radius:3px;" title="6 cases"></span></td></tr>
+<tr><td>11</td><td>Pool &amp; Water Features</td><td>3</td><td>2.1%</td><td><span class="bar-fill bar-primary" style="width:9%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>12</td><td>Water &amp; Plumbing</td><td>3</td><td>2.1%</td><td><span class="bar-fill bar-primary" style="width:9%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>13</td><td>Noise &amp; Neighbour</td><td>3</td><td>2.1%</td><td><span class="bar-fill bar-primary" style="width:9%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>14</td><td>Admin &amp; General</td><td>2</td><td>1.4%</td><td><span class="bar-fill bar-primary" style="width:6%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>15</td><td>Playground &amp; Kids</td><td>2</td><td>1.4%</td><td><span class="bar-fill bar-primary" style="width:6%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>16</td><td>Lighting</td><td>2</td><td>1.4%</td><td><span class="bar-fill bar-primary" style="width:6%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>17</td><td>Landscaping</td><td>1</td><td>0.7%</td><td><span class="bar-fill bar-primary" style="width:3%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+<tr><td>18</td><td>Intercom &amp; Smart Home</td><td>1</td><td>0.7%</td><td><span class="bar-fill bar-primary" style="width:3%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+</tbody></table>
+<h3>Block Breakdown</h3>
+<table><thead><tr><th>Block</th><th>Cases</th><th>Top Cluster</th></tr></thead><tbody>
+<tr><td>Blk 53</td><td>26</td><td>Pest &amp; Animals (8)</td></tr>
+<tr><td>Blk 55</td><td>25</td><td>Lift Issues (12)</td></tr>
+<tr><td>Blk 47</td><td>20</td><td>Cleanliness (4)</td></tr>
+<tr><td>Blk 49</td><td>16</td><td>Pest &amp; Animals (5)</td></tr>
+<tr><td>Blk 59</td><td>14</td><td>Waste &amp; Recycling (6)</td></tr>
+<tr><td>Blk 57</td><td>12</td><td>Pest &amp; Animals (4)</td></tr>
+<tr><td>Blk 45</td><td>11</td><td>Building Maintenance (2)</td></tr>
+<tr><td>Blk 61</td><td>10</td><td>Pest &amp; Animals (4)</td></tr>
+<tr><td>Blk 51</td><td>9</td><td>Others (2)</td></tr>
+<tr><td>Terrace</td><td>3</td><td>Others (1)</td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="month-2025-09" style="margin-bottom:8px">
+<button class="collapsible-btn" onclick="toggleSection('month-content-2025-09')"><span>Sep 2025 -- 127 cases, 100.0% closed, avg rating 4.78</span><span class="chevron">&#9654;</span></button>
+<div id="month-content-2025-09" class="collapsible-content">
+<div class="card">
+<div class="summary-grid">
+<div class="metric"><div class="value">127</div><div class="label">Cases</div></div>
+<div class="metric"><div class="value">127</div><div class="label">Closed</div></div>
+<div class="metric"><div class="value">0</div><div class="label">Outstanding</div></div>
+<div class="metric"><div class="value">100.0%</div><div class="label">Closure Rate</div></div>
+<div class="metric"><div class="value">4.78</div><div class="label">Avg Rating</div></div>
+<div class="metric"><div class="value">1.2</div><div class="label">Avg Days to Close</div></div>
+</div>
+<h3>Highlights</h3><ul class="highlight-list">
+<li>Top issue clusters: Pest &amp; Animals (26), Lift Issues (16), Security &amp; Access (15).</li>
+<li>Noise &amp; Neighbour spiked from 3 to 6 cases.</li>
+<li>7 low-rating cases (1-2 stars): Pest &amp; Animals (3), Noise &amp; Neighbour (1), Building Maintenance (1).</li>
+</ul>
+<h3>Issue Cluster Distribution</h3>
+<table><thead><tr><th>#</th><th>Cluster</th><th>Count</th><th>%</th><th style="width:30%"></th></tr></thead><tbody>
+<tr><td>1</td><td>Pest &amp; Animals</td><td>26</td><td>20.5%</td><td><span class="bar-fill bar-primary" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="26 cases"></span></td></tr>
+<tr><td>2</td><td>Lift Issues</td><td>16</td><td>12.6%</td><td><span class="bar-fill bar-primary" style="width:61%;height:14px;display:inline-block;border-radius:3px;" title="16 cases"></span></td></tr>
+<tr><td>3</td><td>Security &amp; Access</td><td>15</td><td>11.8%</td><td><span class="bar-fill bar-primary" style="width:57%;height:14px;display:inline-block;border-radius:3px;" title="15 cases"></span></td></tr>
+<tr><td>4</td><td>Others</td><td>12</td><td>9.4%</td><td><span class="bar-fill bar-primary" style="width:46%;height:14px;display:inline-block;border-radius:3px;" title="12 cases"></span></td></tr>
+<tr><td>5</td><td>Waste &amp; Recycling</td><td>11</td><td>8.7%</td><td><span class="bar-fill bar-primary" style="width:42%;height:14px;display:inline-block;border-radius:3px;" title="11 cases"></span></td></tr>
+<tr><td>6</td><td>Cleanliness</td><td>9</td><td>7.1%</td><td><span class="bar-fill bar-primary" style="width:34%;height:14px;display:inline-block;border-radius:3px;" title="9 cases"></span></td></tr>
+<tr><td>7</td><td>Common Area Obstruction</td><td>7</td><td>5.5%</td><td><span class="bar-fill bar-primary" style="width:26%;height:14px;display:inline-block;border-radius:3px;" title="7 cases"></span></td></tr>
+<tr><td>8</td><td>Noise &amp; Neighbour</td><td>6</td><td>4.7%</td><td><span class="bar-fill bar-primary" style="width:23%;height:14px;display:inline-block;border-radius:3px;" title="6 cases"></span></td></tr>
+<tr><td>9</td><td>Parking &amp; Traffic</td><td>6</td><td>4.7%</td><td><span class="bar-fill bar-primary" style="width:23%;height:14px;display:inline-block;border-radius:3px;" title="6 cases"></span></td></tr>
+<tr><td>10</td><td>Intercom &amp; Smart Home</td><td>4</td><td>3.1%</td><td><span class="bar-fill bar-primary" style="width:15%;height:14px;display:inline-block;border-radius:3px;" title="4 cases"></span></td></tr>
+<tr><td>11</td><td>Admin &amp; General</td><td>3</td><td>2.4%</td><td><span class="bar-fill bar-primary" style="width:11%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>12</td><td>Water &amp; Plumbing</td><td>3</td><td>2.4%</td><td><span class="bar-fill bar-primary" style="width:11%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>13</td><td>Playground &amp; Kids</td><td>2</td><td>1.6%</td><td><span class="bar-fill bar-primary" style="width:7%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>14</td><td>Pool &amp; Water Features</td><td>2</td><td>1.6%</td><td><span class="bar-fill bar-primary" style="width:7%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>15</td><td>Fire Safety</td><td>2</td><td>1.6%</td><td><span class="bar-fill bar-primary" style="width:7%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>16</td><td>Building Maintenance</td><td>2</td><td>1.6%</td><td><span class="bar-fill bar-primary" style="width:7%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>17</td><td>Gym Equipment</td><td>1</td><td>0.8%</td><td><span class="bar-fill bar-primary" style="width:3%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+</tbody></table>
+<h3>Block Breakdown</h3>
+<table><thead><tr><th>Block</th><th>Cases</th><th>Top Cluster</th></tr></thead><tbody>
+<tr><td>Blk 47</td><td>22</td><td>Pest &amp; Animals (5)</td></tr>
+<tr><td>Blk 59</td><td>21</td><td>Others (4)</td></tr>
+<tr><td>Blk 61</td><td>20</td><td>Pest &amp; Animals (4)</td></tr>
+<tr><td>Blk 53</td><td>16</td><td>Pest &amp; Animals (3)</td></tr>
+<tr><td>Blk 45</td><td>11</td><td>Parking &amp; Traffic (2)</td></tr>
+<tr><td>Blk 55</td><td>11</td><td>Waste &amp; Recycling (2)</td></tr>
+<tr><td>Blk 57</td><td>10</td><td>Security &amp; Access (4)</td></tr>
+<tr><td>Blk 49</td><td>8</td><td>Cleanliness (3)</td></tr>
+<tr><td>Blk 51</td><td>7</td><td>Pest &amp; Animals (2)</td></tr>
+<tr><td>Terrace</td><td>1</td><td>Noise &amp; Neighbour (1)</td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="month-2025-10" style="margin-bottom:8px">
+<button class="collapsible-btn" onclick="toggleSection('month-content-2025-10')"><span>Oct 2025 -- 144 cases, 99.3% closed, avg rating 4.68</span><span class="chevron">&#9654;</span></button>
+<div id="month-content-2025-10" class="collapsible-content">
+<div class="card">
+<div class="summary-grid">
+<div class="metric"><div class="value">144</div><div class="label">Cases</div></div>
+<div class="metric"><div class="value">143</div><div class="label">Closed</div></div>
+<div class="metric"><div class="value">1</div><div class="label">Outstanding</div></div>
+<div class="metric"><div class="value">99.3%</div><div class="label">Closure Rate</div></div>
+<div class="metric"><div class="value">4.68</div><div class="label">Avg Rating</div></div>
+<div class="metric"><div class="value">3.1</div><div class="label">Avg Days to Close</div></div>
+</div>
+<h3>Highlights</h3><ul class="highlight-list">
+<li>Top issue clusters: Pest &amp; Animals (31), Waste &amp; Recycling (21), Security &amp; Access (20).</li>
+<li>Cleanliness spiked from 9 to 15 cases.</li>
+<li>Waste &amp; Recycling spiked from 11 to 21 cases.</li>
+<li>1 cases remain outstanding.</li>
+<li>11 low-rating cases (1-2 stars): Pest &amp; Animals (3), Lighting (1), Water &amp; Plumbing (1).</li>
+</ul>
+<h3>Issue Cluster Distribution</h3>
+<table><thead><tr><th>#</th><th>Cluster</th><th>Count</th><th>%</th><th style="width:30%"></th></tr></thead><tbody>
+<tr><td>1</td><td>Pest &amp; Animals</td><td>31</td><td>21.5%</td><td><span class="bar-fill bar-primary" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="31 cases"></span></td></tr>
+<tr><td>2</td><td>Waste &amp; Recycling</td><td>21</td><td>14.6%</td><td><span class="bar-fill bar-primary" style="width:67%;height:14px;display:inline-block;border-radius:3px;" title="21 cases"></span></td></tr>
+<tr><td>3</td><td>Security &amp; Access</td><td>20</td><td>13.9%</td><td><span class="bar-fill bar-primary" style="width:64%;height:14px;display:inline-block;border-radius:3px;" title="20 cases"></span></td></tr>
+<tr><td>4</td><td>Cleanliness</td><td>15</td><td>10.4%</td><td><span class="bar-fill bar-primary" style="width:48%;height:14px;display:inline-block;border-radius:3px;" title="15 cases"></span></td></tr>
+<tr><td>5</td><td>Others</td><td>11</td><td>7.6%</td><td><span class="bar-fill bar-primary" style="width:35%;height:14px;display:inline-block;border-radius:3px;" title="11 cases"></span></td></tr>
+<tr><td>6</td><td>Parking &amp; Traffic</td><td>9</td><td>6.2%</td><td><span class="bar-fill bar-primary" style="width:29%;height:14px;display:inline-block;border-radius:3px;" title="9 cases"></span></td></tr>
+<tr><td>7</td><td>Noise &amp; Neighbour</td><td>7</td><td>4.9%</td><td><span class="bar-fill bar-primary" style="width:22%;height:14px;display:inline-block;border-radius:3px;" title="7 cases"></span></td></tr>
+<tr><td>8</td><td>Lift Issues</td><td>7</td><td>4.9%</td><td><span class="bar-fill bar-primary" style="width:22%;height:14px;display:inline-block;border-radius:3px;" title="7 cases"></span></td></tr>
+<tr><td>9</td><td>Gym Equipment</td><td>4</td><td>2.8%</td><td><span class="bar-fill bar-primary" style="width:12%;height:14px;display:inline-block;border-radius:3px;" title="4 cases"></span></td></tr>
+<tr><td>10</td><td>Building Maintenance</td><td>4</td><td>2.8%</td><td><span class="bar-fill bar-primary" style="width:12%;height:14px;display:inline-block;border-radius:3px;" title="4 cases"></span></td></tr>
+<tr><td>11</td><td>Pool &amp; Water Features</td><td>3</td><td>2.1%</td><td><span class="bar-fill bar-primary" style="width:9%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>12</td><td>Admin &amp; General</td><td>2</td><td>1.4%</td><td><span class="bar-fill bar-primary" style="width:6%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>13</td><td>Intercom &amp; Smart Home</td><td>2</td><td>1.4%</td><td><span class="bar-fill bar-primary" style="width:6%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>14</td><td>Lighting</td><td>2</td><td>1.4%</td><td><span class="bar-fill bar-primary" style="width:6%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>15</td><td>Landscaping</td><td>2</td><td>1.4%</td><td><span class="bar-fill bar-primary" style="width:6%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>16</td><td>Common Area Obstruction</td><td>2</td><td>1.4%</td><td><span class="bar-fill bar-primary" style="width:6%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>17</td><td>Fire Safety</td><td>1</td><td>0.7%</td><td><span class="bar-fill bar-primary" style="width:3%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+<tr><td>18</td><td>Water &amp; Plumbing</td><td>1</td><td>0.7%</td><td><span class="bar-fill bar-primary" style="width:3%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+</tbody></table>
+<h3>Block Breakdown</h3>
+<table><thead><tr><th>Block</th><th>Cases</th><th>Top Cluster</th></tr></thead><tbody>
+<tr><td>Blk 61</td><td>23</td><td>Cleanliness (6)</td></tr>
+<tr><td>Blk 57</td><td>22</td><td>Security &amp; Access (6)</td></tr>
+<tr><td>Blk 59</td><td>20</td><td>Pest &amp; Animals (5)</td></tr>
+<tr><td>Blk 45</td><td>19</td><td>Security &amp; Access (5)</td></tr>
+<tr><td>Blk 47</td><td>17</td><td>Waste &amp; Recycling (4)</td></tr>
+<tr><td>Blk 53</td><td>14</td><td>Pest &amp; Animals (4)</td></tr>
+<tr><td>Blk 55</td><td>14</td><td>Pest &amp; Animals (5)</td></tr>
+<tr><td>Blk 51</td><td>7</td><td>Lift Issues (2)</td></tr>
+<tr><td>Blk 49</td><td>7</td><td>Parking &amp; Traffic (3)</td></tr>
+<tr><td>Terrace</td><td>1</td><td>Landscaping (1)</td></tr>
+</tbody></table>
+<h3>Outstanding Cases (1)</h3>
+<table><thead><tr><th>Case</th><th>Block</th><th>Cluster</th><th>Title</th><th>Status</th></tr></thead><tbody>
+<tr><td>1292-3875</td><td>Blk 45</td><td>Security &amp; Access</td><td>Main carpark entry</td><td>In Progress</td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="month-2025-11" style="margin-bottom:8px">
+<button class="collapsible-btn" onclick="toggleSection('month-content-2025-11')"><span>Nov 2025 -- 117 cases, 99.1% closed, avg rating 4.83</span><span class="chevron">&#9654;</span></button>
+<div id="month-content-2025-11" class="collapsible-content">
+<div class="card">
+<div class="summary-grid">
+<div class="metric"><div class="value">117</div><div class="label">Cases</div></div>
+<div class="metric"><div class="value">116</div><div class="label">Closed</div></div>
+<div class="metric"><div class="value">1</div><div class="label">Outstanding</div></div>
+<div class="metric"><div class="value">99.1%</div><div class="label">Closure Rate</div></div>
+<div class="metric"><div class="value">4.83</div><div class="label">Avg Rating</div></div>
+<div class="metric"><div class="value">2.5</div><div class="label">Avg Days to Close</div></div>
+</div>
+<h3>Highlights</h3><ul class="highlight-list">
+<li>Top issue clusters: Pest &amp; Animals (21), Waste &amp; Recycling (10), Building Maintenance (10).</li>
+<li>Building Maintenance spiked from 4 to 10 cases.</li>
+<li>Common Area Obstruction spiked from 2 to 5 cases.</li>
+<li>Fire Safety spiked from 1 to 5 cases.</li>
+<li>Gym Equipment spiked from 4 to 7 cases.</li>
+</ul>
+<h3>Issue Cluster Distribution</h3>
+<table><thead><tr><th>#</th><th>Cluster</th><th>Count</th><th>%</th><th style="width:30%"></th></tr></thead><tbody>
+<tr><td>1</td><td>Pest &amp; Animals</td><td>21</td><td>17.9%</td><td><span class="bar-fill bar-primary" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="21 cases"></span></td></tr>
+<tr><td>2</td><td>Waste &amp; Recycling</td><td>10</td><td>8.5%</td><td><span class="bar-fill bar-primary" style="width:47%;height:14px;display:inline-block;border-radius:3px;" title="10 cases"></span></td></tr>
+<tr><td>3</td><td>Building Maintenance</td><td>10</td><td>8.5%</td><td><span class="bar-fill bar-primary" style="width:47%;height:14px;display:inline-block;border-radius:3px;" title="10 cases"></span></td></tr>
+<tr><td>4</td><td>Lift Issues</td><td>9</td><td>7.7%</td><td><span class="bar-fill bar-primary" style="width:42%;height:14px;display:inline-block;border-radius:3px;" title="9 cases"></span></td></tr>
+<tr><td>5</td><td>Security &amp; Access</td><td>8</td><td>6.8%</td><td><span class="bar-fill bar-primary" style="width:38%;height:14px;display:inline-block;border-radius:3px;" title="8 cases"></span></td></tr>
+<tr><td>6</td><td>Parking &amp; Traffic</td><td>8</td><td>6.8%</td><td><span class="bar-fill bar-primary" style="width:38%;height:14px;display:inline-block;border-radius:3px;" title="8 cases"></span></td></tr>
+<tr><td>7</td><td>Gym Equipment</td><td>7</td><td>6.0%</td><td><span class="bar-fill bar-primary" style="width:33%;height:14px;display:inline-block;border-radius:3px;" title="7 cases"></span></td></tr>
+<tr><td>8</td><td>Noise &amp; Neighbour</td><td>6</td><td>5.1%</td><td><span class="bar-fill bar-primary" style="width:28%;height:14px;display:inline-block;border-radius:3px;" title="6 cases"></span></td></tr>
+<tr><td>9</td><td>Others</td><td>6</td><td>5.1%</td><td><span class="bar-fill bar-primary" style="width:28%;height:14px;display:inline-block;border-radius:3px;" title="6 cases"></span></td></tr>
+<tr><td>10</td><td>Cleanliness</td><td>6</td><td>5.1%</td><td><span class="bar-fill bar-primary" style="width:28%;height:14px;display:inline-block;border-radius:3px;" title="6 cases"></span></td></tr>
+<tr><td>11</td><td>Common Area Obstruction</td><td>5</td><td>4.3%</td><td><span class="bar-fill bar-primary" style="width:23%;height:14px;display:inline-block;border-radius:3px;" title="5 cases"></span></td></tr>
+<tr><td>12</td><td>Fire Safety</td><td>5</td><td>4.3%</td><td><span class="bar-fill bar-primary" style="width:23%;height:14px;display:inline-block;border-radius:3px;" title="5 cases"></span></td></tr>
+<tr><td>13</td><td>Water &amp; Plumbing</td><td>4</td><td>3.4%</td><td><span class="bar-fill bar-primary" style="width:19%;height:14px;display:inline-block;border-radius:3px;" title="4 cases"></span></td></tr>
+<tr><td>14</td><td>Intercom &amp; Smart Home</td><td>3</td><td>2.6%</td><td><span class="bar-fill bar-primary" style="width:14%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>15</td><td>Admin &amp; General</td><td>3</td><td>2.6%</td><td><span class="bar-fill bar-primary" style="width:14%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>16</td><td>Playground &amp; Kids</td><td>2</td><td>1.7%</td><td><span class="bar-fill bar-primary" style="width:9%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>17</td><td>Pool &amp; Water Features</td><td>2</td><td>1.7%</td><td><span class="bar-fill bar-primary" style="width:9%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>18</td><td>Lighting</td><td>2</td><td>1.7%</td><td><span class="bar-fill bar-primary" style="width:9%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+</tbody></table>
+<h3>Block Breakdown</h3>
+<table><thead><tr><th>Block</th><th>Cases</th><th>Top Cluster</th></tr></thead><tbody>
+<tr><td>Blk 47</td><td>20</td><td>Building Maintenance (4)</td></tr>
+<tr><td>Blk 55</td><td>18</td><td>Pest &amp; Animals (4)</td></tr>
+<tr><td>Blk 59</td><td>16</td><td>Security &amp; Access (3)</td></tr>
+<tr><td>Blk 57</td><td>16</td><td>Lift Issues (4)</td></tr>
+<tr><td>Blk 53</td><td>12</td><td>Pest &amp; Animals (3)</td></tr>
+<tr><td>Blk 45</td><td>11</td><td>Waste &amp; Recycling (3)</td></tr>
+<tr><td>Blk 49</td><td>10</td><td>Parking &amp; Traffic (2)</td></tr>
+<tr><td>Blk 51</td><td>7</td><td>Waste &amp; Recycling (1)</td></tr>
+<tr><td>Blk 61</td><td>6</td><td>Pest &amp; Animals (6)</td></tr>
+<tr><td>Terrace</td><td>1</td><td>Building Maintenance (1)</td></tr>
+</tbody></table>
+<h3>Outstanding Cases (1)</h3>
+<table><thead><tr><th>Case</th><th>Block</th><th>Cluster</th><th>Title</th><th>Status</th></tr></thead><tbody>
+<tr><td>1292-4060</td><td>Terrace</td><td>Building Maintenance</td><td>carpark floor damaged</td><td>In Progress</td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="month-2025-12" style="margin-bottom:8px">
+<button class="collapsible-btn" onclick="toggleSection('month-content-2025-12')"><span>Dec 2025 -- 148 cases, 98.0% closed, avg rating 4.69</span><span class="chevron">&#9654;</span></button>
+<div id="month-content-2025-12" class="collapsible-content">
+<div class="card">
+<div class="summary-grid">
+<div class="metric"><div class="value">148</div><div class="label">Cases</div></div>
+<div class="metric"><div class="value">145</div><div class="label">Closed</div></div>
+<div class="metric"><div class="value">3</div><div class="label">Outstanding</div></div>
+<div class="metric"><div class="value">98.0%</div><div class="label">Closure Rate</div></div>
+<div class="metric"><div class="value">4.69</div><div class="label">Avg Rating</div></div>
+<div class="metric"><div class="value">1.4</div><div class="label">Avg Days to Close</div></div>
+</div>
+<h3>Highlights</h3><ul class="highlight-list">
+<li>Top issue clusters: Pest &amp; Animals (35), Cleanliness (15), Others (14).</li>
+<li>Case volume spiked 26% vs previous month (148 vs 117).</li>
+<li>Cleanliness spiked from 6 to 15 cases.</li>
+<li>Common Area Obstruction spiked from 5 to 9 cases.</li>
+<li>Fire Safety dropped to 0 (from 5 last month).</li>
+</ul>
+<h3>Issue Cluster Distribution</h3>
+<table><thead><tr><th>#</th><th>Cluster</th><th>Count</th><th>%</th><th style="width:30%"></th></tr></thead><tbody>
+<tr><td>1</td><td>Pest &amp; Animals</td><td>35</td><td>23.6%</td><td><span class="bar-fill bar-primary" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="35 cases"></span></td></tr>
+<tr><td>2</td><td>Cleanliness</td><td>15</td><td>10.1%</td><td><span class="bar-fill bar-primary" style="width:42%;height:14px;display:inline-block;border-radius:3px;" title="15 cases"></span></td></tr>
+<tr><td>3</td><td>Others</td><td>14</td><td>9.5%</td><td><span class="bar-fill bar-primary" style="width:40%;height:14px;display:inline-block;border-radius:3px;" title="14 cases"></span></td></tr>
+<tr><td>4</td><td>Security &amp; Access</td><td>12</td><td>8.1%</td><td><span class="bar-fill bar-primary" style="width:34%;height:14px;display:inline-block;border-radius:3px;" title="12 cases"></span></td></tr>
+<tr><td>5</td><td>Lift Issues</td><td>11</td><td>7.4%</td><td><span class="bar-fill bar-primary" style="width:31%;height:14px;display:inline-block;border-radius:3px;" title="11 cases"></span></td></tr>
+<tr><td>6</td><td>Waste &amp; Recycling</td><td>11</td><td>7.4%</td><td><span class="bar-fill bar-primary" style="width:31%;height:14px;display:inline-block;border-radius:3px;" title="11 cases"></span></td></tr>
+<tr><td>7</td><td>Building Maintenance</td><td>9</td><td>6.1%</td><td><span class="bar-fill bar-primary" style="width:25%;height:14px;display:inline-block;border-radius:3px;" title="9 cases"></span></td></tr>
+<tr><td>8</td><td>Common Area Obstruction</td><td>9</td><td>6.1%</td><td><span class="bar-fill bar-primary" style="width:25%;height:14px;display:inline-block;border-radius:3px;" title="9 cases"></span></td></tr>
+<tr><td>9</td><td>Parking &amp; Traffic</td><td>7</td><td>4.7%</td><td><span class="bar-fill bar-primary" style="width:20%;height:14px;display:inline-block;border-radius:3px;" title="7 cases"></span></td></tr>
+<tr><td>10</td><td>Gym Equipment</td><td>7</td><td>4.7%</td><td><span class="bar-fill bar-primary" style="width:20%;height:14px;display:inline-block;border-radius:3px;" title="7 cases"></span></td></tr>
+<tr><td>11</td><td>Intercom &amp; Smart Home</td><td>6</td><td>4.1%</td><td><span class="bar-fill bar-primary" style="width:17%;height:14px;display:inline-block;border-radius:3px;" title="6 cases"></span></td></tr>
+<tr><td>12</td><td>Pool &amp; Water Features</td><td>3</td><td>2.0%</td><td><span class="bar-fill bar-primary" style="width:8%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>13</td><td>Landscaping</td><td>3</td><td>2.0%</td><td><span class="bar-fill bar-primary" style="width:8%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>14</td><td>Noise &amp; Neighbour</td><td>2</td><td>1.4%</td><td><span class="bar-fill bar-primary" style="width:5%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>15</td><td>Admin &amp; General</td><td>1</td><td>0.7%</td><td><span class="bar-fill bar-primary" style="width:2%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+<tr><td>16</td><td>Electrical</td><td>1</td><td>0.7%</td><td><span class="bar-fill bar-primary" style="width:2%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+<tr><td>17</td><td>Playground &amp; Kids</td><td>1</td><td>0.7%</td><td><span class="bar-fill bar-primary" style="width:2%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+<tr><td>18</td><td>Lighting</td><td>1</td><td>0.7%</td><td><span class="bar-fill bar-primary" style="width:2%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+</tbody></table>
+<h3>Block Breakdown</h3>
+<table><thead><tr><th>Block</th><th>Cases</th><th>Top Cluster</th></tr></thead><tbody>
+<tr><td>Blk 55</td><td>32</td><td>Pest &amp; Animals (7)</td></tr>
+<tr><td>Blk 57</td><td>26</td><td>Pest &amp; Animals (8)</td></tr>
+<tr><td>Blk 47</td><td>17</td><td>Security &amp; Access (3)</td></tr>
+<tr><td>Blk 45</td><td>16</td><td>Waste &amp; Recycling (4)</td></tr>
+<tr><td>Blk 61</td><td>16</td><td>Cleanliness (4)</td></tr>
+<tr><td>Blk 53</td><td>15</td><td>Pest &amp; Animals (6)</td></tr>
+<tr><td>Blk 59</td><td>10</td><td>Pest &amp; Animals (4)</td></tr>
+<tr><td>Blk 49</td><td>10</td><td>Lift Issues (2)</td></tr>
+<tr><td>Terrace</td><td>3</td><td>Pest &amp; Animals (2)</td></tr>
+<tr><td>Blk 51</td><td>3</td><td>Waste &amp; Recycling (1)</td></tr>
+</tbody></table>
+<h3>Outstanding Cases (3)</h3>
+<table><thead><tr><th>Case</th><th>Block</th><th>Cluster</th><th>Title</th><th>Status</th></tr></thead><tbody>
+<tr><td>1292-4216</td><td>Terrace</td><td>Pest &amp; Animals</td><td>Bad ponding due to uprooted plants NOT replaced!</td><td>In Progress</td></tr>
+<tr><td>1292-4213</td><td>Blk 47</td><td>Intercom &amp; Smart Home</td><td>leaking at blk 47 DV room</td><td>In Progress</td></tr>
+<tr><td>1292-4201</td><td>Blk 57</td><td>Noise &amp; Neighbour</td><td>Case No.: 1292-4193</td><td>In Progress</td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="month-2026-01" style="margin-bottom:8px">
+<button class="collapsible-btn" onclick="toggleSection('month-content-2026-01')"><span>Jan 2026 -- 164 cases, 99.4% closed, avg rating 4.64</span><span class="chevron">&#9654;</span></button>
+<div id="month-content-2026-01" class="collapsible-content">
+<div class="card">
+<div class="summary-grid">
+<div class="metric"><div class="value">164</div><div class="label">Cases</div></div>
+<div class="metric"><div class="value">163</div><div class="label">Closed</div></div>
+<div class="metric"><div class="value">1</div><div class="label">Outstanding</div></div>
+<div class="metric"><div class="value">99.4%</div><div class="label">Closure Rate</div></div>
+<div class="metric"><div class="value">4.64</div><div class="label">Avg Rating</div></div>
+<div class="metric"><div class="value">1.3</div><div class="label">Avg Days to Close</div></div>
+</div>
+<h3>Highlights</h3><ul class="highlight-list">
+<li>Top issue clusters: Pest &amp; Animals (36), Lift Issues (17), Security &amp; Access (17).</li>
+<li>Gym Equipment spiked from 7 to 15 cases.</li>
+<li>Lift Issues spiked from 11 to 17 cases.</li>
+<li>Noise &amp; Neighbour spiked from 2 to 6 cases.</li>
+<li>Pool &amp; Water Features spiked from 3 to 5 cases.</li>
+</ul>
+<h3>Issue Cluster Distribution</h3>
+<table><thead><tr><th>#</th><th>Cluster</th><th>Count</th><th>%</th><th style="width:30%"></th></tr></thead><tbody>
+<tr><td>1</td><td>Pest &amp; Animals</td><td>36</td><td>22.0%</td><td><span class="bar-fill bar-primary" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="36 cases"></span></td></tr>
+<tr><td>2</td><td>Lift Issues</td><td>17</td><td>10.4%</td><td><span class="bar-fill bar-primary" style="width:47%;height:14px;display:inline-block;border-radius:3px;" title="17 cases"></span></td></tr>
+<tr><td>3</td><td>Security &amp; Access</td><td>17</td><td>10.4%</td><td><span class="bar-fill bar-primary" style="width:47%;height:14px;display:inline-block;border-radius:3px;" title="17 cases"></span></td></tr>
+<tr><td>4</td><td>Waste &amp; Recycling</td><td>16</td><td>9.8%</td><td><span class="bar-fill bar-primary" style="width:44%;height:14px;display:inline-block;border-radius:3px;" title="16 cases"></span></td></tr>
+<tr><td>5</td><td>Gym Equipment</td><td>15</td><td>9.1%</td><td><span class="bar-fill bar-primary" style="width:41%;height:14px;display:inline-block;border-radius:3px;" title="15 cases"></span></td></tr>
+<tr><td>6</td><td>Parking &amp; Traffic</td><td>9</td><td>5.5%</td><td><span class="bar-fill bar-primary" style="width:25%;height:14px;display:inline-block;border-radius:3px;" title="9 cases"></span></td></tr>
+<tr><td>7</td><td>Others</td><td>8</td><td>4.9%</td><td><span class="bar-fill bar-primary" style="width:22%;height:14px;display:inline-block;border-radius:3px;" title="8 cases"></span></td></tr>
+<tr><td>8</td><td>Cleanliness</td><td>8</td><td>4.9%</td><td><span class="bar-fill bar-primary" style="width:22%;height:14px;display:inline-block;border-radius:3px;" title="8 cases"></span></td></tr>
+<tr><td>9</td><td>Building Maintenance</td><td>7</td><td>4.3%</td><td><span class="bar-fill bar-primary" style="width:19%;height:14px;display:inline-block;border-radius:3px;" title="7 cases"></span></td></tr>
+<tr><td>10</td><td>Intercom &amp; Smart Home</td><td>7</td><td>4.3%</td><td><span class="bar-fill bar-primary" style="width:19%;height:14px;display:inline-block;border-radius:3px;" title="7 cases"></span></td></tr>
+<tr><td>11</td><td>Noise &amp; Neighbour</td><td>6</td><td>3.7%</td><td><span class="bar-fill bar-primary" style="width:16%;height:14px;display:inline-block;border-radius:3px;" title="6 cases"></span></td></tr>
+<tr><td>12</td><td>Pool &amp; Water Features</td><td>5</td><td>3.0%</td><td><span class="bar-fill bar-primary" style="width:13%;height:14px;display:inline-block;border-radius:3px;" title="5 cases"></span></td></tr>
+<tr><td>13</td><td>Common Area Obstruction</td><td>4</td><td>2.4%</td><td><span class="bar-fill bar-primary" style="width:11%;height:14px;display:inline-block;border-radius:3px;" title="4 cases"></span></td></tr>
+<tr><td>14</td><td>Admin &amp; General</td><td>3</td><td>1.8%</td><td><span class="bar-fill bar-primary" style="width:8%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>15</td><td>Lighting</td><td>2</td><td>1.2%</td><td><span class="bar-fill bar-primary" style="width:5%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>16</td><td>Playground &amp; Kids</td><td>2</td><td>1.2%</td><td><span class="bar-fill bar-primary" style="width:5%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>17</td><td>Landscaping</td><td>1</td><td>0.6%</td><td><span class="bar-fill bar-primary" style="width:2%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+<tr><td>18</td><td>Water &amp; Plumbing</td><td>1</td><td>0.6%</td><td><span class="bar-fill bar-primary" style="width:2%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+</tbody></table>
+<h3>Block Breakdown</h3>
+<table><thead><tr><th>Block</th><th>Cases</th><th>Top Cluster</th></tr></thead><tbody>
+<tr><td>Blk 53</td><td>36</td><td>Pest &amp; Animals (13)</td></tr>
+<tr><td>Blk 61</td><td>20</td><td>Lift Issues (5)</td></tr>
+<tr><td>Blk 55</td><td>20</td><td>Gym Equipment (5)</td></tr>
+<tr><td>Blk 59</td><td>19</td><td>Security &amp; Access (5)</td></tr>
+<tr><td>Blk 47</td><td>19</td><td>Pest &amp; Animals (5)</td></tr>
+<tr><td>Blk 45</td><td>19</td><td>Pest &amp; Animals (5)</td></tr>
+<tr><td>Blk 57</td><td>18</td><td>Lift Issues (4)</td></tr>
+<tr><td>Blk 49</td><td>10</td><td>Waste &amp; Recycling (4)</td></tr>
+<tr><td>Terrace</td><td>2</td><td>Pest &amp; Animals (1)</td></tr>
+<tr><td>Blk 51</td><td>1</td><td>Common Area Obstruction (1)</td></tr>
+</tbody></table>
+<h3>Outstanding Cases (1)</h3>
+<table><thead><tr><th>Case</th><th>Block</th><th>Cluster</th><th>Title</th><th>Status</th></tr></thead><tbody>
+<tr><td>1292-4394</td><td>Blk 45</td><td>Pest &amp; Animals</td><td>Cleanliness Issue: Lift Mirror at Block 45</td><td>In Progress</td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="month-2026-02" style="margin-bottom:8px">
+<button class="collapsible-btn" onclick="toggleSection('month-content-2026-02')"><span>Feb 2026 -- 193 cases, 93.3% closed, avg rating 4.74</span><span class="chevron">&#9654;</span></button>
+<div id="month-content-2026-02" class="collapsible-content">
+<div class="card">
+<div class="summary-grid">
+<div class="metric"><div class="value">193</div><div class="label">Cases</div></div>
+<div class="metric"><div class="value">180</div><div class="label">Closed</div></div>
+<div class="metric"><div class="value">13</div><div class="label">Outstanding</div></div>
+<div class="metric"><div class="value">93.3%</div><div class="label">Closure Rate</div></div>
+<div class="metric"><div class="value">4.74</div><div class="label">Avg Rating</div></div>
+<div class="metric"><div class="value">2.2</div><div class="label">Avg Days to Close</div></div>
+</div>
+<h3>Highlights</h3><ul class="highlight-list">
+<li>Top issue clusters: Pest &amp; Animals (34), Security &amp; Access (22), Lift Issues (20).</li>
+<li>Admin &amp; General spiked from 3 to 5 cases.</li>
+<li>Building Maintenance spiked from 7 to 11 cases.</li>
+<li>Cleanliness spiked from 8 to 17 cases.</li>
+<li>Common Area Obstruction spiked from 4 to 20 cases.</li>
+</ul>
+<h3>Issue Cluster Distribution</h3>
+<table><thead><tr><th>#</th><th>Cluster</th><th>Count</th><th>%</th><th style="width:30%"></th></tr></thead><tbody>
+<tr><td>1</td><td>Pest &amp; Animals</td><td>34</td><td>17.6%</td><td><span class="bar-fill bar-primary" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="34 cases"></span></td></tr>
+<tr><td>2</td><td>Security &amp; Access</td><td>22</td><td>11.4%</td><td><span class="bar-fill bar-primary" style="width:64%;height:14px;display:inline-block;border-radius:3px;" title="22 cases"></span></td></tr>
+<tr><td>3</td><td>Lift Issues</td><td>20</td><td>10.4%</td><td><span class="bar-fill bar-primary" style="width:58%;height:14px;display:inline-block;border-radius:3px;" title="20 cases"></span></td></tr>
+<tr><td>4</td><td>Common Area Obstruction</td><td>20</td><td>10.4%</td><td><span class="bar-fill bar-primary" style="width:58%;height:14px;display:inline-block;border-radius:3px;" title="20 cases"></span></td></tr>
+<tr><td>5</td><td>Cleanliness</td><td>17</td><td>8.8%</td><td><span class="bar-fill bar-primary" style="width:50%;height:14px;display:inline-block;border-radius:3px;" title="17 cases"></span></td></tr>
+<tr><td>6</td><td>Waste &amp; Recycling</td><td>17</td><td>8.8%</td><td><span class="bar-fill bar-primary" style="width:50%;height:14px;display:inline-block;border-radius:3px;" title="17 cases"></span></td></tr>
+<tr><td>7</td><td>Building Maintenance</td><td>11</td><td>5.7%</td><td><span class="bar-fill bar-primary" style="width:32%;height:14px;display:inline-block;border-radius:3px;" title="11 cases"></span></td></tr>
+<tr><td>8</td><td>Others</td><td>10</td><td>5.2%</td><td><span class="bar-fill bar-primary" style="width:29%;height:14px;display:inline-block;border-radius:3px;" title="10 cases"></span></td></tr>
+<tr><td>9</td><td>Gym Equipment</td><td>7</td><td>3.6%</td><td><span class="bar-fill bar-primary" style="width:20%;height:14px;display:inline-block;border-radius:3px;" title="7 cases"></span></td></tr>
+<tr><td>10</td><td>Parking &amp; Traffic</td><td>7</td><td>3.6%</td><td><span class="bar-fill bar-primary" style="width:20%;height:14px;display:inline-block;border-radius:3px;" title="7 cases"></span></td></tr>
+<tr><td>11</td><td>Admin &amp; General</td><td>5</td><td>2.6%</td><td><span class="bar-fill bar-primary" style="width:14%;height:14px;display:inline-block;border-radius:3px;" title="5 cases"></span></td></tr>
+<tr><td>12</td><td>Pool &amp; Water Features</td><td>5</td><td>2.6%</td><td><span class="bar-fill bar-primary" style="width:14%;height:14px;display:inline-block;border-radius:3px;" title="5 cases"></span></td></tr>
+<tr><td>13</td><td>Noise &amp; Neighbour</td><td>4</td><td>2.1%</td><td><span class="bar-fill bar-primary" style="width:11%;height:14px;display:inline-block;border-radius:3px;" title="4 cases"></span></td></tr>
+<tr><td>14</td><td>Intercom &amp; Smart Home</td><td>4</td><td>2.1%</td><td><span class="bar-fill bar-primary" style="width:11%;height:14px;display:inline-block;border-radius:3px;" title="4 cases"></span></td></tr>
+<tr><td>15</td><td>Water &amp; Plumbing</td><td>3</td><td>1.6%</td><td><span class="bar-fill bar-primary" style="width:8%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>16</td><td>Playground &amp; Kids</td><td>2</td><td>1.0%</td><td><span class="bar-fill bar-primary" style="width:5%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>17</td><td>Landscaping</td><td>2</td><td>1.0%</td><td><span class="bar-fill bar-primary" style="width:5%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>18</td><td>Fire Safety</td><td>2</td><td>1.0%</td><td><span class="bar-fill bar-primary" style="width:5%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>19</td><td>Electrical</td><td>1</td><td>0.5%</td><td><span class="bar-fill bar-primary" style="width:2%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+</tbody></table>
+<h3>Block Breakdown</h3>
+<table><thead><tr><th>Block</th><th>Cases</th><th>Top Cluster</th></tr></thead><tbody>
+<tr><td>Blk 47</td><td>36</td><td>Cleanliness (9)</td></tr>
+<tr><td>Blk 53</td><td>32</td><td>Security &amp; Access (6)</td></tr>
+<tr><td>Blk 55</td><td>28</td><td>Lift Issues (8)</td></tr>
+<tr><td>Blk 59</td><td>25</td><td>Pest &amp; Animals (6)</td></tr>
+<tr><td>Blk 57</td><td>24</td><td>Pest &amp; Animals (6)</td></tr>
+<tr><td>Blk 61</td><td>14</td><td>Security &amp; Access (5)</td></tr>
+<tr><td>Blk 45</td><td>13</td><td>Pest &amp; Animals (3)</td></tr>
+<tr><td>Blk 49</td><td>9</td><td>Security &amp; Access (2)</td></tr>
+<tr><td>Blk 51</td><td>7</td><td>Waste &amp; Recycling (3)</td></tr>
+<tr><td>Terrace</td><td>5</td><td>Pest &amp; Animals (3)</td></tr>
+</tbody></table>
+<h3>Outstanding Cases (13)</h3>
+<table><thead><tr><th>Case</th><th>Block</th><th>Cluster</th><th>Title</th><th>Status</th></tr></thead><tbody>
+<tr><td>1292-4602</td><td>Blk 47</td><td>Cleanliness</td><td>Need to clean near big plant area</td><td>In Progress</td></tr>
+<tr><td>1292-4591</td><td>Blk 59</td><td>Pest &amp; Animals</td><td>no signal on my mobile</td><td>In Progress</td></tr>
+<tr><td>1292-4586</td><td>Blk 61</td><td>Noise &amp; Neighbour</td><td>Complaint Regarding Noise Disturbance from Unit 61</td><td>In Progress</td></tr>
+<tr><td>1292-4585</td><td>Blk 55</td><td>Playground &amp; Kids</td><td>damaged trampoline</td><td>In Progress</td></tr>
+<tr><td>1292-4575</td><td>Blk 53</td><td>Noise &amp; Neighbour</td><td>Inconsiderate behavior from 53 [unit]</td><td>In Progress</td></tr>
+<tr><td>1292-4556</td><td>Blk 47</td><td>Common Area Obstruction</td><td>Bicycles @ Carpark</td><td>In Progress</td></tr>
+<tr><td>1292-4550</td><td>Blk 57</td><td>Pest &amp; Animals</td><td>Re: Case ID 1292-4305</td><td>In Progress</td></tr>
+<tr><td>1292-4522</td><td>Blk 59</td><td>Pest &amp; Animals</td><td>smoking at balcony</td><td>In Progress</td></tr>
+<tr><td>1292-4518</td><td>Blk 49</td><td>Parking &amp; Traffic</td><td>bicycle parking</td><td>In Progress</td></tr>
+<tr><td>1292-4517</td><td>Blk 47</td><td>Gym Equipment</td><td>gym poorly maintained and still missing 2 treadmil</td><td>In Progress</td></tr>
+<tr><td>1292-4488</td><td>Terrace</td><td>Pest &amp; Animals</td><td>Irresponsible dog owners</td><td>In Progress</td></tr>
+<tr><td>1292-4476</td><td>Blk 53</td><td>Security &amp; Access</td><td>stolen bicycle seat at block 53</td><td>In Progress</td></tr>
+<tr><td>1292-4463</td><td>Blk 57</td><td>Noise &amp; Neighbour</td><td>Noise Disturbance Complaint – Unit [unit]</td><td>In Progress</td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div id="month-2026-03" style="margin-bottom:8px">
+<button class="collapsible-btn" onclick="toggleSection('month-content-2026-03')"><span>Mar 2026 -- 209 cases, 85.6% closed, avg rating 4.76</span><span class="chevron">&#9654;</span></button>
+<div id="month-content-2026-03" class="collapsible-content">
+<div class="card">
+<div class="summary-grid">
+<div class="metric"><div class="value">209</div><div class="label">Cases</div></div>
+<div class="metric"><div class="value">179</div><div class="label">Closed</div></div>
+<div class="metric"><div class="value">30</div><div class="label">Outstanding</div></div>
+<div class="metric"><div class="value">85.6%</div><div class="label">Closure Rate</div></div>
+<div class="metric"><div class="value">4.76</div><div class="label">Avg Rating</div></div>
+<div class="metric"><div class="value">2.2</div><div class="label">Avg Days to Close</div></div>
+</div>
+<h3>Highlights</h3><ul class="highlight-list">
+<li>Top issue clusters: Pest &amp; Animals (36), Security &amp; Access (30), Lift Issues (18).</li>
+<li>Gym Equipment spiked from 7 to 13 cases.</li>
+<li>Intercom &amp; Smart Home spiked from 4 to 9 cases.</li>
+<li>Noise &amp; Neighbour spiked from 4 to 8 cases.</li>
+<li>30 cases remain outstanding.</li>
+</ul>
+<h3>Issue Cluster Distribution</h3>
+<table><thead><tr><th>#</th><th>Cluster</th><th>Count</th><th>%</th><th style="width:30%"></th></tr></thead><tbody>
+<tr><td>1</td><td>Pest &amp; Animals</td><td>36</td><td>17.2%</td><td><span class="bar-fill bar-primary" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="36 cases"></span></td></tr>
+<tr><td>2</td><td>Security &amp; Access</td><td>30</td><td>14.4%</td><td><span class="bar-fill bar-primary" style="width:83%;height:14px;display:inline-block;border-radius:3px;" title="30 cases"></span></td></tr>
+<tr><td>3</td><td>Lift Issues</td><td>18</td><td>8.6%</td><td><span class="bar-fill bar-primary" style="width:50%;height:14px;display:inline-block;border-radius:3px;" title="18 cases"></span></td></tr>
+<tr><td>4</td><td>Common Area Obstruction</td><td>17</td><td>8.1%</td><td><span class="bar-fill bar-primary" style="width:47%;height:14px;display:inline-block;border-radius:3px;" title="17 cases"></span></td></tr>
+<tr><td>5</td><td>Cleanliness</td><td>14</td><td>6.7%</td><td><span class="bar-fill bar-primary" style="width:38%;height:14px;display:inline-block;border-radius:3px;" title="14 cases"></span></td></tr>
+<tr><td>6</td><td>Waste &amp; Recycling</td><td>13</td><td>6.2%</td><td><span class="bar-fill bar-primary" style="width:36%;height:14px;display:inline-block;border-radius:3px;" title="13 cases"></span></td></tr>
+<tr><td>7</td><td>Gym Equipment</td><td>13</td><td>6.2%</td><td><span class="bar-fill bar-primary" style="width:36%;height:14px;display:inline-block;border-radius:3px;" title="13 cases"></span></td></tr>
+<tr><td>8</td><td>Building Maintenance</td><td>12</td><td>5.7%</td><td><span class="bar-fill bar-primary" style="width:33%;height:14px;display:inline-block;border-radius:3px;" title="12 cases"></span></td></tr>
+<tr><td>9</td><td>Intercom &amp; Smart Home</td><td>9</td><td>4.3%</td><td><span class="bar-fill bar-primary" style="width:25%;height:14px;display:inline-block;border-radius:3px;" title="9 cases"></span></td></tr>
+<tr><td>10</td><td>Others</td><td>9</td><td>4.3%</td><td><span class="bar-fill bar-primary" style="width:25%;height:14px;display:inline-block;border-radius:3px;" title="9 cases"></span></td></tr>
+<tr><td>11</td><td>Parking &amp; Traffic</td><td>9</td><td>4.3%</td><td><span class="bar-fill bar-primary" style="width:25%;height:14px;display:inline-block;border-radius:3px;" title="9 cases"></span></td></tr>
+<tr><td>12</td><td>Noise &amp; Neighbour</td><td>8</td><td>3.8%</td><td><span class="bar-fill bar-primary" style="width:22%;height:14px;display:inline-block;border-radius:3px;" title="8 cases"></span></td></tr>
+<tr><td>13</td><td>Lighting</td><td>5</td><td>2.4%</td><td><span class="bar-fill bar-primary" style="width:13%;height:14px;display:inline-block;border-radius:3px;" title="5 cases"></span></td></tr>
+<tr><td>14</td><td>Admin &amp; General</td><td>5</td><td>2.4%</td><td><span class="bar-fill bar-primary" style="width:13%;height:14px;display:inline-block;border-radius:3px;" title="5 cases"></span></td></tr>
+<tr><td>15</td><td>Water &amp; Plumbing</td><td>3</td><td>1.4%</td><td><span class="bar-fill bar-primary" style="width:8%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>16</td><td>Pool &amp; Water Features</td><td>3</td><td>1.4%</td><td><span class="bar-fill bar-primary" style="width:8%;height:14px;display:inline-block;border-radius:3px;" title="3 cases"></span></td></tr>
+<tr><td>17</td><td>Electrical</td><td>2</td><td>1.0%</td><td><span class="bar-fill bar-primary" style="width:5%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>18</td><td>Playground &amp; Kids</td><td>2</td><td>1.0%</td><td><span class="bar-fill bar-primary" style="width:5%;height:14px;display:inline-block;border-radius:3px;" title="2 cases"></span></td></tr>
+<tr><td>19</td><td>Fire Safety</td><td>1</td><td>0.5%</td><td><span class="bar-fill bar-primary" style="width:2%;height:14px;display:inline-block;border-radius:3px;" title="1 cases"></span></td></tr>
+</tbody></table>
+<h3>Block Breakdown</h3>
+<table><thead><tr><th>Block</th><th>Cases</th><th>Top Cluster</th></tr></thead><tbody>
+<tr><td>Blk 47</td><td>60</td><td>Pest &amp; Animals (16)</td></tr>
+<tr><td>Blk 53</td><td>30</td><td>Security &amp; Access (6)</td></tr>
+<tr><td>Blk 61</td><td>23</td><td>Pest &amp; Animals (4)</td></tr>
+<tr><td>Blk 49</td><td>22</td><td>Noise &amp; Neighbour (3)</td></tr>
+<tr><td>Blk 45</td><td>21</td><td>Lift Issues (5)</td></tr>
+<tr><td>Blk 59</td><td>16</td><td>Waste &amp; Recycling (3)</td></tr>
+<tr><td>Blk 57</td><td>12</td><td>Pest &amp; Animals (3)</td></tr>
+<tr><td>Blk 51</td><td>10</td><td>Pest &amp; Animals (3)</td></tr>
+<tr><td>Blk 55</td><td>8</td><td>Security &amp; Access (5)</td></tr>
+<tr><td>Terrace</td><td>7</td><td>Parking &amp; Traffic (2)</td></tr>
+</tbody></table>
+<h3>Outstanding Cases (30)</h3>
+<table><thead><tr><th>Case</th><th>Block</th><th>Cluster</th><th>Title</th><th>Status</th></tr></thead><tbody>
+<tr><td>1292-4812</td><td>Blk 47</td><td>Pest &amp; Animals</td><td>Family Pool - Life Bouy has been removed.</td><td>Pending</td></tr>
+<tr><td>1292-4811</td><td>Blk 47</td><td>Pest &amp; Animals</td><td>Stray Cats in Estate</td><td>Pending</td></tr>
+<tr><td>1292-4801</td><td>Blk 53</td><td>Security &amp; Access</td><td>Pavilion</td><td>In Progress</td></tr>
+<tr><td>1292-4798</td><td>Blk 53</td><td>Security &amp; Access</td><td>Maintenance and Security</td><td>In Progress</td></tr>
+<tr><td>1292-4786</td><td>Blk 45</td><td>Common Area Obstruction</td><td>Children roller blading outside corridor</td><td>In Progress</td></tr>
+<tr><td>1292-4784</td><td>Blk 45</td><td>Fire Safety</td><td>Children roller blading outside corridor</td><td>In Progress</td></tr>
+<tr><td>1292-4737</td><td>Blk 47</td><td>Others</td><td>Hilife - Folder (Announcements)</td><td>Pending</td></tr>
+<tr><td>1292-4732</td><td>Blk 45</td><td>Noise &amp; Neighbour</td><td>heavy Indian food cooking</td><td>In Progress</td></tr>
+<tr><td>1292-4731</td><td>Blk 53</td><td>Cleanliness</td><td>Rust stain left by signage</td><td>In Progress</td></tr>
+<tr><td>1292-4718</td><td>Blk 47</td><td>Gym Equipment</td><td>spoilt treadmill</td><td>In Progress</td></tr>
+<tr><td>1292-4715</td><td>Blk 47</td><td>Security &amp; Access</td><td>Outdoor Pavillions</td><td>In Progress</td></tr>
+<tr><td>1292-4714</td><td>Blk 47</td><td>Building Maintenance</td><td>Maintenance Work - Blk 47 B1 Lobby</td><td>In Progress</td></tr>
+<tr><td>1292-4708</td><td>Blk 49</td><td>Gym Equipment</td><td>Treadmill spoil</td><td>In Progress</td></tr>
+<tr><td>1292-4701</td><td>Terrace</td><td>Pool &amp; Water Features</td><td>Swimming pool (at strata house 23) maintenance</td><td>In Progress</td></tr>
+<tr><td>1292-4693</td><td>Blk 55</td><td>Security &amp; Access</td><td>Blk 55 level 1 lift lobby</td><td>In Progress</td></tr>
+<tr><td>1292-4691</td><td>Blk 55</td><td>Security &amp; Access</td><td>Blk 55 door level 1 is open all the time</td><td>In Progress</td></tr>
+<tr><td>1292-4688</td><td>Blk 55</td><td>Gym Equipment</td><td>Treadmills Unfixed for Months</td><td>In Progress</td></tr>
+<tr><td>1292-4684</td><td>Blk 61</td><td>Security &amp; Access</td><td>Noise Complain</td><td>In Progress</td></tr>
+<tr><td>1292-4683</td><td>Blk 59</td><td>Gym Equipment</td><td>GYM room</td><td>In Progress</td></tr>
+<tr><td>1292-4682</td><td>Blk 53</td><td>Noise &amp; Neighbour</td><td>Block 53 [unit]</td><td>In Progress</td></tr>
+<tr><td colspan="5" style="font-style:italic;color:var(--color-muted)">... and 10 more</td></tr>
+</tbody></table>
+</div>
+</div>
+</div>
+<div style="margin-top:40px;padding:16px;color:var(--color-muted);font-size:0.82em;border-top:1px solid #e2e8f0;">
+Report generated on 11 Apr 2026 (Asia/Kuala_Lumpur). Data: 1844 cases from Apr 2025 to Mar 2026. All unit numbers masked to block level. No personally identifiable information included.
+</div>
+</div>
 </body>
 </html>
