@@ -5,92 +5,157 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Normanton Park -- Facility Utilization Analysis (Apr 2025 - Mar 2026)</title>
 <style>
+/* --- CSS Variables (eform standard) --- */
+:root {
+    --color-bg: #f8f9fa;
+    --color-white: #ffffff;
+    --color-text: #2c3e50;
+    --color-text-light: #5a6c7d;
+    --color-primary: #2c5282;
+    --color-primary-light: #ebf4ff;
+    --color-border: #d1d9e0;
+    --color-border-light: #e8ecf0;
+    --color-green: #276749;
+    --color-green-bg: #c6f6d5;
+    --color-yellow: #975a16;
+    --color-yellow-bg: #fefcbf;
+    --color-red: #9b2c2c;
+    --color-red-bg: #fed7d7;
+    --color-sidebar-width: 240px;
+}
+
 /* --- Base --- */
 *, *::before, *::after { box-sizing: border-box; }
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: #1a1a1a; background: #f5f5f5; margin: 0; padding: 0;
-    line-height: 1.5; font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    font-size: 15px;
+    margin: 0; padding: 0;
 }
-a { color: #1565c0; text-decoration: none; }
+a { color: var(--color-primary); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* --- Layout --- */
-.page-wrapper { display: flex; max-width: 1200px; margin: 0 auto; }
+/* --- Sidebar TOC --- */
 .sidebar {
-    position: sticky; top: 0; height: 100vh; width: 220px; min-width: 220px;
-    background: #263238; color: #eceff1; padding: 20px 12px;
-    overflow-y: auto; flex-shrink: 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: var(--color-sidebar-width);
+    background: var(--color-white);
+    border-right: 1px solid var(--color-border);
+    overflow-y: auto;
+    z-index: 100;
+    padding: 24px 0;
 }
-.sidebar h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .5px; color: #90a4ae; margin: 0 0 12px; }
-.sidebar ul { list-style: none; padding: 0; margin: 0; }
-.sidebar li { margin-bottom: 6px; }
-.sidebar a { color: #b0bec5; font-size: 13px; display: block; padding: 4px 8px; border-radius: 4px; }
-.sidebar a:hover { background: #37474f; color: #fff; text-decoration: none; }
-.main-content { flex: 1; padding: 24px 32px; min-width: 0; background: #fff; }
-.main-content h1 { font-size: 22px; margin: 0 0 4px; color: #263238; }
-.main-content .subtitle { color: #546e7a; font-size: 14px; margin-bottom: 24px; }
+.sidebar h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0 20px 16px;
+    border-bottom: 1px solid var(--color-border-light);
+    margin: 0 0 12px;
+}
+.sidebar nav a {
+    display: block;
+    padding: 7px 20px;
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-size: 13px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s ease;
+}
+.sidebar nav a:hover,
+.sidebar nav a.active {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    border-left-color: var(--color-primary);
+}
+
+/* --- Main content --- */
+.main-content {
+    margin-left: var(--color-sidebar-width);
+    max-width: 1200px;
+    padding: 40px 48px 80px;
+}
+.main-content h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0 0 8px;
+}
+.main-content .subtitle {
+    font-size: 13px;
+    color: var(--color-text-light);
+    margin-bottom: 24px;
+}
 
 /* --- Sections --- */
-section { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid #e0e0e0; }
+section { margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid var(--color-border-light); }
 section:last-child { border-bottom: none; }
-h2 { font-size: 18px; color: #263238; margin: 0 0 16px; padding-top: 8px; }
-h3 { font-size: 15px; color: #37474f; margin: 20px 0 10px; }
-h4 { font-size: 14px; color: #455a64; margin: 16px 0 8px; }
+h2 { font-size: 22px; font-weight: 700; color: var(--color-primary); margin: 0 0 16px; padding-top: 8px; }
+h3 { font-size: 17px; font-weight: 600; color: var(--color-text); margin: 24px 0 12px; }
+h4 { font-size: 15px; font-weight: 600; color: var(--color-text); margin: 16px 0 8px; }
 
 /* --- Summary Cards --- */
 .summary-grid { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
 .summary-card {
-    background: #f5f5f5; border: 1px solid #e0e0e0; border-radius: 6px;
+    background: var(--color-white); border: 1px solid var(--color-border); border-radius: 6px;
     padding: 14px 18px; min-width: 140px; flex: 1;
 }
-.card-value { font-size: 22px; font-weight: 700; color: #263238; }
-.card-label { font-size: 12px; color: #78909c; margin-top: 2px; }
+.card-value { font-size: 22px; font-weight: 700; color: var(--color-primary); }
+.card-label { font-size: 12px; color: var(--color-text-light); margin-top: 2px; }
 
 /* --- Tables --- */
-.table-wrapper { overflow-x: auto; margin: 10px 0; }
+.table-wrapper { overflow-x: auto; margin: 10px 0; border: 1px solid var(--color-border); border-radius: 6px; }
 table { border-collapse: collapse; width: 100%; font-size: 13px; }
-th, td { padding: 6px 8px; border: 1px solid #e0e0e0; }
-th { background: #eceff1; color: #37474f; font-weight: 600; text-align: center; position: sticky; top: 0; }
+th, td { padding: 9px 12px; border-bottom: 1px solid var(--color-border-light); }
+th { background: var(--color-primary); color: #fff; font-weight: 600; text-align: center; white-space: nowrap; }
+td { border: 1px solid var(--color-border-light); }
+tbody tr:nth-child(even) { background: #f7fafc; }
+tbody tr:hover { background: var(--color-primary-light); }
 .fac-name { white-space: nowrap; font-weight: 500; }
-.total-row td { background: #eceff1; font-weight: 700; }
+.total-row td { background: var(--color-primary-light); font-weight: 700; }
 
 /* --- Bar Charts --- */
 .chart { margin: 8px 0; }
 .chart-row { display: flex; align-items: center; margin-bottom: 4px; }
-.chart-label { width: 80px; min-width: 80px; font-size: 12px; color: #455a64; text-align: right; padding-right: 8px; }
+.chart-label { width: 80px; min-width: 80px; font-size: 12px; color: var(--color-text-light); text-align: right; padding-right: 8px; }
 .chart-label-wide { width: 240px; min-width: 240px; }
-.bar-container { flex: 1; height: 22px; background: #f0f0f0; border-radius: 3px; position: relative; display: flex; }
+.bar-container { flex: 1; height: 22px; background: var(--color-border-light); border-radius: 3px; position: relative; display: flex; }
 .bar-fill { height: 100%; border-radius: 3px; transition: width .3s; flex-shrink: 0; cursor: pointer; }
 .bar-overlay { margin-left: 0; }
-.bar-label { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); font-size: 11px; color: #333; font-weight: 500; }
+.bar-label { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); font-size: 11px; color: var(--color-text); font-weight: 500; }
 
 /* --- Legend --- */
-.legend { font-size: 12px; color: #546e7a; margin-top: 6px; }
+.legend { font-size: 12px; color: var(--color-text-light); margin-top: 6px; }
 .legend-box { display: inline-block; width: 12px; height: 12px; border-radius: 2px; vertical-align: middle; margin-right: 3px; margin-left: 10px; }
 
 /* --- Details / Drill-down --- */
 details.month-detail { margin-bottom: 8px; }
 details.month-detail summary {
-    cursor: pointer; padding: 8px 12px; background: #f5f5f5; border: 1px solid #e0e0e0;
-    border-radius: 4px; font-size: 13px;
+    cursor: pointer; padding: 8px 12px; background: var(--color-white); border: 1px solid var(--color-border);
+    border-radius: 6px; font-size: 13px;
 }
-details.month-detail summary:hover { background: #eeeeee; }
-details.month-detail[open] summary { border-radius: 4px 4px 0 0; border-bottom: none; }
+details.month-detail summary:hover { background: var(--color-primary-light); }
+details.month-detail[open] summary { border-radius: 6px 6px 0 0; border-bottom: none; }
 .detail-content {
-    padding: 12px; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 4px 4px;
+    padding: 12px; border: 1px solid var(--color-border); border-top: none; border-radius: 0 0 6px 6px;
 }
 .mini-summary { display: flex; gap: 12px; flex-wrap: wrap; }
 .mini-card {
-    background: #f9f9f9; padding: 6px 12px; border-radius: 4px; font-size: 13px;
-    border: 1px solid #e8e8e8;
+    background: var(--color-primary-light); padding: 6px 12px; border-radius: 4px; font-size: 13px;
+    border: 1px solid var(--color-border-light);
 }
 
 /* --- Print --- */
 @media print {
     .sidebar { display: none; }
-    .page-wrapper { display: block; max-width: 100%; }
-    .main-content { padding: 0; }
+    .main-content { margin-left: 0; padding: 0; }
     body { background: #fff; font-size: 11px; }
     section { page-break-inside: avoid; }
     details { display: block; }
@@ -104,31 +169,30 @@ details.month-detail[open] summary { border-radius: 4px 4px 0 0; border-bottom: 
 /* --- Responsive --- */
 @media (max-width: 800px) {
     .sidebar { display: none; }
-    .main-content { padding: 16px; }
+    .main-content { margin-left: 0; padding: 16px; }
     .summary-grid { flex-direction: column; }
     .chart-label-wide { width: 160px; min-width: 160px; }
 }
 </style>
 </head>
 <body>
-<div class="page-wrapper">
-<nav class="sidebar">
-<h3>Contents</h3>
-<ul>
-<li><a href="#sec-summary">1. Overall Summary</a></li>
-<li><a href="#sec-utilization">2. Utilization by Facility</a></li>
-<li><a href="#sec-trend">3. Monthly Trend</a></li>
-<li><a href="#sec-dow">4. Day-of-Week Heatmap</a></li>
-<li><a href="#sec-timeslot">5. Time Slot Analysis</a></li>
-<li><a href="#sec-underutil">6. Under-Utilized Facilities</a></li>
-<li><a href="#sec-cancel">7. Cancellation Analysis</a></li>
-<li><a href="#sec-fees">8. Booking Fees Analysis</a></li>
-<li><a href="#sec-drilldown">9. Monthly Drill-Down</a></li>
-</ul>
+<aside class="sidebar">
+<h3>CONTENTS</h3>
+<nav>
+<a href="#sec-summary">1. Overall Summary</a>
+<a href="#sec-utilization">2. Utilization by Facility</a>
+<a href="#sec-trend">3. Monthly Trend</a>
+<a href="#sec-dow">4. Day-of-Week Heatmap</a>
+<a href="#sec-timeslot">5. Time Slot Analysis</a>
+<a href="#sec-underutil">6. Under-Utilized Facilities</a>
+<a href="#sec-cancel">7. Cancellation Analysis</a>
+<a href="#sec-fees">8. Booking Fees Analysis</a>
+<a href="#sec-drilldown">9. Monthly Drill-Down</a>
 </nav>
+</aside>
 <main class="main-content">
 <h1>Normanton Park -- Facility Utilization Analysis</h1>
-<p class="subtitle">Period: April 2025 to March 2026 | Generated: 12 Apr 2026 13:09 SGT</p>
+<p class="subtitle">Period: April 2025 to March 2026</p>
 
 <section id="sec-summary"><h2>1. Overall Summary</h2>
 <div class="summary-grid">
@@ -139,38 +203,51 @@ details.month-detail[open] summary { border-radius: 4px 4px 0 0; border-bottom: 
 <div class="summary-card"><div class="card-value">$114,490</div><div class="card-label">Total Booking Fees (excl GST)</div></div>
 <div class="summary-card"><div class="card-value">$10,304</div><div class="card-label">GST (9%)</div></div>
 <div class="summary-card"><div class="card-value">$18.30</div><div class="card-label">Avg Fee / Booking</div></div>
+<div class="summary-card"><div class="card-value">$703,200</div><div class="card-label">Deposits Collected</div></div>
+<div class="summary-card"><div class="card-value">0</div><div class="card-label">Deposit Forfeits</div></div>
 </div>
-<h3>Monthly Booking Fees Trend</h3>
+<div style="background:var(--color-primary-light);border-left:4px solid var(--color-primary);padding:16px 20px;border-radius:0 6px 6px 0;margin-bottom:24px;">
+<h3 style="margin:0 0 10px;font-size:15px;color:var(--color-primary);">Key Insights for Facility Manager</h3>
+<ul style="margin:0;padding-left:20px;line-height:1.8;font-size:13px;">
+<li><strong>Tennis Courts drive 77% of all bookings and 53.8% utilization</strong> -- the most popular facility by far. Weekend and evening slots are near capacity.</li>
+<li><strong>7 of 11 Dining Pavilions are under 15% utilization</strong> -- Botanical, Tropical, and Tea pavilions average under 6%. Repricing (reduce or waive booking fee) could stimulate demand.</li>
+<li><strong>Function Rooms are at 28% utilization</strong> -- moderate but with room to grow. Weekend slots are popular; weekday sessions are mostly empty.</li>
+<li><strong>28.7% cancellation rate is significant</strong> -- nearly 1 in 3 bookings is cancelled. System auto-cancellations (no payment confirmation) account for a large portion.</li>
+<li><strong>No deposit forfeits recorded</strong> -- 3,512 deposit transactions totaling $703,200 collected across 12 months with zero forfeits. Deposit refunds are processed automatically and not individually tracked as transactions.</li>
+<li><strong>Net booking fees are stable at ~$9.5K/month (excl GST)</strong> -- no significant growth or decline trend. Primarily driven by tennis court fees. Hilife service charge (~5.45%) is collected separately from residents and not included in these figures.</li>
+</ul>
+</div>
+<h3>Monthly Booking Fees Trend (excl GST)</h3>
 <div class="chart">
-<div class="chart-row"><span class="chart-label">Apr 2025</span><div class="bar-container"><div class="bar-fill" style="width:82.5%;background:#2e7d32;" title="$9,015"></div><span class="bar-label">$9,015</span></div></div>
-<div class="chart-row"><span class="chart-label">May 2025</span><div class="bar-container"><div class="bar-fill" style="width:89.6%;background:#2e7d32;" title="$9,795"></div><span class="bar-label">$9,795</span></div></div>
-<div class="chart-row"><span class="chart-label">Jun 2025</span><div class="bar-container"><div class="bar-fill" style="width:78.8%;background:#2e7d32;" title="$8,610"></div><span class="bar-label">$8,610</span></div></div>
-<div class="chart-row"><span class="chart-label">Jul 2025</span><div class="bar-container"><div class="bar-fill" style="width:72.8%;background:#2e7d32;" title="$7,955"></div><span class="bar-label">$7,955</span></div></div>
-<div class="chart-row"><span class="chart-label">Aug 2025</span><div class="bar-container"><div class="bar-fill" style="width:89.5%;background:#2e7d32;" title="$9,780"></div><span class="bar-label">$9,780</span></div></div>
-<div class="chart-row"><span class="chart-label">Sep 2025</span><div class="bar-container"><div class="bar-fill" style="width:83.8%;background:#2e7d32;" title="$9,155"></div><span class="bar-label">$9,155</span></div></div>
-<div class="chart-row"><span class="chart-label">Oct 2025</span><div class="bar-container"><div class="bar-fill" style="width:89.0%;background:#2e7d32;" title="$9,730"></div><span class="bar-label">$9,730</span></div></div>
-<div class="chart-row"><span class="chart-label">Nov 2025</span><div class="bar-container"><div class="bar-fill" style="width:100.0%;background:#2e7d32;" title="$10,930"></div><span class="bar-label">$10,930</span></div></div>
-<div class="chart-row"><span class="chart-label">Dec 2025</span><div class="bar-container"><div class="bar-fill" style="width:99.9%;background:#2e7d32;" title="$10,915"></div><span class="bar-label">$10,915</span></div></div>
-<div class="chart-row"><span class="chart-label">Jan 2026</span><div class="bar-container"><div class="bar-fill" style="width:88.2%;background:#2e7d32;" title="$9,640"></div><span class="bar-label">$9,640</span></div></div>
-<div class="chart-row"><span class="chart-label">Feb 2026</span><div class="bar-container"><div class="bar-fill" style="width:91.9%;background:#2e7d32;" title="$10,045"></div><span class="bar-label">$10,045</span></div></div>
-<div class="chart-row"><span class="chart-label">Mar 2026</span><div class="bar-container"><div class="bar-fill" style="width:81.6%;background:#2e7d32;" title="$8,920"></div><span class="bar-label">$8,920</span></div></div>
+<div class="chart-row"><span class="chart-label">Apr 2025</span><div class="bar-container"><div class="bar-fill" style="width:82.5%;background:#276749;" title="$9,015"></div><span class="bar-label">$9,015</span></div></div>
+<div class="chart-row"><span class="chart-label">May 2025</span><div class="bar-container"><div class="bar-fill" style="width:89.6%;background:#276749;" title="$9,795"></div><span class="bar-label">$9,795</span></div></div>
+<div class="chart-row"><span class="chart-label">Jun 2025</span><div class="bar-container"><div class="bar-fill" style="width:78.8%;background:#276749;" title="$8,610"></div><span class="bar-label">$8,610</span></div></div>
+<div class="chart-row"><span class="chart-label">Jul 2025</span><div class="bar-container"><div class="bar-fill" style="width:72.8%;background:#276749;" title="$7,955"></div><span class="bar-label">$7,955</span></div></div>
+<div class="chart-row"><span class="chart-label">Aug 2025</span><div class="bar-container"><div class="bar-fill" style="width:89.5%;background:#276749;" title="$9,780"></div><span class="bar-label">$9,780</span></div></div>
+<div class="chart-row"><span class="chart-label">Sep 2025</span><div class="bar-container"><div class="bar-fill" style="width:83.8%;background:#276749;" title="$9,155"></div><span class="bar-label">$9,155</span></div></div>
+<div class="chart-row"><span class="chart-label">Oct 2025</span><div class="bar-container"><div class="bar-fill" style="width:89.0%;background:#276749;" title="$9,730"></div><span class="bar-label">$9,730</span></div></div>
+<div class="chart-row"><span class="chart-label">Nov 2025</span><div class="bar-container"><div class="bar-fill" style="width:100.0%;background:#276749;" title="$10,930"></div><span class="bar-label">$10,930</span></div></div>
+<div class="chart-row"><span class="chart-label">Dec 2025</span><div class="bar-container"><div class="bar-fill" style="width:99.9%;background:#276749;" title="$10,915"></div><span class="bar-label">$10,915</span></div></div>
+<div class="chart-row"><span class="chart-label">Jan 2026</span><div class="bar-container"><div class="bar-fill" style="width:88.2%;background:#276749;" title="$9,640"></div><span class="bar-label">$9,640</span></div></div>
+<div class="chart-row"><span class="chart-label">Feb 2026</span><div class="bar-container"><div class="bar-fill" style="width:91.9%;background:#276749;" title="$10,045"></div><span class="bar-label">$10,045</span></div></div>
+<div class="chart-row"><span class="chart-label">Mar 2026</span><div class="bar-container"><div class="bar-fill" style="width:81.6%;background:#276749;" title="$8,920"></div><span class="bar-label">$8,920</span></div></div>
 </div>
 <h3>Monthly Bookings (Approved vs Cancelled)</h3>
 <div class="chart">
-<div class="chart-row"><span class="chart-label">Apr 2025</span><div class="bar-container"><div class="bar-fill" style="width:61.0%;background:#2e7d32;" title="Approved: 506"></div><div class="bar-fill bar-overlay" style="width:26.1%;background:#c62828;" title="Cancelled: 217"></div><span class="bar-label">506 / 217</span></div></div>
-<div class="chart-row"><span class="chart-label">May 2025</span><div class="bar-container"><div class="bar-fill" style="width:63.4%;background:#2e7d32;" title="Approved: 526"></div><div class="bar-fill bar-overlay" style="width:22.8%;background:#c62828;" title="Cancelled: 189"></div><span class="bar-label">526 / 189</span></div></div>
-<div class="chart-row"><span class="chart-label">Jun 2025</span><div class="bar-container"><div class="bar-fill" style="width:56.1%;background:#2e7d32;" title="Approved: 466"></div><div class="bar-fill bar-overlay" style="width:18.8%;background:#c62828;" title="Cancelled: 156"></div><span class="bar-label">466 / 156</span></div></div>
-<div class="chart-row"><span class="chart-label">Jul 2025</span><div class="bar-container"><div class="bar-fill" style="width:53.7%;background:#2e7d32;" title="Approved: 446"></div><div class="bar-fill bar-overlay" style="width:21.4%;background:#c62828;" title="Cancelled: 178"></div><span class="bar-label">446 / 178</span></div></div>
-<div class="chart-row"><span class="chart-label">Aug 2025</span><div class="bar-container"><div class="bar-fill" style="width:67.8%;background:#2e7d32;" title="Approved: 563"></div><div class="bar-fill bar-overlay" style="width:32.2%;background:#c62828;" title="Cancelled: 267"></div><span class="bar-label">563 / 267</span></div></div>
-<div class="chart-row"><span class="chart-label">Sep 2025</span><div class="bar-container"><div class="bar-fill" style="width:68.4%;background:#2e7d32;" title="Approved: 568"></div><div class="bar-fill bar-overlay" style="width:29.3%;background:#c62828;" title="Cancelled: 243"></div><span class="bar-label">568 / 243</span></div></div>
-<div class="chart-row"><span class="chart-label">Oct 2025</span><div class="bar-container"><div class="bar-fill" style="width:68.4%;background:#2e7d32;" title="Approved: 568"></div><div class="bar-fill bar-overlay" style="width:25.8%;background:#c62828;" title="Cancelled: 214"></div><span class="bar-label">568 / 214</span></div></div>
-<div class="chart-row"><span class="chart-label">Nov 2025</span><div class="bar-container"><div class="bar-fill" style="width:68.8%;background:#2e7d32;" title="Approved: 571"></div><div class="bar-fill bar-overlay" style="width:30.1%;background:#c62828;" title="Cancelled: 250"></div><span class="bar-label">571 / 250</span></div></div>
-<div class="chart-row"><span class="chart-label">Dec 2025</span><div class="bar-container"><div class="bar-fill" style="width:59.5%;background:#2e7d32;" title="Approved: 494"></div><div class="bar-fill bar-overlay" style="width:25.9%;background:#c62828;" title="Cancelled: 215"></div><span class="bar-label">494 / 215</span></div></div>
-<div class="chart-row"><span class="chart-label">Jan 2026</span><div class="bar-container"><div class="bar-fill" style="width:62.9%;background:#2e7d32;" title="Approved: 522"></div><div class="bar-fill bar-overlay" style="width:28.4%;background:#c62828;" title="Cancelled: 236"></div><span class="bar-label">522 / 236</span></div></div>
-<div class="chart-row"><span class="chart-label">Feb 2026</span><div class="bar-container"><div class="bar-fill" style="width:60.0%;background:#2e7d32;" title="Approved: 498"></div><div class="bar-fill bar-overlay" style="width:21.7%;background:#c62828;" title="Cancelled: 180"></div><span class="bar-label">498 / 180</span></div></div>
-<div class="chart-row"><span class="chart-label">Mar 2026</span><div class="bar-container"><div class="bar-fill" style="width:63.6%;background:#2e7d32;" title="Approved: 528"></div><div class="bar-fill bar-overlay" style="width:20.6%;background:#c62828;" title="Cancelled: 171"></div><span class="bar-label">528 / 171</span></div></div>
+<div class="chart-row"><span class="chart-label">Apr 2025</span><div class="bar-container"><div class="bar-fill" style="width:61.0%;background:#276749;" title="Approved: 506"></div><div class="bar-fill bar-overlay" style="width:26.1%;background:#9b2c2c;" title="Cancelled: 217"></div><span class="bar-label">506 / 217</span></div></div>
+<div class="chart-row"><span class="chart-label">May 2025</span><div class="bar-container"><div class="bar-fill" style="width:63.4%;background:#276749;" title="Approved: 526"></div><div class="bar-fill bar-overlay" style="width:22.8%;background:#9b2c2c;" title="Cancelled: 189"></div><span class="bar-label">526 / 189</span></div></div>
+<div class="chart-row"><span class="chart-label">Jun 2025</span><div class="bar-container"><div class="bar-fill" style="width:56.1%;background:#276749;" title="Approved: 466"></div><div class="bar-fill bar-overlay" style="width:18.8%;background:#9b2c2c;" title="Cancelled: 156"></div><span class="bar-label">466 / 156</span></div></div>
+<div class="chart-row"><span class="chart-label">Jul 2025</span><div class="bar-container"><div class="bar-fill" style="width:53.7%;background:#276749;" title="Approved: 446"></div><div class="bar-fill bar-overlay" style="width:21.4%;background:#9b2c2c;" title="Cancelled: 178"></div><span class="bar-label">446 / 178</span></div></div>
+<div class="chart-row"><span class="chart-label">Aug 2025</span><div class="bar-container"><div class="bar-fill" style="width:67.8%;background:#276749;" title="Approved: 563"></div><div class="bar-fill bar-overlay" style="width:32.2%;background:#9b2c2c;" title="Cancelled: 267"></div><span class="bar-label">563 / 267</span></div></div>
+<div class="chart-row"><span class="chart-label">Sep 2025</span><div class="bar-container"><div class="bar-fill" style="width:68.4%;background:#276749;" title="Approved: 568"></div><div class="bar-fill bar-overlay" style="width:29.3%;background:#9b2c2c;" title="Cancelled: 243"></div><span class="bar-label">568 / 243</span></div></div>
+<div class="chart-row"><span class="chart-label">Oct 2025</span><div class="bar-container"><div class="bar-fill" style="width:68.4%;background:#276749;" title="Approved: 568"></div><div class="bar-fill bar-overlay" style="width:25.8%;background:#9b2c2c;" title="Cancelled: 214"></div><span class="bar-label">568 / 214</span></div></div>
+<div class="chart-row"><span class="chart-label">Nov 2025</span><div class="bar-container"><div class="bar-fill" style="width:68.8%;background:#276749;" title="Approved: 571"></div><div class="bar-fill bar-overlay" style="width:30.1%;background:#9b2c2c;" title="Cancelled: 250"></div><span class="bar-label">571 / 250</span></div></div>
+<div class="chart-row"><span class="chart-label">Dec 2025</span><div class="bar-container"><div class="bar-fill" style="width:59.5%;background:#276749;" title="Approved: 494"></div><div class="bar-fill bar-overlay" style="width:25.9%;background:#9b2c2c;" title="Cancelled: 215"></div><span class="bar-label">494 / 215</span></div></div>
+<div class="chart-row"><span class="chart-label">Jan 2026</span><div class="bar-container"><div class="bar-fill" style="width:62.9%;background:#276749;" title="Approved: 522"></div><div class="bar-fill bar-overlay" style="width:28.4%;background:#9b2c2c;" title="Cancelled: 236"></div><span class="bar-label">522 / 236</span></div></div>
+<div class="chart-row"><span class="chart-label">Feb 2026</span><div class="bar-container"><div class="bar-fill" style="width:60.0%;background:#276749;" title="Approved: 498"></div><div class="bar-fill bar-overlay" style="width:21.7%;background:#9b2c2c;" title="Cancelled: 180"></div><span class="bar-label">498 / 180</span></div></div>
+<div class="chart-row"><span class="chart-label">Mar 2026</span><div class="bar-container"><div class="bar-fill" style="width:63.6%;background:#276749;" title="Approved: 528"></div><div class="bar-fill bar-overlay" style="width:20.6%;background:#9b2c2c;" title="Cancelled: 171"></div><span class="bar-label">528 / 171</span></div></div>
 </div>
-<p class="legend"><span class="legend-box" style="background:#2e7d32;"></span> Approved <span class="legend-box" style="background:#c62828;"></span> Cancelled</p>
+<p class="legend"><span class="legend-box" style="background:#276749;"></span> Approved <span class="legend-box" style="background:#9b2c2c;"></span> Cancelled</p>
 </section><section id="sec-utilization"><h2>2. Utilization by Facility</h2>
 <p>Utilization = approved slot-units / maximum available slots. Tennis: 15 hourly slots/day per court. Dining/Function: 2 sessions/day per facility.</p>
 <h3>Category-Level Utilization</h3>
@@ -586,18 +663,18 @@ details.month-detail[open] summary { border-radius: 4px 4px 0 0; border-bottom: 
 </tbody></table></div>
 <h3>Overall Utilization Trend (Bar Chart)</h3>
 <div class="chart">
-<div class="chart-row"><span class="chart-label">Apr 2025</span><div class="bar-container"><div class="bar-fill" style="width:35.1%;background:#2e7d32;" title="35.1%"></div><span class="bar-label">35.1%</span></div></div>
-<div class="chart-row"><span class="chart-label">May 2025</span><div class="bar-container"><div class="bar-fill" style="width:35.9%;background:#2e7d32;" title="35.9%"></div><span class="bar-label">35.9%</span></div></div>
-<div class="chart-row"><span class="chart-label">Jun 2025</span><div class="bar-container"><div class="bar-fill" style="width:33.0%;background:#2e7d32;" title="33.0%"></div><span class="bar-label">33.0%</span></div></div>
-<div class="chart-row"><span class="chart-label">Jul 2025</span><div class="bar-container"><div class="bar-fill" style="width:30.1%;background:#2e7d32;" title="30.1%"></div><span class="bar-label">30.1%</span></div></div>
-<div class="chart-row"><span class="chart-label">Aug 2025</span><div class="bar-container"><div class="bar-fill" style="width:38.3%;background:#2e7d32;" title="38.3%"></div><span class="bar-label">38.3%</span></div></div>
-<div class="chart-row"><span class="chart-label">Sep 2025</span><div class="bar-container"><div class="bar-fill" style="width:39.2%;background:#2e7d32;" title="39.2%"></div><span class="bar-label">39.2%</span></div></div>
-<div class="chart-row"><span class="chart-label">Oct 2025</span><div class="bar-container"><div class="bar-fill" style="width:38.1%;background:#2e7d32;" title="38.1%"></div><span class="bar-label">38.1%</span></div></div>
-<div class="chart-row"><span class="chart-label">Nov 2025</span><div class="bar-container"><div class="bar-fill" style="width:39.9%;background:#2e7d32;" title="39.9%"></div><span class="bar-label">39.9%</span></div></div>
-<div class="chart-row"><span class="chart-label">Dec 2025</span><div class="bar-container"><div class="bar-fill" style="width:33.1%;background:#2e7d32;" title="33.1%"></div><span class="bar-label">33.1%</span></div></div>
-<div class="chart-row"><span class="chart-label">Jan 2026</span><div class="bar-container"><div class="bar-fill" style="width:35.4%;background:#2e7d32;" title="35.4%"></div><span class="bar-label">35.4%</span></div></div>
-<div class="chart-row"><span class="chart-label">Feb 2026</span><div class="bar-container"><div class="bar-fill" style="width:37.8%;background:#2e7d32;" title="37.8%"></div><span class="bar-label">37.8%</span></div></div>
-<div class="chart-row"><span class="chart-label">Mar 2026</span><div class="bar-container"><div class="bar-fill" style="width:36.9%;background:#2e7d32;" title="36.9%"></div><span class="bar-label">36.9%</span></div></div>
+<div class="chart-row"><span class="chart-label">Apr 2025</span><div class="bar-container"><div class="bar-fill" style="width:35.1%;background:#276749;" title="35.1%"></div><span class="bar-label">35.1%</span></div></div>
+<div class="chart-row"><span class="chart-label">May 2025</span><div class="bar-container"><div class="bar-fill" style="width:35.9%;background:#276749;" title="35.9%"></div><span class="bar-label">35.9%</span></div></div>
+<div class="chart-row"><span class="chart-label">Jun 2025</span><div class="bar-container"><div class="bar-fill" style="width:33.0%;background:#276749;" title="33.0%"></div><span class="bar-label">33.0%</span></div></div>
+<div class="chart-row"><span class="chart-label">Jul 2025</span><div class="bar-container"><div class="bar-fill" style="width:30.1%;background:#276749;" title="30.1%"></div><span class="bar-label">30.1%</span></div></div>
+<div class="chart-row"><span class="chart-label">Aug 2025</span><div class="bar-container"><div class="bar-fill" style="width:38.3%;background:#276749;" title="38.3%"></div><span class="bar-label">38.3%</span></div></div>
+<div class="chart-row"><span class="chart-label">Sep 2025</span><div class="bar-container"><div class="bar-fill" style="width:39.2%;background:#276749;" title="39.2%"></div><span class="bar-label">39.2%</span></div></div>
+<div class="chart-row"><span class="chart-label">Oct 2025</span><div class="bar-container"><div class="bar-fill" style="width:38.1%;background:#276749;" title="38.1%"></div><span class="bar-label">38.1%</span></div></div>
+<div class="chart-row"><span class="chart-label">Nov 2025</span><div class="bar-container"><div class="bar-fill" style="width:39.9%;background:#276749;" title="39.9%"></div><span class="bar-label">39.9%</span></div></div>
+<div class="chart-row"><span class="chart-label">Dec 2025</span><div class="bar-container"><div class="bar-fill" style="width:33.1%;background:#276749;" title="33.1%"></div><span class="bar-label">33.1%</span></div></div>
+<div class="chart-row"><span class="chart-label">Jan 2026</span><div class="bar-container"><div class="bar-fill" style="width:35.4%;background:#276749;" title="35.4%"></div><span class="bar-label">35.4%</span></div></div>
+<div class="chart-row"><span class="chart-label">Feb 2026</span><div class="bar-container"><div class="bar-fill" style="width:37.8%;background:#276749;" title="37.8%"></div><span class="bar-label">37.8%</span></div></div>
+<div class="chart-row"><span class="chart-label">Mar 2026</span><div class="bar-container"><div class="bar-fill" style="width:36.9%;background:#276749;" title="36.9%"></div><span class="bar-label">36.9%</span></div></div>
 </div>
 </section><section id="sec-dow"><h2>4. Day-of-Week Heatmap</h2>
 <p>Approved booking counts by category and day of week (12-month total).</p>
@@ -642,33 +719,33 @@ details.month-detail[open] summary { border-radius: 4px 4px 0 0; border-bottom: 
 <h3>Tennis Courts</h3>
 <p>Most popular: <strong>20:00-21:00</strong> (687 bookings). Least popular: <strong>13:00-14:00</strong> (28 bookings).</p>
 <div class="chart">
-<div class="chart-row"><span class="chart-label chart-label-wide">07:00-08:00</span><div class="bar-container"><div class="bar-fill" style="width:69.1%;background:#4a90d9;" title="475"></div><span class="bar-label">475</span></div></div>
-<div class="chart-row"><span class="chart-label chart-label-wide">08:00-09:00</span><div class="bar-container"><div class="bar-fill" style="width:85.3%;background:#4a90d9;" title="586"></div><span class="bar-label">586</span></div></div>
-<div class="chart-row"><span class="chart-label chart-label-wide">09:00-10:00</span><div class="bar-container"><div class="bar-fill" style="width:60.3%;background:#4a90d9;" title="414"></div><span class="bar-label">414</span></div></div>
-<div class="chart-row"><span class="chart-label chart-label-wide">10:00-11:00</span><div class="bar-container"><div class="bar-fill" style="width:38.9%;background:#4a90d9;" title="267"></div><span class="bar-label">267</span></div></div>
-<div class="chart-row"><span class="chart-label chart-label-wide">11:00-12:00</span><div class="bar-container"><div class="bar-fill" style="width:19.9%;background:#4a90d9;" title="137"></div><span class="bar-label">137</span></div></div>
-<div class="chart-row"><span class="chart-label chart-label-wide">12:00-13:00</span><div class="bar-container"><div class="bar-fill" style="width:9.2%;background:#4a90d9;" title="63"></div><span class="bar-label">63</span></div></div>
-<div class="chart-row"><span class="chart-label chart-label-wide">13:00-14:00</span><div class="bar-container"><div class="bar-fill" style="width:4.1%;background:#4a90d9;" title="28"></div><span class="bar-label">28</span></div></div>
-<div class="chart-row"><span class="chart-label chart-label-wide">14:00-15:00</span><div class="bar-container"><div class="bar-fill" style="width:7.6%;background:#4a90d9;" title="52"></div><span class="bar-label">52</span></div></div>
-<div class="chart-row"><span class="chart-label chart-label-wide">15:00-16:00</span><div class="bar-container"><div class="bar-fill" style="width:16.7%;background:#4a90d9;" title="115"></div><span class="bar-label">115</span></div></div>
-<div class="chart-row"><span class="chart-label chart-label-wide">16:00-17:00</span><div class="bar-container"><div class="bar-fill" style="width:66.5%;background:#4a90d9;" title="457"></div><span class="bar-label">457</span></div></div>
-<div class="chart-row"><span class="chart-label chart-label-wide">17:00-18:00</span><div class="bar-container"><div class="bar-fill" style="width:88.8%;background:#4a90d9;" title="610"></div><span class="bar-label">610</span></div></div>
-<div class="chart-row"><span class="chart-label chart-label-wide">18:00-19:00</span><div class="bar-container"><div class="bar-fill" style="width:98.5%;background:#4a90d9;" title="677"></div><span class="bar-label">677</span></div></div>
-<div class="chart-row"><span class="chart-label chart-label-wide">19:00-20:00</span><div class="bar-container"><div class="bar-fill" style="width:99.3%;background:#4a90d9;" title="682"></div><span class="bar-label">682</span></div></div>
-<div class="chart-row"><span class="chart-label chart-label-wide">20:00-21:00</span><div class="bar-container"><div class="bar-fill" style="width:100.0%;background:#4a90d9;" title="687"></div><span class="bar-label">687</span></div></div>
-<div class="chart-row"><span class="chart-label chart-label-wide">21:00-22:00</span><div class="bar-container"><div class="bar-fill" style="width:93.7%;background:#4a90d9;" title="644"></div><span class="bar-label">644</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">07:00-08:00</span><div class="bar-container"><div class="bar-fill" style="width:69.1%;background:#2c5282;" title="475"></div><span class="bar-label">475</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">08:00-09:00</span><div class="bar-container"><div class="bar-fill" style="width:85.3%;background:#2c5282;" title="586"></div><span class="bar-label">586</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">09:00-10:00</span><div class="bar-container"><div class="bar-fill" style="width:60.3%;background:#2c5282;" title="414"></div><span class="bar-label">414</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">10:00-11:00</span><div class="bar-container"><div class="bar-fill" style="width:38.9%;background:#2c5282;" title="267"></div><span class="bar-label">267</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">11:00-12:00</span><div class="bar-container"><div class="bar-fill" style="width:19.9%;background:#2c5282;" title="137"></div><span class="bar-label">137</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">12:00-13:00</span><div class="bar-container"><div class="bar-fill" style="width:9.2%;background:#2c5282;" title="63"></div><span class="bar-label">63</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">13:00-14:00</span><div class="bar-container"><div class="bar-fill" style="width:4.1%;background:#2c5282;" title="28"></div><span class="bar-label">28</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">14:00-15:00</span><div class="bar-container"><div class="bar-fill" style="width:7.6%;background:#2c5282;" title="52"></div><span class="bar-label">52</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">15:00-16:00</span><div class="bar-container"><div class="bar-fill" style="width:16.7%;background:#2c5282;" title="115"></div><span class="bar-label">115</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">16:00-17:00</span><div class="bar-container"><div class="bar-fill" style="width:66.5%;background:#2c5282;" title="457"></div><span class="bar-label">457</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">17:00-18:00</span><div class="bar-container"><div class="bar-fill" style="width:88.8%;background:#2c5282;" title="610"></div><span class="bar-label">610</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">18:00-19:00</span><div class="bar-container"><div class="bar-fill" style="width:98.5%;background:#2c5282;" title="677"></div><span class="bar-label">677</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">19:00-20:00</span><div class="bar-container"><div class="bar-fill" style="width:99.3%;background:#2c5282;" title="682"></div><span class="bar-label">682</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">20:00-21:00</span><div class="bar-container"><div class="bar-fill" style="width:100.0%;background:#2c5282;" title="687"></div><span class="bar-label">687</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">21:00-22:00</span><div class="bar-container"><div class="bar-fill" style="width:93.7%;background:#2c5282;" title="644"></div><span class="bar-label">644</span></div></div>
 </div>
 <h3>Dining Pavilions</h3>
 <p>Most popular: <strong>17:00-22:00</strong> (908 bookings). Least popular: <strong>10:00-15:00</strong> (157 bookings).</p>
 <div class="chart">
-<div class="chart-row"><span class="chart-label chart-label-wide">10:00-15:00</span><div class="bar-container"><div class="bar-fill" style="width:17.3%;background:#4a90d9;" title="157"></div><span class="bar-label">157</span></div></div>
-<div class="chart-row"><span class="chart-label chart-label-wide">17:00-22:00</span><div class="bar-container"><div class="bar-fill" style="width:100.0%;background:#4a90d9;" title="908"></div><span class="bar-label">908</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">10:00-15:00</span><div class="bar-container"><div class="bar-fill" style="width:17.3%;background:#2c5282;" title="157"></div><span class="bar-label">157</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">17:00-22:00</span><div class="bar-container"><div class="bar-fill" style="width:100.0%;background:#2c5282;" title="908"></div><span class="bar-label">908</span></div></div>
 </div>
 <h3>Function Rooms</h3>
 <p>Most popular: <strong>17:00-22:00</strong> (248 bookings). Least popular: <strong>10:00-15:00</strong> (160 bookings).</p>
 <div class="chart">
-<div class="chart-row"><span class="chart-label chart-label-wide">10:00-15:00</span><div class="bar-container"><div class="bar-fill" style="width:64.5%;background:#4a90d9;" title="160"></div><span class="bar-label">160</span></div></div>
-<div class="chart-row"><span class="chart-label chart-label-wide">17:00-22:00</span><div class="bar-container"><div class="bar-fill" style="width:100.0%;background:#4a90d9;" title="248"></div><span class="bar-label">248</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">10:00-15:00</span><div class="bar-container"><div class="bar-fill" style="width:64.5%;background:#2c5282;" title="160"></div><span class="bar-label">160</span></div></div>
+<div class="chart-row"><span class="chart-label chart-label-wide">17:00-22:00</span><div class="bar-container"><div class="bar-fill" style="width:100.0%;background:#2c5282;" title="248"></div><span class="bar-label">248</span></div></div>
 </div>
 </section><section id="sec-underutil"><h2>6. Under-Utilized Facilities</h2>
 <p>7 facilities were below 15% utilization for at least 6 of 12 months.</p>
@@ -684,36 +761,36 @@ details.month-detail[open] summary { border-radius: 4px 4px 0 0; border-bottom: 
 </section><section id="sec-cancel"><h2>7. Cancellation Analysis</h2>
 <h3>Cancellation Rate by Facility</h3>
 <div class="table-wrapper"><table><thead><tr><th>Facility</th><th>Total</th><th>Cancelled</th><th>Rate</th><th></th></tr></thead><tbody>
-<tr><td class="fac-name">Forest Pavilion-</td><td style="text-align:center;">175</td><td style="text-align:center;">143</td><td style="background:#ff0000;color:#ffffff;text-align:center;">81.7%</td><td><div class="bar-container"><div class="bar-fill" style="width:18.1%;background:#c62828;" title=""></div><span class="bar-label"></span></div></td></tr>
-<tr><td class="fac-name">Tropical Pavilions -</td><td style="text-align:center;">29</td><td style="text-align:center;">17</td><td style="background:#ff4200;color:#ffffff;text-align:center;">58.6%</td><td><div class="bar-container"><div class="bar-fill" style="width:2.2%;background:#c62828;" title=""></div><span class="bar-label"></span></div></td></tr>
-<tr><td class="fac-name">Botanical Pavilions -</td><td style="text-align:center;">21</td><td style="text-align:center;">11</td><td style="background:#ff6700;color:#ffffff;text-align:center;">52.4%</td><td><div class="bar-container"><div class="bar-fill" style="width:1.4%;background:#c62828;" title=""></div><span class="bar-label"></span></div></td></tr>
-<tr><td class="fac-name">Japanese Pavilion -</td><td style="text-align:center;">222</td><td style="text-align:center;">106</td><td style="background:#ff8200;color:#000000;text-align:center;">47.7%</td><td><div class="bar-container"><div class="bar-fill" style="width:13.4%;background:#c62828;" title=""></div><span class="bar-label"></span></div></td></tr>
-<tr><td class="fac-name">Tea Pavilions -</td><td style="text-align:center;">80</td><td style="text-align:center;">37</td><td style="background:#ff8b00;color:#000000;text-align:center;">46.2%</td><td><div class="bar-container"><div class="bar-fill" style="width:4.7%;background:#c62828;" title=""></div><span class="bar-label"></span></div></td></tr>
-<tr><td class="fac-name">Outdoor Dining -</td><td style="text-align:center;">109</td><td style="text-align:center;">48</td><td style="background:#ff9800;color:#000000;text-align:center;">44.0%</td><td><div class="bar-container"><div class="bar-fill" style="width:6.1%;background:#c62828;" title=""></div><span class="bar-label"></span></div></td></tr>
-<tr><td class="fac-name">Lantern Pavillion -</td><td style="text-align:center;">132</td><td style="text-align:center;">56</td><td style="background:#ffa200;color:#000000;text-align:center;">42.4%</td><td><div class="bar-container"><div class="bar-fill" style="width:7.1%;background:#c62828;" title=""></div><span class="bar-label"></span></div></td></tr>
-<tr><td class="fac-name">Family Dining -</td><td style="text-align:center;">284</td><td style="text-align:center;">117</td><td style="background:#ffa900;color:#000000;text-align:center;">41.2%</td><td><div class="bar-container"><div class="bar-fill" style="width:14.8%;background:#c62828;" title=""></div><span class="bar-label"></span></div></td></tr>
-<tr><td class="fac-name">Function Room 1</td><td style="text-align:center;">334</td><td style="text-align:center;">135</td><td style="background:#ffad00;color:#000000;text-align:center;">40.4%</td><td><div class="bar-container"><div class="bar-fill" style="width:17.1%;background:#c62828;" title=""></div><span class="bar-label"></span></div></td></tr>
-<tr><td class="fac-name">Cove Pavillion -</td><td style="text-align:center;">488</td><td style="text-align:center;">189</td><td style="background:#ffb700;color:#000000;text-align:center;">38.7%</td><td><div class="bar-container"><div class="bar-fill" style="width:23.9%;background:#c62828;" title=""></div><span class="bar-label"></span></div></td></tr>
-<tr><td class="fac-name">Kid's Dining -</td><td style="text-align:center;">170</td><td style="text-align:center;">64</td><td style="background:#ffbe00;color:#000000;text-align:center;">37.6%</td><td><div class="bar-container"><div class="bar-fill" style="width:8.1%;background:#c62828;" title=""></div><span class="bar-label"></span></div></td></tr>
-<tr><td class="fac-name">Alfresco Pavilions -</td><td style="text-align:center;">205</td><td style="text-align:center;">77</td><td style="background:#ffbe00;color:#000000;text-align:center;">37.6%</td><td><div class="bar-container"><div class="bar-fill" style="width:9.7%;background:#c62828;" title=""></div><span class="bar-label"></span></div></td></tr>
-<tr><td class="fac-name">Function Room 2</td><td style="text-align:center;">281</td><td style="text-align:center;">88</td><td style="background:#ffe300;color:#000000;text-align:center;">31.3%</td><td><div class="bar-container"><div class="bar-fill" style="width:11.1%;background:#c62828;" title=""></div><span class="bar-label"></span></div></td></tr>
-<tr><td class="fac-name">Tennis Court 1</td><td style="text-align:center;">3121</td><td style="text-align:center;">790</td><td style="background:#ffee27;color:#000000;text-align:center;">25.3%</td><td><div class="bar-container"><div class="bar-fill" style="width:100.0%;background:#c62828;" title=""></div><span class="bar-label"></span></div></td></tr>
-<tr><td class="fac-name">Tennis Court 2</td><td style="text-align:center;">3121</td><td style="text-align:center;">638</td><td style="background:#fff151;color:#000000;text-align:center;">20.4%</td><td><div class="bar-container"><div class="bar-fill" style="width:80.8%;background:#c62828;" title=""></div><span class="bar-label"></span></div></td></tr>
+<tr><td class="fac-name">Forest Pavilion-</td><td style="text-align:center;">175</td><td style="text-align:center;">143</td><td style="background:#ff0000;color:#ffffff;text-align:center;">81.7%</td><td><div class="bar-container"><div class="bar-fill" style="width:18.1%;background:#9b2c2c;" title="143 cancelled of 175"></div><span class="bar-label"></span></div></td></tr>
+<tr><td class="fac-name">Tropical Pavilions -</td><td style="text-align:center;">29</td><td style="text-align:center;">17</td><td style="background:#ff4200;color:#ffffff;text-align:center;">58.6%</td><td><div class="bar-container"><div class="bar-fill" style="width:2.2%;background:#9b2c2c;" title="17 cancelled of 29"></div><span class="bar-label"></span></div></td></tr>
+<tr><td class="fac-name">Botanical Pavilions -</td><td style="text-align:center;">21</td><td style="text-align:center;">11</td><td style="background:#ff6700;color:#ffffff;text-align:center;">52.4%</td><td><div class="bar-container"><div class="bar-fill" style="width:1.4%;background:#9b2c2c;" title="11 cancelled of 21"></div><span class="bar-label"></span></div></td></tr>
+<tr><td class="fac-name">Japanese Pavilion -</td><td style="text-align:center;">222</td><td style="text-align:center;">106</td><td style="background:#ff8200;color:#000000;text-align:center;">47.7%</td><td><div class="bar-container"><div class="bar-fill" style="width:13.4%;background:#9b2c2c;" title="106 cancelled of 222"></div><span class="bar-label"></span></div></td></tr>
+<tr><td class="fac-name">Tea Pavilions -</td><td style="text-align:center;">80</td><td style="text-align:center;">37</td><td style="background:#ff8b00;color:#000000;text-align:center;">46.2%</td><td><div class="bar-container"><div class="bar-fill" style="width:4.7%;background:#9b2c2c;" title="37 cancelled of 80"></div><span class="bar-label"></span></div></td></tr>
+<tr><td class="fac-name">Outdoor Dining -</td><td style="text-align:center;">109</td><td style="text-align:center;">48</td><td style="background:#ff9800;color:#000000;text-align:center;">44.0%</td><td><div class="bar-container"><div class="bar-fill" style="width:6.1%;background:#9b2c2c;" title="48 cancelled of 109"></div><span class="bar-label"></span></div></td></tr>
+<tr><td class="fac-name">Lantern Pavillion -</td><td style="text-align:center;">132</td><td style="text-align:center;">56</td><td style="background:#ffa200;color:#000000;text-align:center;">42.4%</td><td><div class="bar-container"><div class="bar-fill" style="width:7.1%;background:#9b2c2c;" title="56 cancelled of 132"></div><span class="bar-label"></span></div></td></tr>
+<tr><td class="fac-name">Family Dining -</td><td style="text-align:center;">284</td><td style="text-align:center;">117</td><td style="background:#ffa900;color:#000000;text-align:center;">41.2%</td><td><div class="bar-container"><div class="bar-fill" style="width:14.8%;background:#9b2c2c;" title="117 cancelled of 284"></div><span class="bar-label"></span></div></td></tr>
+<tr><td class="fac-name">Function Room 1</td><td style="text-align:center;">334</td><td style="text-align:center;">135</td><td style="background:#ffad00;color:#000000;text-align:center;">40.4%</td><td><div class="bar-container"><div class="bar-fill" style="width:17.1%;background:#9b2c2c;" title="135 cancelled of 334"></div><span class="bar-label"></span></div></td></tr>
+<tr><td class="fac-name">Cove Pavillion -</td><td style="text-align:center;">488</td><td style="text-align:center;">189</td><td style="background:#ffb700;color:#000000;text-align:center;">38.7%</td><td><div class="bar-container"><div class="bar-fill" style="width:23.9%;background:#9b2c2c;" title="189 cancelled of 488"></div><span class="bar-label"></span></div></td></tr>
+<tr><td class="fac-name">Kid's Dining -</td><td style="text-align:center;">170</td><td style="text-align:center;">64</td><td style="background:#ffbe00;color:#000000;text-align:center;">37.6%</td><td><div class="bar-container"><div class="bar-fill" style="width:8.1%;background:#9b2c2c;" title="64 cancelled of 170"></div><span class="bar-label"></span></div></td></tr>
+<tr><td class="fac-name">Alfresco Pavilions -</td><td style="text-align:center;">205</td><td style="text-align:center;">77</td><td style="background:#ffbe00;color:#000000;text-align:center;">37.6%</td><td><div class="bar-container"><div class="bar-fill" style="width:9.7%;background:#9b2c2c;" title="77 cancelled of 205"></div><span class="bar-label"></span></div></td></tr>
+<tr><td class="fac-name">Function Room 2</td><td style="text-align:center;">281</td><td style="text-align:center;">88</td><td style="background:#ffe300;color:#000000;text-align:center;">31.3%</td><td><div class="bar-container"><div class="bar-fill" style="width:11.1%;background:#9b2c2c;" title="88 cancelled of 281"></div><span class="bar-label"></span></div></td></tr>
+<tr><td class="fac-name">Tennis Court 1</td><td style="text-align:center;">3121</td><td style="text-align:center;">790</td><td style="background:#ffee27;color:#000000;text-align:center;">25.3%</td><td><div class="bar-container"><div class="bar-fill" style="width:100.0%;background:#9b2c2c;" title="790 cancelled of 3121"></div><span class="bar-label"></span></div></td></tr>
+<tr><td class="fac-name">Tennis Court 2</td><td style="text-align:center;">3121</td><td style="text-align:center;">638</td><td style="background:#fff151;color:#000000;text-align:center;">20.4%</td><td><div class="bar-container"><div class="bar-fill" style="width:80.8%;background:#9b2c2c;" title="638 cancelled of 3121"></div><span class="bar-label"></span></div></td></tr>
 </tbody></table></div>
 <h3>Cancellation Rate by Month</h3>
 <div class="chart">
-<div class="chart-row"><span class="chart-label">Apr 2025</span><div class="bar-container"><div class="bar-fill" style="width:30.0%;background:#c62828;" title="30.0%"></div><span class="bar-label">30.0%</span></div></div>
-<div class="chart-row"><span class="chart-label">May 2025</span><div class="bar-container"><div class="bar-fill" style="width:26.4%;background:#c62828;" title="26.4%"></div><span class="bar-label">26.4%</span></div></div>
-<div class="chart-row"><span class="chart-label">Jun 2025</span><div class="bar-container"><div class="bar-fill" style="width:25.1%;background:#c62828;" title="25.1%"></div><span class="bar-label">25.1%</span></div></div>
-<div class="chart-row"><span class="chart-label">Jul 2025</span><div class="bar-container"><div class="bar-fill" style="width:28.5%;background:#c62828;" title="28.5%"></div><span class="bar-label">28.5%</span></div></div>
-<div class="chart-row"><span class="chart-label">Aug 2025</span><div class="bar-container"><div class="bar-fill" style="width:32.2%;background:#c62828;" title="32.2%"></div><span class="bar-label">32.2%</span></div></div>
-<div class="chart-row"><span class="chart-label">Sep 2025</span><div class="bar-container"><div class="bar-fill" style="width:30.0%;background:#c62828;" title="30.0%"></div><span class="bar-label">30.0%</span></div></div>
-<div class="chart-row"><span class="chart-label">Oct 2025</span><div class="bar-container"><div class="bar-fill" style="width:27.4%;background:#c62828;" title="27.4%"></div><span class="bar-label">27.4%</span></div></div>
-<div class="chart-row"><span class="chart-label">Nov 2025</span><div class="bar-container"><div class="bar-fill" style="width:30.5%;background:#c62828;" title="30.5%"></div><span class="bar-label">30.5%</span></div></div>
-<div class="chart-row"><span class="chart-label">Dec 2025</span><div class="bar-container"><div class="bar-fill" style="width:30.3%;background:#c62828;" title="30.3%"></div><span class="bar-label">30.3%</span></div></div>
-<div class="chart-row"><span class="chart-label">Jan 2026</span><div class="bar-container"><div class="bar-fill" style="width:31.1%;background:#c62828;" title="31.1%"></div><span class="bar-label">31.1%</span></div></div>
-<div class="chart-row"><span class="chart-label">Feb 2026</span><div class="bar-container"><div class="bar-fill" style="width:26.5%;background:#c62828;" title="26.5%"></div><span class="bar-label">26.5%</span></div></div>
-<div class="chart-row"><span class="chart-label">Mar 2026</span><div class="bar-container"><div class="bar-fill" style="width:24.5%;background:#c62828;" title="24.5%"></div><span class="bar-label">24.5%</span></div></div>
+<div class="chart-row"><span class="chart-label">Apr 2025</span><div class="bar-container"><div class="bar-fill" style="width:30.0%;background:#9b2c2c;" title="30.0%"></div><span class="bar-label">30.0%</span></div></div>
+<div class="chart-row"><span class="chart-label">May 2025</span><div class="bar-container"><div class="bar-fill" style="width:26.4%;background:#9b2c2c;" title="26.4%"></div><span class="bar-label">26.4%</span></div></div>
+<div class="chart-row"><span class="chart-label">Jun 2025</span><div class="bar-container"><div class="bar-fill" style="width:25.1%;background:#9b2c2c;" title="25.1%"></div><span class="bar-label">25.1%</span></div></div>
+<div class="chart-row"><span class="chart-label">Jul 2025</span><div class="bar-container"><div class="bar-fill" style="width:28.5%;background:#9b2c2c;" title="28.5%"></div><span class="bar-label">28.5%</span></div></div>
+<div class="chart-row"><span class="chart-label">Aug 2025</span><div class="bar-container"><div class="bar-fill" style="width:32.2%;background:#9b2c2c;" title="32.2%"></div><span class="bar-label">32.2%</span></div></div>
+<div class="chart-row"><span class="chart-label">Sep 2025</span><div class="bar-container"><div class="bar-fill" style="width:30.0%;background:#9b2c2c;" title="30.0%"></div><span class="bar-label">30.0%</span></div></div>
+<div class="chart-row"><span class="chart-label">Oct 2025</span><div class="bar-container"><div class="bar-fill" style="width:27.4%;background:#9b2c2c;" title="27.4%"></div><span class="bar-label">27.4%</span></div></div>
+<div class="chart-row"><span class="chart-label">Nov 2025</span><div class="bar-container"><div class="bar-fill" style="width:30.5%;background:#9b2c2c;" title="30.5%"></div><span class="bar-label">30.5%</span></div></div>
+<div class="chart-row"><span class="chart-label">Dec 2025</span><div class="bar-container"><div class="bar-fill" style="width:30.3%;background:#9b2c2c;" title="30.3%"></div><span class="bar-label">30.3%</span></div></div>
+<div class="chart-row"><span class="chart-label">Jan 2026</span><div class="bar-container"><div class="bar-fill" style="width:31.1%;background:#9b2c2c;" title="31.1%"></div><span class="bar-label">31.1%</span></div></div>
+<div class="chart-row"><span class="chart-label">Feb 2026</span><div class="bar-container"><div class="bar-fill" style="width:26.5%;background:#9b2c2c;" title="26.5%"></div><span class="bar-label">26.5%</span></div></div>
+<div class="chart-row"><span class="chart-label">Mar 2026</span><div class="bar-container"><div class="bar-fill" style="width:24.5%;background:#9b2c2c;" title="24.5%"></div><span class="bar-label">24.5%</span></div></div>
 </div>
 <h3>Cancellation by Type</h3>
 <div class="chart">
@@ -730,12 +807,12 @@ details.month-detail[open] summary { border-radius: 4px 4px 0 0; border-bottom: 
 <div class="chart-row"><span class="chart-label chart-label-wide">4-7 days before</span><div class="bar-container"><div class="bar-fill" style="width:100.0%;background:#bf360c;" title="902 (35.9%)"></div><span class="bar-label">902 (35.9%)</span></div></div>
 <div class="chart-row"><span class="chart-label chart-label-wide">Over 7 days before</span><div class="bar-container"><div class="bar-fill" style="width:72.1%;background:#bf360c;" title="650 (25.8%)"></div><span class="bar-label">650 (25.8%)</span></div></div>
 </div>
-</section><section id="sec-fees"><h2>8. Booking Fees Analysis</h2>
+</section><section id="sec-fees"><h2>8. Booking Fees Analysis (excl GST)</h2>
 <h3>Total Booking Fees by Category</h3>
 <div class="chart">
-<div class="chart-row"><span class="chart-label">Tennis Courts</span><div class="bar-container"><div class="bar-fill" style="width:100.0%;background:#1565c0;" title="$53,090.00"></div><span class="bar-label">$53,090.00</span></div></div>
-<div class="chart-row"><span class="chart-label">Dining Pavilions</span><div class="bar-container"><div class="bar-fill" style="width:54.8%;background:#1565c0;" title="$29,100.00"></div><span class="bar-label">$29,100.00</span></div></div>
-<div class="chart-row"><span class="chart-label">Function Rooms</span><div class="bar-container"><div class="bar-fill" style="width:60.8%;background:#1565c0;" title="$32,300.00"></div><span class="bar-label">$32,300.00</span></div></div>
+<div class="chart-row"><span class="chart-label">Tennis Courts</span><div class="bar-container"><div class="bar-fill" style="width:100.0%;background:#2c5282;" title="$53,090.00"></div><span class="bar-label">$53,090.00</span></div></div>
+<div class="chart-row"><span class="chart-label">Dining Pavilions</span><div class="bar-container"><div class="bar-fill" style="width:54.8%;background:#2c5282;" title="$29,100.00"></div><span class="bar-label">$29,100.00</span></div></div>
+<div class="chart-row"><span class="chart-label">Function Rooms</span><div class="bar-container"><div class="bar-fill" style="width:60.8%;background:#2c5282;" title="$32,300.00"></div><span class="bar-label">$32,300.00</span></div></div>
 </div>
 <h3>Booking Fees by Category by Month</h3>
 <div class="table-wrapper"><table><thead><tr><th>Month</th><th>Tennis Courts</th><th>Dining Pavilions</th><th>Function Rooms</th><th>Total</th></tr></thead><tbody>
@@ -1082,6 +1159,5 @@ details.month-detail[open] summary { border-radius: 4px 4px 0 0; border-bottom: 
 </section>
 
 </main>
-</div>
 </body>
 </html>
