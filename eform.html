@@ -1320,13 +1320,12 @@ function toggleDetailRow(row) {
   });
 
   function updateActive() {
-    var scrollPos = window.scrollY + 120;
+    var scrollPos = window.scrollY + 200;
     var current = null;
 
-    for (var i = sections.length - 1; i >= 0; i--) {
-      if (sections[i].target.offsetTop <= scrollPos) {
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].target.getBoundingClientRect().top <= 200) {
         current = sections[i].link;
-        break;
       }
     }
 
