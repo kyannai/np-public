@@ -35,7 +35,27 @@
     font-size: 15px;
   }
 
-  .container { max-width: 1000px; margin: 0 auto; padding: 40px 48px 80px; }
+  .sidebar {
+    position: fixed; top: 0; left: 0; height: 100vh; width: 240px;
+    background: var(--color-white); border-right: 1px solid var(--color-border);
+    padding: 24px 0; overflow-y: auto; z-index: 100;
+  }
+  .sidebar h3 {
+    font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--color-primary); margin: 0 0 12px; padding: 0 20px; font-weight: 700;
+  }
+  .sidebar nav a {
+    color: var(--color-text-light); font-size: 13px; display: block;
+    padding: 7px 20px; border-left: 3px solid transparent;
+    transition: all 0.15s ease; text-decoration: none;
+  }
+  .sidebar nav a:hover {
+    background: var(--color-primary-light); color: var(--color-primary);
+    border-left-color: var(--color-primary); text-decoration: none;
+  }
+  .main {
+    margin-left: 240px; max-width: 1200px; padding: 40px 48px 80px;
+  }
 
   h1 {
     font-size: 28px; color: var(--color-primary); margin-bottom: 8px;
@@ -162,13 +182,16 @@
     body { background: #fff; }
     .card { border: 1px solid #ddd; }
     .toggle-content { display: block !important; }
-    .container { max-width: 100%; padding: 10px; }
+    .main { max-width: 100%; padding: 10px; }
+    .sidebar { display: none; }
+    .main { margin-left: 0; }
     h1 { font-size: 1.4em; }
     h2 { font-size: 1.2em; }
   }
 
   @media (max-width: 800px) {
-    .container { padding: 16px; }
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 24px 16px; }
     .heatmap-table { font-size: 10px; }
     .heatmap-table th, .heatmap-table td { padding: 2px 1px; }
   }
@@ -177,11 +200,23 @@
 </head>
 <body>
 
-<div class="container">
+<aside class="sidebar">
+    <h3>Contents</h3>
+    <nav>
+        <a href="#sec-summary">1. Summary</a>
+        <a href="#sec-categories">2. Category Distribution</a>
+        <a href="#sec-heatmap">3. Block vs Category Heatmap</a>
+        <a href="#sec-outstanding">4. Outstanding Cases</a>
+        <a href="#sec-rating">5. Rating Analysis</a>
+        <a href="#sec-actions">6. Action Items</a>
+    </nav>
+</aside>
+
+<div class="main">
 
 <h1>Normanton Park -- Feedback Analysis Report</h1>
 <p class="subtitle">March 2026</p>
-<h2>1. Summary</h2>
+<h2 id="sec-summary">1. Summary</h2>
 <div class="card">
 <div class="summary-grid">
 <div class="metric"><div class="value">209</div><div class="label">Total Cases</div></div>
@@ -198,7 +233,7 @@
 <li><strong>Parking & Traffic</strong> -- 19 cases (9.1%)</li>
 <li><strong>Pest & Animals</strong> -- 18 cases (8.6%)</li>
 </ol></div>
-<h2>2. Category Distribution</h2>
+<h2 id="sec-categories">2. Category Distribution</h2>
 <div class="card">
 <table><thead><tr><th>#</th><th>Category</th><th>Count</th><th>%</th><th></th></tr></thead><tbody>
 <tr><td>1</td><td>Security & Access</td><td>26</td><td>12.4%</td><td><span class="dist-bar" style="width:200px"></span></td></tr>
@@ -219,7 +254,7 @@
 <tr><td>16</td><td>Others</td><td>2</td><td>1.0%</td><td><span class="dist-bar" style="width:15px"></span></td></tr>
 <tr style="font-weight:700;background:#ebf4ff"><td></td><td>Total</td><td>209</td><td>100%</td><td></td></tr>
 </tbody></table></div>
-<h2>3. Heatmap: Block vs Category</h2>
+<h2 id="sec-heatmap">3. Heatmap: Block vs Category</h2>
 <div class="card" style="overflow-x:auto">
 <table class="heatmap-table"><thead><tr><th>Block</th>
 <th>Security</th>
@@ -447,7 +482,7 @@
 <span style="display:inline-block;width:18px;height:14px;background:#276749;border:1px solid #ccc;vertical-align:middle"></span> 5+ &nbsp;
 </div>
 </div>
-<h2>4. Outstanding Cases</h2>
+<h2 id="sec-outstanding">4. Outstanding Cases</h2>
 <div class="card"><p>Total outstanding: <strong>30</strong> cases (Pending or In Progress)</p>
 <div class="outstanding-group">
 <button class="toggle-btn" onclick="toggleGroup('Admin_and_General')">
@@ -550,7 +585,7 @@ Security & Access (6 cases)
 <tr><td>1292-4784</td><td>45</td><td>Blk 45</td><td>Children roller blading outside corridor</td><td class="status-inprogress">In Progress</td><td>17</td></tr>
 </tbody></table></div></div>
 </div>
-<h2>5. Rating Analysis</h2>
+<h2 id="sec-rating">5. Rating Analysis</h2>
 <div class="card">
 <p>Out of 209 cases, <strong>179</strong> received reviews.</p>
 <table style="max-width:500px"><thead><tr><th>Rating</th><th>Count</th><th>%</th><th></th></tr></thead><tbody>
@@ -575,7 +610,7 @@ Security & Access (6 cases)
 <tr class="low-rating-row"><td>1292-4657</td><td>2</td><td>Security & Access</td><td>Entrance door is open</td><td>To add on, we have also noticed that there are grab drivers, contractors, anyone...</td></tr>
 </tbody></table>
 </div>
-<h2>6. Action Items</h2>
+<h2 id="sec-actions">6. Action Items</h2>
 <div class="card"><p>The following action items cover all <strong>30</strong> outstanding cases.</p></div>
 <div class="action-card">
 <h3>1. Complete Pending Administrative Actions</h3>
