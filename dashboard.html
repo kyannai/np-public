@@ -176,6 +176,14 @@ p { margin-bottom: 12px; }
   opacity: 0.7;
 }
 
+/* Stacked bar */
+.stacked-bar {
+  display: flex; height: 18px; border-radius: 3px; overflow: hidden; margin-top: 4px;
+}
+.stacked-bar .seg {
+  height: 100%; min-width: 1px;
+}
+
 /* Quote cards */
 .quote-card {
   background: var(--color-white);
@@ -344,13 +352,14 @@ tbody tr:hover { background: #f5f7fa; }
   </div>
   <nav>
     <a href="#health">1. Estate Health Score</a>
-    <a href="#wins">2. Team Wins</a>
-    <a href="#insights">3. Insights &amp; Recommendations</a>
+    <a href="#outcomes">2. Case Outcome &amp; Quality</a>
+    <a href="#wins">3. Team Wins</a>
+    <a href="#insights">4. Insights &amp; Recommendations</a>
     <a class="sub" href="#active-issues">Active Issues</a>
     <a class="sub" href="#monitoring-issues">Monitoring</a>
     <a class="sub" href="#improving-issues">Improving</a>
-    <a href="#vendors">4. Vendor Management</a>
-    <a href="#actions">5. Action List</a>
+    <a href="#vendors">5. Vendor Management</a>
+    <a href="#actions">6. Action List</a>
   </nav>
   <a class="back-link" href="https://kyannai.github.io/np-public/">&larr; Back to Home</a>
 </div>
@@ -361,7 +370,7 @@ tbody tr:hover { background: #f5f7fa; }
     <h1>Feedback Analysis Dashboard</h1>
     <div class="meta">
       <span>Normanton Park (MCST 4932)</span>
-      <span>Period: Apr 2025 -- Mar 2026 (12 months)</span>
+      <span>Period: Feb -- Apr 2026 (3 months)</span>
       <span>Generated: 25 Apr 2026</span>
     </div>
   </div>
@@ -371,129 +380,199 @@ tbody tr:hover { background: #f5f7fa; }
     <h2>1. Estate Health Score</h2>
     <div class="cards-row">
       <div class="card">
-        <div class="value">1,910</div>
-        <div class="label">Total Cases (12 months)</div>
+        <div class="value">646</div>
+        <div class="label">Total Cases (3 months)</div>
         <div class="sparkline-row">
 
-          <div class="sparkline-bar" style="height:23px" title="158"></div>
-          <div class="sparkline-bar" style="height:16px" title="115"></div>
-          <div class="sparkline-bar" style="height:21px" title="145"></div>
-          <div class="sparkline-bar" style="height:21px" title="146"></div>
-          <div class="sparkline-bar" style="height:18px" title="127"></div>
-          <div class="sparkline-bar" style="height:21px" title="144"></div>
-          <div class="sparkline-bar" style="height:17px" title="117"></div>
-          <div class="sparkline-bar" style="height:21px" title="148"></div>
-          <div class="sparkline-bar" style="height:24px" title="164"></div>
-          <div class="sparkline-bar" style="height:28px" title="193"></div>
-          <div class="sparkline-bar" style="height:30px" title="209"></div>
-          <div class="sparkline-bar" style="height:36px" title="244"></div>
+          <div class="sparkline-bar" style="height:28px" title="Feb 26: 193"></div>
+          <div class="sparkline-bar" style="height:30px" title="Mar 26: 209"></div>
+          <div class="sparkline-bar" style="height:36px" title="Apr 26: 244"></div>
 
         </div>
       </div>
       <div class="card">
-        <div class="value">209</div>
-        <div class="label">Mar 2026 vs 3-mo Avg (215)</div>
-        <div class="trend flat">-3% &#8212;</div>
+        <div class="value">124</div>
+        <div class="label">Currently Open</div>
       </div>
       <div class="card">
-        <div class="value">2.2</div>
+        <div class="value">87</div>
+        <div class="label">Safety Cases</div>
+        <div class="trend up" style="font-size:11px">urgency = safety</div>
+      </div>
+      <div class="card">
+        <div class="value">1.6</div>
         <div class="label">Avg Resolution (days)</div>
-        <div class="trend down">-65% vs H1 &#9660;</div>
-      </div>
-      <div class="card">
-        <div class="value">135</div>
-        <div class="label">Currently Open Cases</div>
-      </div>
-      <div class="card">
-        <div class="value">49</div>
-        <div class="label">Recurring Sub-Issues (3+ months)</div>
       </div>
     </div>
     <div class="health-assessment">
-      Estate feedback is increasing in volume. Fire Safety is the top growing issue area (+300% from H1 to H2). Electrical shows the most improvement (-67%). Key concern: Noise &amp; Neighbour with 22 open cases requiring attention.
+      Estate feedback is increasing in volume over the quarter. 646 cases over 3 months (Feb 26: 193, Mar 26: 209, Apr 26: 244). Top category: Admin &amp; General (75 cases). Key concern: Lighting with 21 open cases requiring attention.
+    </div>
+  </section>
+
+
+  <section id="outcomes">
+    <h2>2. Case Outcome &amp; Quality (Monthly)</h2>
+    <h3>Table A: Case Outcome</h3>
+    <p style="font-size:13px;color:var(--color-text-light)">What happened to each case. Each row adds up to 100%.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th style="color:#c6f6d5">Confirmed Resolved</th>
+            <th style="color:#fed7d7">Confirmed Unresolved</th>
+            <th>Unclear</th>
+            <th style="color:#fefcbf">Open</th>
+            <th>Total</th>
+            <th style="width:140px">Distribution</th>
+          </tr>
+        </thead>
+        <tbody>
+
+
+          <tr>
+            <td><strong>Feb 26</strong></td>
+            <td style="color:var(--color-green)">26 (13%)</td>
+            <td style="color:var(--color-red)">0 (0%)</td>
+            <td style="color:#999">154 (80%)</td>
+            <td style="color:#d69e2e">13 (7%)</td>
+            <td>193</td>
+            <td><div class="stacked-bar"><div class="seg" style="width:13.5%;background:var(--color-green)"></div><div class="seg" style="width:79.8%;background:#999"></div><div class="seg" style="width:6.7%;background:#d69e2e"></div></div></td>
+          </tr>
+
+
+          <tr>
+            <td><strong>Mar 26</strong></td>
+            <td style="color:var(--color-green)">34 (16%)</td>
+            <td style="color:var(--color-red)">0 (0%)</td>
+            <td style="color:#999">145 (69%)</td>
+            <td style="color:#d69e2e">30 (14%)</td>
+            <td>209</td>
+            <td><div class="stacked-bar"><div class="seg" style="width:16.3%;background:var(--color-green)"></div><div class="seg" style="width:69.4%;background:#999"></div><div class="seg" style="width:14.4%;background:#d69e2e"></div></div></td>
+          </tr>
+
+
+          <tr>
+            <td><strong>Apr 26</strong></td>
+            <td style="color:var(--color-green)">53 (22%)</td>
+            <td style="color:var(--color-red)">0 (0%)</td>
+            <td style="color:#999">110 (45%)</td>
+            <td style="color:#d69e2e">81 (33%)</td>
+            <td>244</td>
+            <td><div class="stacked-bar"><div class="seg" style="width:21.7%;background:var(--color-green)"></div><div class="seg" style="width:45.1%;background:#999"></div><div class="seg" style="width:33.2%;background:#d69e2e"></div></div></td>
+          </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="margin-top:28px">Table B: MA Response Quality</h3>
+    <p style="font-size:13px;color:var(--color-text-light)">How the MA handled each case. Each row adds up to 100%.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th style="color:#c6f6d5">Substantive</th>
+            <th style="color:#fefcbf">Mixed</th>
+            <th style="color:#fed7d7">Template</th>
+            <th>No Reply</th>
+            <th>Total</th>
+            <th style="width:140px">Distribution</th>
+          </tr>
+        </thead>
+        <tbody>
+
+
+          <tr>
+            <td><strong>Feb 26</strong></td>
+            <td style="color:var(--color-green)">56 (29%)</td>
+            <td style="color:#d69e2e">97 (50%)</td>
+            <td style="color:var(--color-red)">40 (21%)</td>
+            <td style="color:#999">0 (0%)</td>
+            <td>193</td>
+            <td><div class="stacked-bar"><div class="seg" style="width:29.0%;background:var(--color-green)"></div><div class="seg" style="width:50.3%;background:#d69e2e"></div><div class="seg" style="width:20.7%;background:var(--color-red)"></div></div></td>
+          </tr>
+
+
+          <tr>
+            <td><strong>Mar 26</strong></td>
+            <td style="color:var(--color-green)">135 (65%)</td>
+            <td style="color:#d69e2e">6 (3%)</td>
+            <td style="color:var(--color-red)">65 (31%)</td>
+            <td style="color:#999">3 (1%)</td>
+            <td>209</td>
+            <td><div class="stacked-bar"><div class="seg" style="width:64.6%;background:var(--color-green)"></div><div class="seg" style="width:2.9%;background:#d69e2e"></div><div class="seg" style="width:31.1%;background:var(--color-red)"></div><div class="seg" style="width:1.4%;background:#999"></div></div></td>
+          </tr>
+
+
+          <tr>
+            <td><strong>Apr 26</strong></td>
+            <td style="color:var(--color-green)">117 (48%)</td>
+            <td style="color:#d69e2e">0 (0%)</td>
+            <td style="color:var(--color-red)">57 (23%)</td>
+            <td style="color:#999">70 (29%)</td>
+            <td>244</td>
+            <td><div class="stacked-bar"><div class="seg" style="width:48.0%;background:var(--color-green)"></div><div class="seg" style="width:23.4%;background:var(--color-red)"></div><div class="seg" style="width:28.7%;background:#999"></div></div></td>
+          </tr>
+
+
+        </tbody>
+      </table>
     </div>
   </section>
 
 
   <section id="wins">
-    <h2>2. Team Wins (Positive Feedback)</h2>
+    <h2>3. Team Wins (Positive Feedback)</h2>
 
     <h3 style="margin-bottom:10px">Residents Who Wrote In to Praise</h3>
     <p style="font-size:13px;color:var(--color-text-light);margin-bottom:12px">These residents took the initiative to submit feedback specifically to praise the team.</p>
 
     <div class="quote-card" style="border-left-color:var(--color-green)">
-      <div class="quote-text">"The doors at block 49 level 1 are often kept open (both sides). Given we don’t have security to prevent anyone from accessing any floor, such actions are irresponsible and a threat to the security of "</div>
-      <div class="quote-meta">-- Resident, Blk 49, Apr 2026 | Security &amp; Access | Security or access issue reported at Block 49.</div>
+      <div class="quote-text">"Hi MA. Thank [staff] for making an effort to enhance the security and safety of the residents by introducing the Visitor Message feature on HiLife. I appreciate the initiative to improve the situation. Th"</div>
+      <div class="quote-meta">-- Resident, Blk 47, Apr 2026 | Security &amp; Access | Security or access issue reported at estate.</div>
     </div>
 
 
     <div class="quote-card" style="border-left-color:var(--color-green)">
-      <div class="quote-text">"Dear [staff],
-
-I am writing to raise a concern regarding pets being brought to the poolside area.
-
-Recently, some residents have been allowing their dogs to urinate and defecate near the pool. This"</div>
-      <div class="quote-meta">-- Resident, Blk 45, Apr 2026 | Animal Issues | Request to enforce pet restrictions near poolside common are</div>
-    </div>
-
-
-    <div class="quote-card" style="border-left-color:var(--color-green)">
-      <div class="quote-text">"I would like to suggest during peak hours, to have a security usher taxi and PHVs in to pick up passengers through the residents gantry, while letting those visitors and contractors register at the vi"</div>
-      <div class="quote-meta">-- Resident, Blk 49, Apr 2026 | Parking &amp; Traffic | Suggestion to manage taxi/PHV flow during peak hours.</div>
-    </div>
-
-
-    <div class="quote-card" style="border-left-color:var(--color-green)">
-      <div class="quote-text">"Dear [staff] Management Team,
-
-I am writing to report a recurring noise issue that has been seriously affecting my sleep.
-
-I reside at Blk 61, Unit [unit]. Almost every night, I hear the sound of cha"</div>
-      <div class="quote-meta">-- Resident, Blk 61, Apr 2026 | Noise &amp; Neighbour | Noise disturbance reported from nearby unit at Block 61.</div>
-    </div>
-
-
-    <div class="quote-card" style="border-left-color:var(--color-green)">
-      <div class="quote-text">"Hi [staff]/Mgmt, Reference to Joyce&#x27;s case referred to BCA, i noticed a similar crack line in the room. kindly advise when you are available to take a look and repair it? thank [staff]. Adeline"</div>
-      <div class="quote-meta">-- Resident, Blk 45, Apr 2026 | Building Maintenance | Crack line found in room wall; inspection requested.</div>
-    </div>
-
-
-    <div class="quote-card" style="border-left-color:var(--color-green)">
-      <div class="quote-text">"Hi [staff] Team,
-
-I would like to inform you that monkeys have been seen wandering around the bus stop near the side gate, as well as the prayer burning bin area.
-
-Please see the attached photos for your"</div>
-      <div class="quote-meta">-- Resident, Blk 57, Apr 2026 | Security &amp; Access | Security or access issue reported at estate.</div>
-    </div>
-
-
-    <div class="quote-card" style="border-left-color:var(--color-green)">
-      <div class="quote-text">"I would like to report a neighbour disturbance issue from the resident at Blk 61, [unit]. Their dog barks continuously and excessively every day once the owners leave home, typically from around 7:30–"</div>
-      <div class="quote-meta">-- Resident, Blk 61, Apr 2026 | Animal Issues | Persistent dog barking from unit at Block 61 disturbing neig</div>
-    </div>
-
-
-    <div class="quote-card" style="border-left-color:var(--color-green)">
-      <div class="quote-text">"this is multiple time I feedback on this. pls call me to discuss. thanks"</div>
-      <div class="quote-meta">-- Resident, Unknown, Apr 2026 | Parking &amp; Traffic | Repeated feedback on carpark and pedestrian safety issues.</div>
-    </div>
-
-
-    <div class="quote-card" style="border-left-color:var(--color-green)">
-      <div class="quote-text">"hi, the wardrobe door at the master room has jammed, I am wondering if anyone from your team is able to help. Please kindly let me know if you can send someone over to fix it and the costs involved. T"</div>
-      <div class="quote-meta">-- Resident, Blk 57, Apr 2026 | Building Maintenance | Wardrobe door jammed at master room; assistance requested.</div>
-    </div>
-
-
-    <div class="quote-card" style="border-left-color:var(--color-green)">
-      <div class="quote-text">"Hello, a cardboard is stuck on top of a tree near block 59 gate. Can someone remove it? Thank [staff]"</div>
-      <div class="quote-meta">-- Resident, Blk 59, Apr 2026 | Landscaping | Cardboard stuck on tree near Block 59 gate; removal requeste</div>
+      <div class="quote-text">"I would like to commend the security team for their prompt and professional action. There were three teenagers playing violently in the pool and ignoring other swimmers’ safety. I’m glad that two secu"</div>
+      <div class="quote-meta">-- Resident, Blk 57, Feb 2026 | Security &amp; Access | Commendation for security team stopping rough pool behavior.</div>
     </div>
 
     <h3 style="margin-bottom:10px;margin-top:20px">Residents Who Confirmed Issue Was Fixed</h3>
     <p style="font-size:13px;color:var(--color-text-light);margin-bottom:12px">These residents confirmed in their review that the reported issue was resolved.</p>
+
+    <div class="quote-card" style="border-left-color:var(--color-primary)">
+      <div class="quote-text">"Appreciate the quick action"</div>
+      <div class="quote-meta">-- Resident, Blk 59, Apr 2026 | Security &amp; Access | Issue: Gate issue raising security concern at Block 59.</div>
+    </div>
+
+
+    <div class="quote-card" style="border-left-color:var(--color-primary)">
+      <div class="quote-text">"Appreciate the quick action"</div>
+      <div class="quote-meta">-- Resident, Blk 59, Apr 2026 | Rubbish Chute | Issue: Rubbish chute area dirty at Block 59.</div>
+    </div>
+
+
+    <div class="quote-card" style="border-left-color:var(--color-primary)">
+      <div class="quote-text">"Thank [staff] and Team for the prompt action !"</div>
+      <div class="quote-meta">-- Resident, Blk 49, Apr 2026 | Lighting | Issue: Light fixture faulty at common area; repair needed.</div>
+    </div>
+
+
+    <div class="quote-card" style="border-left-color:var(--color-primary)">
+      <div class="quote-text">"thanks [staff] your quick response"</div>
+      <div class="quote-meta">-- Resident, Blk 59, Apr 2026 | Animal Issues | Issue: Dog waste found at common area; owner did not clean up.</div>
+    </div>
+
+
+    <div class="quote-card" style="border-left-color:var(--color-primary)">
+      <div class="quote-text">"Thank [staff] ., I notice is removed."</div>
+      <div class="quote-meta">-- Resident, Blk 47, Mar 2026 | Cleanliness | Issue: Sticky tape residue on Blk 47 lift corner for two days.</div>
+    </div>
+
 
     <div class="quote-card" style="border-left-color:var(--color-primary)">
       <div class="quote-text">"yes was fixed shortly after feedback. great job team!"</div>
@@ -502,32 +581,21 @@ Please see the attached photos for your"</div>
 
 
     <div class="quote-card" style="border-left-color:var(--color-primary)">
-      <div class="quote-text">"shouldn’t be closed until fixed"</div>
-      <div class="quote-meta">-- Resident, Blk 47, Jan 2026 | Building Maintenance | Issue: Broken net at tennis court 2.</div>
+      <div class="quote-text">"thank [staff]!"</div>
+      <div class="quote-meta">-- Resident, Blk 55, Feb 2026 | Common Area Obstruction | Issue: Resident leaving items untidily outside their unit.</div>
     </div>
 
 
     <div class="quote-card" style="border-left-color:var(--color-primary)">
-      <div class="quote-text">"issue unresolved after many weeks"</div>
-      <div class="quote-meta">-- Resident, Blk 55, Dec 2025 | Gym Equipment | Issue: Broken treadmills unresolved for months, poor contractor man</div>
-    </div>
-
-
-    <div class="quote-card" style="border-left-color:var(--color-primary)">
-      <div class="quote-text">"The cigarette ash and packet is no longer in the staircase."</div>
-      <div class="quote-meta">-- Resident, Blk 61, Dec 2025 | Noise &amp; Neighbour | Issue: Cigarette ash and packets in Blk 61 staircase still uncleane</div>
-    </div>
-
-
-    <div class="quote-card" style="border-left-color:var(--color-primary)">
-      <div class="quote-text">"it has not been rectified yet."</div>
-      <div class="quote-meta">-- Resident, Blk 45, Dec 2025 | Lighting | Issue: Many common area lights not working throughout the condo.</div>
+      <div class="quote-text">"Great job resolving this security issue so quickly"</div>
+      <div class="quote-meta">-- Resident, Blk 61, Feb 2026 | Security &amp; Access | Issue: Blk 61 B1 door access not working, security compromised.</div>
     </div>
 
   </section>
 
   <section id="insights">
-    <h2>3. Insights &amp; Recommendations</h2>
+    <h2>4. Insights &amp; Recommendations</h2>
+    <p style="font-size:13px;color:var(--color-text-light);margin-bottom:16px">Based on 12-month historical analysis for pattern detection.</p>
 
 
     <div class="status-group" id="active-issues">
@@ -557,7 +625,10 @@ Please see the attached photos for your"</div>
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Responses include action references: replaced.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 35 appreciative responses out of 6 reviews.</div>
+          <div class="detail-text">1 dissatisfied out of 6 reviews.</div>
+          <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"it has not been rectified yet."</div>
+          </div>
           <div style="margin:6px 0 6px 12px">
             <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"thank [staff]"</div>
           </div>
@@ -591,14 +662,10 @@ Please see the attached photos for your"</div>
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. No concrete resolution actions mentioned.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Mixed -- 1 negative, 33 positive out of 7 reviews.</div>
+          <div class="detail-text">5 dissatisfied out of 7 reviews.</div>
           <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"I know you guys probably can&#x27;t do much. But to just close it off after I literally said that they are continuing to caus"</div>
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"what if it is repeated in the night ..during normal rains the rope was still dangling"</div>
-          </div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Hi,
-I am writing to report a noise issue originating from the unit above mine, [unit], Blk53. I reside in unit [unit].
-I"</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -630,12 +697,13 @@ I"</div>
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. No concrete resolution actions mentioned.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Mixed -- 1 negative, 18 positive out of 7 reviews.</div>
+          <div class="detail-text">3 dissatisfied out of 7 reviews.</div>
           <div style="margin:6px 0 6px 12px">
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"nothing done till date"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"no discussion. I had 2 near misses this week alone"</div>
           </div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Hi, I’m not able to use residential carpark gantry since last week. My bike number is FBL8342Z. Kindly check and let me "</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Thank [staff] is clear 👍"</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -667,11 +735,9 @@ I"</div>
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;. Some action words found: cleared, rectified.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 20 appreciative responses out of 1 reviews.</div>
+          <div class="detail-text">1 satisfied out of 1 reviews.</div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Dear [Management/Team],
-
-I would like to bring to your attention two safety concerns regarding the current feeder bus se"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Thank [staff], I got it.and Thank [staff] for the event on 30th August it was fun ! I learned emergency response."</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -701,15 +767,15 @@ I would like to bring to your attention two safety concerns regarding the curren
           <p class="detail-text">Avg 4d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: completed, rectified. Common phrases: &quot;thank you for your feedback&quot;.</div>
+          <div class="detail-text">Responses include action references: rectified, completed. Common phrases: &quot;thank you for your feedback&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Mixed -- 3 negative, 22 positive out of 8 reviews.</div>
+          <div class="detail-text">4 dissatisfied out of 8 reviews.</div>
           <div style="margin:6px 0 6px 12px">
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"the switch still not sensitive. need to press few time to open. please check again"</div>
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"The issue is not resolved. When the door swings open, it doesn’t swing back fully thus leaving the door ajar (very small"</div>
           </div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"thanks [staff] taking the additional measures. pls note this is not sustainable and effective. the issue can be easily resol"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"grateful for the prompt assistance as always"</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -741,13 +807,13 @@ I would like to bring to your attention two safety concerns regarding the curren
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Responses include action references: cleared. Common phrases: &quot;thank you for your feedback&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Mixed -- 2 negative, 25 positive out of 5 reviews.</div>
+          <div class="detail-text">3 dissatisfied out of 5 reviews.</div>
           <div style="margin:6px 0 6px 12px">
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"no actions taken. what has been done ? pets shit still seen everywhere"</div>
-            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"yes, pls. the poop was still there when I came back home this afternoon.."</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"Didn’t addressed the core issue, just closed the ticket."</div>
           </div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"hi, noticed there have been stray cat around. might need to remind residents to keep their pet or not feed stray animals"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"thank [staff]."</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -779,13 +845,10 @@ I would like to bring to your attention two safety concerns regarding the curren
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;please be informed&quot; / &quot;we understand your concern&quot;. No concrete resolution actions mentioned.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Mixed -- 3 negative, 35 positive out of 11 reviews.</div>
+          <div class="detail-text">9 dissatisfied out of 11 reviews.</div>
           <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"There is already a poster in place reminding users to keep their usage on the threadmill to 30 minutes. This has evident"</div>
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"did you check after 7min will the trackmill still auto stop?"</div>
-            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"thanks [staff] working on this issue. I still see people using for more than half an hour. this could be a factor contributi"</div>
-          </div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"i am a regular gym goer and there are a few points to note: 1. the aircon is always having “filter” alert on. do you fol"</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -817,9 +880,12 @@ I would like to bring to your attention two safety concerns regarding the curren
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Responses include action references: cleared, cleaned. Common phrases: &quot;thank you for your feedback&quot; / &quot;we understand your concern&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 35 appreciative responses out of 7 reviews.</div>
+          <div class="detail-text">1 dissatisfied out of 7 reviews.</div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Hi [staff], following up on my previous feedback on cigarette butt, it seems like the cigarette butts have landed on the ro"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"not sure if they have shown the picture"</div>
+          </div>
+          <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"thank [staff] for the prompt action in addressing my concerns. really appreciate it!"</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -851,12 +917,13 @@ I would like to bring to your attention two safety concerns regarding the curren
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. No concrete resolution actions mentioned.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Mixed -- 1 negative, 10 positive out of 4 reviews.</div>
+          <div class="detail-text">2 dissatisfied out of 4 reviews.</div>
           <div style="margin:6px 0 6px 12px">
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"still nothing changed the grass is patchy"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"Suggestion for change of use to common area was pushed to an AGM, but the removal of a footpath was carried out without "</div>
           </div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Plants at the 2nd carpark entrance / exit needs to be trimmed to prevent obstruction at the driveway. thanks."</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Thank [staff] for the prompt action in removing the spade and cement basket."</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -888,10 +955,7 @@ I would like to bring to your attention two safety concerns regarding the curren
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Responses include action references: cleared, cleaned. Common phrases: &quot;thank you for your feedback&quot; / &quot;we refer to your feedback&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 11 appreciative responses out of 0 reviews.</div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Users need to clear and dispose these used food packs after consuming their food.  They should not be left around as it "</div>
-          </div>
+          <div class="detail-text">No reviews with clear sentiment (36 without review).</div>
 
           <div class="detail-label">Assessment</div>
           <div class="detail-text">ONGOING -- 5 cases remain open. Issue persists across 11 months. Vendor response appears slow.</div>
@@ -922,12 +986,10 @@ I would like to bring to your attention two safety concerns regarding the curren
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;. No concrete resolution actions mentioned.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Mixed -- 1 negative, 7 positive out of 3 reviews.</div>
+          <div class="detail-text">2 dissatisfied out of 3 reviews.</div>
           <div style="margin:6px 0 6px 12px">
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"I&#x27;ve just checked and the outdoor furnishing remain in poor condition, dirty and with holes. When does the developer hop"</div>
-          </div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"With recent thefts in other condos, can I request that we remind our residents to br responsible about closing access ga"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"Job was not completed nor any changes done and marked closed."</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -957,14 +1019,15 @@ I would like to bring to your attention two safety concerns regarding the curren
           <p class="detail-text">Avg 1d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: fixed, completed, replaced. Common phrases: &quot;we refer to your feedback&quot; / &quot;for your information&quot;.</div>
+          <div class="detail-text">Responses include action references: completed, replaced, fixed. Common phrases: &quot;we refer to your feedback&quot; / &quot;for your information&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Mixed -- 1 negative, 18 positive out of 5 reviews.</div>
+          <div class="detail-text">3 dissatisfied out of 5 reviews.</div>
           <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"if u were to visit now. u will find the air con is extremely cold."</div>
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"still after a week it is not fixed but not sure why you guys close the ticket before fixing it"</div>
           </div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"hi. this has been in this conditions for months. should something need to be done and fixed?"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Thank [staff] for your reply! The situation with each air conditioner is different. I noticed that in other buildings, there"</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -994,11 +1057,12 @@ I would like to bring to your attention two safety concerns regarding the curren
           <p class="detail-text">Avg 4d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: removed, replaced, fixed. Common phrases: &quot;thank you for your feedback&quot;.</div>
+          <div class="detail-text">Responses include action references: rectified, replaced, repaired. Common phrases: &quot;thank you for your feedback&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 9 appreciative responses out of 2 reviews.</div>
+          <div class="detail-text">2 dissatisfied out of 2 reviews.</div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"I would like to raise a maintenance concern regarding the basketball court. The cement along the edge of the court appea"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"Please include corrective action plan with target completion date."</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"hi. in this case this is not satisfactorily address and ticket/feedback should not be closed as completed. let’s ensure "</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -1030,13 +1094,10 @@ I would like to bring to your attention two safety concerns regarding the curren
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. Some action words found: completed.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Mixed -- 1 negative, 3 positive out of 2 reviews.</div>
+          <div class="detail-text">2 dissatisfied out of 2 reviews.</div>
           <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"When posting temporary notices in a high-end condominium, it&#x27;s important that they appear neat and professional to resid"</div>
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"Firstly, I have never seen the door closed. Secondly, even if the door is closed, when someone is using the urinal, then"</div>
-          </div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Dear [staff] Office / Building Committee,
-I am writing to share my concerns regarding the poor visual impression and "</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -1068,13 +1129,10 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;please be informed&quot; / &quot;we refer to your feedback&quot; / &quot;thank you for your feedback&quot;. Some action words found: repaired, replaced.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Mixed -- 2 negative, 18 positive out of 3 reviews.</div>
+          <div class="detail-text">3 dissatisfied out of 3 reviews.</div>
           <div style="margin:6px 0 6px 12px">
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"since there is still a follow up why is the case closed?"</div>
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"aircon still not strong"</div>
-          </div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Dear [staff] team, please look into the aiconditioning for B1 lift lobby of Blk 49, the aircon has become very weak/n"</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -1104,11 +1162,15 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <p class="detail-text">Avg 2d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: replaced, rectified. Common phrases: &quot;thank you for your feedback&quot;.</div>
+          <div class="detail-text">Responses include action references: rectified, replaced. Common phrases: &quot;thank you for your feedback&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 11 appreciative responses out of 3 reviews.</div>
+          <div class="detail-text">2 dissatisfied out of 3 reviews.</div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"PL17 is spoilt, at b1 showing up arrow but it is not moving up. please get it fixed"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"the lift broke down again"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"I am not just asking to clean it up. I need you to check who did this. it is not the first time that someone’s dog pee p"</div>
+          </div>
+          <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"thanks [staff] the update. yes is PL9"</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -1140,10 +1202,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. No concrete resolution actions mentioned.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 4 appreciative responses out of 0 reviews.</div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"I have to report this marketing flyers in our letter box AGAIN. Why flyer distributors can enter to our condo easily ? S"</div>
-          </div>
+          <div class="detail-text">No reviews with clear sentiment (25 without review).</div>
 
           <div class="detail-label">Assessment</div>
           <div class="detail-text">NOT RESOLVED -- Same response pattern for 9 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
@@ -1174,7 +1233,10 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Responses include action references: resolved, completed, removed. Common phrases: &quot;thank you for your feedback&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 6 appreciative responses out of 2 reviews.</div>
+          <div class="detail-text">1 dissatisfied out of 2 reviews.</div>
+          <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"it was closed without a response"</div>
+          </div>
           <div style="margin:6px 0 6px 12px">
             <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"thanks [staff] taking timely action on this."</div>
           </div>
@@ -1208,9 +1270,11 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. Some action words found: resolved.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 14 appreciative responses out of 2 reviews.</div>
+          <div class="detail-text">2 dissatisfied out of 2 reviews.</div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"hello- you advised me to apply for a moving permit under reforms in the app. this does not work for me- no option to sta"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"At least inform the owners before displaying on the notices board, also shouldn’t display our full name on the list. We "</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"house rules does not says ALL common areas. only specific ones. 
+I agree with the safety and the damage, but rules doesn"</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -1242,9 +1306,9 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;. Some action words found: removed.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 8 appreciative responses out of 1 reviews.</div>
+          <div class="detail-text">1 satisfied out of 1 reviews.</div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"the trampoline at the children’s area appears to have some of its hoops dislocated. could you please look into asap sinc"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"thank [staff] for quick response"</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -1274,11 +1338,15 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <p class="detail-text">Avg 1d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: cleared, cleaned, removed. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;.</div>
+          <div class="detail-text">Responses include action references: cleared, removed, cleaned. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 37 appreciative responses out of 7 reviews.</div>
+          <div class="detail-text">3 dissatisfied out of 7 reviews.</div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Hi, could we get the cleaner to help clear the spiderweb on the ceiling along the corridor? thanks"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"Friday evening they did not clean the corridor after work. please arrange the cleaning of corridor."</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"why is this closed"</div>
+          </div>
+          <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Thank [staff] very much. Btw I don&#x27;t know which unit split it, hai..."</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -1310,9 +1378,9 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;we have assigned&quot; / &quot;for your information&quot;. Some action words found: replaced.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 10 appreciative responses out of 2 reviews.</div>
+          <div class="detail-text">2 satisfied out of 2 reviews.</div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Hi [staff], lift PL9 at BLK53 seems went wrong, recently I experienced several times that the lift door cannot open p"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Thanks [staff] your prompt actions taken."</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -1342,12 +1410,9 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <p class="detail-text">Avg 2d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: completed, removed, rectified. Common phrases: &quot;we refer to your feedback&quot; / &quot;please be informed&quot;.</div>
+          <div class="detail-text">Responses include action references: rectified, completed, removed. Common phrases: &quot;we refer to your feedback&quot; / &quot;please be informed&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 6 appreciative responses out of 0 reviews.</div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"the tap hasnt been working for maybe a week. no one has fixed it."</div>
-          </div>
+          <div class="detail-text">No reviews with clear sentiment (22 without review).</div>
 
           <div class="detail-label">Assessment</div>
           <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 10 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
@@ -1378,9 +1443,9 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;please be informed&quot;. Some action words found: replaced.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 4 appreciative responses out of 1 reviews.</div>
+          <div class="detail-text">1 dissatisfied out of 1 reviews.</div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"We would like to bring to your attention that since 3 August, we have been experiencing an intermittent gas-like smell a"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"Which mean there is a possibility of a breach of security knowing that any Tom, Dick or Harry is able to enter the condo"</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -1412,9 +1477,9 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Responses include action references: completed. Common phrases: &quot;we refer to your feedback&quot; / &quot;for your information&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 4 appreciative responses out of 2 reviews.</div>
+          <div class="detail-text">1 satisfied out of 2 reviews.</div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"hi [staff], thanks [staff] your previous reply, understood the signal coverage work is carrying out at basement, how abou"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Thank [staff]. please update us on the network"</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -1446,9 +1511,11 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Mixed response patterns with varied content.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 2 appreciative responses out of 1 reviews.</div>
+          <div class="detail-text">1 dissatisfied out of 1 reviews.</div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"I hope this message finds you well. I am writing to seek your assistance with an ongoing issue concerning persistent coo"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"As regards to this issue, I have yet to see any notice put up on this issue. 
+
+kindly review it please."</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -1478,15 +1545,15 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <p class="detail-text">Avg 1d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: cleared, cleaned, rectified. Common phrases: &quot;thank you for your feedback&quot;.</div>
+          <div class="detail-text">Responses include action references: cleared, rectified, cleaned. Common phrases: &quot;thank you for your feedback&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Mixed -- 5 negative, 51 positive out of 21 reviews.</div>
+          <div class="detail-text">10 dissatisfied out of 21 reviews.</div>
           <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"the spring is not installed yet"</div>
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"The response to the feedback was very prompt. However the follow up actions of increasing flushing and deodorizing did n"</div>
-            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"The faulty chute is still not fixed until now and the residents have to endure the stench everyday."</div>
           </div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"the rubbish chute no longer close by itself. block 53, level 21. thanks."</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"It seems to be fixed and the spring is working.  Thanks [staff] quick response and resolution."</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -1516,14 +1583,15 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <p class="detail-text">Avg 1d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: completed, replaced, rectified. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;.</div>
+          <div class="detail-text">Responses include action references: rectified, completed, replaced. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Mixed -- 1 negative, 11 positive out of 3 reviews.</div>
+          <div class="detail-text">2 dissatisfied out of 3 reviews.</div>
           <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"The issue has not been resolved. Lift PL12 is out of service and the lift button is not working as well."</div>
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"still the same issue today morning"</div>
           </div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Can you get lift technical team to check and repair the lift ventilation fan asap? it is extremely suffer especially whe"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"thank [staff] for prompt actions"</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -1555,9 +1623,10 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;please be informed&quot;. No concrete resolution actions mentioned.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 12 appreciative responses out of 1 reviews.</div>
+          <div class="detail-text">1 satisfied out of 1 reviews.</div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"hi [staff] module in the basement is not working. This implicates entry and delivery of items. please have it fixed ASAP. t"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Thank [staff].
+I am looking forward to this"</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -1589,12 +1658,14 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. Some action words found: removed.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Mixed -- 1 negative, 13 positive out of 2 reviews.</div>
+          <div class="detail-text">1 dissatisfied out of 2 reviews.</div>
           <div style="margin:6px 0 6px 12px">
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"Why keep telling me i exceeded the limit when i did not book any slot that week. This is unacceptable."</div>
           </div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Hi, I&#x27;m planning to have a small wedding luncheon for my family on 4 Oct 2025 noon in the function room. Could you kindl"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"please book for me Tues 14th 7am Court 1
+
+thank [staff]"</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -1626,13 +1697,13 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;for your information&quot; / &quot;we refer to your feedback&quot;. Some action words found: cleared.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Mixed -- 2 negative, 12 positive out of 4 reviews.</div>
+          <div class="detail-text">3 dissatisfied out of 4 reviews.</div>
           <div style="margin:6px 0 6px 12px">
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"hi [staff], thanks [staff] your note. I just checked and the chair is still there though. But you have closed this case. under"</div>
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"hi [staff], thanks [staff] your note. I just checked and the chair is still there though. But you have closed this case. under"</div>
           </div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"I recently found more trash bags at the basement and ground floor. Today I saw a lady trying to throw away her 2 bags of"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"thank [staff]!"</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -1664,7 +1735,10 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Responses include action references: cleared, removed. Common phrases: &quot;for your information&quot; / &quot;thank you for your feedback&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 6 appreciative responses out of 3 reviews.</div>
+          <div class="detail-text">1 dissatisfied out of 3 reviews.</div>
+          <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"Hi, I don’t think it’s reasonable to discard items without any confirmation. just because you knocked and I am not at ho"</div>
+          </div>
           <div style="margin:6px 0 6px 12px">
             <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Thank [staff] Team for your fast action in removing the tyres. Appreciated."</div>
           </div>
@@ -1696,12 +1770,9 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <p class="detail-text">Avg 2d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: completed, replaced, rectified. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;.</div>
+          <div class="detail-text">Responses include action references: rectified, completed, replaced. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 2 appreciative responses out of 0 reviews.</div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Hi [staff], since last few weeks, lift noise has increased a lot at block 53. We can hear the noise clearly in our room. B"</div>
-          </div>
+          <div class="detail-text">No reviews with clear sentiment (20 without review).</div>
 
           <div class="detail-label">Assessment</div>
           <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 8 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
@@ -1732,7 +1803,10 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;. Some action words found: removed.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 13 appreciative responses out of 6 reviews.</div>
+          <div class="detail-text">1 dissatisfied out of 6 reviews.</div>
+          <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"Item is not removed yet"</div>
+          </div>
           <div style="margin:6px 0 6px 12px">
             <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Thank [staff]."</div>
           </div>
@@ -1764,11 +1838,11 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <p class="detail-text">Avg 1d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: cleared, cleaned, resolved. Common phrases: &quot;thank you for your feedback&quot; / &quot;please be informed&quot;.</div>
+          <div class="detail-text">Responses include action references: cleared, completed, resolved. Common phrases: &quot;thank you for your feedback&quot; / &quot;please be informed&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 3 appreciative responses out of 2 reviews.</div>
+          <div class="detail-text">1 dissatisfied out of 2 reviews.</div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"1292-3980 additional comments.Please make arrangements as soon as possible because I think it’s pet poop.Thank [staff]."</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"also can we stop delivery riders from placing the food everywhere? it’s creating a lot of maintenance issues. sometimes "</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -1788,7 +1862,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
         </summary>
         <div class="detail-body">
 
-          <p class="detail-text" style="color:var(--color-text-light);margin-bottom:10px">Security guard conduct — rude behavior, not responsive, absent from post.</p>
+          <p class="detail-text" style="color:var(--color-text-light);margin-bottom:10px">Security guard conduct -- rude behavior, not responsive, absent from post.</p>
           <div class="detail-label">Example Cases</div>
           <ul style="margin:4px 0 12px 18px;font-size:13px;color:var(--color-text)">
             <li style="margin-bottom:4px">Security or access issue reported at estate.</li>
@@ -1800,49 +1874,12 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. No concrete resolution actions mentioned.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 5 appreciative responses out of 0 reviews.</div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Hi, initially I was quite hesitate to write in to feedback on our security in Normanton. However, in many occasions, esp"</div>
-          </div>
+          <div class="detail-text">No reviews with clear sentiment (12 without review).</div>
 
           <div class="detail-label">Assessment</div>
           <div class="detail-text">NOT RESOLVED -- Same response pattern for 9 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
           <div class="detail-label">Recommendation</div>
           <div class="detail-text">Escalate to Omega Security Services with documented recurrence data. Set concrete SLA with penalty clause. Request vendor root-cause analysis within 14 days.</div>
-        </div>
-      </details>
-
-
-      <details class="sub-issue active">
-        <summary>
-          Ceiling Seepage -- Blk 57, Blk 53
-          <span class="detail-stats">
-            7 cases | 0 open | Recurring 6/12 months | MK Jetting
-          </span>
-        </summary>
-        <div class="detail-body">
-
-          <p class="detail-text" style="color:var(--color-text-light);margin-bottom:10px">Issues related to ceiling seepage.</p>
-          <div class="detail-label">Example Cases</div>
-          <ul style="margin:4px 0 12px 18px;font-size:13px;color:var(--color-text)">
-            <li style="margin-bottom:4px">Yellowish water leaking from pipes at B1 carpark lot.</li>
-            <li style="margin-bottom:4px">Water leaking and staining wall at B1 carpark lot.</li>
-            <li style="margin-bottom:4px">Blk 47 B1 lobby ceiling has water damage and holes.</li>
-          </ul>
-          <p class="detail-text">Avg 29d resolution</p>
-
-          <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;. No concrete resolution actions mentioned.</div>
-          <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 2 appreciative responses out of 0 reviews.</div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"the ceiling of the master bedroom washroom is dripping water. could we get some help on this please? Thank [staff]!"</div>
-          </div>
-
-          <div class="detail-label">Assessment</div>
-          <div class="detail-text">NOT RESOLVED -- Same response pattern for 6 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
-          <div class="detail-label">Recommendation</div>
-          <div class="detail-text">Escalate to MK Jetting with documented recurrence data. Set concrete SLA with penalty clause. Request vendor root-cause analysis within 14 days.</div>
         </div>
       </details>
 
@@ -1866,12 +1903,9 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <p class="detail-text">Avg 1d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: cleared, cleaned, completed. Common phrases: &quot;we have assigned&quot; / &quot;for your information&quot;.</div>
+          <div class="detail-text">Responses include action references: cleared, completed, cleaned. Common phrases: &quot;we have assigned&quot; / &quot;for your information&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 1 appreciative responses out of 0 reviews.</div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Dear MA team, can get your cleaning team to look into this? Thank [staff]"</div>
-          </div>
+          <div class="detail-text">No reviews with clear sentiment (7 without review).</div>
 
           <div class="detail-label">Assessment</div>
           <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 6 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
@@ -1902,10 +1936,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Common phrases: &quot;thank you for your feedback&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 5 appreciative responses out of 1 reviews.</div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"hi [staff] management, I would like to extend my renovation works to 30 Sep. there remains no change to balcony, no wo"</div>
-          </div>
+          <div class="detail-text">No reviews with clear sentiment (6 without review).</div>
 
           <div class="detail-label">Assessment</div>
           <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 5 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
@@ -1914,15 +1945,8 @@ I am writing to share my concerns regarding the poor visual impression and "</di
         </div>
       </details>
 
-    </div>
 
-    <div class="status-group" id="monitoring-issues">
-      <div class="status-group-header monitoring">
-        Monitoring (Watching for Recurrence) -- 1 sub-issues
-      </div>
-
-
-      <details class="sub-issue monitoring">
+      <details class="sub-issue active">
         <summary>
           Visitor Access -- Blk 49, Blk 47
           <span class="detail-stats">
@@ -1943,13 +1967,82 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Mixed response patterns with varied content.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 2 appreciative responses out of 0 reviews.</div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Hi MA. Thank [staff] for making an effort to enhance the security and safety of the residents by introducing the Visitor Mes"</div>
-          </div>
+          <div class="detail-text">No reviews with clear sentiment (3 without review).</div>
 
           <div class="detail-label">Assessment</div>
           <div class="detail-text">RESOLVED -- No recent cases. Last occurrence: Apr 2026. Monitor for recurrence.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Ensure vendor SLA compliance.</div>
+        </div>
+      </details>
+
+    </div>
+
+    <div class="status-group" id="monitoring-issues">
+      <div class="status-group-header monitoring">
+        Monitoring (Watching for Recurrence) -- 2 sub-issues
+      </div>
+
+
+      <details class="sub-issue monitoring">
+        <summary>
+          Common Area Leak -- Blk 47, Blk 51
+          <span class="detail-stats">
+            8 cases | 0 open | Recurring 6/12 months | MK Jetting
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text" style="color:var(--color-text-light);margin-bottom:10px">Issues related to common area leak.</p>
+          <div class="detail-label">Example Cases</div>
+          <ul style="margin:4px 0 12px 18px;font-size:13px;color:var(--color-text)">
+            <li style="margin-bottom:4px">PU grouting dripping from ceiling at B1 carpark.</li>
+            <li style="margin-bottom:4px">Carpark ceiling leaking again, staining car.</li>
+            <li style="margin-bottom:4px">Moulding and water leaking at Blk 47 basement lobby.</li>
+          </ul>
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: cleared, cleaned. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;.</div>
+          <div class="detail-label">Resident Sentiment</div>
+          <div class="detail-text">1 dissatisfied out of 1 reviews.</div>
+          <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"hi. please kindly fix the peeling paint."</div>
+          </div>
+
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">RESOLVED -- No recent cases. Last occurrence: Feb 2026. Monitor for recurrence.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">No immediate action required. Keep in monitoring queue. Re-escalate if new cases appear.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue monitoring">
+        <summary>
+          Ceiling Seepage -- Blk 57, Blk 53
+          <span class="detail-stats">
+            7 cases | 0 open | Recurring 6/12 months | MK Jetting
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text" style="color:var(--color-text-light);margin-bottom:10px">Issues related to ceiling seepage.</p>
+          <div class="detail-label">Example Cases</div>
+          <ul style="margin:4px 0 12px 18px;font-size:13px;color:var(--color-text)">
+            <li style="margin-bottom:4px">Yellowish water leaking from pipes at B1 carpark lot.</li>
+            <li style="margin-bottom:4px">Water leaking and staining wall at B1 carpark lot.</li>
+            <li style="margin-bottom:4px">Blk 47 B1 lobby ceiling has water damage and holes.</li>
+          </ul>
+          <p class="detail-text">Avg 29d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;. No concrete resolution actions mentioned.</div>
+          <div class="detail-label">Resident Sentiment</div>
+          <div class="detail-text">No reviews with clear sentiment (7 without review).</div>
+
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">RESOLVED -- No recent cases. Last occurrence: Feb 2026. Monitor for recurrence.</div>
           <div class="detail-label">Recommendation</div>
           <div class="detail-text">No immediate action required. Keep in monitoring queue. Re-escalate if new cases appear.</div>
         </div>
@@ -1959,7 +2052,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
 
     <div class="status-group" id="improving-issues">
       <div class="status-group-header improving">
-        Improving (Trending Down) -- 10 sub-issues
+        Improving (Trending Down) -- 9 sub-issues
       </div>
 
 
@@ -1984,12 +2077,13 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. Some action words found: cleared, cleaned.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Mixed -- 1 negative, 17 positive out of 8 reviews.</div>
+          <div class="detail-text">3 dissatisfied out of 8 reviews.</div>
           <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"please advise when is the target date for the pump to be fixed"</div>
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"There was Nothing done since I feedback this issue"</div>
           </div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Hi, I saw 4 deck chairs in the swimming pool.  Pls alert maintenance staff to retrieve it and also users should be educa"</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Great to see that the pool is cleaned."</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -2021,7 +2115,10 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;for your information&quot; / &quot;we refer to your feedback&quot;. Some action words found: installed.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 8 appreciative responses out of 2 reviews.</div>
+          <div class="detail-text">1 dissatisfied out of 2 reviews.</div>
+          <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"The point is that nothing has changed. If internal mediation isnt working, where is the escalation to CMC?"</div>
+          </div>
           <div style="margin:6px 0 6px 12px">
             <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Thank [staff] for your proactive action"</div>
           </div>
@@ -2055,10 +2152,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Mixed response patterns with varied content.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 5 appreciative responses out of 2 reviews.</div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"I found a item on my windowsill as the photo and I managed to pick it up. I don’t know where it was from and worried abo"</div>
-          </div>
+          <div class="detail-text">No reviews with clear sentiment (17 without review).</div>
 
           <div class="detail-label">Assessment</div>
           <div class="detail-text">IMPROVING -- Cases down 57% from H1 to H2. MA interventions showing results. Continue monitoring.</div>
@@ -2087,12 +2181,9 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <p class="detail-text">Avg 0d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. Some action words found: completed, rectified.</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. Some action words found: rectified, completed.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 2 appreciative responses out of 0 reviews.</div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"At 0630H ... blk 59 experience no water and around 0900H ... low water pressure experienced. please activate plumber and"</div>
-          </div>
+          <div class="detail-text">No reviews with clear sentiment (8 without review).</div>
 
           <div class="detail-label">Assessment</div>
           <div class="detail-text">IMPROVING -- Cases down 50% from H1 to H2. MA interventions showing results. Continue monitoring.</div>
@@ -2123,10 +2214,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Responses include action references: cleared, cleaned. Common phrases: &quot;thank you for your feedback&quot; / &quot;for your information&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 20 appreciative responses out of 0 reviews.</div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Hihi, we have reported ants issue before, after the pest control came, it got controlled. however the ants issue are bac"</div>
-          </div>
+          <div class="detail-text">No reviews with clear sentiment (61 without review).</div>
 
           <div class="detail-label">Assessment</div>
           <div class="detail-text">IMPROVING -- Cases down 39% from H1 to H2. Vendor actions appear effective. Continue monitoring.</div>
@@ -2157,12 +2245,12 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Responses include action references: completed. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have assigned&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Mixed -- 1 negative, 17 positive out of 2 reviews.</div>
+          <div class="detail-text">2 dissatisfied out of 2 reviews.</div>
           <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"how can it be “improved significantly “? i am at blk 61 - zero reception. same for blk 47
+
+where has reception"</div>
             <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"Today is 16 March but the M1 network at B1 is still very bad, please update when it will be better."</div>
-          </div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Hi, may I check when is the planned fixed date to get the phone signal up in the carpark? the carpark has no signal for "</div>
           </div>
 
           <div class="detail-label">Assessment</div>
@@ -2194,47 +2282,18 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Responses include action references: installed, completed.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 13 appreciative responses out of 4 reviews.</div>
+          <div class="detail-text">1 dissatisfied out of 4 reviews.</div>
           <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"hello. why was my feedback closed? this is not resolved. I’m unable to see that the amount is refunded and I can’t find "</div>
+            <div style="font-size:12px;font-style:italic;color:var(--color-red);padding:4px 0;border-left:3px solid var(--color-red);padding-left:10px;margin-bottom:4px">"unfortunately the issue is there is no auto close hinge for the doors. 
+most of the other doors have the auto close. 
+my"</div>
+          </div>
+          <div style="margin:6px 0 6px 12px">
+            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"Ok I will be there later ard before 1pm today"</div>
           </div>
 
           <div class="detail-label">Assessment</div>
           <div class="detail-text">IMPROVING -- Cases down 33% from H1 to H2. MA interventions showing results. Continue monitoring.</div>
-          <div class="detail-label">Recommendation</div>
-          <div class="detail-text">Maintain current measures. Document what worked for replication. Review in 3 months.</div>
-        </div>
-      </details>
-
-
-      <details class="sub-issue improving">
-        <summary>
-          Common Area Leak -- Blk 47, Blk 51
-          <span class="detail-stats">
-            8 cases | 0 open | Recurring 6/12 months | MK Jetting
-          </span>
-        </summary>
-        <div class="detail-body">
-
-          <p class="detail-text" style="color:var(--color-text-light);margin-bottom:10px">Issues related to common area leak.</p>
-          <div class="detail-label">Example Cases</div>
-          <ul style="margin:4px 0 12px 18px;font-size:13px;color:var(--color-text)">
-            <li style="margin-bottom:4px">PU grouting dripping from ceiling at B1 carpark.</li>
-            <li style="margin-bottom:4px">Carpark ceiling leaking again, staining car.</li>
-            <li style="margin-bottom:4px">Moulding and water leaking at Blk 47 basement lobby.</li>
-          </ul>
-          <p class="detail-text">Avg 1d resolution</p>
-
-          <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: cleared, cleaned. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;.</div>
-          <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 1 appreciative responses out of 1 reviews.</div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"please find attached photo for your reference. i am unsure if the issue shown is water seepage and would appreciate it i"</div>
-          </div>
-
-          <div class="detail-label">Assessment</div>
-          <div class="detail-text">IMPROVING -- Cases down 50% from H1 to H2. Vendor actions appear effective. Continue monitoring.</div>
           <div class="detail-label">Recommendation</div>
           <div class="detail-text">Maintain current measures. Document what worked for replication. Review in 3 months.</div>
         </div>
@@ -2262,10 +2321,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. No concrete resolution actions mentioned.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 2 appreciative responses out of 0 reviews.</div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"I noticed that the floor on my level is so clean last evening when I came home and  understand from my son it was washed"</div>
-          </div>
+          <div class="detail-text">No reviews with clear sentiment (5 without review).</div>
 
           <div class="detail-label">Assessment</div>
           <div class="detail-text">IMPROVING -- Cases down 50% from H1 to H2. MA interventions showing results. Continue monitoring.</div>
@@ -2296,10 +2352,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <div class="detail-label">MA Reply Pattern</div>
           <div class="detail-text">Responses include action references: cleaned.</div>
           <div class="detail-label">Resident Sentiment</div>
-          <div class="detail-text">Positive -- 1 appreciative responses out of 0 reviews.</div>
-          <div style="margin:6px 0 6px 12px">
-            <div style="font-size:12px;font-style:italic;color:var(--color-green);padding:4px 0;border-left:3px solid var(--color-green);padding-left:10px;margin-bottom:4px">"there is water ponding at the bottom of the stairs to car park probably due to a choked outlet. thanks."</div>
-          </div>
+          <div class="detail-text">No reviews with clear sentiment (3 without review).</div>
 
           <div class="detail-label">Assessment</div>
           <div class="detail-text">IMPROVING -- Cases down 50% from H1 to H2. Vendor actions appear effective. Continue monitoring.</div>
@@ -2312,7 +2365,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
   </section>
 
   <section id="vendors">
-    <h2>4. Vendor Management</h2>
+    <h2>5. Vendor Management</h2>
     <div class="table-wrap">
       <table>
         <thead>
@@ -2322,7 +2375,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
             <th>Total Cases</th>
             <th>Closed %</th>
             <th>Avg Days to Close</th>
-            <th>Trend (H2 vs H1)</th>
+            <th>Trend (MoM)</th>
           </tr>
         </thead>
         <tbody>
@@ -2331,100 +2384,100 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <tr>
             <td><strong>Nature Landscape / Spring Landscape</strong></td>
             <td>Landscaping</td>
-            <td>33</td>
-            <td style="">82%</td>
-            <td>2.0</td>
-            <td style="color:var(--color-red)">+56%</td>
+            <td>14</td>
+            <td style="color:var(--color-red);font-weight:600">64%</td>
+            <td>4.9</td>
+            <td style="color:var(--color-red)">+200%</td>
           </tr>
 
 
           <tr>
             <td><strong>Active Lifestyle Pte Ltd</strong></td>
             <td>Gym Equipment</td>
-            <td>83</td>
-            <td style="">92%</td>
-            <td>1.0</td>
-            <td style="color:var(--color-red)">+93%</td>
-          </tr>
-
-
-          <tr>
-            <td><strong>Omega Security Services</strong></td>
-            <td>Security &amp; Access</td>
-            <td>128</td>
-            <td style="">92%</td>
-            <td>2.9</td>
-            <td style="color:var(--color-red)">+288%</td>
+            <td>27</td>
+            <td style="color:var(--color-red);font-weight:600">74%</td>
+            <td>1.7</td>
+            <td style="color:var(--color-green)">-38%</td>
           </tr>
 
 
           <tr>
             <td><strong>Wateronic</strong></td>
             <td>Pool &amp; Water Features</td>
-            <td>68</td>
-            <td style="">94%</td>
-            <td>5.0</td>
-            <td style="color:var(--color-green)">-50%</td>
+            <td>16</td>
+            <td style="color:var(--color-red);font-weight:600">75%</td>
+            <td>1.2</td>
+            <td style="color:var(--color-red)">+200%</td>
+          </tr>
+
+
+          <tr>
+            <td><strong>Omega Security Services</strong></td>
+            <td>Security &amp; Access</td>
+            <td>66</td>
+            <td style="">85%</td>
+            <td>1.5</td>
+            <td style="color:var(--color-red)">+82%</td>
           </tr>
 
 
           <tr>
             <td><strong>MK Jetting</strong></td>
             <td>Water &amp; Plumbing</td>
-            <td>48</td>
-            <td style="">96%</td>
-            <td>5.5</td>
-            <td style="">+0%</td>
+            <td>11</td>
+            <td style="">91%</td>
+            <td>3.2</td>
+            <td style="color:var(--color-green)">-100%</td>
           </tr>
 
 
           <tr>
             <td><strong>ABM Century Pte Ltd</strong></td>
             <td>Cleanliness</td>
-            <td>172</td>
-            <td style="">97%</td>
-            <td>1.0</td>
-            <td style="color:var(--color-red)">+51%</td>
+            <td>56</td>
+            <td style="">91%</td>
+            <td>1.2</td>
+            <td style="">+0%</td>
           </tr>
 
 
           <tr>
             <td><strong>Kone</strong></td>
             <td>Lift Issues</td>
-            <td>151</td>
-            <td style="">97%</td>
-            <td>1.7</td>
-            <td style="color:var(--color-red)">+42%</td>
-          </tr>
-
-
-          <tr>
-            <td><strong>Elite Pest Management</strong></td>
-            <td>Pest Control</td>
-            <td>61</td>
-            <td style="">100%</td>
-            <td>3.5</td>
-            <td style="color:var(--color-green)">-39%</td>
+            <td>51</td>
+            <td style="">92%</td>
+            <td>2.0</td>
+            <td style="color:var(--color-red)">+20%</td>
           </tr>
 
 
           <tr>
             <td><strong>Hilife</strong></td>
             <td>Intercom &amp; Smart Home</td>
-            <td>46</td>
+            <td>19</td>
             <td style="">100%</td>
-            <td>1.1</td>
-            <td style="color:var(--color-red)">+217%</td>
+            <td>1.7</td>
+            <td style="color:var(--color-green)">-38%</td>
           </tr>
 
 
           <tr>
             <td><strong>Cora Environment / Stream Environment</strong></td>
             <td>Rubbish Chute</td>
-            <td>150</td>
+            <td>38</td>
             <td style="">100%</td>
-            <td>0.9</td>
-            <td style="">-3%</td>
+            <td>1.5</td>
+            <td style="color:var(--color-red)">+40%</td>
+          </tr>
+
+
+          <tr>
+            <td><strong>Elite Pest Management</strong></td>
+            <td>Pest Control</td>
+            <td>11</td>
+            <td style="">100%</td>
+            <td>1.5</td>
+            <td style="color:var(--color-red)">+25%</td>
           </tr>
 
 
@@ -2433,14 +2486,14 @@ I am writing to share my concerns regarding the poor visual impression and "</di
     </div>
 
     <h3>Vendor Action Items</h3>
-    <div class="vendor-action">Nature Landscape / Spring Landscape: 33 total cases across Landscaping. 6 open cases, oldest 3 months unresolved. ACTION: Schedule vendor review meeting.</div>
-    <div class="vendor-action">Active Lifestyle Pte Ltd: 83 total cases across Gym Equipment. 7 open cases, oldest 2 months unresolved. ACTION: Schedule vendor review meeting.</div>
-    <div class="vendor-action">Omega Security Services: 128 total cases across Security &amp; Access. 10 open cases, oldest 1 months unresolved. ACTION: Schedule vendor review meeting.</div>
-    <div class="vendor-action">ABM Century Pte Ltd: 172 total cases across Cleanliness. 6 open cases, oldest 2 months unresolved. ACTION: Schedule vendor review meeting.</div>
+    <div class="vendor-action">Nature Landscape / Spring Landscape: 14 total cases across Landscaping. 5 open cases. ACTION: Schedule vendor review meeting.</div>
+    <div class="vendor-action">Active Lifestyle Pte Ltd: 27 total cases across Gym Equipment. 7 open cases, oldest 2 months unresolved. ACTION: Schedule vendor review meeting.</div>
+    <div class="vendor-action">Wateronic: 16 total cases across Pool &amp; Water Features. 4 open cases, oldest 1 months unresolved. ACTION: Schedule vendor review meeting.</div>
+    <div class="vendor-action">Omega Security Services: 66 total cases across Security &amp; Access. 10 open cases, oldest 1 months unresolved. ACTION: Schedule vendor review meeting.</div>
   </section>
 
   <section id="actions">
-    <h2>5. This Week's Action List</h2>
+    <h2>6. This Week's Action List</h2>
     <p>All open cases (Status not Closed) sorted by days open. Color: <span style="background:#fed7d7;padding:2px 6px;border-radius:3px">Red &gt; 90 days</span> <span style="background:#fefcbf;padding:2px 6px;border-radius:3px">Yellow &gt; 30 days</span> <span style="background:#fff;border:1px solid #ddd;padding:2px 6px;border-radius:3px">White &lt; 30 days</span></p>
 
 
@@ -2464,7 +2517,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
               <td>1292-4550</td>
               <td>Blk 57</td>
               <td><strong>68</strong></td>
-              <td>Previous feedback not brought up at council meeting.</td>
+              <td>Previous feedback not brought up at council meeting.<span style="background:var(--color-red);color:#fff;padding:1px 6px;border-radius:3px;font-size:10px;margin-left:6px">SAFETY</span></td>
               <td>In Progress</td>
             </tr>
 
@@ -2558,7 +2611,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
               <td>1292-4488</td>
               <td>Unknown</td>
               <td><strong>76</strong></td>
-              <td>Dog owner not cleaning up after pet on common walkway.</td>
+              <td>Dog owner not cleaning up after pet on common walkway.<span style="background:var(--color-red);color:#fff;padding:1px 6px;border-radius:3px;font-size:10px;margin-left:6px">SAFETY</span></td>
               <td>In Progress</td>
             </tr>
 
@@ -2664,7 +2717,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
 
 
     <div class="action-group">
-      <div class="action-group-title">Building Maintenance (Other) (4 open)</div>
+      <div class="action-group-title">Building Maintenance (Other) (3 open)</div>
       <div class="table-wrap">
         <table class="action-table">
           <thead>
@@ -2677,15 +2730,6 @@ I am writing to share my concerns regarding the poor visual impression and "</di
             </tr>
           </thead>
           <tbody>
-
-
-            <tr class="age-red">
-              <td>1292-3443</td>
-              <td>Blk 53</td>
-              <td><strong>292</strong></td>
-              <td>Algae forming around the lighting point.</td>
-              <td>In Progress</td>
-            </tr>
 
 
             <tr class="age-yellow">
@@ -2768,6 +2812,24 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <tbody>
 
 
+            <tr class="age-white">
+              <td>1292-5054</td>
+              <td>Blk 57</td>
+              <td><strong>1</strong></td>
+              <td>Resident reports parcel theft at their block and requests CCTV review.<span style="background:var(--color-red);color:#fff;padding:1px 6px;border-radius:3px;font-size:10px;margin-left:6px">SAFETY</span></td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-white">
+              <td>1292-5052</td>
+              <td>Blk 57</td>
+              <td><strong>1</strong></td>
+              <td>Resident reports parcel theft at Block 57 and requests CCTV review.<span style="background:var(--color-red);color:#fff;padding:1px 6px;border-radius:3px;font-size:10px;margin-left:6px">SAFETY</span></td>
+              <td>Pending</td>
+            </tr>
+
+
             <tr class="age-yellow">
               <td>1292-4476</td>
               <td>Blk 53</td>
@@ -2792,24 +2854,6 @@ I am writing to share my concerns regarding the poor visual impression and "</di
               <td><strong>50</strong></td>
               <td>Bicycle seat stolen at Blk 61 B1, thief on video.</td>
               <td>In Progress</td>
-            </tr>
-
-
-            <tr class="age-white">
-              <td>1292-5054</td>
-              <td>Blk 57</td>
-              <td><strong>1</strong></td>
-              <td>Resident reports parcel theft at their block and requests CCTV review.</td>
-              <td>In Progress</td>
-            </tr>
-
-
-            <tr class="age-white">
-              <td>1292-5052</td>
-              <td>Blk 57</td>
-              <td><strong>1</strong></td>
-              <td>Resident reports parcel theft at Block 57 and requests CCTV review.</td>
-              <td>Pending</td>
             </tr>
 
 
@@ -2887,7 +2931,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
 
 
     <div class="action-group">
-      <div class="action-group-title">Dirty Corridor/Lobby (1 open)</div>
+      <div class="action-group-title">Door &amp; Lock (1 open)</div>
       <div class="table-wrap">
         <table class="action-table">
           <thead>
@@ -2900,55 +2944,6 @@ I am writing to share my concerns regarding the poor visual impression and "</di
             </tr>
           </thead>
           <tbody>
-
-
-            <tr class="age-yellow">
-              <td>1292-4394</td>
-              <td>Blk 45</td>
-              <td><strong>86</strong></td>
-              <td>Blk 45 lift mirror foggy and uncleaned for a month.</td>
-              <td>In Progress</td>
-            </tr>
-
-
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-
-    <div class="action-group">
-      <div class="action-group-title">Door &amp; Lock (3 open)</div>
-      <div class="table-wrap">
-        <table class="action-table">
-          <thead>
-            <tr>
-              <th>Case ID</th>
-              <th>Block</th>
-              <th>Days Open</th>
-              <th>Summary</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-
-
-            <tr class="age-red">
-              <td>1292-3359</td>
-              <td>Blk 55</td>
-              <td><strong>315</strong></td>
-              <td>Issue spotted on ceiling of Blk 55 carpark lobby.</td>
-              <td>In Progress</td>
-            </tr>
-
-
-            <tr class="age-red">
-              <td>1292-3444</td>
-              <td>Blk 53</td>
-              <td><strong>292</strong></td>
-              <td>Algae forming around lighting point at Blk 53 lobby.</td>
-              <td>In Progress</td>
-            </tr>
 
 
             <tr class="age-white">
@@ -3208,37 +3203,6 @@ I am writing to share my concerns regarding the poor visual impression and "</di
 
 
     <div class="action-group">
-      <div class="action-group-title">High-Rise Littering (1 open)</div>
-      <div class="table-wrap">
-        <table class="action-table">
-          <thead>
-            <tr>
-              <th>Case ID</th>
-              <th>Block</th>
-              <th>Days Open</th>
-              <th>Summary</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-
-
-            <tr class="age-red">
-              <td>1292-4201</td>
-              <td>Blk 57</td>
-              <td><strong>122</strong></td>
-              <td>Ongoing knocking and dragging noises from unit above since morning.</td>
-              <td>In Progress</td>
-            </tr>
-
-
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-
-    <div class="action-group">
       <div class="action-group-title">In-Unit (1 open)</div>
       <div class="table-wrap">
         <table class="action-table">
@@ -3258,7 +3222,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
               <td>1292-4636</td>
               <td>Blk 47</td>
               <td><strong>52</strong></td>
-              <td>Blk 47 lobby ceiling leaking and mouldy after aircon leak.</td>
+              <td>Blk 47 lobby ceiling leaking and mouldy after aircon leak.<span style="background:var(--color-red);color:#fff;padding:1px 6px;border-radius:3px;font-size:10px;margin-left:6px">SAFETY</span></td>
               <td>In Progress</td>
             </tr>
 
@@ -3270,7 +3234,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
 
 
     <div class="action-group">
-      <div class="action-group-title">Landscaping (6 open)</div>
+      <div class="action-group-title">Landscaping (5 open)</div>
       <div class="table-wrap">
         <table class="action-table">
           <thead>
@@ -3283,15 +3247,6 @@ I am writing to share my concerns regarding the poor visual impression and "</di
             </tr>
           </thead>
           <tbody>
-
-
-            <tr class="age-red">
-              <td>1292-4216</td>
-              <td>Unknown</td>
-              <td><strong>119</strong></td>
-              <td>Plants behind villa uprooted months ago still not replaced, causing ponding.</td>
-              <td>In Progress</td>
-            </tr>
 
 
             <tr class="age-white">
@@ -3708,7 +3663,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
 
 
     <div class="action-group">
-      <div class="action-group-title">Noise Disturbance (12 open)</div>
+      <div class="action-group-title">Noise Disturbance (11 open)</div>
       <div class="table-wrap">
         <table class="action-table">
           <thead>
@@ -3721,15 +3676,6 @@ I am writing to share my concerns regarding the poor visual impression and "</di
             </tr>
           </thead>
           <tbody>
-
-
-            <tr class="age-red">
-              <td>1292-3419</td>
-              <td>Blk 61</td>
-              <td><strong>299</strong></td>
-              <td>Note posted to noisy neighbour about loud singing at Blk 61.</td>
-              <td>In Progress</td>
-            </tr>
 
 
             <tr class="age-yellow">
@@ -3838,7 +3784,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
 
 
     <div class="action-group">
-      <div class="action-group-title">Parking &amp; Traffic (10 open)</div>
+      <div class="action-group-title">Parking &amp; Traffic (8 open)</div>
       <div class="table-wrap">
         <table class="action-table">
           <thead>
@@ -3851,24 +3797,6 @@ I am writing to share my concerns regarding the poor visual impression and "</di
             </tr>
           </thead>
           <tbody>
-
-
-            <tr class="age-red">
-              <td>1292-3875</td>
-              <td>Blk 45</td>
-              <td><strong>201</strong></td>
-              <td>Main carpark entry stop line hidden by slope, needs better signage.</td>
-              <td>In Progress</td>
-            </tr>
-
-
-            <tr class="age-red">
-              <td>1292-4060</td>
-              <td>Unknown</td>
-              <td><strong>154</strong></td>
-              <td>Carpark floor damage reported for 4th time, still unresolved.</td>
-              <td>In Progress</td>
-            </tr>
 
 
             <tr class="age-white">
@@ -3969,7 +3897,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
               <td>1292-4585</td>
               <td>Blk 55</td>
               <td><strong>59</strong></td>
-              <td>Playground trampoline damaged, needs repair.</td>
+              <td>Playground trampoline damaged, needs repair.<span style="background:var(--color-red);color:#fff;padding:1px 6px;border-radius:3px;font-size:10px;margin-left:6px">SAFETY</span></td>
               <td>In Progress</td>
             </tr>
 
@@ -4064,19 +3992,19 @@ I am writing to share my concerns regarding the poor visual impression and "</di
 
 
             <tr class="age-white">
-              <td>1292-4798</td>
+              <td>1292-4801</td>
               <td>Blk 53</td>
-              <td><strong>27</strong></td>
-              <td>Maintenance and security issues as shown in photos.</td>
+              <td><strong>26</strong></td>
+              <td>Late-night activity at pavilion, security not enforcing.<span style="background:var(--color-red);color:#fff;padding:1px 6px;border-radius:3px;font-size:10px;margin-left:6px">SAFETY</span></td>
               <td>In Progress</td>
             </tr>
 
 
             <tr class="age-white">
-              <td>1292-4801</td>
+              <td>1292-4798</td>
               <td>Blk 53</td>
-              <td><strong>26</strong></td>
-              <td>Late-night activity at pavilion, security not enforcing.</td>
+              <td><strong>27</strong></td>
+              <td>Maintenance and security issues as shown in photos.</td>
               <td>In Progress</td>
             </tr>
 
@@ -4155,7 +4083,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
 
 
     <div class="action-group">
-      <div class="action-group-title">Smoking (6 open)</div>
+      <div class="action-group-title">Smoking (5 open)</div>
       <div class="table-wrap">
         <table class="action-table">
           <thead>
@@ -4170,20 +4098,11 @@ I am writing to share my concerns regarding the poor visual impression and "</di
           <tbody>
 
 
-            <tr class="age-red">
-              <td>1292-3494</td>
-              <td>Blk 47</td>
-              <td><strong>285</strong></td>
-              <td>Excessive smoking smell from neighbour affecting multiple units.</td>
-              <td>In Progress</td>
-            </tr>
-
-
             <tr class="age-yellow">
               <td>1292-4522</td>
               <td>Blk 59</td>
               <td><strong>73</strong></td>
-              <td>Balcony smoking affecting asthma patient at home.</td>
+              <td>Balcony smoking affecting asthma patient at home.<span style="background:var(--color-red);color:#fff;padding:1px 6px;border-radius:3px;font-size:10px;margin-left:6px">SAFETY</span></td>
               <td>In Progress</td>
             </tr>
 
@@ -4192,16 +4111,7 @@ I am writing to share my concerns regarding the poor visual impression and "</di
               <td>1292-4575</td>
               <td>Blk 53</td>
               <td><strong>62</strong></td>
-              <td>Neighbor repeatedly banging loudly on balcony railing.</td>
-              <td>In Progress</td>
-            </tr>
-
-
-            <tr class="age-white">
-              <td>1292-4900</td>
-              <td>Blk 61</td>
-              <td><strong>20</strong></td>
-              <td>Neighbour smoking at balcony causing smoke drift to adjacent unit.</td>
+              <td>Neighbor repeatedly banging loudly on balcony railing.<span style="background:var(--color-red);color:#fff;padding:1px 6px;border-radius:3px;font-size:10px;margin-left:6px">SAFETY</span></td>
               <td>In Progress</td>
             </tr>
 
@@ -4210,6 +4120,15 @@ I am writing to share my concerns regarding the poor visual impression and "</di
               <td>1292-4973</td>
               <td>Blk 59</td>
               <td><strong>11</strong></td>
+              <td>Neighbour smoking at balcony causing smoke drift to adjacent unit.<span style="background:var(--color-red);color:#fff;padding:1px 6px;border-radius:3px;font-size:10px;margin-left:6px">SAFETY</span></td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-white">
+              <td>1292-4900</td>
+              <td>Blk 61</td>
+              <td><strong>20</strong></td>
               <td>Neighbour smoking at balcony causing smoke drift to adjacent unit.</td>
               <td>In Progress</td>
             </tr>
@@ -4247,19 +4166,19 @@ I am writing to share my concerns regarding the poor visual impression and "</di
 
 
             <tr class="age-yellow">
-              <td>1292-4643</td>
-              <td>Blk 45</td>
-              <td><strong>51</strong></td>
-              <td>Blk 45 B2 carpark lobby buzzing noise and broken tiles.</td>
+              <td>1292-4714</td>
+              <td>Blk 47</td>
+              <td><strong>41</strong></td>
+              <td>B1 lobby ceiling plaster sagging and water-damaged.<span style="background:var(--color-red);color:#fff;padding:1px 6px;border-radius:3px;font-size:10px;margin-left:6px">SAFETY</span></td>
               <td>In Progress</td>
             </tr>
 
 
             <tr class="age-yellow">
-              <td>1292-4714</td>
-              <td>Blk 47</td>
-              <td><strong>41</strong></td>
-              <td>B1 lobby ceiling plaster sagging and water-damaged.</td>
+              <td>1292-4643</td>
+              <td>Blk 45</td>
+              <td><strong>51</strong></td>
+              <td>Blk 45 B2 carpark lobby buzzing noise and broken tiles.</td>
               <td>In Progress</td>
             </tr>
 
@@ -4278,37 +4197,6 @@ I am writing to share my concerns regarding the poor visual impression and "</di
               <td>Blk 45</td>
               <td><strong>6</strong></td>
               <td>Crack line found in room wall; inspection requested.</td>
-              <td>In Progress</td>
-            </tr>
-
-
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-
-    <div class="action-group">
-      <div class="action-group-title">Water &amp; Plumbing (Other) (1 open)</div>
-      <div class="table-wrap">
-        <table class="action-table">
-          <thead>
-            <tr>
-              <th>Case ID</th>
-              <th>Block</th>
-              <th>Days Open</th>
-              <th>Summary</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-
-
-            <tr class="age-red">
-              <td>1292-4213</td>
-              <td>Blk 47</td>
-              <td><strong>120</strong></td>
-              <td>Blk 47 DV room leaking with water ponding outside.</td>
               <td>In Progress</td>
             </tr>
 
