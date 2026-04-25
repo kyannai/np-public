@@ -1,0 +1,2829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Normanton Park -- Feedback Analysis Dashboard</title>
+<style>
+:root {
+  --color-bg: #f8f9fa;
+  --color-white: #ffffff;
+  --color-text: #2c3e50;
+  --color-text-light: #5a6c7d;
+  --color-primary: #2c5282;
+  --color-primary-light: #ebf4ff;
+  --color-border: #d1d9e0;
+  --color-border-light: #e8ecf0;
+  --color-green: #276749;
+  --color-green-bg: #c6f6d5;
+  --color-green-border: #9ae6b4;
+  --color-yellow: #975a16;
+  --color-yellow-bg: #fefcbf;
+  --color-yellow-border: #f6e05e;
+  --color-red: #9b2c2c;
+  --color-red-bg: #fed7d7;
+  --color-red-border: #fc8181;
+  --sidebar-width: 240px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed; top: 0; left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  background: var(--color-white);
+  border-right: 1px solid var(--color-border);
+  overflow-y: auto;
+  z-index: 100;
+  padding: 24px 0;
+}
+.sidebar-header {
+  padding: 0 20px 16px;
+  border-bottom: 1px solid var(--color-border-light);
+  margin-bottom: 12px;
+}
+.sidebar-header h2 {
+  font-size: 14px; font-weight: 700;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.sidebar-header p {
+  font-size: 11px; color: var(--color-text-light); margin-top: 4px;
+}
+.sidebar nav a {
+  display: block;
+  padding: 7px 20px;
+  color: var(--color-text-light);
+  text-decoration: none;
+  font-size: 13px;
+  border-left: 3px solid transparent;
+  transition: all 0.15s ease;
+}
+.sidebar nav a:hover, .sidebar nav a.active {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border-left-color: var(--color-primary);
+}
+.sidebar nav a.sub {
+  padding-left: 36px; font-size: 12px;
+}
+.sidebar .back-link {
+  display: block;
+  padding: 10px 20px;
+  margin-top: 16px;
+  border-top: 1px solid var(--color-border-light);
+  color: var(--color-text-light);
+  text-decoration: none;
+  font-size: 12px;
+}
+.sidebar .back-link:hover {
+  color: var(--color-primary);
+}
+
+/* Main content */
+.main {
+  margin-left: var(--sidebar-width);
+  max-width: 1200px;
+  padding: 40px 48px 80px;
+}
+.doc-header {
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid var(--color-primary);
+}
+.doc-header h1 {
+  font-size: 28px; font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+.doc-header .meta {
+  font-size: 13px; color: var(--color-text-light);
+}
+.doc-header .meta span { margin-right: 24px; }
+
+section { margin-bottom: 48px; }
+h2 {
+  font-size: 22px; font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 16px; padding-top: 8px;
+}
+h3 {
+  font-size: 17px; font-weight: 600;
+  color: var(--color-text);
+  margin-top: 24px; margin-bottom: 12px;
+}
+p { margin-bottom: 12px; }
+
+/* Summary cards */
+.cards-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+}
+.card .value {
+  font-size: 32px; font-weight: 700;
+  color: var(--color-primary);
+}
+.card .label {
+  font-size: 12px; color: var(--color-text-light);
+  text-transform: uppercase; letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+.card .trend {
+  font-size: 13px; margin-top: 6px; font-weight: 600;
+}
+.card .trend.up { color: var(--color-red); }
+.card .trend.down { color: var(--color-green); }
+.card .trend.flat { color: var(--color-text-light); }
+
+/* Health assessment */
+.health-assessment {
+  background: var(--color-primary-light);
+  border-left: 4px solid var(--color-primary);
+  padding: 16px 20px;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 24px;
+  font-size: 14px; line-height: 1.7;
+}
+
+/* Sparkline */
+.sparkline-row {
+  display: flex; align-items: flex-end; gap: 3px;
+  height: 40px; margin-top: 12px;
+}
+.sparkline-bar {
+  flex: 1; background: var(--color-primary);
+  border-radius: 2px 2px 0 0; min-width: 4px;
+  opacity: 0.7;
+}
+
+/* Quote cards */
+.quote-card {
+  background: var(--color-white);
+  border-left: 4px solid var(--color-green-border);
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  border-radius: 0 6px 6px 0;
+  border: 1px solid var(--color-border-light);
+  border-left: 4px solid var(--color-green-border);
+}
+.quote-text {
+  font-style: italic;
+  font-size: 14px;
+  color: var(--color-text);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+.quote-meta {
+  font-size: 12px;
+  color: var(--color-text-light);
+}
+
+/* Sub-issue cards */
+.status-group { margin-bottom: 32px; }
+.status-group-header {
+  font-size: 14px; font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 8px 0;
+  border-bottom: 2px solid var(--color-border);
+  margin-bottom: 16px;
+}
+.status-group-header.active { color: var(--color-red); border-bottom-color: var(--color-red); }
+.status-group-header.monitoring { color: var(--color-yellow); border-bottom-color: var(--color-yellow); }
+.status-group-header.improving { color: var(--color-green); border-bottom-color: var(--color-green); }
+
+details.sub-issue {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+details.sub-issue.active { border-left: 4px solid var(--color-red); }
+details.sub-issue.monitoring { border-left: 4px solid var(--color-yellow); }
+details.sub-issue.improving { border-left: 4px solid var(--color-green); }
+
+details.sub-issue summary {
+  padding: 14px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+details.sub-issue summary::-webkit-details-marker { display: none; }
+details.sub-issue summary::before {
+  content: "\25B6";
+  font-size: 10px;
+  color: var(--color-text-light);
+  transition: transform 0.2s;
+}
+details.sub-issue[open] summary::before {
+  transform: rotate(90deg);
+}
+details.sub-issue .detail-body {
+  padding: 0 20px 16px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.detail-stats {
+  font-size: 12px;
+  color: var(--color-text-light);
+  margin-left: auto;
+  white-space: nowrap;
+}
+.detail-label {
+  font-weight: 600; color: var(--color-text);
+  margin-top: 10px; margin-bottom: 4px;
+  font-size: 13px;
+}
+.detail-text {
+  color: var(--color-text-light);
+  font-size: 13px;
+}
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge-red { background: var(--color-red-bg); color: var(--color-red); }
+.badge-yellow { background: var(--color-yellow-bg); color: var(--color-yellow); }
+.badge-green { background: var(--color-green-bg); color: var(--color-green); }
+
+/* Vendor table */
+.table-wrap {
+  overflow-x: auto;
+  margin-bottom: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+}
+table {
+  width: 100%; border-collapse: collapse; font-size: 13px;
+}
+thead th {
+  background: var(--color-primary);
+  color: #fff; font-weight: 600;
+  text-align: left;
+  padding: 10px 12px; white-space: nowrap;
+}
+tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--color-border-light);
+  vertical-align: top;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #f5f7fa; }
+
+.vendor-action {
+  background: var(--color-yellow-bg);
+  border-left: 4px solid var(--color-yellow-border);
+  padding: 10px 16px;
+  margin-bottom: 8px;
+  border-radius: 0 4px 4px 0;
+  font-size: 13px;
+}
+
+/* Action list */
+.action-group { margin-bottom: 20px; }
+.action-group-title {
+  font-size: 14px; font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+.action-table td { font-size: 12px; padding: 8px 10px; }
+.action-table .age-red { background: #fed7d7; }
+.action-table .age-yellow { background: #fefcbf; }
+.action-table .age-white { background: var(--color-white); }
+
+/* Print */
+@media print {
+  .sidebar { display: none; }
+  .main { margin-left: 0; padding: 20px; max-width: 100%; }
+  details.sub-issue { break-inside: avoid; }
+  details.sub-issue[open] { break-inside: auto; }
+  .no-print { display: none; }
+}
+
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; padding: 20px; }
+}
+</style>
+</head>
+<body><a href="https://kyannai.github.io/np-public/" class="back-to-home" style="position:fixed;top:12px;right:16px;z-index:200;font-size:13px;padding:6px 14px;background:var(--color-primary,#2c5282);color:#fff;border-radius:4px;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.2);">Back to Home</a>
+
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h2>Feedback Dashboard</h2>
+    <p>Normanton Park (MCST 4932)</p>
+  </div>
+  <nav>
+    <a href="#health">1. Estate Health Score</a>
+    <a href="#wins">2. Team Wins</a>
+    <a href="#insights">3. Insights &amp; Recommendations</a>
+    <a class="sub" href="#active-issues">Active Issues</a>
+    <a class="sub" href="#monitoring-issues">Monitoring</a>
+    <a class="sub" href="#improving-issues">Improving</a>
+    <a href="#vendors">4. Vendor Management</a>
+    <a href="#actions">5. Action List</a>
+  </nav>
+  <a class="back-link" href="https://kyannai.github.io/np-public/">&larr; Back to Home</a>
+</div>
+
+
+<div class="main">
+  <div class="doc-header">
+    <h1>Feedback Analysis Dashboard</h1>
+    <div class="meta">
+      <span>Normanton Park (MCST 4932)</span>
+      <span>Period: Apr 2025 -- Mar 2026 (12 months)</span>
+      <span>Generated: 25 Apr 2026</span>
+    </div>
+  </div>
+
+
+  <section id="health">
+    <h2>1. Estate Health Score</h2>
+    <div class="cards-row">
+      <div class="card">
+        <div class="value">1,844</div>
+        <div class="label">Total Cases (12 months)</div>
+        <div class="sparkline-row">
+
+          <div class="sparkline-bar" style="height:30px" title="178"></div>
+          <div class="sparkline-bar" style="height:27px" title="158"></div>
+          <div class="sparkline-bar" style="height:19px" title="115"></div>
+          <div class="sparkline-bar" style="height:24px" title="145"></div>
+          <div class="sparkline-bar" style="height:25px" title="146"></div>
+          <div class="sparkline-bar" style="height:21px" title="127"></div>
+          <div class="sparkline-bar" style="height:24px" title="144"></div>
+          <div class="sparkline-bar" style="height:20px" title="117"></div>
+          <div class="sparkline-bar" style="height:25px" title="148"></div>
+          <div class="sparkline-bar" style="height:28px" title="164"></div>
+          <div class="sparkline-bar" style="height:33px" title="193"></div>
+          <div class="sparkline-bar" style="height:36px" title="209"></div>
+
+        </div>
+      </div>
+      <div class="card">
+        <div class="value">209</div>
+        <div class="label">Mar 2026 vs 3-mo Avg (189)</div>
+        <div class="trend up">+11% &#9650;</div>
+      </div>
+      <div class="card">
+        <div class="value">3.2</div>
+        <div class="label">Avg Resolution (days)</div>
+        <div class="trend down">-83% vs H1 &#9660;</div>
+      </div>
+      <div class="card">
+        <div class="value">58</div>
+        <div class="label">Currently Open Cases</div>
+      </div>
+      <div class="card">
+        <div class="value">49</div>
+        <div class="label">Recurring Sub-Issues (3+ months)</div>
+      </div>
+    </div>
+    <div class="health-assessment">
+      Estate feedback is increasing in volume. Playground &amp; Kids is the top growing issue area (+250% from H1 to H2). Pool &amp; Water Features shows the most improvement (-75%). Key concern: Noise &amp; Neighbour with 13 open cases requiring attention.
+    </div>
+  </section>
+
+
+  <section id="wins">
+    <h2>2. Team Wins (Positive Feedback)</h2>
+
+
+    <div class="quote-card">
+      <div class="quote-text">"Thank [staff].
+I am looking forward to this"</div>
+      <div class="quote-meta">-- Resident, Blk 51, Mar 2026 | Cluster: Intercom &amp; Smart Home | Rating: 5/5</div>
+    </div>
+
+
+    <div class="quote-card">
+      <div class="quote-text">"Thank [staff] is clear 👍"</div>
+      <div class="quote-meta">-- Resident, Blk 47, Mar 2026 | Cluster: Parking &amp; Traffic | Rating: 5/5</div>
+    </div>
+
+
+    <div class="quote-card">
+      <div class="quote-text">"Thank [staff] - Appreciate the Clear Response 👍"</div>
+      <div class="quote-meta">-- Resident, Blk 47, Mar 2026 | Cluster: Lighting | Rating: 5/5</div>
+    </div>
+
+
+    <div class="quote-card">
+      <div class="quote-text">"Thank [staff] ., I notice is removed."</div>
+      <div class="quote-meta">-- Resident, Blk 47, Mar 2026 | Cluster: Cleanliness | Rating: 5/5</div>
+    </div>
+
+
+    <div class="quote-card">
+      <div class="quote-text">"yes was fixed shortly after feedback. great job team!"</div>
+      <div class="quote-meta">-- Resident, Blk 51, Feb 2026 | Cluster: Rubbish Chute | Rating: 5/5</div>
+    </div>
+
+
+    <div class="quote-card">
+      <div class="quote-text">"thank [staff] for the swift response."</div>
+      <div class="quote-meta">-- Resident, Blk 57, Feb 2026 | Cluster: Rubbish Chute | Rating: 5/5</div>
+    </div>
+
+
+    <div class="quote-card">
+      <div class="quote-text">"grateful for the prompt assistance as always"</div>
+      <div class="quote-meta">-- Resident, Blk 47, Feb 2026 | Cluster: Security &amp; Access | Rating: 5/5</div>
+    </div>
+
+
+    <div class="quote-card">
+      <div class="quote-text">"Thanks [staff] your prompt actions taken."</div>
+      <div class="quote-meta">-- Resident, Blk 59, Feb 2026 | Cluster: Lift Issues | Rating: 5/5</div>
+    </div>
+
+
+    <div class="quote-card">
+      <div class="quote-text">"Thank [staff] very much for your prompt action: cleaning the recycle chute and sticking up the notice! ❤️ Have a very blessed new year!"</div>
+      <div class="quote-meta">-- Resident, Blk 49, Dec 2025 | Cluster: Rubbish Chute | Rating: 5/5</div>
+    </div>
+
+
+    <div class="quote-card">
+      <div class="quote-text">"thank [staff] for quick response"</div>
+      <div class="quote-meta">-- Resident, Blk 45, Dec 2025 | Cluster: Playground &amp; Kids | Rating: 5/5</div>
+    </div>
+
+
+    <div class="quote-card">
+      <div class="quote-text">"Thank [staff] very much for your speedy and helpful response!"</div>
+      <div class="quote-meta">-- Resident, Blk 61, Nov 2025 | Cluster: Noise &amp; Neighbour | Rating: 5/5</div>
+    </div>
+
+  </section>
+
+  <section id="insights">
+    <h2>3. Insights &amp; Recommendations</h2>
+
+
+    <div class="status-group" id="active-issues">
+      <div class="status-group-header active">
+        Active (Root Cause Unresolved) -- 38 sub-issues
+      </div>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Gym Equipment -- Estate Wide
+          <span class="detail-stats">
+            81 cases | 7 open | Recurring 11/12 months | Active Lifestyle Pte Ltd
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;for your information&quot;. No concrete resolution actions mentioned.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 11 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Escalate to Active Lifestyle Pte Ltd with documented recurrence data. Set concrete SLA with penalty clause. Request vendor root-cause analysis within 14 days.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Noise Disturbance -- Estate Wide
+          <span class="detail-stats">
+            64 cases | 6 open | Recurring 12/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 9d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. No concrete resolution actions mentioned.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 12 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Review internal process for handling noise disturbance cases. Develop specific action protocol instead of template responses. Assign ownership to a specific team member.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Dirty Common Area -- Estate Wide
+          <span class="detail-stats">
+            35 cases | 4 open | Recurring 11/12 months | ABM Century Pte Ltd
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: fixed, cleared, cleaned. Common phrases: &quot;for your information&quot; / &quot;we refer to your feedback&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">ONGOING -- 4 cases remain open. Issue persists across 11 months. Vendor response appears slow.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Prioritize clearing 4 open cases. Schedule vendor review meeting. Set target closure within 14 days.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Wall &amp; Ceiling -- Estate Wide
+          <span class="detail-stats">
+            20 cases | 4 open | Recurring 9/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 4d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: removed, fixed, replaced. Common phrases: &quot;thank you for your feedback&quot; / &quot;for your information&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">ONGOING -- 4 cases remain open. Issue persists across 9 months. Needs operational attention.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Prioritize clearing 4 open cases. Assign dedicated resource. Set target closure within 14 days.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Smoking -- Estate Wide
+          <span class="detail-stats">
+            72 cases | 3 open | Recurring 11/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 5d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;we have assigned&quot; / &quot;for your information&quot; / &quot;we refer to your feedback&quot;. Some action words found: cleared.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 11 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Review internal process for handling smoking cases. Develop specific action protocol instead of template responses. Assign ownership to a specific team member.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Crime &amp; Police -- Estate Wide
+          <span class="detail-stats">
+            28 cases | 3 open | Recurring 11/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 6d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;we have informed&quot; / &quot;we understand your concern&quot;. No concrete resolution actions mentioned.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 11 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Review internal process for handling crime &amp; police cases. Develop specific action protocol instead of template responses. Assign ownership to a specific team member.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Parking &amp; Traffic -- Estate Wide
+          <span class="detail-stats">
+            89 cases | 2 open | Recurring 12/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 4d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;for your information&quot; / &quot;we refer to your feedback&quot;. No concrete resolution actions mentioned.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 12 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Review internal process for handling parking &amp; traffic cases. Develop specific action protocol instead of template responses. Assign ownership to a specific team member.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Gate &amp; Door Access -- Estate Wide
+          <span class="detail-stats">
+            73 cases | 2 open | Recurring 12/12 months | Omega Security Services
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 7d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;we refer to your feedback&quot; / &quot;thank you for your feedback&quot; / &quot;we understand your concern&quot;. Some action words found: resolved.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 12 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Escalate to Omega Security Services with documented recurrence data. Set concrete SLA with penalty clause. Request vendor root-cause analysis within 14 days.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Animal Issues -- Estate Wide
+          <span class="detail-stats">
+            72 cases | 2 open | Recurring 12/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: cleared. Common phrases: &quot;thank you for your feedback&quot; / &quot;we understand your concern&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 12 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Review process efficiency.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Building Maintenance (Other) -- Estate Wide
+          <span class="detail-stats">
+            49 cases | 2 open | Recurring 11/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: fixed, completed, replaced. Common phrases: &quot;for your information&quot; / &quot;we refer to your feedback&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 11 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Review process efficiency.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Bicycle Parking -- Estate Wide
+          <span class="detail-stats">
+            25 cases | 2 open | Recurring 10/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 2d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: removed, completed, resolved. Common phrases: &quot;thank you for your feedback&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 10 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Review process efficiency.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Security &amp; Access (Other) -- Estate Wide
+          <span class="detail-stats">
+            23 cases | 2 open | Recurring 9/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;for your information&quot; / &quot;we have assigned&quot; / &quot;we refer to your feedback&quot;. Some action words found: removed, replaced.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 9 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Review internal process for handling security &amp; access (other) cases. Develop specific action protocol instead of template responses. Assign ownership to a specific team member.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Dirty Corridor/Lobby -- Estate Wide
+          <span class="detail-stats">
+            118 cases | 1 open | Recurring 12/12 months | ABM Century Pte Ltd
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: removed, completed, cleared. Common phrases: &quot;we refer to your feedback&quot; / &quot;we have assigned&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 12 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Ensure vendor SLA compliance.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Admin &amp; General (Other) -- Estate Wide
+          <span class="detail-stats">
+            67 cases | 1 open | Recurring 12/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. No concrete resolution actions mentioned.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 12 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Review internal process for handling admin &amp; general (other) cases. Develop specific action protocol instead of template responses. Assign ownership to a specific team member.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Lift Issues (Other) -- Estate Wide
+          <span class="detail-stats">
+            45 cases | 1 open | Recurring 12/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 2d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: fixed, replaced, removed. Common phrases: &quot;thank you for your feedback&quot; / &quot;for your information&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 12 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Review process efficiency.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          In-Unit -- Estate Wide
+          <span class="detail-stats">
+            29 cases | 1 open | Recurring 11/12 months | MK Jetting
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 10d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: removed, completed, rectified. Common phrases: &quot;we refer to your feedback&quot; / &quot;please be informed&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 11 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Ensure vendor SLA compliance.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          HiLife System -- Estate Wide
+          <span class="detail-stats">
+            23 cases | 1 open | Recurring 11/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. Some action words found: resolved.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 11 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Review internal process for handling hilife system cases. Develop specific action protocol instead of template responses. Assign ownership to a specific team member.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Lift Door -- Estate Wide
+          <span class="detail-stats">
+            22 cases | 1 open | Recurring 10/12 months | Kone
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 3d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;we have assigned&quot; / &quot;for your information&quot; / &quot;we refer to your feedback&quot;. Some action words found: replaced.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 10 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Escalate to Kone with documented recurrence data. Set concrete SLA with penalty clause. Request vendor root-cause analysis within 14 days.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Playground &amp; Kids -- Estate Wide
+          <span class="detail-stats">
+            21 cases | 1 open | Recurring 8/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 3d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;we have informed&quot; / &quot;thank you for your feedback&quot;. Some action words found: removed.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 8 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Review internal process for handling playground &amp; kids cases. Develop specific action protocol instead of template responses. Assign ownership to a specific team member.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Mobile Signal -- Estate Wide
+          <span class="detail-stats">
+            9 cases | 1 open | Recurring 4/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: completed. Common phrases: &quot;we refer to your feedback&quot; / &quot;for your information&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 4 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Review process efficiency.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Ceiling Seepage -- Blk 57, Blk 53
+          <span class="detail-stats">
+            8 cases | 1 open | Recurring 7/12 months | MK Jetting
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 29d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;. No concrete resolution actions mentioned.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 7 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Escalate to MK Jetting with documented recurrence data. Set concrete SLA with penalty clause. Request vendor root-cause analysis within 14 days.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Cooking Smell -- Estate Wide
+          <span class="detail-stats">
+            4 cases | 1 open | Recurring 4/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 3d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Mixed response patterns with varied content.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 4 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Review process efficiency.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Rubbish Chute -- Estate Wide
+          <span class="detail-stats">
+            147 cases | 0 open | Recurring 12/12 months | Cora Environment / Stream Environment
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: cleared. Common phrases: &quot;we refer to your feedback&quot; / &quot;we have assigned&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 12 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Ensure vendor SLA compliance.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Lift Malfunction -- Estate Wide
+          <span class="detail-stats">
+            56 cases | 0 open | Recurring 12/12 months | Kone
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: completed, replaced. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have assigned&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 12 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Ensure vendor SLA compliance.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Intercom &amp; Smart Home -- Estate Wide
+          <span class="detail-stats">
+            46 cases | 0 open | Recurring 11/12 months | Hilife
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;please be informed&quot; / &quot;we refer to your feedback&quot;. No concrete resolution actions mentioned.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 11 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Escalate to Hilife with documented recurrence data. Set concrete SLA with penalty clause. Request vendor root-cause analysis within 14 days.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Facility Booking -- Estate Wide
+          <span class="detail-stats">
+            41 cases | 0 open | Recurring 12/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. No concrete resolution actions mentioned.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 12 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Review internal process for handling facility booking cases. Develop specific action protocol instead of template responses. Assign ownership to a specific team member.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Lighting -- Estate Wide
+          <span class="detail-stats">
+            37 cases | 0 open | Recurring 11/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 5d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. Some action words found: rectified.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 11 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Review internal process for handling lighting cases. Develop specific action protocol instead of template responses. Assign ownership to a specific team member.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Corridor Items -- Estate Wide
+          <span class="detail-stats">
+            33 cases | 0 open | Recurring 11/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;for your information&quot; / &quot;we refer to your feedback&quot;. Some action words found: cleared.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 11 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Review internal process for handling corridor items cases. Develop specific action protocol instead of template responses. Assign ownership to a specific team member.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Common Area Obstruction (Other) -- Estate Wide
+          <span class="detail-stats">
+            26 cases | 0 open | Recurring 10/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: removed, cleared. Common phrases: &quot;for your information&quot; / &quot;thank you for your feedback&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 10 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Review process efficiency.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Access Card -- Estate Wide
+          <span class="detail-stats">
+            25 cases | 0 open | Recurring 11/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 0d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: installed, completed.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 11 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Review process efficiency.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Bulky Waste -- Blk 47, Blk 61
+          <span class="detail-stats">
+            23 cases | 0 open | Recurring 8/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 4d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;. Some action words found: removed.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 8 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Review internal process for handling bulky waste cases. Develop specific action protocol instead of template responses. Assign ownership to a specific team member.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Lift Noise -- Blk 53, Blk 45
+          <span class="detail-stats">
+            16 cases | 0 open | Recurring 7/12 months | Kone
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 2d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: completed, replaced. Common phrases: &quot;for your information&quot; / &quot;we have informed&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 7 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Ensure vendor SLA compliance.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Fire Safety -- Estate Wide
+          <span class="detail-stats">
+            15 cases | 0 open | Recurring 6/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;we understand your concern&quot; / &quot;please be informed&quot; / &quot;thank you for your feedback&quot;. Some action words found: replaced.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 6 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Review internal process for handling fire safety cases. Develop specific action protocol instead of template responses. Assign ownership to a specific team member.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Cleanliness (Other) -- Estate Wide
+          <span class="detail-stats">
+            13 cases | 0 open | Recurring 8/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: cleared, completed, resolved. Common phrases: &quot;thank you for your feedback&quot; / &quot;please be informed&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 8 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Review process efficiency.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Common Area Leak -- Blk 47, Blk 51
+          <span class="detail-stats">
+            9 cases | 0 open | Recurring 7/12 months | MK Jetting
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: cleared, cleaned. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 7 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Ensure vendor SLA compliance.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Dirty Lift -- Estate Wide
+          <span class="detail-stats">
+            9 cases | 0 open | Recurring 7/12 months | ABM Century Pte Ltd
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: completed, cleared, cleaned. Common phrases: &quot;we have assigned&quot; / &quot;for your information&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 7 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Ensure vendor SLA compliance.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Signage -- Estate Wide
+          <span class="detail-stats">
+            9 cases | 0 open | Recurring 6/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. Some action words found: removed, completed.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">NOT RESOLVED -- Same response pattern for 6 months. Template replies suggest administrative closure without root-cause fix. Cases continue to recur.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Review internal process for handling signage cases. Develop specific action protocol instead of template responses. Assign ownership to a specific team member.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue active">
+        <summary>
+          Renovation -- Estate Wide
+          <span class="detail-stats">
+            7 cases | 0 open | Recurring 5/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Common phrases: &quot;thank you for your feedback&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">PARTIALLY ADDRESSED -- Recurring over 5 months. Some cases resolved but new cases continue to appear. Root cause may not be fully addressed.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Continue current approach but track recurrence monthly. Review process efficiency.</div>
+        </div>
+      </details>
+
+    </div>
+
+    <div class="status-group" id="improving-issues">
+      <div class="status-group-header improving">
+        Improving (Trending Down) -- 11 sub-issues
+      </div>
+
+
+      <details class="sub-issue improving">
+        <summary>
+          Door &amp; Lock -- Estate Wide
+          <span class="detail-stats">
+            66 cases | 2 open | Recurring 12/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 6d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;we refer to your feedback&quot; / &quot;please be informed&quot; / &quot;thank you for your feedback&quot;. Some action words found: replaced.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">IMPROVING -- Cases down 41% from H1 to H2. MA interventions showing results. Continue monitoring.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Maintain current measures. Document what worked for replication. Review in 3 months.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue improving">
+        <summary>
+          Pool &amp; Water Features -- Estate Wide
+          <span class="detail-stats">
+            62 cases | 2 open | Recurring 11/12 months | Wateronic
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 5d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;we have assigned&quot; / &quot;for your information&quot;. Some action words found: removed, cleared.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">IMPROVING -- Cases down 75% from H1 to H2. Vendor actions appear effective. Continue monitoring.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Maintain current measures. Document what worked for replication. Review in 3 months.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue improving">
+        <summary>
+          Noise &amp; Neighbour (Other) -- Estate Wide
+          <span class="detail-stats">
+            30 cases | 2 open | Recurring 10/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 12d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;for your information&quot; / &quot;we refer to your feedback&quot;. Some action words found: installed.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">IMPROVING -- Cases down 46% from H1 to H2. MA interventions showing results. Continue monitoring.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Maintain current measures. Document what worked for replication. Review in 3 months.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue improving">
+        <summary>
+          Landscaping -- Estate Wide
+          <span class="detail-stats">
+            29 cases | 1 open | Recurring 11/12 months | Nature Landscape / Spring Landscape
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 2d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;please be informed&quot; / &quot;we refer to your feedback&quot; / &quot;thank you for your feedback&quot;. Some action words found: completed, repaired.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">IMPROVING -- Cases down 45% from H1 to H2. Vendor actions appear effective. Continue monitoring.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Maintain current measures. Document what worked for replication. Review in 3 months.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue improving">
+        <summary>
+          High-Rise Littering -- Estate Wide
+          <span class="detail-stats">
+            20 cases | 1 open | Recurring 8/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 14d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Mixed response patterns with varied content.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">IMPROVING -- Cases down 40% from H1 to H2. MA interventions showing results. Continue monitoring.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Maintain current measures. Document what worked for replication. Review in 3 months.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue improving">
+        <summary>
+          Water &amp; Plumbing (Other) -- Estate Wide
+          <span class="detail-stats">
+            12 cases | 1 open | Recurring 7/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 29d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: completed, replaced, rectified. Common phrases: &quot;thank you for your feedback&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">IMPROVING -- Cases down 83% from H1 to H2. MA interventions showing results. Continue monitoring.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Maintain current measures. Document what worked for replication. Review in 3 months.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue improving">
+        <summary>
+          Pest Control -- Estate Wide
+          <span class="detail-stats">
+            61 cases | 0 open | Recurring 12/12 months | Elite Pest Management
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 3d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;for your information&quot; / &quot;we refer to your feedback&quot;. Some action words found: cleared.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">IMPROVING -- Cases down 31% from H1 to H2. Vendor actions appear effective. Continue monitoring.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Maintain current measures. Document what worked for replication. Review in 3 months.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue improving">
+        <summary>
+          Electrical -- Estate Wide
+          <span class="detail-stats">
+            49 cases | 0 open | Recurring 12/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 2d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: completed, replaced. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have assigned&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">IMPROVING -- Cases down 70% from H1 to H2. MA interventions showing results. Continue monitoring.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Maintain current measures. Document what worked for replication. Review in 3 months.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue improving">
+        <summary>
+          Security Guard -- Estate Wide
+          <span class="detail-stats">
+            14 cases | 0 open | Recurring 9/12 months | Omega Security Services
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. No concrete resolution actions mentioned.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">IMPROVING -- Cases down 60% from H1 to H2. Vendor actions appear effective. Continue monitoring.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Maintain current measures. Document what worked for replication. Review in 3 months.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue improving">
+        <summary>
+          Others -- Estate Wide
+          <span class="detail-stats">
+            6 cases | 0 open | Recurring 6/12 months | MA Internal
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 1d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. No concrete resolution actions mentioned.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">IMPROVING -- Cases down 50% from H1 to H2. MA interventions showing results. Continue monitoring.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Maintain current measures. Document what worked for replication. Review in 3 months.</div>
+        </div>
+      </details>
+
+
+      <details class="sub-issue improving">
+        <summary>
+          Drainage -- Blk 53, Blk 55
+          <span class="detail-stats">
+            4 cases | 0 open | Recurring 4/12 months | MK Jetting
+          </span>
+        </summary>
+        <div class="detail-body">
+
+          <p class="detail-text">Avg 2d resolution</p>
+
+          <div class="detail-label">MA Reply Pattern</div>
+          <div class="detail-text">Responses include action references: replaced, cleaned. Common phrases: &quot;we have informed&quot;.</div>
+          <div class="detail-label">Assessment</div>
+          <div class="detail-text">IMPROVING -- Cases down 50% from H1 to H2. Vendor actions appear effective. Continue monitoring.</div>
+          <div class="detail-label">Recommendation</div>
+          <div class="detail-text">Maintain current measures. Document what worked for replication. Review in 3 months.</div>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <section id="vendors">
+    <h2>4. Vendor Management</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Vendor</th>
+            <th>Clusters Managed</th>
+            <th>Total Cases</th>
+            <th>Closed %</th>
+            <th>Avg Days to Close</th>
+            <th>Trend (H2 vs H1)</th>
+          </tr>
+        </thead>
+        <tbody>
+
+
+          <tr>
+            <td><strong>Active Lifestyle Pte Ltd</strong></td>
+            <td>Gym Equipment</td>
+            <td>81</td>
+            <td style="">91%</td>
+            <td>1.3</td>
+            <td style="color:var(--color-red)">+169%</td>
+          </tr>
+
+
+          <tr>
+            <td><strong>MK Jetting</strong></td>
+            <td>Water &amp; Plumbing</td>
+            <td>62</td>
+            <td style="">95%</td>
+            <td>13.6</td>
+            <td style="color:var(--color-green)">-35%</td>
+          </tr>
+
+
+          <tr>
+            <td><strong>Omega Security Services</strong></td>
+            <td>Security &amp; Access</td>
+            <td>112</td>
+            <td style="">96%</td>
+            <td>4.9</td>
+            <td style="color:var(--color-red)">+79%</td>
+          </tr>
+
+
+          <tr>
+            <td><strong>Nature Landscape / Spring Landscape</strong></td>
+            <td>Landscaping</td>
+            <td>29</td>
+            <td style="">97%</td>
+            <td>1.9</td>
+            <td style="color:var(--color-green)">-45%</td>
+          </tr>
+
+
+          <tr>
+            <td><strong>Wateronic</strong></td>
+            <td>Pool &amp; Water Features</td>
+            <td>62</td>
+            <td style="">97%</td>
+            <td>5.4</td>
+            <td style="color:var(--color-green)">-75%</td>
+          </tr>
+
+
+          <tr>
+            <td><strong>ABM Century Pte Ltd</strong></td>
+            <td>Cleanliness</td>
+            <td>175</td>
+            <td style="">97%</td>
+            <td>0.9</td>
+            <td style="color:var(--color-red)">+28%</td>
+          </tr>
+
+
+          <tr>
+            <td><strong>Kone</strong></td>
+            <td>Lift Issues</td>
+            <td>139</td>
+            <td style="">99%</td>
+            <td>1.8</td>
+            <td style="color:var(--color-red)">+56%</td>
+          </tr>
+
+
+          <tr>
+            <td><strong>Elite Pest Management</strong></td>
+            <td>Pest Control</td>
+            <td>61</td>
+            <td style="">100%</td>
+            <td>3.4</td>
+            <td style="color:var(--color-green)">-31%</td>
+          </tr>
+
+
+          <tr>
+            <td><strong>Cora Environment / Stream Environment</strong></td>
+            <td>Rubbish Chute</td>
+            <td>147</td>
+            <td style="">100%</td>
+            <td>1.1</td>
+            <td style="color:var(--color-green)">-8%</td>
+          </tr>
+
+
+          <tr>
+            <td><strong>Hilife</strong></td>
+            <td>Intercom &amp; Smart Home</td>
+            <td>46</td>
+            <td style="">100%</td>
+            <td>0.6</td>
+            <td style="color:var(--color-red)">+214%</td>
+          </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Vendor Action Items</h3>
+    <div class="vendor-action">Active Lifestyle Pte Ltd: 81 total cases across Gym Equipment. 7 open cases, oldest 2 months unresolved. ACTION: Schedule vendor review meeting.</div>
+  </section>
+
+  <section id="actions">
+    <h2>5. This Week's Action List</h2>
+    <p>All open cases (Status not Closed) sorted by days open. Color: <span style="background:#fed7d7;padding:2px 6px;border-radius:3px">Red &gt; 90 days</span> <span style="background:#fefcbf;padding:2px 6px;border-radius:3px">Yellow &gt; 30 days</span> <span style="background:#fff;border:1px solid #ddd;padding:2px 6px;border-radius:3px">White &lt; 30 days</span></p>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Admin &amp; General (Other) (1 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-yellow">
+              <td>1292-4550</td>
+              <td>Blk 57</td>
+              <td><strong>68</strong></td>
+              <td>Previous feedback not brought up at council meeting.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Animal Issues (2 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-yellow">
+              <td>1292-4488</td>
+              <td>Unknown</td>
+              <td><strong>76</strong></td>
+              <td>Dog owner not cleaning up after pet on common walkway.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-white">
+              <td>1292-4811</td>
+              <td>Blk 47</td>
+              <td><strong>25</strong></td>
+              <td>Another stray cat with collar spotted near Blk 59.</td>
+              <td>Pending</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Bicycle Parking (2 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-yellow">
+              <td>1292-4518</td>
+              <td>Blk 49</td>
+              <td><strong>73</strong></td>
+              <td>Bicycle parking cleanup not completed after over six months.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4556</td>
+              <td>Blk 47</td>
+              <td><strong>68</strong></td>
+              <td>Illegally parked bicycles at carpark need removal.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Building Maintenance (Other) (2 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-red">
+              <td>1292-3443</td>
+              <td>Blk 53</td>
+              <td><strong>292</strong></td>
+              <td>Algae forming around the lighting point.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4639</td>
+              <td>Blk 53</td>
+              <td><strong>51</strong></td>
+              <td>Area map damaged, request CCTV review to find culprit.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Ceiling Seepage (1 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-red">
+              <td>1292-3135</td>
+              <td>Blk 55</td>
+              <td><strong>362</strong></td>
+              <td>Hole in ceiling with water leaking at Blk 55 B1 lobby.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Cooking Smell (1 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-yellow">
+              <td>1292-4732</td>
+              <td>Blk 45</td>
+              <td><strong>38</strong></td>
+              <td>Strong cooking smell from neighbor daily affecting unit.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Crime &amp; Police (3 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-yellow">
+              <td>1292-4476</td>
+              <td>Blk 53</td>
+              <td><strong>77</strong></td>
+              <td>Bicycle seat stolen at Blk 53, police report filed.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4644</td>
+              <td>Blk 61</td>
+              <td><strong>51</strong></td>
+              <td>Bicycle seat stolen at Blk 61 B1, security saw thief.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4646</td>
+              <td>Blk 61</td>
+              <td><strong>50</strong></td>
+              <td>Bicycle seat stolen at Blk 61 B1, thief on video.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Dirty Common Area (4 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-red">
+              <td>1292-3033</td>
+              <td>Blk 57</td>
+              <td><strong>379</strong></td>
+              <td>Stains at Blk 57 basement keep returning after cleaning.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4602</td>
+              <td>Blk 47</td>
+              <td><strong>56</strong></td>
+              <td>Seating area near big plant dirty and needs cleaning.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4670</td>
+              <td>Blk 53</td>
+              <td><strong>46</strong></td>
+              <td>Dirty signboard missed by cleaner, needs cleaning.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4731</td>
+              <td>Blk 53</td>
+              <td><strong>38</strong></td>
+              <td>Rust stain left by signage uncleaned for weeks.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Dirty Corridor/Lobby (1 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-yellow">
+              <td>1292-4394</td>
+              <td>Blk 45</td>
+              <td><strong>86</strong></td>
+              <td>Blk 45 lift mirror foggy and uncleaned for a month.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Door &amp; Lock (2 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-red">
+              <td>1292-3359</td>
+              <td>Blk 55</td>
+              <td><strong>315</strong></td>
+              <td>Issue spotted on ceiling of Blk 55 carpark lobby.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-red">
+              <td>1292-3444</td>
+              <td>Blk 53</td>
+              <td><strong>292</strong></td>
+              <td>Algae forming around lighting point at Blk 53 lobby.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Gate &amp; Door Access (2 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-yellow">
+              <td>1292-4693</td>
+              <td>Blk 55</td>
+              <td><strong>44</strong></td>
+              <td>Blk 55 level 1 both doors open again, ongoing fault.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4691</td>
+              <td>Blk 55</td>
+              <td><strong>44</strong></td>
+              <td>Blk 55 level 1 door stays open, not swinging shut.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Gym Equipment (7 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-yellow">
+              <td>1292-4517</td>
+              <td>Blk 47</td>
+              <td><strong>73</strong></td>
+              <td>Two gym treadmills broken since November, still not replaced.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4655</td>
+              <td>Blk 47</td>
+              <td><strong>49</strong></td>
+              <td>Three treadmills down again, no definite repair timeline.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4680</td>
+              <td>Blk 47</td>
+              <td><strong>46</strong></td>
+              <td>Multiple treadmills unusable for months, inadequate gym.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4688</td>
+              <td>Blk 55</td>
+              <td><strong>45</strong></td>
+              <td>Half the gym treadmills broken for months, always queues.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4683</td>
+              <td>Blk 59</td>
+              <td><strong>45</strong></td>
+              <td>Gym equipment down for over a month.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4708</td>
+              <td>Blk 49</td>
+              <td><strong>41</strong></td>
+              <td>Gym treadmills down for many months, still not fixed.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4718</td>
+              <td>Blk 47</td>
+              <td><strong>40</strong></td>
+              <td>Three of six gym treadmills broken, people waiting.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">HiLife System (1 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-yellow">
+              <td>1292-4737</td>
+              <td>Blk 47</td>
+              <td><strong>38</strong></td>
+              <td>Request to fix HiLife announcement folder naming.</td>
+              <td>Pending</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">High-Rise Littering (1 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-red">
+              <td>1292-4201</td>
+              <td>Blk 57</td>
+              <td><strong>122</strong></td>
+              <td>Ongoing knocking and dragging noises from unit above since morning.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">In-Unit (1 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-yellow">
+              <td>1292-4636</td>
+              <td>Blk 47</td>
+              <td><strong>52</strong></td>
+              <td>Blk 47 lobby ceiling leaking and mouldy after aircon leak.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Landscaping (1 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-red">
+              <td>1292-4216</td>
+              <td>Unknown</td>
+              <td><strong>119</strong></td>
+              <td>Plants behind villa uprooted months ago still not replaced, causing ponding.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Lift Door (1 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-yellow">
+              <td>1292-4664</td>
+              <td>Blk 53</td>
+              <td><strong>48</strong></td>
+              <td>Blk 53 lift PL9 door opening between floors again.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Lift Issues (Other) (1 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-yellow">
+              <td>1292-4652</td>
+              <td>Blk 49</td>
+              <td><strong>50</strong></td>
+              <td>Blk 49 lift FL3 handle loose.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Mobile Signal (1 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-yellow">
+              <td>1292-4591</td>
+              <td>Blk 59</td>
+              <td><strong>58</strong></td>
+              <td>No mobile signal at B1, cannot use HiLife app.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Noise &amp; Neighbour (Other) (2 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-yellow">
+              <td>1292-4682</td>
+              <td>Blk 53</td>
+              <td><strong>45</strong></td>
+              <td>Neighbor repeatedly banging loudly on balcony railing.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-white">
+              <td>1292-4786</td>
+              <td>Blk 45</td>
+              <td><strong>30</strong></td>
+              <td>Children rollerblading in Blk 45 corridor with photos.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Noise Disturbance (6 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-red">
+              <td>1292-3419</td>
+              <td>Blk 61</td>
+              <td><strong>299</strong></td>
+              <td>Note posted to noisy neighbour about loud singing at Blk 61.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4463</td>
+              <td>Blk 57</td>
+              <td><strong>78</strong></td>
+              <td>Neighbor shouting and screaming nightly until midnight.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4586</td>
+              <td>Blk 61</td>
+              <td><strong>59</strong></td>
+              <td>Recurring furniture-dragging noise nightly from unit above.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4684</td>
+              <td>Blk 61</td>
+              <td><strong>45</strong></td>
+              <td>Neighbor singing past 9pm, noise mitigation wearing off.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4715</td>
+              <td>Blk 47</td>
+              <td><strong>41</strong></td>
+              <td>Late-night groups at pavilion being loud and playing cards.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-white">
+              <td>1292-4784</td>
+              <td>Blk 45</td>
+              <td><strong>30</strong></td>
+              <td>Children rollerblading in Blk 45 corridor, banging walls.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Parking &amp; Traffic (2 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-red">
+              <td>1292-3875</td>
+              <td>Blk 45</td>
+              <td><strong>201</strong></td>
+              <td>Main carpark entry stop line hidden by slope, needs better signage.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-red">
+              <td>1292-4060</td>
+              <td>Unknown</td>
+              <td><strong>154</strong></td>
+              <td>Carpark floor damage reported for 4th time, still unresolved.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Playground &amp; Kids (1 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-yellow">
+              <td>1292-4585</td>
+              <td>Blk 55</td>
+              <td><strong>59</strong></td>
+              <td>Playground trampoline damaged, needs repair.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Pool &amp; Water Features (2 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-yellow">
+              <td>1292-4701</td>
+              <td>Unknown</td>
+              <td><strong>42</strong></td>
+              <td>Strata house pool area has algae and cloudy water.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-white">
+              <td>1292-4812</td>
+              <td>Blk 47</td>
+              <td><strong>25</strong></td>
+              <td>Life buoy removed from family pool, safety concern.</td>
+              <td>Pending</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Security &amp; Access (Other) (2 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-white">
+              <td>1292-4798</td>
+              <td>Blk 53</td>
+              <td><strong>27</strong></td>
+              <td>Maintenance and security issues as shown in photos.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-white">
+              <td>1292-4801</td>
+              <td>Blk 53</td>
+              <td><strong>26</strong></td>
+              <td>Late-night activity at pavilion, security not enforcing.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Smoking (3 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-red">
+              <td>1292-3494</td>
+              <td>Blk 47</td>
+              <td><strong>285</strong></td>
+              <td>Excessive smoking smell from neighbour affecting multiple units.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4522</td>
+              <td>Blk 59</td>
+              <td><strong>73</strong></td>
+              <td>Balcony smoking affecting asthma patient at home.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4575</td>
+              <td>Blk 53</td>
+              <td><strong>62</strong></td>
+              <td>Neighbor repeatedly banging loudly on balcony railing.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Wall &amp; Ceiling (4 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-red">
+              <td>1292-3006</td>
+              <td>Blk 47</td>
+              <td><strong>384</strong></td>
+              <td>External walls and windows dirty, promised wash not done.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-red">
+              <td>1292-3113</td>
+              <td>Blk 61</td>
+              <td><strong>367</strong></td>
+              <td>Ceiling surface peeling off above driveway in carpark.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4643</td>
+              <td>Blk 45</td>
+              <td><strong>51</strong></td>
+              <td>Blk 45 B2 carpark lobby buzzing noise and broken tiles.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+            <tr class="age-yellow">
+              <td>1292-4714</td>
+              <td>Blk 47</td>
+              <td><strong>41</strong></td>
+              <td>B1 lobby ceiling plaster sagging and water-damaged.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="action-group">
+      <div class="action-group-title">Water &amp; Plumbing (Other) (1 open)</div>
+      <div class="table-wrap">
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Block</th>
+              <th>Days Open</th>
+              <th>Summary</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+
+
+            <tr class="age-red">
+              <td>1292-4213</td>
+              <td>Blk 47</td>
+              <td><strong>120</strong></td>
+              <td>Blk 47 DV room leaking with water ponding outside.</td>
+              <td>In Progress</td>
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+  </section>
+</div>
+
+<script>
+// Highlight active sidebar link on scroll
+(function() {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.sidebar nav a');
+  function onScroll() {
+    let current = '';
+    sections.forEach(function(s) {
+      if (window.scrollY >= s.offsetTop - 80) current = s.id;
+    });
+    navLinks.forEach(function(a) {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+})();
+</script>
+</body>
+</html>
