@@ -188,12 +188,15 @@ function toggleSection(id) {
 }
 </script>
 </head>
-<body><a href="https://kyannai.github.io/np-public/" class="back-to-home" style="position:fixed;top:12px;right:16px;z-index:200;font-size:13px;padding:6px 14px;background:var(--color-primary,#2c5282);color:#fff;border-radius:4px;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.2);">Back to Home</a>
+<body>
 <nav class="sidebar">
 <h2>Feedback Analysis</h2>
 <div class="nav-group">
 <div class="nav-label">Overview</div>
 <a href="#overall-summary">Overall Summary</a>
+<a href="#case-outcome">Case Outcome</a>
+<a href="#ma-quality">MA Response Quality</a>
+<a href="#crime-safety">Crime &amp; Safety</a>
 <a href="#issue-cluster-trend">Issue Cluster Trend</a>
 <a href="#cluster-details">Cluster Details</a>
 <a href="#vendor-performance">Vendor Performance</a>
@@ -202,7 +205,6 @@ function toggleSection(id) {
 <a href="#sentiment">Sentiment Analysis</a>
 <a href="#rating-by-cluster">Rating by Cluster</a>
 <a href="#recurring-issues">Recurring Issues</a>
-<a href="#crime-cases">Crime &amp; Police</a>
 <a href="#overall-highlights">Key Findings</a>
 </div>
 <div class="nav-group">
@@ -223,7 +225,7 @@ function toggleSection(id) {
 </nav>
 <div class="main">
 <h1>Normanton Park -- 12-Month Feedback Analysis</h1>
-<p class="subtitle">April 2025 to March 2026 -- 1,844 cases analysed</p>
+<p class="subtitle">May 2025 to April 2026 -- 1,910 cases analysed</p>
 <h2 id="overall-summary">1. Overall Summary</h2>
 <div class="card">
 <div class="summary-grid">
@@ -254,6 +256,105 @@ function toggleSection(id) {
 <li><strong>Noise &amp; Neighbour</strong> -- 191 cases (10.0%)</li>
 <li><strong>Cleanliness</strong> -- 172 cases (9.0%)</li>
 </ol>
+</div>
+<h2 id="case-outcome">1b. Case Outcome (AI-Assessed)</h2>
+<div class="card">
+<p style="color:#5a6c7d;font-size:13px;margin-bottom:12px">Resolution status assessed by AI analysis of case content, MA replies, and resident reviews.</p>
+<div class="summary-grid">
+<div class="metric"><div class="value" style="color:#276749">216</div><div class="label">Confirmed Resolved (11.3%)</div></div>
+<div class="metric"><div class="value" style="color:#9b2c2c">0</div><div class="label">Confirmed Unresolved (0.0%)</div></div>
+<div class="metric"><div class="value" style="color:#999">1559</div><div class="label">Unclear (81.6%)</div></div>
+<div class="metric"><div class="value" style="color:#d69e2e">135</div><div class="label">Still Open (7.1%)</div></div>
+</div>
+<h3>Monthly Case Outcome Trend</h3>
+<table><thead><tr><th>Month</th><th style="color:#276749">Confirmed Resolved</th><th style="color:#9b2c2c">Confirmed Unresolved</th><th>Unclear</th><th style="color:#d69e2e">Open</th><th>Total</th></tr></thead><tbody>
+<tr><td>May 2025</td><td style="color:#276749">12 (7%)</td><td style="color:#9b2c2c">0 (0%)</td><td style="color:#999">146 (92%)</td><td style="color:#d69e2e">0 (0%)</td><td>158</td></tr>
+<tr><td>Jun 2025</td><td style="color:#276749">13 (11%)</td><td style="color:#9b2c2c">0 (0%)</td><td style="color:#999">100 (86%)</td><td style="color:#d69e2e">2 (1%)</td><td>115</td></tr>
+<tr><td>Jul 2025</td><td style="color:#276749">9 (6%)</td><td style="color:#9b2c2c">0 (0%)</td><td style="color:#999">133 (91%)</td><td style="color:#d69e2e">3 (2%)</td><td>145</td></tr>
+<tr><td>Aug 2025</td><td style="color:#276749">23 (15%)</td><td style="color:#9b2c2c">0 (0%)</td><td style="color:#999">123 (84%)</td><td style="color:#d69e2e">0 (0%)</td><td>146</td></tr>
+<tr><td>Sep 2025</td><td style="color:#276749">15 (11%)</td><td style="color:#9b2c2c">0 (0%)</td><td style="color:#999">112 (88%)</td><td style="color:#d69e2e">0 (0%)</td><td>127</td></tr>
+<tr><td>Oct 2025</td><td style="color:#276749">18 (12%)</td><td style="color:#9b2c2c">0 (0%)</td><td style="color:#999">125 (86%)</td><td style="color:#d69e2e">1 (0%)</td><td>144</td></tr>
+<tr><td>Nov 2025</td><td style="color:#276749">6 (5%)</td><td style="color:#9b2c2c">0 (0%)</td><td style="color:#999">110 (94%)</td><td style="color:#d69e2e">1 (0%)</td><td>117</td></tr>
+<tr><td>Dec 2025</td><td style="color:#276749">3 (2%)</td><td style="color:#9b2c2c">0 (0%)</td><td style="color:#999">142 (95%)</td><td style="color:#d69e2e">3 (2%)</td><td>148</td></tr>
+<tr><td>Jan 2026</td><td style="color:#276749">4 (2%)</td><td style="color:#9b2c2c">0 (0%)</td><td style="color:#999">159 (96%)</td><td style="color:#d69e2e">1 (0%)</td><td>164</td></tr>
+<tr><td>Feb 2026</td><td style="color:#276749">26 (13%)</td><td style="color:#9b2c2c">0 (0%)</td><td style="color:#999">154 (79%)</td><td style="color:#d69e2e">13 (6%)</td><td>193</td></tr>
+<tr><td>Mar 2026</td><td style="color:#276749">34 (16%)</td><td style="color:#9b2c2c">0 (0%)</td><td style="color:#999">145 (69%)</td><td style="color:#d69e2e">30 (14%)</td><td>209</td></tr>
+<tr><td>Apr 2026</td><td style="color:#276749">53 (21%)</td><td style="color:#9b2c2c">0 (0%)</td><td style="color:#999">110 (45%)</td><td style="color:#d69e2e">81 (33%)</td><td>244</td></tr>
+</tbody></table>
+</div>
+<h2 id="ma-quality">1c. MA Response Quality (AI-Assessed)</h2>
+<div class="card">
+<p style="color:#5a6c7d;font-size:13px;margin-bottom:12px">Quality of MA replies assessed by AI. Substantive = specific action taken; Mixed = partial acknowledgement; Template = generic copy-paste; No Reply = no response.</p>
+<div class="summary-grid">
+<div class="metric"><div class="value" style="color:#276749">506</div><div class="label">Substantive (26%)</div></div>
+<div class="metric"><div class="value" style="color:#d69e2e">600</div><div class="label">Mixed (31%)</div></div>
+<div class="metric"><div class="value" style="color:#9b2c2c">731</div><div class="label">Template (38%)</div></div>
+<div class="metric"><div class="value" style="color:#999">73</div><div class="label">No Reply (3%)</div></div>
+</div>
+<h3>Monthly MA Response Quality Trend</h3>
+<table><thead><tr><th>Month</th><th style="color:#276749">Substantive</th><th style="color:#d69e2e">Mixed</th><th style="color:#9b2c2c">Template</th><th>No Reply</th><th>Total</th></tr></thead><tbody>
+<tr><td>May 2025</td><td style="color:#276749">30 (18%)</td><td style="color:#d69e2e">83 (52%)</td><td style="color:#9b2c2c">45 (28%)</td><td style="color:#999">0 (0%)</td><td>158</td></tr>
+<tr><td>Jun 2025</td><td style="color:#276749">40 (34%)</td><td style="color:#d69e2e">52 (45%)</td><td style="color:#9b2c2c">23 (20%)</td><td style="color:#999">0 (0%)</td><td>115</td></tr>
+<tr><td>Jul 2025</td><td style="color:#276749">29 (20%)</td><td style="color:#d69e2e">37 (25%)</td><td style="color:#9b2c2c">79 (54%)</td><td style="color:#999">0 (0%)</td><td>145</td></tr>
+<tr><td>Aug 2025</td><td style="color:#276749">21 (14%)</td><td style="color:#d69e2e">25 (17%)</td><td style="color:#9b2c2c">100 (68%)</td><td style="color:#999">0 (0%)</td><td>146</td></tr>
+<tr><td>Sep 2025</td><td style="color:#276749">15 (11%)</td><td style="color:#d69e2e">20 (15%)</td><td style="color:#9b2c2c">92 (72%)</td><td style="color:#999">0 (0%)</td><td>127</td></tr>
+<tr><td>Oct 2025</td><td style="color:#276749">13 (9%)</td><td style="color:#d69e2e">37 (25%)</td><td style="color:#9b2c2c">94 (65%)</td><td style="color:#999">0 (0%)</td><td>144</td></tr>
+<tr><td>Nov 2025</td><td style="color:#276749">16 (13%)</td><td style="color:#d69e2e">61 (52%)</td><td style="color:#9b2c2c">40 (34%)</td><td style="color:#999">0 (0%)</td><td>117</td></tr>
+<tr><td>Dec 2025</td><td style="color:#276749">19 (12%)</td><td style="color:#d69e2e">78 (52%)</td><td style="color:#9b2c2c">51 (34%)</td><td style="color:#999">0 (0%)</td><td>148</td></tr>
+<tr><td>Jan 2026</td><td style="color:#276749">15 (9%)</td><td style="color:#d69e2e">104 (63%)</td><td style="color:#9b2c2c">45 (27%)</td><td style="color:#999">0 (0%)</td><td>164</td></tr>
+<tr><td>Feb 2026</td><td style="color:#276749">56 (29%)</td><td style="color:#d69e2e">97 (50%)</td><td style="color:#9b2c2c">40 (20%)</td><td style="color:#999">0 (0%)</td><td>193</td></tr>
+<tr><td>Mar 2026</td><td style="color:#276749">135 (64%)</td><td style="color:#d69e2e">6 (2%)</td><td style="color:#9b2c2c">65 (31%)</td><td style="color:#999">3 (1%)</td><td>209</td></tr>
+<tr><td>Apr 2026</td><td style="color:#276749">117 (47%)</td><td style="color:#d69e2e">0 (0%)</td><td style="color:#9b2c2c">57 (23%)</td><td style="color:#999">70 (28%)</td><td>244</td></tr>
+</tbody></table>
+</div>
+<h2 id="crime-safety">1d. Crime &amp; Safety Cases</h2>
+<div class="card">
+<h3>Crime & Police Cases (26 total)</h3>
+<table><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
+<tr><td>1292-5054</td><td>24 Apr 2026</td><td>Blk 57</td><td>parcel stealing</td><td>In Progress</td></tr>
+<tr><td>1292-5053</td><td>24 Apr 2026</td><td>Blk 57</td><td>parcel stealing</td><td>Closed</td></tr>
+<tr><td>1292-5052</td><td>24 Apr 2026</td><td>Blk 57</td><td>Parcel stealing</td><td>Pending</td></tr>
+<tr><td>1292-4646</td><td>06 Mar 2026</td><td>Blk 61</td><td>Stolen bicyle seats at Blk 61 B1 bicycle park</td><td>In Progress</td></tr>
+<tr><td>1292-4644</td><td>05 Mar 2026</td><td>Blk 61</td><td>Stolen bicycle seat at Blk 61 B1 bicycle park area</td><td>In Progress</td></tr>
+<tr><td>1292-4476</td><td>07 Feb 2026</td><td>Blk 53</td><td>stolen bicycle seat at block 53</td><td>In Progress</td></tr>
+<tr><td>1292-4470</td><td>07 Feb 2026</td><td>Blk 53</td><td>53 Bicycle Seat Stolen</td><td>Closed</td></tr>
+<tr><td>1292-4370</td><td>25 Jan 2026</td><td>Blk 55</td><td>Ref ID:[phone] - Suspicious character is back</td><td>Closed</td></tr>
+<tr><td>1292-4363</td><td>24 Jan 2026</td><td>Blk 61</td><td>blk 61 carpark</td><td>Closed</td></tr>
+<tr><td>1292-4331</td><td>16 Jan 2026</td><td>Blk 61</td><td>trespass from carpark exit</td><td>Closed</td></tr>
+<tr><td>1292-4286</td><td>07 Jan 2026</td><td>Blk 57</td><td>Jacket got stolen</td><td>Closed</td></tr>
+<tr><td>1292-4214</td><td>26 Dec 2025</td><td>Blk 55</td><td>report incidents of stolen case</td><td>Closed</td></tr>
+<tr><td>1292-3911</td><td>14 Oct 2025</td><td>Blk 53</td><td>Possible Attempt to Access My Apartment</td><td>Closed</td></tr>
+<tr><td>1292-3910</td><td>14 Oct 2025</td><td>Blk 61</td><td>stealing flowers</td><td>Closed</td></tr>
+<tr><td>1292-3876</td><td>06 Oct 2025</td><td>Blk 57</td><td>Trash Disposal Handle</td><td>Closed</td></tr>
+<tr><td>1292-3858</td><td>04 Oct 2025</td><td>Blk 61</td><td>Trespassing at side gate</td><td>Closed</td></tr>
+<tr><td>1292-3857</td><td>03 Oct 2025</td><td>Blk 55</td><td>Suspicious Character - Repeated Occurence (Blk 55)</td><td>Closed</td></tr>
+<tr><td>1292-3797</td><td>21 Sep 2025</td><td>Blk 57</td><td>Access to Rooftop at Blk 57</td><td>Closed</td></tr>
+<tr><td>1292-3672</td><td>24 Aug 2025</td><td>Blk 57</td><td>Letterbox</td><td>Closed</td></tr>
+<tr><td>1292-3498</td><td>16 Jul 2025</td><td>Blk 49</td><td>De facing car</td><td>Closed</td></tr>
+</tbody></table>
+<h3>Safety-Flagged Cases (345 total, 15 open)</h3>
+<table><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Title</th><th>Status</th></tr></thead><tbody>
+<tr><td>1292-5054</td><td>24 Apr 2026</td><td>Blk 57</td><td>parcel stealing</td><td>In Progress</td></tr>
+<tr><td>1292-5053</td><td>24 Apr 2026</td><td>Blk 57</td><td>parcel stealing</td><td>Closed</td></tr>
+<tr><td>1292-5052</td><td>24 Apr 2026</td><td>Blk 57</td><td>Parcel stealing</td><td>Pending</td></tr>
+<tr><td>1292-5046</td><td>23 Apr 2026</td><td>Blk 53</td><td>Blk 53 lifts cannot stop at level 21 and above</td><td>Closed</td></tr>
+<tr><td>1292-5027</td><td>21 Apr 2026</td><td>Blk 51</td><td>spoilt door in block 51</td><td>Closed</td></tr>
+<tr><td>1292-5017</td><td>20 Apr 2026</td><td>Blk 59</td><td>Gate not closing</td><td>Closed</td></tr>
+<tr><td>1292-4993</td><td>17 Apr 2026</td><td>Blk 53</td><td>Termite Infestation</td><td>Closed</td></tr>
+<tr><td>1292-4990</td><td>17 Apr 2026</td><td>Blk 47</td><td>Building Gate Left Open - Security Concern</td><td>Closed</td></tr>
+<tr><td>1292-4975</td><td>14 Apr 2026</td><td>Blk 59</td><td>cockroach infestation</td><td>Closed</td></tr>
+<tr><td>1292-4973</td><td>14 Apr 2026</td><td>Blk 59</td><td>smoking at balcony</td><td>In Progress</td></tr>
+<tr><td>1292-4909</td><td>06 Apr 2026</td><td>Blk 55</td><td>basement door not working</td><td>Closed</td></tr>
+<tr><td>1292-4899</td><td>05 Apr 2026</td><td>Blk 61</td><td>Blk 61 level 13 rubbish chute</td><td>Closed</td></tr>
+<tr><td>1292-4889</td><td>04 Apr 2026</td><td>Blk 49</td><td>Entrance door is open at level 1</td><td>Closed</td></tr>
+<tr><td>1292-4857</td><td>04 Apr 2026</td><td>Blk 47</td><td>Fire Hosereel Obstructions</td><td>Closed</td></tr>
+<tr><td>1292-4818</td><td>01 Apr 2026</td><td>Blk 57</td><td>PL13 Stuck at Level 1</td><td>Closed</td></tr>
+<tr><td>1292-4801</td><td>30 Mar 2026</td><td>Blk 53</td><td>Pavilion</td><td>In Progress</td></tr>
+<tr><td>1292-4791</td><td>27 Mar 2026</td><td>Blk 49</td><td>Fire Safety Hazard Obstruction at Common Corridor</td><td>Closed</td></tr>
+<tr><td>1292-4767</td><td>24 Mar 2026</td><td>Blk 61</td><td>Urgent: Unresolved Noise Disturbance</td><td>Closed</td></tr>
+<tr><td>1292-4729</td><td>17 Mar 2026</td><td>Blk 45</td><td>Urgent: Lift Noise Issue at Block 45</td><td>Closed</td></tr>
+<tr><td>1292-4728</td><td>17 Mar 2026</td><td>Blk 45</td><td>Urgent: Lift Noise Issue at Block 45</td><td>Closed</td></tr>
+</tbody></table>
 </div>
 <h2 id="issue-cluster-trend">2. Issue Cluster Trend (12 Months)</h2>
 <div class="card" style="overflow-x:auto">
@@ -13326,18 +13427,18 @@ Thanks again.</p></div></details></td><td>Closed</td></tr>
 <h2 id="sentiment">6. Sentiment Trend</h2>
 <div class="card">
 <table><thead><tr><th>Month</th><th>Total</th><th>Negative</th><th>Neg %</th><th>Positive</th><th style="width:30%">Negative Sentiment</th></tr></thead><tbody>
-<tr><td>May 2025</td><td>158</td><td>12</td><td>7.6%</td><td>17</td><td><span class="bar-fill bar-red" style="width:62%;height:14px;display:inline-block;border-radius:3px;" title="7.6% negative"></span></td></tr>
-<tr><td>Jun 2025</td><td>115</td><td>14</td><td>12.2%</td><td>20</td><td><span class="bar-fill bar-red" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="12.2% negative"></span></td></tr>
-<tr><td>Jul 2025</td><td>145</td><td>12</td><td>8.3%</td><td>26</td><td><span class="bar-fill bar-red" style="width:68%;height:14px;display:inline-block;border-radius:3px;" title="8.3% negative"></span></td></tr>
-<tr><td>Aug 2025</td><td>146</td><td>15</td><td>10.3%</td><td>23</td><td><span class="bar-fill bar-red" style="width:84%;height:14px;display:inline-block;border-radius:3px;" title="10.3% negative"></span></td></tr>
-<tr><td>Sep 2025</td><td>127</td><td>10</td><td>7.9%</td><td>24</td><td><span class="bar-fill bar-red" style="width:64%;height:14px;display:inline-block;border-radius:3px;" title="7.9% negative"></span></td></tr>
-<tr><td>Oct 2025</td><td>144</td><td>11</td><td>7.6%</td><td>26</td><td><span class="bar-fill bar-red" style="width:62%;height:14px;display:inline-block;border-radius:3px;" title="7.6% negative"></span></td></tr>
-<tr><td>Nov 2025</td><td>117</td><td>7</td><td>6.0%</td><td>21</td><td><span class="bar-fill bar-red" style="width:49%;height:14px;display:inline-block;border-radius:3px;" title="6.0% negative"></span></td></tr>
-<tr><td>Dec 2025</td><td>148</td><td>9</td><td>6.1%</td><td>26</td><td><span class="bar-fill bar-red" style="width:50%;height:14px;display:inline-block;border-radius:3px;" title="6.1% negative"></span></td></tr>
-<tr><td>Jan 2026</td><td>164</td><td>16</td><td>9.8%</td><td>27</td><td><span class="bar-fill bar-red" style="width:80%;height:14px;display:inline-block;border-radius:3px;" title="9.8% negative"></span></td></tr>
-<tr><td>Feb 2026</td><td>193</td><td>14</td><td>7.3%</td><td>35</td><td><span class="bar-fill bar-red" style="width:59%;height:14px;display:inline-block;border-radius:3px;" title="7.3% negative"></span></td></tr>
-<tr><td>Mar 2026</td><td>209</td><td>12</td><td>5.7%</td><td>35</td><td><span class="bar-fill bar-red" style="width:46%;height:14px;display:inline-block;border-radius:3px;" title="5.7% negative"></span></td></tr>
-<tr><td>Apr 2026</td><td>244</td><td>6</td><td>2.5%</td><td>32</td><td><span class="bar-fill bar-red" style="width:20%;height:14px;display:inline-block;border-radius:3px;" title="2.5% negative"></span></td></tr>
+<tr><td>May 2025</td><td>158</td><td>18</td><td>11.4%</td><td>19</td><td><span class="bar-fill bar-red" style="width:69%;height:14px;display:inline-block;border-radius:3px;" title="11.4% negative"></span></td></tr>
+<tr><td>Jun 2025</td><td>115</td><td>17</td><td>14.8%</td><td>20</td><td><span class="bar-fill bar-red" style="width:90%;height:14px;display:inline-block;border-radius:3px;" title="14.8% negative"></span></td></tr>
+<tr><td>Jul 2025</td><td>145</td><td>17</td><td>11.7%</td><td>25</td><td><span class="bar-fill bar-red" style="width:71%;height:14px;display:inline-block;border-radius:3px;" title="11.7% negative"></span></td></tr>
+<tr><td>Aug 2025</td><td>146</td><td>24</td><td>16.4%</td><td>22</td><td><span class="bar-fill bar-red" style="width:100%;height:14px;display:inline-block;border-radius:3px;" title="16.4% negative"></span></td></tr>
+<tr><td>Sep 2025</td><td>127</td><td>14</td><td>11.0%</td><td>24</td><td><span class="bar-fill bar-red" style="width:67%;height:14px;display:inline-block;border-radius:3px;" title="11.0% negative"></span></td></tr>
+<tr><td>Oct 2025</td><td>144</td><td>14</td><td>9.7%</td><td>28</td><td><span class="bar-fill bar-red" style="width:59%;height:14px;display:inline-block;border-radius:3px;" title="9.7% negative"></span></td></tr>
+<tr><td>Nov 2025</td><td>117</td><td>11</td><td>9.4%</td><td>20</td><td><span class="bar-fill bar-red" style="width:57%;height:14px;display:inline-block;border-radius:3px;" title="9.4% negative"></span></td></tr>
+<tr><td>Dec 2025</td><td>148</td><td>15</td><td>10.1%</td><td>24</td><td><span class="bar-fill bar-red" style="width:61%;height:14px;display:inline-block;border-radius:3px;" title="10.1% negative"></span></td></tr>
+<tr><td>Jan 2026</td><td>164</td><td>24</td><td>14.6%</td><td>22</td><td><span class="bar-fill bar-red" style="width:89%;height:14px;display:inline-block;border-radius:3px;" title="14.6% negative"></span></td></tr>
+<tr><td>Feb 2026</td><td>193</td><td>18</td><td>9.3%</td><td>37</td><td><span class="bar-fill bar-red" style="width:56%;height:14px;display:inline-block;border-radius:3px;" title="9.3% negative"></span></td></tr>
+<tr><td>Mar 2026</td><td>209</td><td>19</td><td>9.1%</td><td>36</td><td><span class="bar-fill bar-red" style="width:55%;height:14px;display:inline-block;border-radius:3px;" title="9.1% negative"></span></td></tr>
+<tr><td>Apr 2026</td><td>244</td><td>8</td><td>3.3%</td><td>33</td><td><span class="bar-fill bar-red" style="width:20%;height:14px;display:inline-block;border-radius:3px;" title="3.3% negative"></span></td></tr>
 </tbody></table>
 </div>
 <h2 id="rating-by-cluster">7. Average Rating by Cluster</h2>
@@ -13544,206 +13645,6 @@ Thanks again.</p></div></details></td><td>Closed</td></tr>
 <h3 style="margin-top:16px">Fire Safety <span style="font-weight:400;font-size:0.85em;color:var(--color-muted)">(1 blocks affected, 3 repeat months)</span></h3>
 <div style="display:flex;align-items:center;gap:10px;margin:6px 0;padding:6px 10px;background:var(--color-bg);border-radius:6px;"><strong style="min-width:50px">Blk Blk 49</strong><div><span title="May 2025" style="display:inline-block;width:22px;height:22px;background:var(--color-border-light);color:var(--color-muted);border-radius:50%;text-align:center;line-height:22px;font-size:9px;margin:1px;">May</span> <span title="Jun 2025" style="display:inline-block;width:22px;height:22px;background:var(--color-border-light);color:var(--color-muted);border-radius:50%;text-align:center;line-height:22px;font-size:9px;margin:1px;">Jun</span> <span title="Jul 2025" style="display:inline-block;width:22px;height:22px;background:var(--color-border-light);color:var(--color-muted);border-radius:50%;text-align:center;line-height:22px;font-size:9px;margin:1px;">Jul</span> <span title="Aug 2025" style="display:inline-block;width:22px;height:22px;background:var(--color-red);color:#fff;border-radius:50%;text-align:center;line-height:22px;font-size:9px;margin:1px;">Aug</span> <span title="Sep 2025" style="display:inline-block;width:22px;height:22px;background:var(--color-red);color:#fff;border-radius:50%;text-align:center;line-height:22px;font-size:9px;margin:1px;">Sep</span> <span title="Oct 2025" style="display:inline-block;width:22px;height:22px;background:var(--color-border-light);color:var(--color-muted);border-radius:50%;text-align:center;line-height:22px;font-size:9px;margin:1px;">Oct</span> <span title="Nov 2025" style="display:inline-block;width:22px;height:22px;background:var(--color-red);color:#fff;border-radius:50%;text-align:center;line-height:22px;font-size:9px;margin:1px;">Nov</span> <span title="Dec 2025" style="display:inline-block;width:22px;height:22px;background:var(--color-border-light);color:var(--color-muted);border-radius:50%;text-align:center;line-height:22px;font-size:9px;margin:1px;">Dec</span> <span title="Jan 2026" style="display:inline-block;width:22px;height:22px;background:var(--color-border-light);color:var(--color-muted);border-radius:50%;text-align:center;line-height:22px;font-size:9px;margin:1px;">Jan</span> <span title="Feb 2026" style="display:inline-block;width:22px;height:22px;background:var(--color-border-light);color:var(--color-muted);border-radius:50%;text-align:center;line-height:22px;font-size:9px;margin:1px;">Feb</span> <span title="Mar 2026" style="display:inline-block;width:22px;height:22px;background:var(--color-border-light);color:var(--color-muted);border-radius:50%;text-align:center;line-height:22px;font-size:9px;margin:1px;">Mar</span> <span title="Apr 2026" style="display:inline-block;width:22px;height:22px;background:var(--color-border-light);color:var(--color-muted);border-radius:50%;text-align:center;line-height:22px;font-size:9px;margin:1px;">Apr</span></div><span style="font-size:12px;color:var(--color-muted)">3/12 months</span></div>
 <p style="font-size:12px;color:var(--color-muted);margin-top:12px">Red dots = months where this block + issue cluster had feedback reported. Issues appearing 3+ months indicate a persistent problem needing root-cause action.</p>
-</div>
-<h2 id="crime-cases">Crime and Police Involvement</h2>
-<div class="card">
-<p><strong>26 cases</strong> involved crime, police reports, vandalism, trespassing, theft, or safety threats across 12 months.</p>
-<table><thead><tr><th>Case ID</th><th>Date</th><th>Block</th><th>Details</th><th>Status</th></tr></thead><tbody>
-<tr style="background:var(--color-red-bg);"><td>1292-5054</td><td>2026-04-24</td><td>Blk Blk 57</td><td><details class="case-expand"><summary>Resident reports parcel theft at their block and requests CCTV review.</summary><div class="case-content"><p><strong>Title:</strong> parcel stealing</p><p><strong>Description:</strong> parcel stealing photos , please help to check time line from 12-7 … because im aware the other parcel ( Qxpress ) is taken by another driver who did sent me video proof</p><p><strong>MA Reply:</strong> [24 Apr 2026] Dear Ms Jose, 
-Thank you for providing us the above details. 
-We suggest you make a police report and let the police officer to investigate further for this matter. 
-Regards, Rui Ling</p></div></details></td><td>In Progress</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-5053</td><td>2026-04-24</td><td>Blk Blk 57</td><td><details class="case-expand"><summary>Resident reports parcel theft at their block and requests CCTV review.</summary><div class="case-content"><p><strong>Title:</strong> parcel stealing</p><p><strong>Description:</strong> parcel stealing photos</p><p><strong>MA Reply:</strong> [24 Apr 2026] Dear Ms Jose, 
-We will close this feedback and reply to your latest feedback. Regards, Rui Ling</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-5052</td><td>2026-04-24</td><td>Blk Blk 57</td><td><details class="case-expand"><summary>Resident reports parcel theft at Block 57 and requests CCTV review.</summary><div class="case-content"><p><strong>Title:</strong> Parcel stealing</p><p><strong>Description:</strong> I’m a fellow resident in block 57, recently my parcel has been getting stolen so i need the retrieval of CCTV for this entire week</p></div></details></td><td>Pending</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-4646</td><td>2026-03-06</td><td>Blk Blk 61</td><td><details class="case-expand"><summary>Bicycle seat stolen at Blk 61 B1, thief on video.</summary><div class="case-content"><p><strong>Title:</strong> Stolen bicyle seats at Blk 61 B1 bicycle park</p><p><strong>Description:</strong> As reported, my bicycle seat was stolen on 5 Mar 2026 10+pm.  Later i realised that my car was parked near bicycle park area and extracted the car camera with videos of the thief in action. There are 3 key videos which I would like to share 1) The thief came out from Blk 61 carpark side door and target at my bicycle ( I suggest MA checked the video at B1 lobby and lift between 22:00-22:03, you should be able to get his face)  2) Second video shown the secuirty came by while the thief is benting over still trying to steal my bicycle seat  3) Third video shown the thief successfully stolen the seat and walked away.  I would like to make police report tomorrow and hope MA could help extract his photo from B1 lobby camara to facilitate the police report between 22:00-22:03</p><p><strong>MA Reply:</strong> [06 Mar 2026] Dear Sandra,
-
-Thank you for sharing the following dashcam videos with us. We have shared them with security for their necessary follow-up actions. We will keep you updated of any further developments of this matter. Wishing you a pleasant day ahead.
-
-Warmest Regards,
-Nurhidayat</p></div></details></td><td>In Progress</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-4644</td><td>2026-03-05</td><td>Blk Blk 61</td><td><details class="case-expand"><summary>Bicycle seat stolen at Blk 61 B1, security saw thief.</summary><div class="case-content"><p><strong>Title:</strong> Stolen bicycle seat at Blk 61 B1 bicycle park area</p><p><strong>Description:</strong> Between 22:15-22:30 on 5 Mar 2026 , someone stolen my bicycle seat at Blk 61 B1 bicycle park area.  One security guard saw the thief and questioned him and understand that the thief said he was repairing his bicycle and shown the security guard his Hilife app.  My son happend to come back same time and saw the security guard talking to the thief.  My son did not realise that thief was targeting my bicycle and when home sensed something wrong.  He immediately went down to B1 and found that the seat was stolen.  Hence, he informed the same security guard who spoke to the thief.  Understand that the thief is chinese, medium height slightly long hair.   Two questions for MA: 1) should police report be made ?  2) when can camera be installed to capture future thief  ?</p><p><strong>MA Reply:</strong> [06 Mar 2026] Dear Sandra, thank you for your feedback. We are sorry to hear about the stolen bicycle seat. Rest assured that we will work closely with security to review our CCTV cameras to see if we can further pinpoint where the suspect stays (since he showed the HiLife app, we assume that he is a resident here). We are also aware that you were able to capture some more photos and videos of the suspect and have shared them with security.
-
-Concurrently, we encourage you to lodge a police report while we conduct our investigations and will corroborate any further information with the Investigation Officer when approached by them. Regarding future CCTV cameras deployed, let us take this matter up to the Management Council to seek approval for the procurement of cameras to be deployed for deterrence in the future.
-
-We hope that we have addressed your feedback amicably for now. We will keep you updated of any further developments in this feedback. Thank you for your kind attention and we wish you a pleasant day ahead.
-
-Regards,
-Nurhidayat</p></div></details></td><td>In Progress</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-4476</td><td>2026-02-07</td><td>Blk Blk 53</td><td><details class="case-expand"><summary>Bicycle seat stolen at Blk 53, police report filed.</summary><div class="case-content"><p><strong>Title:</strong> stolen bicycle seat at block 53</p><p><strong>Description:</strong> refer case [phone] , I&#x27;ve made a police report D/[phone]/7059. I&#x27;m disappointed the case was closed when nothing was done. step up the security in this estate.</p><p><strong>MA Reply:</strong> [09 Feb 2026] Dear Joseph, thank you for your feedback. We apologise if the previous response was not conclusive. Thank you for sharing with us and for lodging the police report. Please be assured that we will assist the police to the best of our abilities when approached by them with their investigations.
-
-Moving forward, we have also forwarded this matter to security to increase their patrolling frequency. We hope that the increased presence at the carpark will deter any potential theft incidents.
-
-We will keep this thread open so that any further developments can be shared with you. 
-
-Thank you for your kind attention and we wish you a pleasant day ahead.</p></div></details></td><td>In Progress</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-4470</td><td>2026-02-07</td><td>Blk Blk 53</td><td><details class="case-expand"><summary>Bicycle seat stolen from Blk 53 bicycle lot.</summary><div class="case-content"><p><strong>Title:</strong> 53 Bicycle Seat Stolen</p><p><strong>Description:</strong> I want to feedback that my bicycle seat has been stolen. it was parked at the corner bicycle lot at block 53. This was stolen within the last one week.</p><p><strong>MA Reply:</strong> [07 Feb 2026] Dear Joseph, thank you for your feedback. We note your observation and are sorry to hear about the missing bicycle seat. We encourage you to report this matter to the police and the management will assist them in their investigation to the best of our abilities.
-
-We hope this provides an amicable response to your feedback. As no further response is required, we will be closing this feedback automatically.
-
-Thank you for your kind attention and we wish you a pleasant day ahead.
-
-Warmest regards,
-Nurhidayat</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-4370</td><td>2026-01-25</td><td>Blk Blk 55</td><td><details class="case-expand"><summary>Suspicious person spotted again lurking around the estate.</summary><div class="case-content"><p><strong>Title:</strong> Ref ID:[phone] - Suspicious character is back</p><p><strong>Description:</strong> Same guy lurking smelling socks of our neighbour is back on 24 January 2026. This time, our video captured his full face and he was seen using the lift. Date and timestamp has been captured on each of the 2 videos attached.</p><p><strong>MA Reply:</strong> [27 Jan 2026] Dear resident,
-
-We refer to your feedback regarding the above subject matter with thanks.
-
-We understand the seriousness of the matter and note that a police report had previously been lodged. As this is a recurrence, we strongly advise that you update the existing police report with the latest information and video evidence by making a follow-up or supplementary report, referencing the earlier case.
-
-Thank you for bringing this matter to our attention. We appreciate your cooperation and understanding.</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-4363</td><td>2026-01-24</td><td>Blk Blk 61</td><td><details class="case-expand"><summary>Car logo spray-painted black in Blk 61 basement carpark.</summary><div class="case-content"><p><strong>Title:</strong> blk 61 carpark</p><p><strong>Description:</strong> hi , was there any complains about cars getting sprayed at blk 61 basement 1 carpark? someone sprayed my car logo emblem black. im very confused on the intention</p><p><strong>MA Reply:</strong> [26 Jan 2026] Hi Kaii, thanks for the feedback. We understand your concern and regret the inconvenience caused. We have informed the security to step up more patrol around the basement carpark at blk 61.
-
-In the meantime, if you wish to pursue the matter further, you may consider lodging a police report for their follow-up and record.
-
-Thank you for your cooperation and understanding.</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-4331</td><td>2026-01-16</td><td>Blk Blk 61</td><td><details class="case-expand"><summary>Person trespassed into estate through carpark exit.</summary><div class="case-content"><p><strong>Title:</strong> trespass from carpark exit</p><p><strong>Description:</strong> this morning saw someone trespassed from the carpark exit between the planter boxes.</p><p><strong>MA Reply:</strong> [16 Jan 2026] Hi Kris Qiu, thanks for the feedback. We have informed the security to check on the CCTV and follow up this matter.
-
-Thanks again.</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-4286</td><td>2026-01-07</td><td>Blk Blk 57</td><td><details class="case-expand"><summary>Jacket stolen from bicycle in basement carpark.</summary><div class="case-content"><p><strong>Title:</strong> Jacket got stolen</p><p><strong>Description:</strong> Hi, my jacket (a 3M black jacket) got stolen in the carpark. I hung the jacket to dry on my bike and on the next day I found it missing. My bike was parked at B1 M15 (near Blk 57) when the jacket went missing.</p><p><strong>MA Reply:</strong> [08 Jan 2026] Hi Vickneshwaran, thanks for the feedback. We have checked from the Security Officer and so far, nobody has found it.
-
-We will update you once if someone return back to the security.
-
-Thanks again.</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-4214</td><td>2025-12-26</td><td>Blk Blk 55</td><td><details class="case-expand"><summary>Two theft incidents in unit over recent months, security concern.</summary><div class="case-content"><p><strong>Title:</strong> report incidents of stolen case</p><p><strong>Description:</strong> I’m writing to provide feedback and raise a concern about security and safety in the condo, as my household has experienced two theft incidents within the last few months.
-
-1) August incident: A packet/bag of cherries was stolen.  
-2) December incident (recent): A pair of my husband’s shoes was stolen.
-
-These incidents have made us feel increasingly uneasy about day-to-day safety in the common areas. We would appreciate the Management Office’s support to strengthen preventive measures.</p><p><strong>MA Reply:</strong> [27 Dec 2025] Dear Xupan Zhou, thank you for your feedback. We note your observations regarding the theft incidents reported over the past few months. We strongly encourage you to lodge a police report in relation to the recent incident, and please be assured that the management will render full cooperation to the authorities and assist with their investigations to the best of our ability.
-
-We understand the concerns this may raise regarding safety within the common areas. While the security team continues to provide estate-level security coverage, residents are also encouraged to take proactive precautions, such as avoiding leaving valuables unattended in common areas.
-
-Some residents have also implemented additional deterrent measures, such as installing CCTV coverage at the frontage of their units, where permissible, to enhance personal security.
-
-We hope this provides an amicable response to your feedback. As no further response is required, we will be closing this feedback automatically. Thank you for your kind attention and we wish you a pleasant day ahead.</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-3911</td><td>2025-10-14</td><td>Blk Blk 53</td><td><details class="case-expand"><summary>Someone attempted to access apartment via door lock keypad.</summary><div class="case-content"><p><strong>Title:</strong> Possible Attempt to Access My Apartment</p><p><strong>Description:</strong> I am writing to report a security concern that occurred this morning, 9:15 - 9:25 AM. I cannot record the exact timing, but during that time, I heard multiple attempts on my door lock keypad — it sounded as though someone was trying to enter my apartment by testing the password, approximately 2 to 3 times, before leaving.  
-When I went to check what was happening, I also heard footsteps moving away from my door, someone might had been standing right outside. However, when I checked the door monitor immediately afterward, I did not see anyone at the corridor. Initially, I assumed it might have been a delivery, but there were no parcel or delivery notices left at my door step.
-
-Could you please review the building’s CCTV footage or check any access records to see if there was anyone in the corridor or near my apartment during that period?
-
-Thank you for your attention to this matter. I look forward to your follow-up and any findings from your investigation.</p><p><strong>MA Reply:</strong> [14 Oct 2025] Dear Johice,
-
-Thank you for your message and for bringing this matter to our attention.
-
-We understand your concern regarding the incident outside your apartment between the period. Unfortunately, we currently do not have CCTV coverage in the corridor areas and therefore there are no CCTV footage available. However, please be assured we take all feedback seriously.
-
-Should you encounter such incident again, we strongly encourage you to contact our security team immediately via the guardhouse or management hotline [phone].
-
-Thank you again.</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-3910</td><td>2025-10-14</td><td>Blk Blk 61</td><td><details class="case-expand"><summary>Person seen picking flowers from public garden area.</summary><div class="case-content"><p><strong>Title:</strong> stealing flowers</p><p><strong>Description:</strong> the lady harvesting blossoms in the public area . . .</p><p><strong>MA Reply:</strong> [14 Oct 2025] Dear HrBrt, thank you for sharing this matter with us. Kindly provide us with an estimated time when this incident occur so that we may deploy security in the future to intervene and educate that such flowers are not meant to be plucked.
-
-We look forward to your response. Wishing you a pleasant day ahead.
----
-[14 Oct 2025] Dear HrBrt, we have gone to clarify with the landscaper and the supervisor clarified that while in the midst of pruning the plants as part of the routine maintenance, the lady requested if she could take the cut flowers for her own use. We have already discouraged the landscaper from allowing anyone to take any of the plants, even though it has been pruned as it was already sprayed with chemicals as part of fortifying the plants against external factors.
-
-Thus, these plant materials may not be suitable to be kept at home as well. As no further response is required, we will be closing this feedback automatically. Thank you for bringing this matter to our attention, and we wish you a pleasant day ahead.
----
-[14 Oct 2025] Dear owner,
-
-We refer to your feedback regarding the above subject matter with thanks.
-
-For your information, we have checked with our landscape contractor, and they informed us that the resident had asked for the trimmed blossoms to be kept aside during their trimming work, as she wanted to take them home.
-
-However, please note that removing or damage plants from common areas is not allowed.
-
-Thanks again bringing this matter to management attention.</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-3876</td><td>2025-10-06</td><td>Blk Blk 57</td><td><details class="case-expand"><summary>Trash disposal handle vandalized and difficult to operate.</summary><div class="case-content"><p><strong>Title:</strong> Trash Disposal Handle</p><p><strong>Description:</strong> Please replace the handle, someone vandalised it. It makes it difficult to open when it gets stuck in it&#x27;s holder.</p><p><strong>MA Reply:</strong> [07 Oct 2025] Dear resident,
-
-We refer to your feedback above with thanks.
-
-We have assigned the subject matter to our technician, and the door handle have done replacement.
-
-We thanks again to bringing up this matter to management team.</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-3858</td><td>2025-10-04</td><td>Blk Blk 61</td><td><details class="case-expand"><summary>Man climbed wall at side gate near FairPrice to let companion in.</summary><div class="case-content"><p><strong>Title:</strong> Trespassing at side gate</p><p><strong>Description:</strong> Hi, I witnessed a man climbing over the wall at the side gate beside Fairprice Express, at about 11:55 to 11:56pm on Oct 3. He then opened the gate to let his companion into the estate. I did not manage to capture a picture in time, but hopefully this was captured by CCTV.</p><p><strong>MA Reply:</strong> [04 Oct 2025] Dear Jason, thank you for your feedback. We note your observation regarding this matter and have tasked security to review CCTV footage and check on this matter. If necessary, we will be reporting this matter to the police, as well as checking in with the security company why no action was taken to prevent this matter from happening in the first place. Thank you for bringing this matter to our attention and we wish you a pleasant day ahead.
----
-[06 Dec 2025] We will be closing this case. Please feel free to submit any new feedback. Thank you.</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-3857</td><td>2025-10-03</td><td>Blk Blk 55</td><td><details class="case-expand"><summary>Suspicious person sniffing shoes at Blk 55 floor 2 corridor weekly.</summary><div class="case-content"><p><strong>Title:</strong> Suspicious Character - Repeated Occurence (Blk 55)</p><p><strong>Description:</strong> We have been observing and monitoring this guy (not staying on our level #2) appearing on our floor, at least twice a week. Trying to sniff shoes/socks of our neighbours. This guy uses the staircase and this video captured was on 3 October 2025 at 2:18AM. Please take this seriously and see if you’re able to capture him on your security cameras. We find it really unsafe and would like Management to take action and keep us updated. Thank you.</p><p><strong>MA Reply:</strong> [04 Oct 2025] Dear NP SN, thank you for your feedback. We note your observation and have lodged a police report regarding this matter. Moving forward, we will continue to work closely with the police to resolve this matter. Kindly note that we may refer your contact details to the police for their investigations as well.
-
-At the same time, we have forwarded this matter to security to review CCTV footage to see if we are able to identify this person further. Meanwhile, we would like to continue to receive information on any further occurrences of this person. At the same time, kindly do not confront this person while investigations are ongoing.
-
-Thank you for bringing this matter to our attention. Wishing you a pleasant day ahead.
----
-[22 Nov 2025] We will close this case. Please submit a new case if this guy resurfaces again. Thank you</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-3797</td><td>2025-09-21</td><td>Blk Blk 57</td><td><details class="case-expand"><summary>Unauthorized rooftop access by residents at Blk 57 level 24.</summary><div class="case-content"><p><strong>Title:</strong> Access to Rooftop at Blk 57</p><p><strong>Description:</strong> Hi noted 2 foreign causacian ladies accessing and exiting out from the door at L24 which leads to the roof top at around 10ish pm today 20th Sept . This is not the first time and it is quite concerning for safety reasons accessing the roof top of the blocks esp when they are none residents. Pls ensure something is done to prevent unauthorised parties from accessing the premises of the condo and block in particular the hazards of the rooftop given that there has been some noises observed on few occasions. Thanks</p><p><strong>MA Reply:</strong> [22 Sep 2025] Dear Mamamia81, thank you for your feedback. We note your observation regarding this matter and have alerted security to check and ensure that the rooftop access door is locked to prevent any trespassing from occurring. Moving forward, you may wish to consider contacting security at their 24-hour hotline [phone] should you see any suspicious activity being conducted. We hope this addresses your feedback amicably. As no further response is required, we will be closing this feedback automatically. Thank you for your kind attention, and we wish you a pleasant day ahead.</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-3672</td><td>2025-08-24</td><td>Blk Blk 57</td><td><details class="case-expand"><summary>Letterbox lock tampered with; requesting CCTV at letterbox area.</summary><div class="case-content"><p><strong>Title:</strong> Letterbox</p><p><strong>Description:</strong> we noticed someone open our letterbox and changed the digital lock password and took away our original lock which was keep inside the letterbox. we unsure any other letters are taken. This is an serious matters. Can MCST install security camera at the letter box area, to prevent theft for the letter box</p><p><strong>MA Reply:</strong> [25 Aug 2025] Dear Peilu Tang, thank you for your feedback. Installation of CCTV cameras comes at a significant cost to the MCST and such decision will be reserved for the Management Council upon its formation after the 1st Annual General Meeting.
-
-With regards to your current situation, we recommend that you lodge a police report should you believe that foul play is involved with regards to your letterbox. We hope that we have responded amicably to your feedback. As no further response is required, we will be closing this feedback automatically. Wishing you a pleasant day ahead.</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-3498</td><td>2025-07-16</td><td>Blk Blk 49</td><td><details class="case-expand"><summary>Coffee splashed on car parked near Blk 49.</summary><div class="case-content"><p><strong>Title:</strong> De facing car</p><p><strong>Description:</strong> Hi. I parked my car adjacent to Blk 49, near the bicycle rack. Found coffee splashed on my car on Sun, 13 Aug (see pic) . I’m not sure if it’s accidental or malicious and would ask for more security vigilance.lf there are security footages at the above mentioned carpark lot area, pls review. Thanks.</p><p><strong>MA Reply:</strong> [16 Jul 2025] Dear Yang, thank you for your feedback. We are sorry to hear about the incident involving your car. We have forwarded this matter to the security for their attention. As there might be limited coverage from the CCTV of the lift lobbies, we highly recommend that you install an in-car camera system to deter such incidents from happening or at least be able to record if it happens. Thank you for your kind attention, and we hope that we were able to respond to your feedback amicably. Wishing you a pleasant day ahead.</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-3492</td><td>2025-07-14</td><td>Blk Blk 47</td><td><details class="case-expand"><summary>Man spotted prying open letter box flaps to insert flyers.</summary><div class="case-content"><p><strong>Title:</strong> man plied open letter box</p><p><strong>Description:</strong> On 14 Jul- 15:15-15:30am. a man spotted putting in flyer into letter box by plying the flap n trying to fit into the gap. he started to use strong force and ended up open up one of the letter box. I have stopped and stared at the man, before i can get car plate the man flee away. He then spotted drove past his car to blk47 but didnt make a stop. Management, will the increased theft cases in car park and random stranger plying the letter box. what are the measures? No monitoring? No CCTV in the carpark?</p><p><strong>MA Reply:</strong> [14 Jul 2025] Dear Becca, thank you for your feedback. We are sorry to hear about this incident you encounter. We have forwarded this matter to security and see if we are able to identify the person.
-
-We seek your assistance in providing further details of the man, e.g. are you able to recall what car model/make and colour? It will be helpful in identifying the driver and potentially blacklist them from coming in again.
-
-Meanwhile security will be monitoring the CCTV footage as well to identify the man in question.
----
-[06 Aug 2025] Dear Becca, thank you for your update. We have taken note of a black car and the physical feature of the man. We have shared this information with security and they will investigate further on this matter. As no further response is required, we will be closing this feedback automatically. Thank you for your kind attention, and we wish you a pleasant day ahead.</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-3376</td><td>2025-06-18</td><td>Blk Blk 61</td><td><details class="case-expand"><summary>Shoes stolen from doorstep shoe rack.</summary><div class="case-content"><p><strong>Title:</strong> Shoe theft in condo</p><p><strong>Description:</strong> A pair of shoes disappeared from my shoe rack on my doorstep and I suspect they have been stolen. Unfortunately I have no way of knowing who. I would like to ask that we step up security or request all residents to comply with advisories again such as ensuring L1 gates are closed because I notice our L1 gates at Block 61 are always left open. or is there a way to ensure they close automatically, or that lift levels are restricted to card access? on the whole it just feels like security is quite lax here and now that shoes have disappeared off my shoe rack - and I believe previously there was a spate of bicycle thefts - I really think management should step up on security measures.</p><p><strong>MA Reply:</strong> [19 Jun 2025] Thank you for your Feedback.
-
-We are sorry to hear about the missing pair of shoes outside your unit and understand your concerns regarding the overall security in the estate.
-We recommend that you file a police report regarding this incident so that it can be properly documented and investigated.
-
-Level 1 Gate Closure:
-We acknowledge that the Level 1 gate at Block 61 is sometimes left open. The  installing a spring-loaded or hydraulic auto-closer or a magnetic locking device, subject to Management Council approval and budget availability. Circular/Notice pasted on the gate to remind the resident to close the gate after opening.
-
-Lift Access Control:
-Lifts in our estate are not currently programmed with a card access control system, and such a system was not included in the original design and installation. As such, restricting lift access by resident keycard would require additional hardware upgrades and integration, subject to Council review and budget consideration.
-
-
-Security Measures:
-We will also request our security personnel to increase their vigilance and patrols, especially in common areas such as lift lobbies and corridors. Additionally, we will review the current CCTV coverage and assess if enhancements are needed in light of recent incidents.
-
-While we regret that we are unable to trace the missing shoes without direct evidence or CCTV footage in the specific area, we encourage all residents to keep valuables within the unit whenever possible.
-
-Thank you once again for your feedback. 
-
--w</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-3214</td><td>2025-05-12</td><td>Blk Blk 49</td><td><details class="case-expand"><summary>Request for responsible access gate closing by residents.</summary><div class="case-content"><p><strong>Title:</strong> Access control</p><p><strong>Description:</strong> With recent thefts in other condos, can I request that we remind our residents to br responsible about closing access gates which are often just left open (daily especially in morning and late afternoon). I’ll suggest installing a ringing alert that’s goes off the gates are not closed. Also, there should be increased vigilance about tail gating given the continuous stream of delivery personnel pls. Pls take action to improve the current situation. Thanks.</p><p><strong>MA Reply:</strong> [13 May 2025] Thank you for highlighting your concerns and suggestions regarding the estate’s security.
-
-We acknowledge the issue of gates being left open and the risk of tailgating, especially during peak hours and times of high delivery activity. Tailgating can be challenging to manage as it often occurs quickly and discreetly, particularly when access is granted to legitimate visitors or delivery personnel.
-
-A reminder will be issued to all residents to ensure that access gates are properly closed behind them.
-
-We will explore the feasibility of installing an alert system or chime that activates when gates are left open for an extended period.
-
-Security will be reminded to stay vigilant and to monitor for tailgating more closely, especially during high-traffic periods involving delivery personnel.
-
-We appreciate your feedback and proactive suggestions. Your cooperation plays a vital role in keeping our community safe.</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-3202</td><td>2025-05-11</td><td>Blk Blk 59</td><td><details class="case-expand"><summary>Door mat tampered with and building security concern.</summary><div class="case-content"><p><strong>Title:</strong> Tampered Door Mat and Building Security Concern</p><p><strong>Description:</strong> Dear Management 
-
-I am writing to formally raise two concerns regarding recent issues at our residence.
-
-Firstly, I discovered that my door mat, placed just outside my unit, has been deliberately cut. This act of vandalism is both unsettling and unacceptable, and I urge the management to investigate the matter.
-
-Secondly, I would like to highlight a recurring security concern — the entrance door to the building is frequently left unlocked. This compromises the safety of all residents and potentially allows unauthorized individuals to access the premises.
-
-I kindly request prompt action to:
-	1.	Investigate the tampering of my door mat.
-	2.	Ensure the building’s entrance door remains securely locked at all times.
-
-Thank you for your attention to these matters. I hope for your swift response and resolution.
-
-Sincerely,</p><p><strong>MA Reply:</strong> [13 May 2025] Thank you for informing us of these matters.
-
-We are sorry to hear about the damage to your door mat. While we regret to inform you that there is no CCTV coverage in that specific area, we will be increasing patrols and keeping a closer watch in the vicinity. We also encourage you to report any suspicious activity you may observe, as it can help us in preventing future occurrences.
-
-Regarding the issue of the entrance door being frequently left unlocked, we agree this poses a safety concern. We will inspect the door to ensure the locking mechanism is functioning properly, and reminders will be issued to residents and relevant personnel to ensure the door is securely closed at all times.
-
-We appreciate your vigilance and will continue to monitor both matters. Please feel free to reach out if the issues persist or if you notice any further developments.</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-3171</td><td>2025-05-05</td><td>Blk Blk 47</td><td><details class="case-expand"><summary>Security guard harassed helper at side gate about registration.</summary><div class="case-content"><p><strong>Title:</strong> Disturbance from security guard</p><p><strong>Description:</strong> My part time helper, Sandar came in this morning from the side gate next to the AYE bus stop at about 9am. She registered and then the security guard started saying I Love you Sandar, and smiled at her. It terrified her! She described the guy is walking with a limp. I am not sure if he is a full time security guard but it poses insecurity in our community. Do report with his manager on such inappropriate behavior.</p><p><strong>MA Reply:</strong> [05 May 2025] Thank you for bringing this matter to our attention. We are very sorry to hear about the inappropriate and unsettling experience your helper, Sandar, encountered this morning at the side gate. The safety and comfort of all residents and their visitors are of utmost importance to us.
-
-We take such reports seriously and have already initiated an investigation into the incident. Based on the description provided, we are working with the security agency to identify the guard involved. The individual will be interviewed, and appropriate disciplinary actions will be taken in accordance with our community’s code of conduct.
-
-Please be assured that we have reminded all security personnel of the importance of maintaining professionalism at all times. Additional training will also be conducted to reinforce expected behavior and boundaries.
-
-We deeply regret any distress caused to Sandar and to you as a resident. Should there be any further concerns or if Sandar is willing to provide additional details, we would appreciate the opportunity to follow up.
-
-Thank you again for your vigilance in helping maintain a safe and respectful living environment.</p></div></details></td><td>Closed</td></tr>
-<tr style="background:var(--color-red-bg);"><td>1292-3149</td><td>2025-05-01</td><td>Blk Blk 61</td><td><details class="case-expand"><summary>Holes found in outdoor furniture from vandalism.</summary><div class="case-content"><p><strong>Title:</strong> damaged outdoor furnishing</p><p><strong>Description:</strong> There seems to be several holes in the outdoor furnishing. Can we discourage this behaviour by users either residents or guests or pets? The condition is also quite dirty and may require more regular cleaning.</p><p><strong>MA Reply:</strong> [02 May 2025] Thank you for your feedback regarding the condition of the outdoor sofa. We’re aware of the issues, including the wear and tear, and we truly appreciate you bringing it to our attention.
-
-Please rest assured that we’ve already discussed this matter with the developer and are currently in the process of sourcing quotes from potential suppliers for a suitable replacement. We understand the importance of maintaining a comfortable and clean outdoor space for everyone to enjoy.
-
-We kindly ask for your patience as we work through the necessary steps to resolve this matter. Your understanding and cooperation are greatly appreciated.</p></div></details></td><td>Closed</td></tr>
-</tbody></table>
 </div>
 <h2 id="overall-highlights">9. Top 20 Priority Issues -- MA Action List</h2>
 <p>These are the 20 most critical specific issues requiring MA attention, ranked by severity (High first, then Medium), with trend, duration, and resident impact context.</p>
@@ -14089,6 +13990,7 @@ We kindly ask for your patience as we work through the necessary steps to resolv
 <h3>Highlights</h3><ul class="highlight-list">
 <li>Top issue clusters: Lift Issues (21), Cleanliness (17), Noise &amp; Neighbour (14).</li>
 <li>12 low-rating cases (1-2 stars): Rubbish Chute (3), Cleanliness (2), Lift Issues (2).</li>
+<li>Negative sentiment at 16.4% -- higher than usual.</li>
 </ul>
 <h3>Issue Cluster Distribution</h3>
 <table><thead><tr><th>#</th><th>Cluster</th><th>Count</th><th>%</th><th style="width:30%"></th></tr></thead><tbody>
