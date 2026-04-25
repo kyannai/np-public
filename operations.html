@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Normanton Park -- MA Operations Dashboard (Apr 2025 - Mar 2026)</title>
+<style>
+  :root {
+    --color-primary: #2c5282;
+    --color-primary-light: #ebf0f7;
+    --color-primary-dark: #1a365d;
+    --color-green: #276749;
+    --color-red: #9b2c2c;
+    --color-yellow: #975a16;
+    --color-bg: #f8f9fa;
+    --color-card: #ffffff;
+    --color-text: #2d3748;
+    --color-muted: #718096;
+    --color-border: #c5cfe0;
+    --sidebar-width: 240px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--color-text); background: var(--color-bg); line-height: 1.6;
+  }
+  /* Sidebar */
+  .sidebar {
+    position: fixed; top: 0; left: 0; width: var(--sidebar-width); height: 100vh;
+    background: var(--color-primary-dark); color: #e2e8f0; overflow-y: auto;
+    padding: 20px 0; z-index: 100; display: flex; flex-direction: column;
+  }
+  .sidebar h2 {
+    color: #fff; font-size: 0.95em; padding: 0 16px; margin-bottom: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.15); padding-bottom: 12px;
+  }
+  .sidebar a {
+    display: block; padding: 7px 16px; color: #cbd5e0; text-decoration: none;
+    font-size: 0.84em; transition: background 0.15s;
+  }
+  .sidebar a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  .sidebar .nav-group { margin-bottom: 12px; }
+  .sidebar .nav-label {
+    font-size: 0.72em; text-transform: uppercase; letter-spacing: 0.06em;
+    color: #a0aec0; padding: 8px 16px 3px; font-weight: 600;
+  }
+  .sidebar .home-link {
+    background: rgba(255,255,255,0.08); border-radius: 4px; margin: 8px 12px;
+    padding: 8px 12px; text-align: center; font-size: 0.82em; color: #90cdf4;
+  }
+  .sidebar .home-link:hover { background: rgba(255,255,255,0.18); color: #fff; }
+
+  /* Main content */
+  .main { margin-left: var(--sidebar-width); max-width: 1200px; padding: 24px 32px 60px; }
+  h1 { font-size: 1.6em; color: var(--color-primary-dark); margin-bottom: 4px; }
+  h2 {
+    font-size: 1.25em; color: var(--color-primary); margin: 36px 0 14px;
+    border-bottom: 2px solid var(--color-border); padding-bottom: 6px;
+  }
+  h3 { font-size: 1.0em; color: #37474f; margin: 14px 0 8px; }
+  .subtitle { color: var(--color-muted); font-size: 0.88em; margin-bottom: 20px; }
+  .card {
+    background: var(--color-card); border-radius: 8px; padding: 20px;
+    margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  /* Summary cards */
+  .summary-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 12px; margin: 12px 0;
+  }
+  .metric {
+    background: var(--color-primary-light); border-radius: 6px;
+    padding: 16px; text-align: center;
+  }
+  .metric .value { font-size: 1.7em; font-weight: 700; color: var(--color-primary); }
+  .metric .label { font-size: 0.78em; color: var(--color-muted); margin-top: 2px; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.84em; }
+  th {
+    background: var(--color-primary); color: #fff; padding: 8px 6px;
+    text-align: left; font-weight: 600; font-size: 0.86em;
+  }
+  td { padding: 6px; border-bottom: 1px solid #e2e8f0; vertical-align: middle; }
+  tr:hover td { background: #f7fafc; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .cluster-name { font-weight: 600; white-space: nowrap; }
+  .vendor-name { font-size: 0.82em; color: var(--color-muted); }
+  .cluster-list { font-size: 0.8em; color: var(--color-muted); max-width: 180px; }
+
+  /* Sparklines */
+  .sparkline {
+    display: inline-flex; align-items: flex-end; gap: 1px; height: 32px;
+    vertical-align: middle;
+  }
+  .spark-bar {
+    display: inline-block; width: 5px; min-height: 0; border-radius: 1px 1px 0 0;
+    transition: height 0.2s;
+  }
+
+  /* Trend arrows */
+  .trend-up { color: var(--color-red); font-size: 0.85em; }
+  .trend-down { color: var(--color-green); font-size: 0.85em; }
+  .trend-stable { color: var(--color-muted); font-size: 0.85em; }
+
+  /* Open highlight */
+  .open-highlight { color: var(--color-red); font-weight: 700; }
+
+  /* Two-column layout */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .two-col .card { margin-bottom: 0; }
+
+  /* Heatmap */
+  .hm-cell {
+    text-align: center; font-size: 0.78em; padding: 4px 2px;
+    font-variant-numeric: tabular-nums; min-width: 42px;
+  }
+  .growing-row { outline: 2px solid var(--color-red); outline-offset: -1px; }
+  .heatmap-wrap { overflow-x: auto; }
+
+  /* Task cards */
+  .task-card {
+    background: var(--color-card); border-radius: 6px; padding: 16px 18px;
+    margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+  }
+  .task-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .task-name { font-weight: 700; font-size: 0.95em; }
+  .task-priority {
+    font-size: 0.72em; font-weight: 700; text-transform: uppercase;
+    padding: 2px 8px; border-radius: 3px; letter-spacing: 0.04em;
+  }
+  .priority-high { background: #fed7d7; color: var(--color-red); }
+  .priority-medium { background: #fefcbf; color: var(--color-yellow); }
+  .priority-low { background: #c6f6d5; color: var(--color-green); }
+  .task-meta { font-size: 0.8em; color: var(--color-muted); margin-bottom: 6px; }
+  .task-meta .sep { margin: 0 6px; }
+  .task-detail { font-size: 0.82em; margin-bottom: 3px; }
+  .task-status { font-size: 0.78em; color: var(--color-muted); margin-top: 6px; font-style: italic; }
+
+  /* Vendor scorecard */
+  .rating-good { color: var(--color-green); font-weight: 600; }
+  .rating-fair { color: var(--color-yellow); font-weight: 600; }
+  .rating-poor { color: var(--color-red); font-weight: 600; }
+
+  /* Open cases */
+  .open-cluster-group { margin-bottom: 18px; }
+  .open-cluster-group h3 { font-size: 0.92em; border-bottom: 1px solid var(--color-border); padding-bottom: 4px; }
+  .open-table { font-size: 0.82em; }
+  .open-table th { font-size: 0.82em; padding: 6px 5px; }
+  .open-table td { padding: 5px; }
+  .summary-text { max-width: 400px; font-size: 0.82em; color: #4a5568; }
+  .age-red { background: #fff5f5; }
+  .age-red td { color: var(--color-red); }
+  .age-yellow { background: #fffff0; }
+  .age-yellow td { color: var(--color-yellow); }
+
+  /* Print */
+  @media print {
+    .sidebar { display: none; }
+    .main { margin-left: 0; max-width: 100%; padding: 10px; }
+    .card { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
+    .task-card { box-shadow: none; border: 1px solid #ddd; page-break-inside: avoid; }
+    h2 { page-break-before: always; }
+    body { font-size: 11px; }
+  }
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main { margin-left: 0; padding: 16px; }
+    .two-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body><a href="https://kyannai.github.io/np-public/" class="back-to-home" style="position:fixed;top:12px;right:16px;z-index:200;font-size:13px;padding:6px 14px;background:var(--color-primary,#2c5282);color:#fff;border-radius:4px;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.2);">Back to Home</a>
+
+<nav class="sidebar">
+    <h2>MA Operations</h2>
+    
+        <div class="nav-group">
+            <div class="nav-label">Dashboard</div>
+            <a href="#overview">Operations Overview</a>
+            <a href="#clusters">Issue Clusters</a>
+            <a href="#trends">Trend Analysis</a>
+            <a href="#taskgroups">Task Groups</a>
+            <a href="#vendors">Vendor Scorecard</a>
+            <a href="#open">Open Cases</a>
+        </div>
+        <div class="nav-group">
+            <div class="nav-label">Quick Stats</div>
+            <div style="padding:4px 16px;font-size:0.78em;color:#a0aec0;">
+                Total: 1844<br>
+                Open: 58<br>
+                Avg Res: 3.8d
+            </div>
+        </div>
+        <div class="nav-group" style="margin-top:auto;padding-top:20px;">
+            <a href="https://kyannai.github.io/np-public/" class="home-link">Back to Home</a>
+        </div>
+    
+</nav>
+
+<div class="main">
+
+<h1>MA Office Manager's Operations Dashboard</h1>
+<p class="subtitle">Normanton Park | Apr 2025 - Mar 2026 | Generated 11 Apr 2026</p>
+
+<!-- Section 1: Operations Overview -->
+<h2 id="overview">1. Operations Overview</h2>
+<div class="card">
+    <div class="summary-grid">
+        <div class="metric">
+            <div class="value">1844</div>
+            <div class="label">Total Cases (12 months)</div>
+        </div>
+        <div class="metric">
+            <div class="value" style="color:var(--color-red)">58</div>
+            <div class="label">Currently Open</div>
+        </div>
+        <div class="metric">
+            <div class="value">3.8</div>
+            <div class="label">Avg Resolution (days)</div>
+        </div>
+        <div class="metric">
+            <div class="value">209</div>
+            <div class="label">Mar 2026 <span class="trend-up">&#9650; +8.3%</span></div>
+        </div>
+        <div class="metric">
+            <div class="value">193</div>
+            <div class="label">Feb 2026</div>
+        </div>
+    </div>
+    <div class="summary-grid" style="margin-top:8px;">
+        <div class="metric">
+            <div class="value">903</div>
+            <div class="label">MA Internal</div>
+        </div>
+        <div class="metric">
+            <div class="value">914</div>
+            <div class="label">Vendor-Managed</div>
+        </div>
+        <div class="metric">
+            <div class="value">27</div>
+            <div class="label">Other / Unassigned</div>
+        </div>
+    </div>
+</div>
+
+<!-- Section 2: Issue Clusters by Responsibility -->
+<h2 id="clusters">2. Issue Clusters by Responsibility</h2>
+<div class="two-col">
+    <div class="card">
+        <h3>MA Internal</h3>
+        <p style="font-size:0.78em;color:var(--color-muted);margin-bottom:8px;">Handled directly by MA team</p>
+        <table>
+            <thead><tr>
+                <th>Cluster</th><th>Total</th><th>Mar 26</th><th>12-Month</th><th>Trend</th><th>Open</th><th>Avg Days</th>
+            </tr></thead>
+            <tbody><tr>
+            <td class="cluster-name">Noise &amp; Neighbour</td>
+            
+            <td class="num">190</td>
+            <td class="num">26</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:20px;background:#2c5282" title="Apr 25: 18"></span><span class="spark-bar" style="height:18px;background:#2c5282" title="May 25: 16"></span><span class="spark-bar" style="height:10px;background:#2c5282" title="Jun 25: 9"></span><span class="spark-bar" style="height:19px;background:#2c5282" title="Jul 25: 17"></span><span class="spark-bar" style="height:16px;background:#2c5282" title="Aug 25: 14"></span><span class="spark-bar" style="height:19px;background:#2c5282" title="Sep 25: 17"></span><span class="spark-bar" style="height:17px;background:#2c5282" title="Oct 25: 15"></span><span class="spark-bar" style="height:18px;background:#2c5282" title="Nov 25: 16"></span><span class="spark-bar" style="height:18px;background:#2c5282" title="Dec 25: 16"></span><span class="spark-bar" style="height:20px;background:#3b6fb5" title="Jan 26: 18"></span><span class="spark-bar" style="height:9px;background:#3b6fb5" title="Feb 26: 8"></span><span class="spark-bar" style="height:30px;background:#3b6fb5" title="Mar 26: 26"></span></span></td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+            <td class="open-highlight">13</td>
+            <td class="num">8.8</td>
+        </tr><tr>
+            <td class="cluster-name">Animal Issues</td>
+            
+            <td class="num">72</td>
+            <td class="num">13</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:6px;background:#2c5282" title="Apr 25: 3"></span><span class="spark-bar" style="height:18px;background:#2c5282" title="May 25: 8"></span><span class="spark-bar" style="height:11px;background:#2c5282" title="Jun 25: 5"></span><span class="spark-bar" style="height:11px;background:#2c5282" title="Jul 25: 5"></span><span class="spark-bar" style="height:13px;background:#2c5282" title="Aug 25: 6"></span><span class="spark-bar" style="height:9px;background:#2c5282" title="Sep 25: 4"></span><span class="spark-bar" style="height:18px;background:#2c5282" title="Oct 25: 8"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="Nov 25: 3"></span><span class="spark-bar" style="height:4px;background:#2c5282" title="Dec 25: 2"></span><span class="spark-bar" style="height:13px;background:#3b6fb5" title="Jan 26: 6"></span><span class="spark-bar" style="height:20px;background:#3b6fb5" title="Feb 26: 9"></span><span class="spark-bar" style="height:30px;background:#3b6fb5" title="Mar 26: 13"></span></span></td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+            <td class="open-highlight">2</td>
+            <td class="num">1.6</td>
+        </tr><tr>
+            <td class="cluster-name">Parking &amp; Traffic</td>
+            
+            <td class="num">89</td>
+            <td class="num">11</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:30px;background:#2c5282" title="Apr 25: 11"></span><span class="spark-bar" style="height:16px;background:#2c5282" title="May 25: 6"></span><span class="spark-bar" style="height:10px;background:#2c5282" title="Jun 25: 4"></span><span class="spark-bar" style="height:24px;background:#2c5282" title="Jul 25: 9"></span><span class="spark-bar" style="height:19px;background:#2c5282" title="Aug 25: 7"></span><span class="spark-bar" style="height:10px;background:#2c5282" title="Sep 25: 4"></span><span class="spark-bar" style="height:24px;background:#2c5282" title="Oct 25: 9"></span><span class="spark-bar" style="height:21px;background:#2c5282" title="Nov 25: 8"></span><span class="spark-bar" style="height:13px;background:#2c5282" title="Dec 25: 5"></span><span class="spark-bar" style="height:21px;background:#3b6fb5" title="Jan 26: 8"></span><span class="spark-bar" style="height:19px;background:#3b6fb5" title="Feb 26: 7"></span><span class="spark-bar" style="height:30px;background:#3b6fb5" title="Mar 26: 11"></span></span></td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+            <td class="open-highlight">2</td>
+            <td class="num">4.3</td>
+        </tr><tr>
+            <td class="cluster-name">Common Area Obstruction</td>
+            
+            <td class="num">107</td>
+            <td class="num">20</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:16px;background:#2c5282" title="Apr 25: 11"></span><span class="spark-bar" style="height:9px;background:#2c5282" title="May 25: 6"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="Jun 25: 8"></span><span class="spark-bar" style="height:7px;background:#2c5282" title="Jul 25: 5"></span><span class="spark-bar" style="height:7px;background:#2c5282" title="Aug 25: 5"></span><span class="spark-bar" style="height:10px;background:#2c5282" title="Sep 25: 7"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="Oct 25: 8"></span><span class="spark-bar" style="height:7px;background:#2c5282" title="Nov 25: 5"></span><span class="spark-bar" style="height:13px;background:#2c5282" title="Dec 25: 9"></span><span class="spark-bar" style="height:18px;background:#3b6fb5" title="Jan 26: 12"></span><span class="spark-bar" style="height:16px;background:#3b6fb5" title="Feb 26: 11"></span><span class="spark-bar" style="height:30px;background:#3b6fb5" title="Mar 26: 20"></span></span></td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+            <td class="open-highlight">2</td>
+            <td class="num">2.3</td>
+        </tr><tr>
+            <td class="cluster-name">Admin &amp; General</td>
+            
+            <td class="num">172</td>
+            <td class="num">18</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:11px;background:#2c5282" title="Apr 25: 10"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="May 25: 11"></span><span class="spark-bar" style="height:10px;background:#2c5282" title="Jun 25: 9"></span><span class="spark-bar" style="height:16px;background:#2c5282" title="Jul 25: 14"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="Aug 25: 11"></span><span class="spark-bar" style="height:20px;background:#2c5282" title="Sep 25: 18"></span><span class="spark-bar" style="height:15px;background:#2c5282" title="Oct 25: 13"></span><span class="spark-bar" style="height:11px;background:#2c5282" title="Nov 25: 10"></span><span class="spark-bar" style="height:20px;background:#2c5282" title="Dec 25: 18"></span><span class="spark-bar" style="height:16px;background:#3b6fb5" title="Jan 26: 14"></span><span class="spark-bar" style="height:30px;background:#3b6fb5" title="Feb 26: 26"></span><span class="spark-bar" style="height:20px;background:#3b6fb5" title="Mar 26: 18"></span></span></td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+            <td class="open-highlight">3</td>
+            <td class="num">1.2</td>
+        </tr><tr>
+            <td class="cluster-name">Lighting</td>
+            
+            <td class="num">37</td>
+            <td class="num">10</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:9px;background:#2c5282" title="Apr 25: 3"></span><span class="spark-bar" style="height:9px;background:#2c5282" title="May 25: 3"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="Jun 25: 4"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="Jul 25: 2"></span><span class="spark-bar" style="height:3px;background:#2c5282" title="Aug 25: 1"></span><span class="spark-bar" style="height:3px;background:#2c5282" title="Sep 25: 1"></span><span class="spark-bar" style="height:3px;background:#2c5282" title="Oct 25: 1"></span><span class="spark-bar" style="height:9px;background:#2c5282" title="Nov 25: 3"></span><span class="spark-bar" style="height:9px;background:#2c5282" title="Dec 25: 3"></span><span class="spark-bar" style="height:18px;background:#3b6fb5" title="Jan 26: 6"></span><span class="spark-bar" style="height:0px;background:#3b6fb5" title="Feb 26: 0"></span><span class="spark-bar" style="height:30px;background:#3b6fb5" title="Mar 26: 10"></span></span></td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+            <td>0</td>
+            <td class="num">5.4</td>
+        </tr><tr>
+            <td class="cluster-name">Electrical</td>
+            
+            <td class="num">49</td>
+            <td class="num">1</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:22px;background:#2c5282" title="Apr 25: 6"></span><span class="spark-bar" style="height:30px;background:#2c5282" title="May 25: 8"></span><span class="spark-bar" style="height:22px;background:#2c5282" title="Jun 25: 6"></span><span class="spark-bar" style="height:15px;background:#2c5282" title="Jul 25: 4"></span><span class="spark-bar" style="height:15px;background:#2c5282" title="Aug 25: 4"></span><span class="spark-bar" style="height:18px;background:#2c5282" title="Sep 25: 5"></span><span class="spark-bar" style="height:15px;background:#2c5282" title="Oct 25: 4"></span><span class="spark-bar" style="height:7px;background:#2c5282" title="Nov 25: 2"></span><span class="spark-bar" style="height:15px;background:#2c5282" title="Dec 25: 4"></span><span class="spark-bar" style="height:3px;background:#3b6fb5" title="Jan 26: 1"></span><span class="spark-bar" style="height:15px;background:#3b6fb5" title="Feb 26: 4"></span><span class="spark-bar" style="height:3px;background:#3b6fb5" title="Mar 26: 1"></span></span></td>
+            <td class="num"><span class="trend-down" title="Declining">&#9660;</span></td>
+            <td>0</td>
+            <td class="num">2.1</td>
+        </tr><tr>
+            <td class="cluster-name">Fire Safety</td>
+            
+            <td class="num">15</td>
+            <td class="num">0</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:0px;background:#2c5282" title="Apr 25: 0"></span><span class="spark-bar" style="height:0px;background:#2c5282" title="May 25: 0"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="Jun 25: 2"></span><span class="spark-bar" style="height:0px;background:#2c5282" title="Jul 25: 0"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="Aug 25: 2"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="Sep 25: 1"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="Oct 25: 1"></span><span class="spark-bar" style="height:30px;background:#2c5282" title="Nov 25: 5"></span><span class="spark-bar" style="height:0px;background:#2c5282" title="Dec 25: 0"></span><span class="spark-bar" style="height:0px;background:#3b6fb5" title="Jan 26: 0"></span><span class="spark-bar" style="height:24px;background:#3b6fb5" title="Feb 26: 4"></span><span class="spark-bar" style="height:0px;background:#3b6fb5" title="Mar 26: 0"></span></span></td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+            <td>0</td>
+            <td class="num">1.2</td>
+        </tr><tr>
+            <td class="cluster-name">Building Maintenance</td>
+            
+            <td class="num">144</td>
+            <td class="num">13</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:30px;background:#2c5282" title="Apr 25: 21"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="May 25: 9"></span><span class="spark-bar" style="height:10px;background:#2c5282" title="Jun 25: 7"></span><span class="spark-bar" style="height:11px;background:#2c5282" title="Jul 25: 8"></span><span class="spark-bar" style="height:17px;background:#2c5282" title="Aug 25: 12"></span><span class="spark-bar" style="height:20px;background:#2c5282" title="Sep 25: 14"></span><span class="spark-bar" style="height:24px;background:#2c5282" title="Oct 25: 17"></span><span class="spark-bar" style="height:18px;background:#2c5282" title="Nov 25: 13"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="Dec 25: 9"></span><span class="spark-bar" style="height:11px;background:#3b6fb5" title="Jan 26: 8"></span><span class="spark-bar" style="height:18px;background:#3b6fb5" title="Feb 26: 13"></span><span class="spark-bar" style="height:18px;background:#3b6fb5" title="Mar 26: 13"></span></span></td>
+            <td class="num"><span class="trend-stable" title="Stable">&#9644;</span></td>
+            <td class="open-highlight">8</td>
+            <td class="num">4.3</td>
+        </tr><tr>
+            <td class="cluster-name">Crime &amp; Police</td>
+            
+            <td class="num">28</td>
+            <td class="num">2</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:30px;background:#2c5282" title="Apr 25: 5"></span><span class="spark-bar" style="height:24px;background:#2c5282" title="May 25: 4"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="Jun 25: 1"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="Jul 25: 2"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="Aug 25: 1"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="Sep 25: 1"></span><span class="spark-bar" style="height:30px;background:#2c5282" title="Oct 25: 5"></span><span class="spark-bar" style="height:0px;background:#2c5282" title="Nov 25: 0"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="Dec 25: 1"></span><span class="spark-bar" style="height:24px;background:#3b6fb5" title="Jan 26: 4"></span><span class="spark-bar" style="height:12px;background:#3b6fb5" title="Feb 26: 2"></span><span class="spark-bar" style="height:12px;background:#3b6fb5" title="Mar 26: 2"></span></span></td>
+            <td class="num"><span class="trend-down" title="Declining">&#9660;</span></td>
+            <td class="open-highlight">3</td>
+            <td class="num">6.8</td>
+        </tr><tr>
+            <td class="cluster-name">Playground &amp; Kids</td>
+            
+            <td class="num">21</td>
+            <td class="num">3</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:5px;background:#2c5282" title="Apr 25: 1"></span><span class="spark-bar" style="height:5px;background:#2c5282" title="May 25: 1"></span><span class="spark-bar" style="height:10px;background:#2c5282" title="Jun 25: 2"></span><span class="spark-bar" style="height:10px;background:#2c5282" title="Jul 25: 2"></span><span class="spark-bar" style="height:0px;background:#2c5282" title="Aug 25: 0"></span><span class="spark-bar" style="height:0px;background:#2c5282" title="Sep 25: 0"></span><span class="spark-bar" style="height:0px;background:#2c5282" title="Oct 25: 0"></span><span class="spark-bar" style="height:0px;background:#2c5282" title="Nov 25: 0"></span><span class="spark-bar" style="height:5px;background:#2c5282" title="Dec 25: 1"></span><span class="spark-bar" style="height:30px;background:#3b6fb5" title="Jan 26: 6"></span><span class="spark-bar" style="height:25px;background:#3b6fb5" title="Feb 26: 5"></span><span class="spark-bar" style="height:15px;background:#3b6fb5" title="Mar 26: 3"></span></span></td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+            <td class="open-highlight">1</td>
+            <td class="num">3.2</td>
+        </tr><tr>
+            <td class="cluster-name">Others</td>
+            
+            <td class="num">6</td>
+            <td class="num">1</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:30px;background:#2c5282" title="Apr 25: 1"></span><span class="spark-bar" style="height:30px;background:#2c5282" title="May 25: 1"></span><span class="spark-bar" style="height:0px;background:#2c5282" title="Jun 25: 0"></span><span class="spark-bar" style="height:30px;background:#2c5282" title="Jul 25: 1"></span><span class="spark-bar" style="height:30px;background:#2c5282" title="Aug 25: 1"></span><span class="spark-bar" style="height:30px;background:#2c5282" title="Sep 25: 1"></span><span class="spark-bar" style="height:0px;background:#2c5282" title="Oct 25: 0"></span><span class="spark-bar" style="height:0px;background:#2c5282" title="Nov 25: 0"></span><span class="spark-bar" style="height:0px;background:#2c5282" title="Dec 25: 0"></span><span class="spark-bar" style="height:0px;background:#3b6fb5" title="Jan 26: 0"></span><span class="spark-bar" style="height:0px;background:#3b6fb5" title="Feb 26: 0"></span><span class="spark-bar" style="height:30px;background:#3b6fb5" title="Mar 26: 1"></span></span></td>
+            <td class="num"><span class="trend-down" title="Declining">&#9660;</span></td>
+            <td>0</td>
+            <td class="num">1.4</td>
+        </tr></tbody>
+        </table>
+    </div>
+    <div class="card">
+        <h3>Vendor-Managed</h3>
+        <p style="font-size:0.78em;color:var(--color-muted);margin-bottom:8px;">Vendor delivers, MA oversees</p>
+        <table>
+            <thead><tr>
+                <th>Cluster</th><th>Vendor</th><th>Total</th><th>Mar 26</th><th>12-Month</th><th>Trend</th><th>Open</th><th>Avg Days</th>
+            </tr></thead>
+            <tbody><tr>
+            <td class="cluster-name">Lift Issues</td>
+            <td class='vendor-name'>Kone</td>
+            <td class="num">139</td>
+            <td class="num">15</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:8px;background:#2c5282" title="Apr 25: 6"></span><span class="spark-bar" style="height:14px;background:#2c5282" title="May 25: 10"></span><span class="spark-bar" style="height:15px;background:#2c5282" title="Jun 25: 11"></span><span class="spark-bar" style="height:21px;background:#2c5282" title="Jul 25: 15"></span><span class="spark-bar" style="height:30px;background:#2c5282" title="Aug 25: 21"></span><span class="spark-bar" style="height:11px;background:#2c5282" title="Sep 25: 8"></span><span class="spark-bar" style="height:11px;background:#2c5282" title="Oct 25: 8"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="Nov 25: 9"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="Dec 25: 9"></span><span class="spark-bar" style="height:12px;background:#3b6fb5" title="Jan 26: 9"></span><span class="spark-bar" style="height:25px;background:#3b6fb5" title="Feb 26: 18"></span><span class="spark-bar" style="height:21px;background:#3b6fb5" title="Mar 26: 15"></span></span></td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+            <td class="open-highlight">2</td>
+            <td class="num">2.3</td>
+        </tr><tr>
+            <td class="cluster-name">Gym Equipment</td>
+            <td class='vendor-name'>Active Lifestyle Pte Ltd</td>
+            <td class="num">81</td>
+            <td class="num">13</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:11px;background:#2c5282" title="Apr 25: 6"></span><span class="spark-bar" style="height:9px;background:#2c5282" title="May 25: 5"></span><span class="spark-bar" style="height:3px;background:#2c5282" title="Jun 25: 2"></span><span class="spark-bar" style="height:13px;background:#2c5282" title="Jul 25: 7"></span><span class="spark-bar" style="height:11px;background:#2c5282" title="Aug 25: 6"></span><span class="spark-bar" style="height:0px;background:#2c5282" title="Sep 25: 0"></span><span class="spark-bar" style="height:1px;background:#2c5282" title="Oct 25: 1"></span><span class="spark-bar" style="height:11px;background:#2c5282" title="Nov 25: 6"></span><span class="spark-bar" style="height:24px;background:#2c5282" title="Dec 25: 13"></span><span class="spark-bar" style="height:30px;background:#3b6fb5" title="Jan 26: 16"></span><span class="spark-bar" style="height:11px;background:#3b6fb5" title="Feb 26: 6"></span><span class="spark-bar" style="height:24px;background:#3b6fb5" title="Mar 26: 13"></span></span></td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+            <td class="open-highlight">7</td>
+            <td class="num">1.9</td>
+        </tr><tr>
+            <td class="cluster-name">Cleanliness</td>
+            <td class='vendor-name'>ABM Century Pte Ltd</td>
+            <td class="num">175</td>
+            <td class="num">15</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:20px;background:#2c5282" title="Apr 25: 18"></span><span class="spark-bar" style="height:21px;background:#2c5282" title="May 25: 19"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="Jun 25: 6"></span><span class="spark-bar" style="height:13px;background:#2c5282" title="Jul 25: 12"></span><span class="spark-bar" style="height:19px;background:#2c5282" title="Aug 25: 17"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="Sep 25: 11"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="Oct 25: 11"></span><span class="spark-bar" style="height:13px;background:#2c5282" title="Nov 25: 12"></span><span class="spark-bar" style="height:16px;background:#2c5282" title="Dec 25: 14"></span><span class="spark-bar" style="height:16px;background:#3b6fb5" title="Jan 26: 14"></span><span class="spark-bar" style="height:30px;background:#3b6fb5" title="Feb 26: 26"></span><span class="spark-bar" style="height:17px;background:#3b6fb5" title="Mar 26: 15"></span></span></td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+            <td class="open-highlight">5</td>
+            <td class="num">1.4</td>
+        </tr><tr>
+            <td class="cluster-name">Pest Control</td>
+            <td class='vendor-name'>Elite Pest Management</td>
+            <td class="num">61</td>
+            <td class="num">4</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:16px;background:#2c5282" title="Apr 25: 5"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="May 25: 2"></span><span class="spark-bar" style="height:30px;background:#2c5282" title="Jun 25: 9"></span><span class="spark-bar" style="height:23px;background:#2c5282" title="Jul 25: 7"></span><span class="spark-bar" style="height:23px;background:#2c5282" title="Aug 25: 7"></span><span class="spark-bar" style="height:20px;background:#2c5282" title="Sep 25: 6"></span><span class="spark-bar" style="height:23px;background:#2c5282" title="Oct 25: 7"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="Nov 25: 2"></span><span class="spark-bar" style="height:16px;background:#2c5282" title="Dec 25: 5"></span><span class="spark-bar" style="height:16px;background:#3b6fb5" title="Jan 26: 5"></span><span class="spark-bar" style="height:6px;background:#3b6fb5" title="Feb 26: 2"></span><span class="spark-bar" style="height:13px;background:#3b6fb5" title="Mar 26: 4"></span></span></td>
+            <td class="num"><span class="trend-down" title="Declining">&#9660;</span></td>
+            <td>0</td>
+            <td class="num">4.0</td>
+        </tr><tr>
+            <td class="cluster-name">Security &amp; Access</td>
+            <td class='vendor-name'>Omega Security Services</td>
+            <td class="num">112</td>
+            <td class="num">17</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:25px;background:#2c5282" title="Apr 25: 15"></span><span class="spark-bar" style="height:13px;background:#2c5282" title="May 25: 8"></span><span class="spark-bar" style="height:8px;background:#2c5282" title="Jun 25: 5"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="Jul 25: 4"></span><span class="spark-bar" style="height:10px;background:#2c5282" title="Aug 25: 6"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="Sep 25: 4"></span><span class="spark-bar" style="height:15px;background:#2c5282" title="Oct 25: 9"></span><span class="spark-bar" style="height:3px;background:#2c5282" title="Nov 25: 2"></span><span class="spark-bar" style="height:15px;background:#2c5282" title="Dec 25: 9"></span><span class="spark-bar" style="height:25px;background:#3b6fb5" title="Jan 26: 15"></span><span class="spark-bar" style="height:30px;background:#3b6fb5" title="Feb 26: 18"></span><span class="spark-bar" style="height:28px;background:#3b6fb5" title="Mar 26: 17"></span></span></td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+            <td class="open-highlight">4</td>
+            <td class="num">5.4</td>
+        </tr><tr>
+            <td class="cluster-name">Intercom &amp; Smart Home</td>
+            <td class='vendor-name'>Hilife</td>
+            <td class="num">46</td>
+            <td class="num">8</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:18px;background:#2c5282" title="Apr 25: 5"></span><span class="spark-bar" style="height:7px;background:#2c5282" title="May 25: 2"></span><span class="spark-bar" style="height:0px;background:#2c5282" title="Jun 25: 0"></span><span class="spark-bar" style="height:15px;background:#2c5282" title="Jul 25: 4"></span><span class="spark-bar" style="height:3px;background:#2c5282" title="Aug 25: 1"></span><span class="spark-bar" style="height:18px;background:#2c5282" title="Sep 25: 5"></span><span class="spark-bar" style="height:7px;background:#2c5282" title="Oct 25: 2"></span><span class="spark-bar" style="height:3px;background:#2c5282" title="Nov 25: 1"></span><span class="spark-bar" style="height:15px;background:#2c5282" title="Dec 25: 4"></span><span class="spark-bar" style="height:30px;background:#3b6fb5" title="Jan 26: 8"></span><span class="spark-bar" style="height:22px;background:#3b6fb5" title="Feb 26: 6"></span><span class="spark-bar" style="height:30px;background:#3b6fb5" title="Mar 26: 8"></span></span></td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+            <td>0</td>
+            <td class="num">1.1</td>
+        </tr><tr>
+            <td class="cluster-name">Pool &amp; Water Features</td>
+            <td class='vendor-name'>Wateronic</td>
+            <td class="num">62</td>
+            <td class="num">3</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:5px;background:#2c5282" title="Apr 25: 3"></span><span class="spark-bar" style="height:30px;background:#2c5282" title="May 25: 17"></span><span class="spark-bar" style="height:14px;background:#2c5282" title="Jun 25: 8"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="Jul 25: 7"></span><span class="spark-bar" style="height:8px;background:#2c5282" title="Aug 25: 5"></span><span class="spark-bar" style="height:5px;background:#2c5282" title="Sep 25: 3"></span><span class="spark-bar" style="height:7px;background:#2c5282" title="Oct 25: 4"></span><span class="spark-bar" style="height:7px;background:#2c5282" title="Nov 25: 4"></span><span class="spark-bar" style="height:7px;background:#2c5282" title="Dec 25: 4"></span><span class="spark-bar" style="height:0px;background:#3b6fb5" title="Jan 26: 0"></span><span class="spark-bar" style="height:7px;background:#3b6fb5" title="Feb 26: 4"></span><span class="spark-bar" style="height:5px;background:#3b6fb5" title="Mar 26: 3"></span></span></td>
+            <td class="num"><span class="trend-down" title="Declining">&#9660;</span></td>
+            <td class="open-highlight">2</td>
+            <td class="num">5.9</td>
+        </tr><tr>
+            <td class="cluster-name">Rubbish Chute</td>
+            <td class='vendor-name'>Cora Environment / Stream Environment</td>
+            <td class="num">147</td>
+            <td class="num">10</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:22px;background:#2c5282" title="Apr 25: 11"></span><span class="spark-bar" style="height:30px;background:#2c5282" title="May 25: 15"></span><span class="spark-bar" style="height:24px;background:#2c5282" title="Jun 25: 12"></span><span class="spark-bar" style="height:24px;background:#2c5282" title="Jul 25: 12"></span><span class="spark-bar" style="height:26px;background:#2c5282" title="Aug 25: 13"></span><span class="spark-bar" style="height:20px;background:#2c5282" title="Sep 25: 10"></span><span class="spark-bar" style="height:30px;background:#2c5282" title="Oct 25: 15"></span><span class="spark-bar" style="height:20px;background:#2c5282" title="Nov 25: 10"></span><span class="spark-bar" style="height:28px;background:#2c5282" title="Dec 25: 14"></span><span class="spark-bar" style="height:22px;background:#3b6fb5" title="Jan 26: 11"></span><span class="spark-bar" style="height:28px;background:#3b6fb5" title="Feb 26: 14"></span><span class="spark-bar" style="height:20px;background:#3b6fb5" title="Mar 26: 10"></span></span></td>
+            <td class="num"><span class="trend-stable" title="Stable">&#9644;</span></td>
+            <td>0</td>
+            <td class="num">1.6</td>
+        </tr><tr>
+            <td class="cluster-name">Water &amp; Plumbing</td>
+            <td class='vendor-name'>MK Jetting</td>
+            <td class="num">62</td>
+            <td class="num">3</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:30px;background:#2c5282" title="Apr 25: 14"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="May 25: 3"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="Jun 25: 3"></span><span class="spark-bar" style="height:10px;background:#2c5282" title="Jul 25: 5"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="Aug 25: 3"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="Sep 25: 6"></span><span class="spark-bar" style="height:10px;background:#2c5282" title="Oct 25: 5"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="Nov 25: 6"></span><span class="spark-bar" style="height:8px;background:#2c5282" title="Dec 25: 4"></span><span class="spark-bar" style="height:4px;background:#3b6fb5" title="Jan 26: 2"></span><span class="spark-bar" style="height:17px;background:#3b6fb5" title="Feb 26: 8"></span><span class="spark-bar" style="height:6px;background:#3b6fb5" title="Mar 26: 3"></span></span></td>
+            <td class="num"><span class="trend-down" title="Declining">&#9660;</span></td>
+            <td class="open-highlight">3</td>
+            <td class="num">14.1</td>
+        </tr><tr>
+            <td class="cluster-name">Landscaping</td>
+            <td class='vendor-name'>Nature Landscape / Spring Landscape</td>
+            <td class="num">29</td>
+            <td class="num">3</td>
+            <td><span class="sparkline"><span class="spark-bar" style="height:30px;background:#2c5282" title="Apr 25: 5"></span><span class="spark-bar" style="height:24px;background:#2c5282" title="May 25: 4"></span><span class="spark-bar" style="height:12px;background:#2c5282" title="Jun 25: 2"></span><span class="spark-bar" style="height:18px;background:#2c5282" title="Jul 25: 3"></span><span class="spark-bar" style="height:18px;background:#2c5282" title="Aug 25: 3"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="Sep 25: 1"></span><span class="spark-bar" style="height:6px;background:#2c5282" title="Oct 25: 1"></span><span class="spark-bar" style="height:0px;background:#2c5282" title="Nov 25: 0"></span><span class="spark-bar" style="height:24px;background:#2c5282" title="Dec 25: 4"></span><span class="spark-bar" style="height:6px;background:#3b6fb5" title="Jan 26: 1"></span><span class="spark-bar" style="height:12px;background:#3b6fb5" title="Feb 26: 2"></span><span class="spark-bar" style="height:18px;background:#3b6fb5" title="Mar 26: 3"></span></span></td>
+            <td class="num"><span class="trend-down" title="Declining">&#9660;</span></td>
+            <td class="open-highlight">1</td>
+            <td class="num">2.4</td>
+        </tr></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Section 3: Trend Analysis -->
+<h2 id="trends">3. Trend Analysis (Heatmap)</h2>
+<div class="card">
+    <p style="font-size:0.78em;color:var(--color-muted);margin-bottom:8px;">Rows highlighted in red border indicate growing clusters (last 3-month avg &gt; first 3-month avg by 15%+). Sorted by total cases descending.</p>
+    <div class="heatmap-wrap">
+    <table>
+        <thead><tr>
+            <th>Cluster</th><th>Total</th>
+            <th class="hm-cell">Apr 25</th><th class="hm-cell">May 25</th><th class="hm-cell">Jun 25</th><th class="hm-cell">Jul 25</th><th class="hm-cell">Aug 25</th><th class="hm-cell">Sep 25</th><th class="hm-cell">Oct 25</th><th class="hm-cell">Nov 25</th><th class="hm-cell">Dec 25</th><th class="hm-cell">Jan 26</th><th class="hm-cell">Feb 26</th><th class="hm-cell">Mar 26</th>
+        </tr></thead>
+        <tbody><tr class="growing-row"><td class="cluster-name">Noise &amp; Neighbour</td><td class="num">190</td><td class="hm-cell" style="background:rgb(108,135,168);color:#fff">18</td><td class="hm-cell" style="background:rgb(125,148,178);color:#fff">16</td><td class="hm-cell" style="background:rgb(181,195,211);color:#2d3748">9</td><td class="hm-cell" style="background:rgb(117,141,173);color:#fff">17</td><td class="hm-cell" style="background:rgb(141,161,187);color:#fff">14</td><td class="hm-cell" style="background:rgb(117,141,173);color:#fff">17</td><td class="hm-cell" style="background:rgb(133,155,182);color:#fff">15</td><td class="hm-cell" style="background:rgb(125,148,178);color:#fff">16</td><td class="hm-cell" style="background:rgb(125,148,178);color:#fff">16</td><td class="hm-cell" style="background:rgb(108,135,168);color:#fff">18</td><td class="hm-cell" style="background:rgb(190,201,216);color:#2d3748">8</td><td class="hm-cell" style="background:rgb(44,82,130);color:#fff">26</td></tr>
+<tr class="growing-row"><td class="cluster-name">Cleanliness</td><td class="num">175</td><td class="hm-cell" style="background:rgb(108,135,168);color:#fff">18</td><td class="hm-cell" style="background:rgb(100,128,163);color:#fff">19</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(157,175,197);color:#2d3748">12</td><td class="hm-cell" style="background:rgb(117,141,173);color:#fff">17</td><td class="hm-cell" style="background:rgb(165,181,202);color:#2d3748">11</td><td class="hm-cell" style="background:rgb(165,181,202);color:#2d3748">11</td><td class="hm-cell" style="background:rgb(157,175,197);color:#2d3748">12</td><td class="hm-cell" style="background:rgb(141,161,187);color:#fff">14</td><td class="hm-cell" style="background:rgb(141,161,187);color:#fff">14</td><td class="hm-cell" style="background:rgb(44,82,130);color:#fff">26</td><td class="hm-cell" style="background:rgb(133,155,182);color:#fff">15</td></tr>
+<tr class="growing-row"><td class="cluster-name">Admin &amp; General</td><td class="num">172</td><td class="hm-cell" style="background:rgb(173,188,206);color:#2d3748">10</td><td class="hm-cell" style="background:rgb(165,181,202);color:#2d3748">11</td><td class="hm-cell" style="background:rgb(181,195,211);color:#2d3748">9</td><td class="hm-cell" style="background:rgb(141,161,187);color:#fff">14</td><td class="hm-cell" style="background:rgb(165,181,202);color:#2d3748">11</td><td class="hm-cell" style="background:rgb(108,135,168);color:#fff">18</td><td class="hm-cell" style="background:rgb(149,168,192);color:#2d3748">13</td><td class="hm-cell" style="background:rgb(173,188,206);color:#2d3748">10</td><td class="hm-cell" style="background:rgb(108,135,168);color:#fff">18</td><td class="hm-cell" style="background:rgb(141,161,187);color:#fff">14</td><td class="hm-cell" style="background:rgb(44,82,130);color:#fff">26</td><td class="hm-cell" style="background:rgb(108,135,168);color:#fff">18</td></tr>
+<tr class=""><td class="cluster-name">Rubbish Chute</td><td class="num">147</td><td class="hm-cell" style="background:rgb(165,181,202);color:#2d3748">11</td><td class="hm-cell" style="background:rgb(133,155,182);color:#fff">15</td><td class="hm-cell" style="background:rgb(157,175,197);color:#2d3748">12</td><td class="hm-cell" style="background:rgb(157,175,197);color:#2d3748">12</td><td class="hm-cell" style="background:rgb(149,168,192);color:#2d3748">13</td><td class="hm-cell" style="background:rgb(173,188,206);color:#2d3748">10</td><td class="hm-cell" style="background:rgb(133,155,182);color:#fff">15</td><td class="hm-cell" style="background:rgb(173,188,206);color:#2d3748">10</td><td class="hm-cell" style="background:rgb(141,161,187);color:#fff">14</td><td class="hm-cell" style="background:rgb(165,181,202);color:#2d3748">11</td><td class="hm-cell" style="background:rgb(141,161,187);color:#fff">14</td><td class="hm-cell" style="background:rgb(173,188,206);color:#2d3748">10</td></tr>
+<tr class=""><td class="cluster-name">Building Maintenance</td><td class="num">144</td><td class="hm-cell" style="background:rgb(84,115,154);color:#fff">21</td><td class="hm-cell" style="background:rgb(181,195,211);color:#2d3748">9</td><td class="hm-cell" style="background:rgb(198,208,221);color:#2d3748">7</td><td class="hm-cell" style="background:rgb(190,201,216);color:#2d3748">8</td><td class="hm-cell" style="background:rgb(157,175,197);color:#2d3748">12</td><td class="hm-cell" style="background:rgb(141,161,187);color:#fff">14</td><td class="hm-cell" style="background:rgb(117,141,173);color:#fff">17</td><td class="hm-cell" style="background:rgb(149,168,192);color:#2d3748">13</td><td class="hm-cell" style="background:rgb(181,195,211);color:#2d3748">9</td><td class="hm-cell" style="background:rgb(190,201,216);color:#2d3748">8</td><td class="hm-cell" style="background:rgb(149,168,192);color:#2d3748">13</td><td class="hm-cell" style="background:rgb(149,168,192);color:#2d3748">13</td></tr>
+<tr class="growing-row"><td class="cluster-name">Lift Issues</td><td class="num">139</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(173,188,206);color:#2d3748">10</td><td class="hm-cell" style="background:rgb(165,181,202);color:#2d3748">11</td><td class="hm-cell" style="background:rgb(133,155,182);color:#fff">15</td><td class="hm-cell" style="background:rgb(84,115,154);color:#fff">21</td><td class="hm-cell" style="background:rgb(190,201,216);color:#2d3748">8</td><td class="hm-cell" style="background:rgb(190,201,216);color:#2d3748">8</td><td class="hm-cell" style="background:rgb(181,195,211);color:#2d3748">9</td><td class="hm-cell" style="background:rgb(181,195,211);color:#2d3748">9</td><td class="hm-cell" style="background:rgb(181,195,211);color:#2d3748">9</td><td class="hm-cell" style="background:rgb(108,135,168);color:#fff">18</td><td class="hm-cell" style="background:rgb(133,155,182);color:#fff">15</td></tr>
+<tr class="growing-row"><td class="cluster-name">Security &amp; Access</td><td class="num">112</td><td class="hm-cell" style="background:rgb(133,155,182);color:#fff">15</td><td class="hm-cell" style="background:rgb(190,201,216);color:#2d3748">8</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(181,195,211);color:#2d3748">9</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(181,195,211);color:#2d3748">9</td><td class="hm-cell" style="background:rgb(133,155,182);color:#fff">15</td><td class="hm-cell" style="background:rgb(108,135,168);color:#fff">18</td><td class="hm-cell" style="background:rgb(117,141,173);color:#fff">17</td></tr>
+<tr class="growing-row"><td class="cluster-name">Common Area Obstruction</td><td class="num">107</td><td class="hm-cell" style="background:rgb(165,181,202);color:#2d3748">11</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(190,201,216);color:#2d3748">8</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(198,208,221);color:#2d3748">7</td><td class="hm-cell" style="background:rgb(190,201,216);color:#2d3748">8</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(181,195,211);color:#2d3748">9</td><td class="hm-cell" style="background:rgb(157,175,197);color:#2d3748">12</td><td class="hm-cell" style="background:rgb(165,181,202);color:#2d3748">11</td><td class="hm-cell" style="background:rgb(92,121,158);color:#fff">20</td></tr>
+<tr class="growing-row"><td class="cluster-name">Parking &amp; Traffic</td><td class="num">89</td><td class="hm-cell" style="background:rgb(165,181,202);color:#2d3748">11</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(181,195,211);color:#2d3748">9</td><td class="hm-cell" style="background:rgb(198,208,221);color:#2d3748">7</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(181,195,211);color:#2d3748">9</td><td class="hm-cell" style="background:rgb(190,201,216);color:#2d3748">8</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(190,201,216);color:#2d3748">8</td><td class="hm-cell" style="background:rgb(198,208,221);color:#2d3748">7</td><td class="hm-cell" style="background:rgb(165,181,202);color:#2d3748">11</td></tr>
+<tr class="growing-row"><td class="cluster-name">Gym Equipment</td><td class="num">81</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(198,208,221);color:#2d3748">7</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(149,168,192);color:#2d3748">13</td><td class="hm-cell" style="background:rgb(125,148,178);color:#fff">16</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(149,168,192);color:#2d3748">13</td></tr>
+<tr class="growing-row"><td class="cluster-name">Animal Issues</td><td class="num">72</td><td class="hm-cell" style="background:rgb(230,235,240);color:#2d3748">3</td><td class="hm-cell" style="background:rgb(190,201,216);color:#2d3748">8</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(190,201,216);color:#2d3748">8</td><td class="hm-cell" style="background:rgb(230,235,240);color:#2d3748">3</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(181,195,211);color:#2d3748">9</td><td class="hm-cell" style="background:rgb(149,168,192);color:#2d3748">13</td></tr>
+<tr class=""><td class="cluster-name">Water &amp; Plumbing</td><td class="num">62</td><td class="hm-cell" style="background:rgb(141,161,187);color:#fff">14</td><td class="hm-cell" style="background:rgb(230,235,240);color:#2d3748">3</td><td class="hm-cell" style="background:rgb(230,235,240);color:#2d3748">3</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(230,235,240);color:#2d3748">3</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(190,201,216);color:#2d3748">8</td><td class="hm-cell" style="background:rgb(230,235,240);color:#2d3748">3</td></tr>
+<tr class=""><td class="cluster-name">Pool &amp; Water Features</td><td class="num">62</td><td class="hm-cell" style="background:rgb(230,235,240);color:#2d3748">3</td><td class="hm-cell" style="background:rgb(117,141,173);color:#fff">17</td><td class="hm-cell" style="background:rgb(190,201,216);color:#2d3748">8</td><td class="hm-cell" style="background:rgb(198,208,221);color:#2d3748">7</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(230,235,240);color:#2d3748">3</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(230,235,240);color:#2d3748">3</td></tr>
+<tr class=""><td class="cluster-name">Pest Control</td><td class="num">61</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(181,195,211);color:#2d3748">9</td><td class="hm-cell" style="background:rgb(198,208,221);color:#2d3748">7</td><td class="hm-cell" style="background:rgb(198,208,221);color:#2d3748">7</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(198,208,221);color:#2d3748">7</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td></tr>
+<tr class=""><td class="cluster-name">Electrical</td><td class="num">49</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(190,201,216);color:#2d3748">8</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td></tr>
+<tr class="growing-row"><td class="cluster-name">Intercom &amp; Smart Home</td><td class="num">46</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(190,201,216);color:#2d3748">8</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(190,201,216);color:#2d3748">8</td></tr>
+<tr class="growing-row"><td class="cluster-name">Lighting</td><td class="num">37</td><td class="hm-cell" style="background:rgb(230,235,240);color:#2d3748">3</td><td class="hm-cell" style="background:rgb(230,235,240);color:#2d3748">3</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(230,235,240);color:#2d3748">3</td><td class="hm-cell" style="background:rgb(230,235,240);color:#2d3748">3</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(173,188,206);color:#2d3748">10</td></tr>
+<tr class=""><td class="cluster-name">Landscaping</td><td class="num">29</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(230,235,240);color:#2d3748">3</td><td class="hm-cell" style="background:rgb(230,235,240);color:#2d3748">3</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(230,235,240);color:#2d3748">3</td></tr>
+<tr class=""><td class="cluster-name">Crime &amp; Police</td><td class="num">28</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td></tr>
+<tr class="growing-row"><td class="cluster-name">Playground &amp; Kids</td><td class="num">21</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(206,215,226);color:#2d3748">6</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(230,235,240);color:#2d3748">3</td></tr>
+<tr class="growing-row"><td class="cluster-name">Fire Safety</td><td class="num">15</td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(238,241,245);color:#2d3748">2</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(214,221,230);color:#2d3748">5</td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(222,228,235);color:#2d3748">4</td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td></tr>
+<tr class=""><td class="cluster-name">Others</td><td class="num">6</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(255,255,255);color:#2d3748"></td><td class="hm-cell" style="background:rgb(246,248,250);color:#2d3748">1</td></tr>
+</tbody>
+    </table>
+    </div>
+</div>
+
+<!-- Section 4: Task Groups -->
+<h2 id="taskgroups">4. Task Groups (Actionable Projects)</h2>
+<p style="font-size:0.82em;color:var(--color-muted);margin-bottom:14px;">Recommended projects based on recurring patterns. Border color: red = High priority, yellow = Medium, green = Low.</p>
+
+        <div class="task-card" style="border-left:5px solid #9b2c2c">
+            <div class="task-header">
+                <span class="task-name">Gym Equipment Overhaul</span>
+                <span class="task-priority priority-high">High</span>
+            </div>
+            <div class="task-meta">
+                <span>Clusters: Gym Equipment</span>
+                <span class="sep">|</span>
+                <span>81 cases over 11 months</span>
+                <span class="sep">|</span>
+                <span>Open: 7</span>
+            </div>
+            <div class="task-detail"><strong>Root cause:</strong> Aging treadmills, no replacement SLA with vendor</div>
+            <div class="task-detail"><strong>Recommended team:</strong> Active Lifestyle Pte Ltd + MA Facilities</div>
+            <div class="task-status">Status: Not Started</div>
+        </div>
+        <div class="task-card" style="border-left:5px solid #9b2c2c">
+            <div class="task-header">
+                <span class="task-name">Blk 55 Security Hardening</span>
+                <span class="task-priority priority-high">High</span>
+            </div>
+            <div class="task-meta">
+                <span>Clusters: Security &amp; Access, Building Maintenance</span>
+                <span class="sep">|</span>
+                <span>256 cases over 12 months</span>
+                <span class="sep">|</span>
+                <span>Open: 12</span>
+            </div>
+            <div class="task-detail"><strong>Root cause:</strong> Mechanical door closer failure, doors not closing</div>
+            <div class="task-detail"><strong>Recommended team:</strong> MA Facilities + Omega Security</div>
+            <div class="task-status">Status: Not Started</div>
+        </div>
+        <div class="task-card" style="border-left:5px solid #9b2c2c">
+            <div class="task-header">
+                <span class="task-name">Smoking &amp; High-Rise Littering Enforcement</span>
+                <span class="task-priority priority-high">High</span>
+            </div>
+            <div class="task-meta">
+                <span>Clusters: Noise &amp; Neighbour, Common Area Obstruction</span>
+                <span class="sep">|</span>
+                <span>297 cases over 12 months</span>
+                <span class="sep">|</span>
+                <span>Open: 15</span>
+            </div>
+            <div class="task-detail"><strong>Root cause:</strong> No deterrent, repeat offenders, no enforcement framework</div>
+            <div class="task-detail"><strong>Recommended team:</strong> MA Operations + Security patrols</div>
+            <div class="task-status">Status: Not Started</div>
+        </div>
+        <div class="task-card" style="border-left:5px solid #975a16">
+            <div class="task-header">
+                <span class="task-name">Lift Noise Investigation (Blk 45, 53)</span>
+                <span class="task-priority priority-medium">Medium</span>
+            </div>
+            <div class="task-meta">
+                <span>Clusters: Lift Issues</span>
+                <span class="sep">|</span>
+                <span>139 cases over 12 months</span>
+                <span class="sep">|</span>
+                <span>Open: 2</span>
+            </div>
+            <div class="task-detail"><strong>Root cause:</strong> Bearing wear, needs Kone detailed inspection</div>
+            <div class="task-detail"><strong>Recommended team:</strong> Kone + MA Facilities</div>
+            <div class="task-status">Status: Not Started</div>
+        </div>
+        <div class="task-card" style="border-left:5px solid #9b2c2c">
+            <div class="task-header">
+                <span class="task-name">Cleaning Standards Review (Blk 53, 61)</span>
+                <span class="task-priority priority-high">High</span>
+            </div>
+            <div class="task-meta">
+                <span>Clusters: Cleanliness</span>
+                <span class="sep">|</span>
+                <span>175 cases over 12 months</span>
+                <span class="sep">|</span>
+                <span>Open: 5</span>
+            </div>
+            <div class="task-detail"><strong>Root cause:</strong> Cleaning schedule inadequacy, high-traffic areas underserved</div>
+            <div class="task-detail"><strong>Recommended team:</strong> ABM Century Pte Ltd + MA Operations</div>
+            <div class="task-status">Status: Not Started</div>
+        </div>
+        <div class="task-card" style="border-left:5px solid #9b2c2c">
+            <div class="task-header">
+                <span class="task-name">Rubbish Chute Preventive Maintenance (Blk 61, 47)</span>
+                <span class="task-priority priority-high">High</span>
+            </div>
+            <div class="task-meta">
+                <span>Clusters: Rubbish Chute</span>
+                <span class="sep">|</span>
+                <span>147 cases over 12 months</span>
+                <span class="sep">|</span>
+                <span>Open: 0</span>
+            </div>
+            <div class="task-detail"><strong>Root cause:</strong> No preventive maintenance schedule</div>
+            <div class="task-detail"><strong>Recommended team:</strong> Cora Environment / Stream Environment + MA Facilities</div>
+            <div class="task-status">Status: Not Started</div>
+        </div>
+        <div class="task-card" style="border-left:5px solid #975a16">
+            <div class="task-header">
+                <span class="task-name">Bicycle Security at B1</span>
+                <span class="task-priority priority-medium">Medium</span>
+            </div>
+            <div class="task-meta">
+                <span>Clusters: Crime &amp; Police, Security &amp; Access</span>
+                <span class="sep">|</span>
+                <span>140 cases over 12 months</span>
+                <span class="sep">|</span>
+                <span>Open: 7</span>
+            </div>
+            <div class="task-detail"><strong>Root cause:</strong> Open access to bicycle area, no CCTV coverage</div>
+            <div class="task-detail"><strong>Recommended team:</strong> Omega Security + MA Operations + Police liaison</div>
+            <div class="task-status">Status: Not Started</div>
+        </div>
+        <div class="task-card" style="border-left:5px solid #975a16">
+            <div class="task-header">
+                <span class="task-name">Dog Waste Management</span>
+                <span class="task-priority priority-medium">Medium</span>
+            </div>
+            <div class="task-meta">
+                <span>Clusters: Animal Issues</span>
+                <span class="sep">|</span>
+                <span>72 cases over 12 months</span>
+                <span class="sep">|</span>
+                <span>Open: 2</span>
+            </div>
+            <div class="task-detail"><strong>Root cause:</strong> No waste stations installed, no enforcement</div>
+            <div class="task-detail"><strong>Recommended team:</strong> MA Operations + Landscaping vendor</div>
+            <div class="task-status">Status: Not Started</div>
+        </div>
+        <div class="task-card" style="border-left:5px solid #9b2c2c">
+            <div class="task-header">
+                <span class="task-name">Building Maintenance Backlog Clearance</span>
+                <span class="task-priority priority-high">High</span>
+            </div>
+            <div class="task-meta">
+                <span>Clusters: Building Maintenance</span>
+                <span class="sep">|</span>
+                <span>144 cases over 12 months</span>
+                <span class="sep">|</span>
+                <span>Open: 8</span>
+            </div>
+            <div class="task-detail"><strong>Root cause:</strong> No SLA for maintenance closure, 8 open cases 300+ days</div>
+            <div class="task-detail"><strong>Recommended team:</strong> MA Facilities</div>
+            <div class="task-status">Status: Not Started</div>
+        </div>
+        <div class="task-card" style="border-left:5px solid #975a16">
+            <div class="task-header">
+                <span class="task-name">Noise Mediation Program</span>
+                <span class="task-priority priority-medium">Medium</span>
+            </div>
+            <div class="task-meta">
+                <span>Clusters: Noise &amp; Neighbour</span>
+                <span class="sep">|</span>
+                <span>190 cases over 12 months</span>
+                <span class="sep">|</span>
+                <span>Open: 13</span>
+            </div>
+            <div class="task-detail"><strong>Root cause:</strong> No structured mediation process, 13 open cases with repeat offender units</div>
+            <div class="task-detail"><strong>Recommended team:</strong> MA Operations + Community Management</div>
+            <div class="task-status">Status: Not Started</div>
+        </div>
+
+<!-- Section 5: Vendor Scorecard -->
+<h2 id="vendors">5. Vendor Scorecard</h2>
+<div class="card">
+    <p style="font-size:0.78em;color:var(--color-muted);margin-bottom:8px;">Sorted by closed rate ascending (worst-performing vendors first).</p>
+    <table>
+        <thead><tr>
+            <th>Vendor</th><th>Clusters</th><th>Total Cases</th><th>Closed Rate</th><th>Avg Res Days</th><th>Rating</th><th>Trend</th>
+        </tr></thead>
+        <tbody><tr>
+            <td class="vendor-name">Active Lifestyle Pte Ltd</td>
+            <td class="cluster-list">Gym Equipment</td>
+            <td class="num">81</td>
+            <td class="num">91.4%</td>
+            <td class="num">1.9</td>
+            <td class="rating-fair">Fair</td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+        </tr><tr>
+            <td class="vendor-name">MK Jetting</td>
+            <td class="cluster-list">Water &amp; Plumbing</td>
+            <td class="num">62</td>
+            <td class="num">95.2%</td>
+            <td class="num">14.1</td>
+            <td class="rating-fair">Fair</td>
+            <td class="num"><span class="trend-down" title="Declining">&#9660;</span></td>
+        </tr><tr>
+            <td class="vendor-name">Omega Security Services</td>
+            <td class="cluster-list">Security &amp; Access</td>
+            <td class="num">112</td>
+            <td class="num">96.4%</td>
+            <td class="num">5.4</td>
+            <td class="rating-fair">Fair</td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+        </tr><tr>
+            <td class="vendor-name">Nature Landscape / Spring Landscape</td>
+            <td class="cluster-list">Landscaping</td>
+            <td class="num">29</td>
+            <td class="num">96.6%</td>
+            <td class="num">2.4</td>
+            <td class="rating-fair">Fair</td>
+            <td class="num"><span class="trend-down" title="Declining">&#9660;</span></td>
+        </tr><tr>
+            <td class="vendor-name">Wateronic</td>
+            <td class="cluster-list">Pool &amp; Water Features</td>
+            <td class="num">62</td>
+            <td class="num">96.8%</td>
+            <td class="num">5.9</td>
+            <td class="rating-fair">Fair</td>
+            <td class="num"><span class="trend-down" title="Declining">&#9660;</span></td>
+        </tr><tr>
+            <td class="vendor-name">ABM Century Pte Ltd</td>
+            <td class="cluster-list">Cleanliness</td>
+            <td class="num">175</td>
+            <td class="num">97.1%</td>
+            <td class="num">1.4</td>
+            <td class="rating-good">Good</td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+        </tr><tr>
+            <td class="vendor-name">Kone</td>
+            <td class="cluster-list">Lift Issues</td>
+            <td class="num">139</td>
+            <td class="num">98.6%</td>
+            <td class="num">2.3</td>
+            <td class="rating-good">Good</td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+        </tr><tr>
+            <td class="vendor-name">Elite Pest Management</td>
+            <td class="cluster-list">Pest Control</td>
+            <td class="num">61</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.0</td>
+            <td class="rating-good">Good</td>
+            <td class="num"><span class="trend-down" title="Declining">&#9660;</span></td>
+        </tr><tr>
+            <td class="vendor-name">Hilife</td>
+            <td class="cluster-list">Intercom &amp; Smart Home</td>
+            <td class="num">46</td>
+            <td class="num">100.0%</td>
+            <td class="num">1.1</td>
+            <td class="rating-good">Good</td>
+            <td class="num"><span class="trend-up" title="Growing">&#9650;</span></td>
+        </tr><tr>
+            <td class="vendor-name">Cora Environment / Stream Environment</td>
+            <td class="cluster-list">Rubbish Chute</td>
+            <td class="num">147</td>
+            <td class="num">100.0%</td>
+            <td class="num">1.6</td>
+            <td class="rating-good">Good</td>
+            <td class="num"><span class="trend-stable" title="Stable">&#9644;</span></td>
+        </tr></tbody>
+    </table>
+</div>
+
+<!-- Section 6: Open Cases -->
+<h2 id="open">6. Open Cases Requiring Action</h2>
+<div class="card">
+    <p style="font-size:0.78em;color:var(--color-muted);margin-bottom:8px;">
+        58 open cases grouped by cluster, sorted by age (oldest first).
+        <span style="background:#fff5f5;padding:1px 6px;color:var(--color-red);border-radius:3px;">Red: &gt;90 days</span>
+        <span style="background:#fffff0;padding:1px 6px;color:var(--color-yellow);border-radius:3px;margin-left:4px;">Yellow: &gt;30 days</span>
+    </p>
+    
+        <div class="open-cluster-group">
+            <h3>Noise &amp; Neighbour (13 open)</h3>
+            <table class="open-table">
+                <thead><tr><th>Case ID</th><th>Block</th><th>Status</th><th>Days Open</th><th>Summary</th></tr></thead>
+                <tbody><tr class="age-red">
+                <td>1292-3419</td>
+                <td>Blk 61</td>
+                <td>In Progress</td>
+                <td class="num">285</td>
+                <td class="summary-text">Note posted to noisy neighbour about loud singing at Blk 61.</td>
+            </tr><tr class="age-red">
+                <td>1292-3494</td>
+                <td>Blk 47</td>
+                <td>In Progress</td>
+                <td class="num">271</td>
+                <td class="summary-text">Excessive smoking smell from neighbour affecting multiple units.</td>
+            </tr><tr class="age-red">
+                <td>1292-4201</td>
+                <td>Blk 57</td>
+                <td>In Progress</td>
+                <td class="num">108</td>
+                <td class="summary-text">Ongoing knocking and dragging noises from unit above since morning.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4463</td>
+                <td>Blk 57</td>
+                <td>In Progress</td>
+                <td class="num">64</td>
+                <td class="summary-text">Neighbor shouting and screaming nightly until midnight.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4522</td>
+                <td>Blk 59</td>
+                <td>In Progress</td>
+                <td class="num">59</td>
+                <td class="summary-text">Balcony smoking affecting asthma patient at home.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4575</td>
+                <td>Blk 53</td>
+                <td>In Progress</td>
+                <td class="num">48</td>
+                <td class="summary-text">Neighbor repeatedly banging loudly on balcony railing.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4586</td>
+                <td>Blk 61</td>
+                <td>In Progress</td>
+                <td class="num">45</td>
+                <td class="summary-text">Recurring furniture-dragging noise nightly from unit above.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4684</td>
+                <td>Blk 61</td>
+                <td>In Progress</td>
+                <td class="num">31</td>
+                <td class="summary-text">Neighbor singing past 9pm, noise mitigation wearing off.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4682</td>
+                <td>Blk 53</td>
+                <td>In Progress</td>
+                <td class="num">31</td>
+                <td class="summary-text">Neighbor repeatedly banging loudly on balcony railing.</td>
+            </tr><tr class="">
+                <td>1292-4715</td>
+                <td>Blk 47</td>
+                <td>In Progress</td>
+                <td class="num">27</td>
+                <td class="summary-text">Late-night groups at pavilion being loud and playing cards.</td>
+            </tr><tr class="">
+                <td>1292-4732</td>
+                <td>Blk 45</td>
+                <td>In Progress</td>
+                <td class="num">24</td>
+                <td class="summary-text">Strong cooking smell from neighbor daily affecting unit.</td>
+            </tr><tr class="">
+                <td>1292-4786</td>
+                <td>Blk 45</td>
+                <td>In Progress</td>
+                <td class="num">16</td>
+                <td class="summary-text">Children rollerblading in Blk 45 corridor with photos.</td>
+            </tr><tr class="">
+                <td>1292-4784</td>
+                <td>Blk 45</td>
+                <td>In Progress</td>
+                <td class="num">16</td>
+                <td class="summary-text">Children rollerblading in Blk 45 corridor, banging walls.</td>
+            </tr></tbody>
+            </table>
+        </div>
+        <div class="open-cluster-group">
+            <h3>Building Maintenance (8 open)</h3>
+            <table class="open-table">
+                <thead><tr><th>Case ID</th><th>Block</th><th>Status</th><th>Days Open</th><th>Summary</th></tr></thead>
+                <tbody><tr class="age-red">
+                <td>1292-3006</td>
+                <td>Blk 47</td>
+                <td>In Progress</td>
+                <td class="num">370</td>
+                <td class="summary-text">External walls and windows dirty, promised wash not done.</td>
+            </tr><tr class="age-red">
+                <td>1292-3113</td>
+                <td>Blk 61</td>
+                <td>In Progress</td>
+                <td class="num">353</td>
+                <td class="summary-text">Ceiling surface peeling off above driveway in carpark.</td>
+            </tr><tr class="age-red">
+                <td>1292-3359</td>
+                <td>Blk 55</td>
+                <td>In Progress</td>
+                <td class="num">301</td>
+                <td class="summary-text">Issue spotted on ceiling of Blk 55 carpark lobby.</td>
+            </tr><tr class="age-red">
+                <td>1292-3444</td>
+                <td>Blk 53</td>
+                <td>In Progress</td>
+                <td class="num">278</td>
+                <td class="summary-text">Algae forming around lighting point at Blk 53 lobby.</td>
+            </tr><tr class="age-red">
+                <td>1292-3443</td>
+                <td>Blk 53</td>
+                <td>In Progress</td>
+                <td class="num">278</td>
+                <td class="summary-text">Algae forming around the lighting point.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4643</td>
+                <td>Blk 45</td>
+                <td>In Progress</td>
+                <td class="num">37</td>
+                <td class="summary-text">Blk 45 B2 carpark lobby buzzing noise and broken tiles.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4639</td>
+                <td>Blk 53</td>
+                <td>In Progress</td>
+                <td class="num">37</td>
+                <td class="summary-text">Area map damaged, request CCTV review to find culprit.</td>
+            </tr><tr class="">
+                <td>1292-4714</td>
+                <td>Blk 47</td>
+                <td>In Progress</td>
+                <td class="num">27</td>
+                <td class="summary-text">B1 lobby ceiling plaster sagging and water-damaged.</td>
+            </tr></tbody>
+            </table>
+        </div>
+        <div class="open-cluster-group">
+            <h3>Gym Equipment (7 open)</h3>
+            <table class="open-table">
+                <thead><tr><th>Case ID</th><th>Block</th><th>Status</th><th>Days Open</th><th>Summary</th></tr></thead>
+                <tbody><tr class="age-yellow">
+                <td>1292-4517</td>
+                <td>Blk 47</td>
+                <td>In Progress</td>
+                <td class="num">59</td>
+                <td class="summary-text">Two gym treadmills broken since November, still not replaced.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4655</td>
+                <td>Blk 47</td>
+                <td>In Progress</td>
+                <td class="num">35</td>
+                <td class="summary-text">Three treadmills down again, no definite repair timeline.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4680</td>
+                <td>Blk 47</td>
+                <td>In Progress</td>
+                <td class="num">32</td>
+                <td class="summary-text">Multiple treadmills unusable for months, inadequate gym.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4688</td>
+                <td>Blk 55</td>
+                <td>In Progress</td>
+                <td class="num">31</td>
+                <td class="summary-text">Half the gym treadmills broken for months, always queues.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4683</td>
+                <td>Blk 59</td>
+                <td>In Progress</td>
+                <td class="num">31</td>
+                <td class="summary-text">Gym equipment down for over a month.</td>
+            </tr><tr class="">
+                <td>1292-4708</td>
+                <td>Blk 49</td>
+                <td>In Progress</td>
+                <td class="num">27</td>
+                <td class="summary-text">Gym treadmills down for many months, still not fixed.</td>
+            </tr><tr class="">
+                <td>1292-4718</td>
+                <td>Blk 47</td>
+                <td>In Progress</td>
+                <td class="num">26</td>
+                <td class="summary-text">Three of six gym treadmills broken, people waiting.</td>
+            </tr></tbody>
+            </table>
+        </div>
+        <div class="open-cluster-group">
+            <h3>Cleanliness (5 open)</h3>
+            <table class="open-table">
+                <thead><tr><th>Case ID</th><th>Block</th><th>Status</th><th>Days Open</th><th>Summary</th></tr></thead>
+                <tbody><tr class="age-red">
+                <td>1292-3033</td>
+                <td>Blk 57</td>
+                <td>In Progress</td>
+                <td class="num">365</td>
+                <td class="summary-text">Stains at Blk 57 basement keep returning after cleaning.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4394</td>
+                <td>Blk 45</td>
+                <td>In Progress</td>
+                <td class="num">72</td>
+                <td class="summary-text">Blk 45 lift mirror foggy and uncleaned for a month.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4602</td>
+                <td>Blk 47</td>
+                <td>In Progress</td>
+                <td class="num">42</td>
+                <td class="summary-text">Seating area near big plant dirty and needs cleaning.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4670</td>
+                <td>Blk 53</td>
+                <td>In Progress</td>
+                <td class="num">32</td>
+                <td class="summary-text">Dirty signboard missed by cleaner, needs cleaning.</td>
+            </tr><tr class="">
+                <td>1292-4731</td>
+                <td>Blk 53</td>
+                <td>In Progress</td>
+                <td class="num">24</td>
+                <td class="summary-text">Rust stain left by signage uncleaned for weeks.</td>
+            </tr></tbody>
+            </table>
+        </div>
+        <div class="open-cluster-group">
+            <h3>Security &amp; Access (4 open)</h3>
+            <table class="open-table">
+                <thead><tr><th>Case ID</th><th>Block</th><th>Status</th><th>Days Open</th><th>Summary</th></tr></thead>
+                <tbody><tr class="">
+                <td>1292-4693</td>
+                <td>Blk 55</td>
+                <td>In Progress</td>
+                <td class="num">30</td>
+                <td class="summary-text">Blk 55 level 1 both doors open again, ongoing fault.</td>
+            </tr><tr class="">
+                <td>1292-4691</td>
+                <td>Blk 55</td>
+                <td>In Progress</td>
+                <td class="num">30</td>
+                <td class="summary-text">Blk 55 level 1 door stays open, not swinging shut.</td>
+            </tr><tr class="">
+                <td>1292-4798</td>
+                <td>Blk 53</td>
+                <td>In Progress</td>
+                <td class="num">13</td>
+                <td class="summary-text">Maintenance and security issues as shown in photos.</td>
+            </tr><tr class="">
+                <td>1292-4801</td>
+                <td>Blk 53</td>
+                <td>In Progress</td>
+                <td class="num">12</td>
+                <td class="summary-text">Late-night activity at pavilion, security not enforcing.</td>
+            </tr></tbody>
+            </table>
+        </div>
+        <div class="open-cluster-group">
+            <h3>Water &amp; Plumbing (3 open)</h3>
+            <table class="open-table">
+                <thead><tr><th>Case ID</th><th>Block</th><th>Status</th><th>Days Open</th><th>Summary</th></tr></thead>
+                <tbody><tr class="age-red">
+                <td>1292-3135</td>
+                <td>Blk 55</td>
+                <td>In Progress</td>
+                <td class="num">348</td>
+                <td class="summary-text">Hole in ceiling with water leaking at Blk 55 B1 lobby.</td>
+            </tr><tr class="age-red">
+                <td>1292-4213</td>
+                <td>Blk 47</td>
+                <td>In Progress</td>
+                <td class="num">106</td>
+                <td class="summary-text">Blk 47 DV room leaking with water ponding outside.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4636</td>
+                <td>Blk 47</td>
+                <td>In Progress</td>
+                <td class="num">38</td>
+                <td class="summary-text">Blk 47 lobby ceiling leaking and mouldy after aircon leak.</td>
+            </tr></tbody>
+            </table>
+        </div>
+        <div class="open-cluster-group">
+            <h3>Crime &amp; Police (3 open)</h3>
+            <table class="open-table">
+                <thead><tr><th>Case ID</th><th>Block</th><th>Status</th><th>Days Open</th><th>Summary</th></tr></thead>
+                <tbody><tr class="age-yellow">
+                <td>1292-4476</td>
+                <td>Blk 53</td>
+                <td>In Progress</td>
+                <td class="num">63</td>
+                <td class="summary-text">Bicycle seat stolen at Blk 53, police report filed.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4644</td>
+                <td>Blk 61</td>
+                <td>In Progress</td>
+                <td class="num">37</td>
+                <td class="summary-text">Bicycle seat stolen at Blk 61 B1, security saw thief.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4646</td>
+                <td>Blk 61</td>
+                <td>In Progress</td>
+                <td class="num">36</td>
+                <td class="summary-text">Bicycle seat stolen at Blk 61 B1, thief on video.</td>
+            </tr></tbody>
+            </table>
+        </div>
+        <div class="open-cluster-group">
+            <h3>Admin &amp; General (3 open)</h3>
+            <table class="open-table">
+                <thead><tr><th>Case ID</th><th>Block</th><th>Status</th><th>Days Open</th><th>Summary</th></tr></thead>
+                <tbody><tr class="age-yellow">
+                <td>1292-4550</td>
+                <td>Blk 57</td>
+                <td>In Progress</td>
+                <td class="num">54</td>
+                <td class="summary-text">Previous feedback not brought up at council meeting.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4591</td>
+                <td>Blk 59</td>
+                <td>In Progress</td>
+                <td class="num">44</td>
+                <td class="summary-text">No mobile signal at B1, cannot use HiLife app.</td>
+            </tr><tr class="">
+                <td>1292-4737</td>
+                <td>Blk 47</td>
+                <td>Pending</td>
+                <td class="num">24</td>
+                <td class="summary-text">Request to fix HiLife announcement folder naming.</td>
+            </tr></tbody>
+            </table>
+        </div>
+        <div class="open-cluster-group">
+            <h3>Parking &amp; Traffic (2 open)</h3>
+            <table class="open-table">
+                <thead><tr><th>Case ID</th><th>Block</th><th>Status</th><th>Days Open</th><th>Summary</th></tr></thead>
+                <tbody><tr class="age-red">
+                <td>1292-3875</td>
+                <td>Blk 45</td>
+                <td>In Progress</td>
+                <td class="num">187</td>
+                <td class="summary-text">Main carpark entry stop line hidden by slope, needs better signage.</td>
+            </tr><tr class="age-red">
+                <td>1292-4060</td>
+                <td></td>
+                <td>In Progress</td>
+                <td class="num">140</td>
+                <td class="summary-text">Carpark floor damage reported for 4th time, still unresolved.</td>
+            </tr></tbody>
+            </table>
+        </div>
+        <div class="open-cluster-group">
+            <h3>Animal Issues (2 open)</h3>
+            <table class="open-table">
+                <thead><tr><th>Case ID</th><th>Block</th><th>Status</th><th>Days Open</th><th>Summary</th></tr></thead>
+                <tbody><tr class="age-yellow">
+                <td>1292-4488</td>
+                <td></td>
+                <td>In Progress</td>
+                <td class="num">62</td>
+                <td class="summary-text">Dog owner not cleaning up after pet on common walkway.</td>
+            </tr><tr class="">
+                <td>1292-4811</td>
+                <td>Blk 47</td>
+                <td>Pending</td>
+                <td class="num">11</td>
+                <td class="summary-text">Another stray cat with collar spotted near Blk 59.</td>
+            </tr></tbody>
+            </table>
+        </div>
+        <div class="open-cluster-group">
+            <h3>Common Area Obstruction (2 open)</h3>
+            <table class="open-table">
+                <thead><tr><th>Case ID</th><th>Block</th><th>Status</th><th>Days Open</th><th>Summary</th></tr></thead>
+                <tbody><tr class="age-yellow">
+                <td>1292-4518</td>
+                <td>Blk 49</td>
+                <td>In Progress</td>
+                <td class="num">59</td>
+                <td class="summary-text">Bicycle parking cleanup not completed after over six months.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4556</td>
+                <td>Blk 47</td>
+                <td>In Progress</td>
+                <td class="num">54</td>
+                <td class="summary-text">Illegally parked bicycles at carpark need removal.</td>
+            </tr></tbody>
+            </table>
+        </div>
+        <div class="open-cluster-group">
+            <h3>Lift Issues (2 open)</h3>
+            <table class="open-table">
+                <thead><tr><th>Case ID</th><th>Block</th><th>Status</th><th>Days Open</th><th>Summary</th></tr></thead>
+                <tbody><tr class="age-yellow">
+                <td>1292-4652</td>
+                <td>Blk 49</td>
+                <td>In Progress</td>
+                <td class="num">36</td>
+                <td class="summary-text">Blk 49 lift FL3 handle loose.</td>
+            </tr><tr class="age-yellow">
+                <td>1292-4664</td>
+                <td>Blk 53</td>
+                <td>In Progress</td>
+                <td class="num">34</td>
+                <td class="summary-text">Blk 53 lift PL9 door opening between floors again.</td>
+            </tr></tbody>
+            </table>
+        </div>
+        <div class="open-cluster-group">
+            <h3>Pool &amp; Water Features (2 open)</h3>
+            <table class="open-table">
+                <thead><tr><th>Case ID</th><th>Block</th><th>Status</th><th>Days Open</th><th>Summary</th></tr></thead>
+                <tbody><tr class="">
+                <td>1292-4701</td>
+                <td></td>
+                <td>In Progress</td>
+                <td class="num">28</td>
+                <td class="summary-text">Strata house pool area has algae and cloudy water.</td>
+            </tr><tr class="">
+                <td>1292-4812</td>
+                <td>Blk 47</td>
+                <td>Pending</td>
+                <td class="num">11</td>
+                <td class="summary-text">Life buoy removed from family pool, safety concern.</td>
+            </tr></tbody>
+            </table>
+        </div>
+        <div class="open-cluster-group">
+            <h3>Landscaping (1 open)</h3>
+            <table class="open-table">
+                <thead><tr><th>Case ID</th><th>Block</th><th>Status</th><th>Days Open</th><th>Summary</th></tr></thead>
+                <tbody><tr class="age-red">
+                <td>1292-4216</td>
+                <td></td>
+                <td>In Progress</td>
+                <td class="num">105</td>
+                <td class="summary-text">Plants behind villa uprooted months ago still not replaced, causing ponding.</td>
+            </tr></tbody>
+            </table>
+        </div>
+        <div class="open-cluster-group">
+            <h3>Playground &amp; Kids (1 open)</h3>
+            <table class="open-table">
+                <thead><tr><th>Case ID</th><th>Block</th><th>Status</th><th>Days Open</th><th>Summary</th></tr></thead>
+                <tbody><tr class="age-yellow">
+                <td>1292-4585</td>
+                <td>Blk 55</td>
+                <td>In Progress</td>
+                <td class="num">45</td>
+                <td class="summary-text">Playground trampoline damaged, needs repair.</td>
+            </tr></tbody>
+            </table>
+        </div>
+</div>
+
+</div><!-- end main -->
+</body>
+</html>
