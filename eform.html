@@ -549,9 +549,8 @@
     <a href="#wf-deposit" class="sub">4.3 Deposit-Required</a>
     <a href="#wf-facility" class="sub">4.4 Facility Bookings</a>
     <a href="#actions">5. Action Items</a>
-    <a href="#act-hilife" class="sub">5.1 Hilife Credit Card Fees</a>
-    <a href="#act-eform" class="sub">5.2 E-Form Completion</a>
-    <a href="#act-decide" class="sub">5.3 Fee/Deposit Collection</a>
+    <a href="#act-eform" class="sub">5.1 E-Form Completion</a>
+    <a href="#act-decide" class="sub">5.2 Fee/Deposit Collection</a>
   </nav>
 </aside>
 
@@ -574,11 +573,11 @@
     <p>Hilife CMS provides two modules relevant to this migration:</p>
     <ul>
       <li><strong>E-Form Module</strong> &mdash; for application submissions with approval workflows, reply threads, and signature collection.</li>
-      <li><strong>Facility Booking Module</strong> &mdash; for venue reservations with integrated deposit collection via credit card hold, booking fees, and automated refund lifecycle.</li>
+      <li><strong>Facility Booking Module</strong> &mdash; for venue reservations with booking fees and automated lifecycle.</li>
     </ul>
     <p><strong>Current state:</strong> Nine draft e-forms have been created in Hilife, but only the EV Questionnaire (a survey, not an application form) has been published. The Facility Booking module is already operational for the Dining Pavilions, Function Rooms, and Tennis Court. Significant gaps remain in field completeness, payment handling, and workflow coverage across the draft e-forms.</p>
     <div class="info-box info-box-blue">
-      <strong>Key insight:</strong> By combining the E-Form module (rich application details, signatures, communication) with the Facility Booking module (deposit collection, lifecycle tracking, refund/forfeit), full digital coverage is achievable without any platform changes.
+      <strong>Key insight:</strong> E-Forms handle the full application lifecycle (submissions, signatures, reply thread). Deposits and fees are collected via PayNow, with payment confirmation uploaded in the reply thread. Full digital coverage is achievable without any platform changes.
     </div>
   </section>
 
@@ -692,11 +691,11 @@
                   <tr class="remove-row"><td>-</td><td><s>Application Permit for Contractor</s></td><td><s>Multiple Choice</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q7)</span></td><td>Merged into main form; permit issued via approval workflow</td></tr>
                   <tr class="remove-row"><td>-</td><td><s>NRIC Last 4 Digits</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q7)</span></td><td>PDPA non-compliant by 31 Dec 2026</td></tr>
                   <tr class="remove-row"><td>-</td><td><s>Official Use x2</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q6, Q8)</span></td><td>MA uses approval workflow</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Deposit Cheque Number</s></td><td><s>Text</s></td><td>Remove</td><td>N/A</td><td>Deposit collected via Facility Booking module</td></tr>
+                  <tr class="remove-row"><td>-</td><td><s>Deposit Cheque Number</s></td><td><s>Text</s></td><td>Remove</td><td>N/A</td><td>Deposit collected via PayNow</td></tr>
                 </tbody>
               </table>
               <div class="form-notes">
-                <strong>Assessment:</strong> Major gaps. The merge of B-1/B-2/B-3/C is correct in concept, but the form lacks renovation scope details, dates, worker list, and applicant contact info. Contractor info fields exist but are crammed into a single Multiple Choice question and need restructuring into separate text fields. NRIC field must be removed. Deposit handled via Facility Booking module.
+                <strong>Assessment:</strong> Major gaps. The merge of B-1/B-2/B-3/C is correct in concept, but the form lacks renovation scope details, dates, worker list, and applicant contact info. Contractor info fields exist but are crammed into a single Multiple Choice question and need restructuring into separate text fields. NRIC field must be removed. Deposit collected via PayNow.
               </div>
             </td>
           </tr>
@@ -724,12 +723,12 @@
                   <tr><td>9</td><td>Terms and Conditions Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
                   <tr><td>10</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3/Q4)</span></td><td></td></tr>
                   <tr class="remove-row"><td>-</td><td><s>NRIC Last 4 Digits</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q4)</span></td><td>PDPA non-compliant</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Deposit Cheque Number</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q2)</span></td><td>Deposit via Facility Booking</td></tr>
+                  <tr class="remove-row"><td>-</td><td><s>Deposit Cheque Number</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q2)</span></td><td>Deposit via PayNow</td></tr>
                   <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q5)</span></td><td></td></tr>
                 </tbody>
               </table>
               <div class="form-notes">
-                <strong>Assessment:</strong> Major gaps. Cannot distinguish moving in from moving out. Missing time slot preference. Cheque reference and NRIC field must be removed. Deposit handled via Facility Booking module.
+                <strong>Assessment:</strong> Major gaps. Cannot distinguish moving in from moving out. Missing time slot preference. Cheque reference and NRIC field must be removed. Deposit collected via PayNow.
               </div>
             </td>
           </tr>
@@ -742,10 +741,10 @@
             <td colspan="8">
               <p>This form is <strong>eliminated</strong> from the digital platform. The current Hilife draft (ID 18273) conflates two different refund processes and should be deleted.</p>
               <div class="form-notes">
-                <strong>Rationale:</strong> Under the proposed dual-module workflow, deposit refunds are no longer resident-initiated "requests." They are mandatory MA actions triggered at process closure:
+                <strong>Rationale:</strong> Under the PayNow workflow, deposit refunds are no longer resident-initiated "requests." They are mandatory MA actions triggered at process closure:
                 <ul style="margin-top:8px;">
                   <li><strong>A&amp;A/Moving deposit refunds</strong> &mdash; MA processes via the Deposit Records page after inspection.</li>
-                  <li><strong>Facility booking deposit refunds</strong> &mdash; handled automatically by the Facility Booking module, or MA clicks Refund/Forfeit in Deposit Records.</li>
+                  <li><strong>PayNow deposit refunds</strong> &mdash; MA initiates bank transfer refund after inspection confirms no damage.</li>
                 </ul>
               </div>
               <p style="margin-top:12px;">The paper Forms E and K are eliminated. Completion notification is handled via the <strong>reply thread</strong> of the original e-form (renovation or moving application) &mdash; the resident simply posts "work completed, please arrange inspection" in the thread. No separate form is needed.</p>
@@ -1033,73 +1032,18 @@
       <strong>Forms eliminated:</strong> Form E (Refund of A&amp;A Deposit) and Form K (Refund of Facility Deposit). Refund is now an MA-driven action at process closure, not a resident request.
     </div>
 
-    <h4>The Problem</h4>
-    <p>Hilife's E-Form module <strong>cannot collect deposits</strong>. The Facility Booking module <strong>can collect deposits</strong> via credit card hold. However, the two modules are completely separate &mdash; there is no linkage between an e-form submission and a facility booking.</p>
+    <h4>Deposit Collection via PayNow</h4>
+    <p>Hilife's E-Form module cannot collect deposits directly. All deposit and fee collection is handled via <strong>PayNow</strong>. Residents pay via PayNow to MCST 4932 and upload the payment screenshot in the e-form reply thread. MA verifies and tracks deposits manually.</p>
 
-    <h4>Option 1: Use Facility Booking for Everything (Form + Deposit)</h4>
-    <p>The Facility Booking module supports Q&amp;A questions (<code>enable_qa</code>) which can serve as a basic form. The archived "Renovation Deposit" and "Moving Deposit" categories previously used this approach.</p>
-    <div class="info-box info-box-yellow">
-      <strong>Downside:</strong> Residents would need to look for their renovation or moving application under "Facility Booking" rather than "E-Forms", which is confusing. The Q&amp;A is also more limited than e-forms (no signatures, limited question types, no reply thread for back-and-forth).
-    </div>
-
-    <h4>Option 2: Split E-Form and Deposit Payment (Recommended)</h4>
-    <p>Use E-Form for the application (rich form, signatures, reply thread) and Facility Booking purely for deposit collection. The two are not linked in the system, but the MA manages the connection manually.</p>
     <div class="info-box info-box-green">
-      <strong>Advantage:</strong> Each module does what it is best at. Residents submit applications where they expect to (E-Forms) and pay deposits where the system supports it (Facility Booking). The e-form reply thread enables back-and-forth communication throughout the process.
-    </div>
-
-    <h4>Payment Method Options</h4>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Method</th><th>How It Works</th><th>Pros</th><th>Cons</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><strong>Credit Card via Facility Booking</strong></td>
-            <td>Resident pays deposit via credit card hold in Facility Booking module. MA refunds/forfeits via Deposit Records.</td>
-            <td>Automated lifecycle tracking (In Use / Refunded / Forfeited). Simpler for residents.</td>
-            <td>Credit card processing fees may apply on both charge and refund &mdash; MCST may lose $20&ndash;$30 per $1,000 cycle. Must clarify with Hilife (see Action Item 5.1).</td>
-          </tr>
-          <tr>
-            <td><strong>PayNow / Bank Transfer</strong></td>
-            <td>Resident pays via PayNow, uploads screenshot in e-form reply. MA creates manual deposit record. MA refunds via bank transfer.</td>
-            <td>No credit card fees.</td>
-            <td>More manual effort for both resident and MA. No automated lifecycle tracking.</td>
-          </tr>
-        </tbody>
-      </table>
+      <strong>Why PayNow:</strong> No credit card processing fees (saves ~$1,000&ndash;$1,500/year on renovation/moving deposits). Works for all deposit durations including long-term vehicle registration deposits. Simple and familiar to residents.
     </div>
 
     <div class="info-box info-box-yellow">
       <strong>Status convention:</strong> The e-form stays in <strong>Pending</strong> throughout the entire process &mdash; application, deposit payment, work in progress, inspection, and refund. MA only marks it as <strong>Approved</strong> when the deposit has been fully refunded (or forfeited) and the case is closed. All communication and intermediate steps are managed via the <strong>reply thread</strong>.
     </div>
 
-    <h4>Flow A: Credit Card via Facility Booking</h4>
-
-    <div class="flow-diagram">
-      <div class="flow-step flow-step-action"><span class="flow-step-label">Pending</span>Resident submits e-form with full details (status: PENDING)</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">MA reviews via reply thread (all back-and-forth happens here)</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">MA replies: "Please proceed to Facility Booking to pay the deposit."</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">Resident pays deposit via credit card hold in Facility Booking. Deposit = "In Use".</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">Work/move commences (communicate via reply thread as needed)</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">Resident notifies via reply thread: "Work completed."</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">MA inspects common areas</div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-decision">Damage?</div>
-      <div class="flow-branch">
-        <div><div class="flow-arrow-label">No</div><div class="flow-arrow"></div><div class="flow-step flow-step-outcome-good">MA clicks "Refund" in Deposit Records</div></div>
-        <div><div class="flow-arrow-label">Yes</div><div class="flow-arrow"></div><div class="flow-step flow-step-outcome-bad">MA clicks "Forfeit" in Deposit Records</div></div>
-      </div>
-      <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-outcome-good"><span class="flow-step-label">Approved</span>MA marks e-form as APPROVED (status: APPROVED = case closed)</div>
-    </div>
-
-    <h4>Flow B: PayNow</h4>
+    <h4>Deposit Flow (PayNow)</h4>
 
     <div class="flow-diagram">
       <div class="flow-step flow-step-action"><span class="flow-step-label">Pending</span>Resident submits e-form with full details (status: PENDING)</div>
@@ -1110,7 +1054,7 @@
       <div class="flow-arrow"></div>
       <div class="flow-step flow-step-action">Resident pays via PayNow, uploads screenshot in reply thread</div>
       <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">MA verifies payment, creates manual deposit record</div>
+      <div class="flow-step flow-step-action">MA verifies payment, records deposit</div>
       <div class="flow-arrow"></div>
       <div class="flow-step flow-step-action">Work/move commences (communicate via reply thread as needed)</div>
       <div class="flow-arrow"></div>
@@ -1190,25 +1134,7 @@
   <section id="actions">
     <h2>5. Action Items</h2>
 
-    <h3 id="act-hilife">5.1 Check with Hilife on Credit Card Fees</h3>
-    <p>Before committing to the Facility Booking module for deposit collection, the following must be clarified:</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>#</th><th>Question</th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td>What are the credit card processing fees for deposit collection and refund via the Facility Booking module?</td></tr>
-          <tr><td>2</td><td>Does a deposit-only transaction (no booking fee) still incur processing fees for the MCST on both the charge and the refund?</td></tr>
-          <tr><td>3</td><td>On full refund, does the resident receive 100% of the deposit, or is any processing fee deducted from the resident?</td></tr>
-          <tr><td>4</td><td>What happens when a deposit reaches its 6-month expiry &mdash; auto-refund, flag for MA action, or extension?</td></tr>
-          <tr><td>5</td><td>Are PayNow or bank transfer available as alternative deposit collection modes within the Facility Booking module?</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="info-box info-box-yellow">
-      <strong>Estimated impact if fees apply:</strong> On a $1,000 deposit charge-and-refund cycle, MCST may lose $20&ndash;$30 in processing fees. Across ~50 renovation/moving deposits per year, that is $1,000&ndash;$1,500 annually.
-    </div>
-
-    <h3 id="act-eform">5.2 E-Form Completion</h3>
+    <h3 id="act-eform">5.1 E-Form Completion</h3>
 
     <h4>Forms to Update</h4>
     <div class="table-wrap">
@@ -1262,31 +1188,18 @@
       </table>
     </div>
 
-    <h3 id="act-decide">5.3 Decide: Fee and Deposit Collection via Facility Booking or PayNow</h3>
-    <h4>Decided: PayNow</h4>
+    <h3 id="act-decide">5.2 Fee and Deposit Collection (PayNow)</h3>
+    <p>All fees and deposits are collected via PayNow. No credit card processing fees.</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Form</th><th>Amount</th><th>Type</th><th>Decision</th><th>Reason</th></tr></thead>
+        <thead><tr><th>Form</th><th>Amount</th><th>Type</th><th>Method</th><th>Notes</th></tr></thead>
         <tbody>
-          <tr><td>Vehicle Reg (F)</td><td>$50</td><td>Refundable deposit</td><td><span class="badge badge-green">PayNow</span></td><td>Deposit may be held for years (duration of vehicle ownership) &mdash; exceeds Hilife's 6-month expiry</td></tr>
-          <tr><td>Access Card (G)</td><td>$50/card</td><td>Non-refundable fee</td><td><span class="badge badge-green">PayNow</span></td><td>Fee collection, not a deposit. Variable quantity.</td></tr>
+          <tr><td>Renovation (B-1)</td><td>$1,000</td><td>Refundable deposit</td><td><span class="badge badge-green">PayNow</span></td><td>PayNow to MCST 4932, upload screenshot. MA refunds via bank transfer after inspection.</td></tr>
+          <tr><td>Moving (D-1)</td><td>$1,000</td><td>Refundable deposit</td><td><span class="badge badge-green">PayNow</span></td><td>Same as renovation. Refund within 1&ndash;4 weeks after move.</td></tr>
+          <tr><td>Vehicle Reg (F)</td><td>$50</td><td>Refundable deposit</td><td><span class="badge badge-green">PayNow</span></td><td>Long-term deposit (duration of vehicle ownership).</td></tr>
+          <tr><td>Access Card (G)</td><td>$50/card</td><td>Non-refundable fee</td><td><span class="badge badge-green">PayNow</span></td><td>Fee per card. Variable quantity.</td></tr>
         </tbody>
       </table>
-    </div>
-
-    <h4>To Decide: Facility Booking or PayNow</h4>
-    <p>Pending the outcome of Section 5.1 (Hilife credit card fee clarification):</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Form</th><th>Amount</th><th>Type</th><th>Option A: Facility Booking</th><th>Option B: PayNow</th></tr></thead>
-        <tbody>
-          <tr><td>Renovation (B-1)</td><td>$1,000</td><td>Refundable deposit (1-3 months)</td><td>Credit card hold, auto-lifecycle tracking, MA refund/forfeit</td><td>PayNow + screenshot, MA manual deposit record, bank transfer refund</td></tr>
-          <tr><td>Moving (D-1)</td><td>$1,000</td><td>Refundable deposit (1-4 weeks)</td><td>Same as above</td><td>Same as above</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="info-box info-box-green">
-      <strong>Recommendation:</strong> Confirm exact fee structure with Hilife first, then decide. If there is no fee, and the max duration is enough, use the credit card flow for simplicity. If fees are material ($20&ndash;$30 per cycle), use PayNow.
     </div>
   </section>
 
