@@ -619,7 +619,6 @@
     <section id="eform-design">
     <h2>3. E-Form Design</h2>
     <p>This section specifies the complete field requirements for each e-form. For existing Hilife drafts, the <strong>Hilife Status</strong> column indicates whether each field already exists, partially exists, is missing, or should be removed.</p>
-    <p>Status key: <span class="badge badge-green">Exists</span> <span class="badge badge-yellow">Exists (QX)</span> <span class="badge badge-yellow">Partial (QX)</span> <span class="badge badge-green">Added</span> <span class="badge badge-green">Removed</span> <span class="badge badge-red">N/A</span></p>
 
     <h3 id="eform-summary">Discrepancy Summary</h3>
     <p>Click any row to expand field details.</p>
@@ -641,11 +640,10 @@
                 <tbody>
                   <tr><td>1</td><td>New Correspondence Address</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
                   <tr><td>2</td><td>Effective Date of Change</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
-                  <tr><td>3</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td>Mobile and/or home</td></tr>
-                  <tr><td>4</td><td>Email Address</td><td>Text</td><td>No</td><td><span class="badge badge-green">Added</span></td><td>For correspondence</td></tr>
+                  <tr><td>3</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td>Mobile and/or home</td></tr>
+                  <tr><td>4</td><td>Email Address</td><td>Text</td><td>No</td><td><span class="badge badge-green">Exists</span></td><td>For correspondence</td></tr>
                   <tr><td>5</td><td>Consent (PDPA)</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-green">Removed</span></td><td>MA uses approval workflow instead</td></tr>
-                </tbody>
+                  </tbody>
               </table>
               <div class="form-notes">
                 <strong>Assessment:</strong> Complete. Contact number and email fields added. Official Use section removed. Ready for review and publishing.
@@ -664,35 +662,31 @@
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
                   <tr class="section-header"><td colspan="6">Section: Applicant Info</td></tr>
-                  <tr><td>1</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td>Mobile</td></tr>
-                  <tr><td>2</td><td>Email Address</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td></td></tr>
+                  <tr><td>1</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td>Mobile</td></tr>
+                  <tr><td>2</td><td>Email Address</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
                   <tr class="section-header"><td colspan="6">Section: Renovation Details</td></tr>
-                  <tr><td>3</td><td>Summary of Proposed Renovation Works</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td>Description of scope</td></tr>
-                  <tr><td>4</td><td>Date of Commencement</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td></td></tr>
-                  <tr><td>5</td><td>Expected Date of Completion</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td></td></tr>
-                  <tr><td>6</td><td>Drawing Plans / Renovation Proposal</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td>Upload PDF/images</td></tr>
-                  <tr><td>7</td><td>Hot Work Required?</td><td>Single Choice (Yes/No)</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td>If yes, hot work permit applies</td></tr>
+                  <tr><td>3</td><td>Summary of Proposed Renovation Works</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td>Description of scope</td></tr>
+                  <tr><td>4</td><td>Date of Commencement</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
+                  <tr><td>5</td><td>Expected Date of Completion</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
+                  <tr><td>6</td><td>Drawing Plans / Renovation Proposal</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td>Upload PDF/images</td></tr>
+                  <tr><td>7</td><td>Hot Work Required?</td><td>Single Choice (Yes/No)</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td>If yes, hot work permit applies</td></tr>
                   <tr class="section-header"><td colspan="6">Section: Contractor Info</td></tr>
                   <tr><td>8</td><td>Name of Contractor Company</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>Combined as Multiple Choice in Q1, needs restructuring</td></tr>
                   <tr><td>9</td><td>Contractor Business Reg. No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>Combined in Q1, needs separate field</td></tr>
                   <tr><td>10</td><td>Contractor Address</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>Combined in Q1, needs separate field</td></tr>
                   <tr><td>11</td><td>Contractor Person-in-Charge</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>Combined in Q1, needs separate field</td></tr>
                   <tr><td>12</td><td>Contractor Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>Combined in Q1, needs separate field</td></tr>
-                  <tr><td>13</td><td>Contractor Email</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td></td></tr>
+                  <tr><td>13</td><td>Contractor Email</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
                   <tr><td>14</td><td>Company Stamp</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
                   <tr class="section-header"><td colspan="6">Section: Worker Details</td></tr>
-                  <tr><td>15</td><td>Number of Workers</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td></td></tr>
-                  <tr><td>16</td><td>Worker Names and ID Numbers</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td>Name + work permit/passport no. Do NOT collect NRIC.</td></tr>
+                  <tr><td>15</td><td>Number of Workers</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
+                  <tr><td>16</td><td>Worker Names and ID Numbers</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td>Name + work permit/passport no. Do NOT collect NRIC.</td></tr>
                   <tr class="section-header"><td colspan="6">Section: Indemnity &amp; Acknowledgment</td></tr>
                   <tr><td>17</td><td>Contractor Indemnity Undertaking</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td>Lift protection, common area clauses</td></tr>
                   <tr><td>18</td><td>Terms and Conditions Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
                   <tr><td>19</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2/Q4)</span></td><td></td></tr>
                   <tr><td>20</td><td>Signed Contractor Indemnity Form</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q5)</span></td><td>Resident uploads contractor's signed indemnity document</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Application Permit for Contractor</s></td><td><s>Multiple Choice</s></td><td>Remove</td><td><span class="badge badge-green">Removed</span></td><td>Merged into main form; permit issued via approval workflow</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>NRIC Last 4 Digits</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-green">Removed</span></td><td>PDPA non-compliant by 31 Dec 2026</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Official Use x2</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-yellow">Remove (Q6, Q8)</span></td><td>MA uses approval workflow</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Deposit Cheque Number</s></td><td><s>Text</s></td><td>Remove</td><td>N/A</td><td>Deposit collected via PayNow</td></tr>
-                </tbody>
+                  </tbody>
               </table>
               <div class="form-notes">
                 <strong>Assessment:</strong> Complete. All required fields added: renovation scope, dates, drawings, hot work, full contractor details (company, PIC, contact, email), worker list. NRIC and deposit cheque fields removed. Deposit collected via PayNow.
@@ -710,22 +704,19 @@
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
-                  <tr><td>1</td><td>Moving Direction</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td>"Moving In" or "Moving Out"</td></tr>
+                  <tr><td>1</td><td>Moving Direction</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td>"Moving In" or "Moving Out"</td></tr>
                   <tr><td>2</td><td>Date of Moving</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
-                  <tr><td>3</td><td>Preferred Time Slot</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td>Morning (9am-1pm) / Afternoon (1pm-5pm)</td></tr>
+                  <tr><td>3</td><td>Preferred Time Slot</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td>Morning (9am-1pm) / Afternoon (1pm-5pm)</td></tr>
                   <tr class="section-header"><td colspan="6">Section: Contractor Info</td></tr>
                   <tr><td>4</td><td>Name of Moving Company</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Partial (Q3)</span></td><td>Combined in Q3, needs restructuring</td></tr>
                   <tr><td>5</td><td>Contractor Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-yellow">Partial (Q3)</span></td><td>Combined in Q3</td></tr>
-                  <tr><td>6</td><td>Contractor Person-in-Charge</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td></td></tr>
-                  <tr><td>7</td><td>Number of Workers</td><td>Number</td><td>No</td><td><span class="badge badge-green">Added</span></td><td></td></tr>
+                  <tr><td>6</td><td>Contractor Person-in-Charge</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
+                  <tr><td>7</td><td>Number of Workers</td><td>Number</td><td>No</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
                   <tr class="section-header"><td colspan="6">Section: Indemnity &amp; Acknowledgment</td></tr>
                   <tr><td>8</td><td>Contractor Indemnity Undertaking</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td>Lift protection, common area protection</td></tr>
                   <tr><td>9</td><td>Terms and Conditions Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
                   <tr><td>10</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3/Q4)</span></td><td></td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>NRIC Last 4 Digits</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-green">Removed</span></td><td>PDPA non-compliant</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Deposit Cheque Number</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-green">Removed</span></td><td>Deposit via PayNow</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-green">Removed</span></td><td></td></tr>
-                </tbody>
+                  </tbody>
               </table>
               <div class="form-notes">
                 <strong>Assessment:</strong> Complete. Moving direction and time slot added. Moving company and contractor details added. Deposit cheque field removed. Deposit collected via PayNow.
@@ -762,16 +753,15 @@
                 <tbody>
                   <tr><td>1</td><td>Applicant Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>"Subsidiary Proprietor" or "Tenant"</td></tr>
                   <tr><td>2</td><td>Tenant Info (if applicable)</td><td>Text (multi-line)</td><td>Conditional</td><td><span class="badge badge-green">Exists (Q2)</span></td><td>Required if tenant. Currently Multiple Choice placeholder &mdash; restructure to text field</td></tr>
-                  <tr><td>3</td><td>Vehicle Registration Plate No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td>Exists in wrong form (18239)</td></tr>
-                  <tr><td>4</td><td>Vehicle IU Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td>Exists in wrong form (18239)</td></tr>
-                  <tr><td>5</td><td>Vehicle Make and Model</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td>Exists in wrong form (18239)</td></tr>
-                  <tr><td>6</td><td>Vehicle Type</td><td>Single Choice</td><td>No</td><td><span class="badge badge-green">Added</span></td><td>Car / Motorcycle / Others</td></tr>
-                  <tr><td>7</td><td>Company Vehicle Letter</td><td>Attachment</td><td>No</td><td><span class="badge badge-green">Added</span></td><td>Required if company-registered vehicle</td></tr>
-                  <tr><td>8</td><td>Tenancy Agreement Copy</td><td>Attachment</td><td>No</td><td><span class="badge badge-green">Added</span></td><td>Required if tenant</td></tr>
+                  <tr><td>3</td><td>Vehicle Registration Plate No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td>Exists in wrong form (18239)</td></tr>
+                  <tr><td>4</td><td>Vehicle IU Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td>Exists in wrong form (18239)</td></tr>
+                  <tr><td>5</td><td>Vehicle Make and Model</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td>Exists in wrong form (18239)</td></tr>
+                  <tr><td>6</td><td>Vehicle Type</td><td>Single Choice</td><td>No</td><td><span class="badge badge-green">Exists</span></td><td>Car / Motorcycle / Others</td></tr>
+                  <tr><td>7</td><td>Company Vehicle Letter</td><td>Attachment</td><td>No</td><td><span class="badge badge-green">Exists</span></td><td>Required if company-registered vehicle</td></tr>
+                  <tr><td>8</td><td>Tenancy Agreement Copy</td><td>Attachment</td><td>No</td><td><span class="badge badge-green">Exists</span></td><td>Required if tenant</td></tr>
                   <tr><td>9</td><td>Consent + Rules Acknowledgment</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>PDPA + carpark rules</td></tr>
-                  <tr><td>10</td><td>Deposit Payment Confirmation</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td>Upload PayNow screenshot ($50 to MCST 4932)</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-green">Removed</span></td><td></td></tr>
-                </tbody>
+                  <tr><td>10</td><td>Deposit Payment Confirmation</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td>Upload PayNow screenshot ($50 to MCST 4932)</td></tr>
+                  </tbody>
               </table>
               <p style="margin-top:12px;"><strong>Note:</strong> The $50 deposit is refundable upon de-registration of the vehicle.</p>
               <div class="form-notes">
@@ -790,14 +780,12 @@
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
                   <tr><td>1</td><td>Application Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>"Replacement" or "Additional Card"</td></tr>
-                  <tr><td>2</td><td>Number of Cards Required</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td></td></tr>
-                  <tr><td>3</td><td>Card Holder Details</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td>Name and relationship to SP per card</td></tr>
-                  <tr><td>4</td><td>Reason for Replacement</td><td>Text</td><td>Conditional</td><td><span class="badge badge-green">Added</span></td><td>Required if "Replacement"</td></tr>
-                  <tr><td>5</td><td>Payment Confirmation</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td>Upload PayNow screenshot ($50/card to MCST 4932)</td></tr>
+                  <tr><td>2</td><td>Number of Cards Required</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
+                  <tr><td>3</td><td>Card Holder Details</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td>Name and relationship to SP per card</td></tr>
+                  <tr><td>4</td><td>Reason for Replacement</td><td>Text</td><td>Conditional</td><td><span class="badge badge-green">Exists</span></td><td>Required if "Replacement"</td></tr>
+                  <tr><td>5</td><td>Payment Confirmation</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td>Upload PayNow screenshot ($50/card to MCST 4932)</td></tr>
                   <tr><td>6</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Cash/Cheque Reference</s></td><td><s>Text</s></td><td>Remove</td><td><span class="badge badge-green">Removed</span></td><td>Payment via PayNow</td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-green">Removed</span></td><td></td></tr>
-                </tbody>
+                  </tbody>
               </table>
               <div class="form-notes">
                 <strong>Assessment:</strong> Major gaps. Missing card holder details, quantity, and replacement reason. The $50/card fee should be collected via PayNow with screenshot upload as payment confirmation.
@@ -818,8 +806,7 @@
                   <tr><td>2</td><td>Application Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td>"First-time" or "Replacement"</td></tr>
                   <tr><td>3</td><td>Terms and Conditions Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>Bicycle parking rules</td></tr>
                   <tr><td>4</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-green">Removed</span></td><td></td></tr>
-                </tbody>
+                  </tbody>
               </table>
               <div class="form-notes">
                 <strong>Assessment:</strong> Complete. All required fields exist. Ready for review and publishing.
@@ -836,18 +823,17 @@
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
-                  <tr><td>1</td><td>Registration Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td>"New Occupancy" or "Change of Occupancy"</td></tr>
-                  <tr><td>2</td><td>Owner Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td>Auto-populate from Hilife profile if possible</td></tr>
-                  <tr><td>3</td><td>Tenancy Start Date</td><td>Date</td><td>Conditional</td><td><span class="badge badge-green">Added</span></td><td>Required if tenant</td></tr>
-                  <tr><td>4</td><td>Tenancy End Date</td><td>Date</td><td>Conditional</td><td><span class="badge badge-green">Added</span></td><td>Required if tenant</td></tr>
-                  <tr><td>5</td><td>Tenancy Agreement</td><td>Attachment</td><td>Conditional</td><td><span class="badge badge-green">Added</span></td><td>Required if tenant</td></tr>
-                  <tr><td>6</td><td>Number of Occupants</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td>Maximum 6 unrelated persons per regulations</td></tr>
+                  <tr><td>1</td><td>Registration Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td>"New Occupancy" or "Change of Occupancy"</td></tr>
+                  <tr><td>2</td><td>Owner Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td>Auto-populate from Hilife profile if possible</td></tr>
+                  <tr><td>3</td><td>Tenancy Start Date</td><td>Date</td><td>Conditional</td><td><span class="badge badge-green">Exists</span></td><td>Required if tenant</td></tr>
+                  <tr><td>4</td><td>Tenancy End Date</td><td>Date</td><td>Conditional</td><td><span class="badge badge-green">Exists</span></td><td>Required if tenant</td></tr>
+                  <tr><td>5</td><td>Tenancy Agreement</td><td>Attachment</td><td>Conditional</td><td><span class="badge badge-green">Exists</span></td><td>Required if tenant</td></tr>
+                  <tr><td>6</td><td>Number of Occupants</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td>Maximum 6 unrelated persons per regulations</td></tr>
                   <tr><td>7</td><td>Occupant Details</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-yellow">Partial (Q1)</span></td><td>Q1 "Tenant Info" &mdash; very sparse, needs expansion</td></tr>
-                  <tr><td>8</td><td>Emergency Contact Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td></td></tr>
-                  <tr><td>9</td><td>Emergency Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td></td></tr>
-                  <tr><td>10</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Added</span></td><td></td></tr>
-                  <tr class="remove-row"><td>-</td><td><s>Official Use</s></td><td><s>Header</s></td><td>Remove</td><td><span class="badge badge-green">Removed</span></td><td></td></tr>
-                </tbody>
+                  <tr><td>8</td><td>Emergency Contact Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
+                  <tr><td>9</td><td>Emergency Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
+                  <tr><td>10</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists</span></td><td></td></tr>
+                  </tbody>
               </table>
               <div class="form-notes">
                 <strong>Assessment:</strong> Very sparse. Only one actual resident-facing field exists (Q1 "Tenant Info"). The paper form collects significantly more detail. Eight fields must be added.
