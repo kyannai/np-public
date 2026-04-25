@@ -626,16 +626,16 @@
     <div class="table-wrap">
       <table>
         <thead>
-          <tr><th>Form</th><th>Paper Form ID</th><th>Hilife ID</th><th>Current Qs</th><th>Required Fields</th><th>Missing</th><th>To Remove</th><th>Readiness</th></tr>
+          <tr><th>Form</th><th>Key</th><th>Paper Form ID</th><th>Hilife ID</th><th>Current Qs</th><th>Required Fields</th><th>Missing</th><th>To Remove</th><th>Readiness</th></tr>
         </thead>
         <tbody>
 
           <!-- Row 1: Address Change -->
           <tr class="expandable-row" id="form-a" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Address Change</td><td>A</td><td>18237</td><td>4</td><td>5</td><td>2</td><td>1</td><td><span class="badge badge-green">Near-complete</span></td>
+            <td><span class="arrow">&#9654;</span> Address Change</td><td><code>ADDRESS</code></td><td>A</td><td>18237</td><td>4</td><td>5</td><td>2</td><td>1</td><td><span class="badge badge-green">Near-complete</span></td>
           </tr>
           <tr class="detail-row">
-            <td colspan="8">
+            <td colspan="9">
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
@@ -655,10 +655,10 @@
 
           <!-- Row 2: Renovation/A&A + Contractor -->
           <tr class="expandable-row" id="form-b1" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Renovation/A&amp;A + Contractor</td><td>B-1, B-2, B-3, C</td><td>18271</td><td>8</td><td>20</td><td>9</td><td>4</td><td><span class="badge badge-yellow">Incomplete</span></td>
+            <td><span class="arrow">&#9654;</span> Renovation/A&amp;A + Contractor</td><td><code>RENO</code></td><td>B-1, B-2, B-3, C</td><td>18271</td><td>8</td><td>20</td><td>9</td><td>4</td><td><span class="badge badge-yellow">Incomplete</span></td>
           </tr>
           <tr class="detail-row">
-            <td colspan="8">
+            <td colspan="9">
               <p style="margin-bottom:12px;">Merged form combining paper Forms B-1, B-2, B-3, and C.</p>
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
@@ -702,10 +702,10 @@
 
           <!-- Row 3: Moving In/Out -->
           <tr class="expandable-row" id="form-d1" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Moving In/Out</td><td>D-1, D-2</td><td>18272</td><td>5</td><td>10</td><td>4</td><td>3</td><td><span class="badge badge-yellow">Incomplete</span></td>
+            <td><span class="arrow">&#9654;</span> Moving In/Out</td><td><code>MOVING</code></td><td>D-1, D-2</td><td>18272</td><td>5</td><td>10</td><td>4</td><td>3</td><td><span class="badge badge-yellow">Incomplete</span></td>
           </tr>
           <tr class="detail-row">
-            <td colspan="8">
+            <td colspan="9">
               <p style="margin-bottom:12px;">Merged form combining paper Forms D-1 and D-2.</p>
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
@@ -735,10 +735,10 @@
 
           <!-- Row 4: Refund of Deposit (ELIMINATED) -->
           <tr class="expandable-row" id="form-ek" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Refund of Deposit</td><td>E, K</td><td>18273</td><td>5</td><td>0</td><td>0</td><td>0</td><td><span class="badge badge-red">ELIMINATED</span></td>
+            <td><span class="arrow">&#9654;</span> Refund of Deposit</td><td><code>-</code></td><td>E, K</td><td>18273</td><td>5</td><td>0</td><td>0</td><td>0</td><td><span class="badge badge-red">ELIMINATED</span></td>
           </tr>
           <tr class="detail-row">
-            <td colspan="8">
+            <td colspan="9">
               <p>This form is <strong>eliminated</strong> from the digital platform. The current Hilife draft (ID 18273) conflates two different refund processes and should be deleted.</p>
               <div class="form-notes">
                 <strong>Rationale:</strong> Under the PayNow workflow, deposit refunds are no longer resident-initiated "requests." They are mandatory MA actions triggered at process closure:
@@ -753,10 +753,10 @@
 
           <!-- Row 5: Vehicle Registration -->
           <tr class="expandable-row" id="form-f" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Vehicle Registration</td><td>F</td><td>18238</td><td>4</td><td>10</td><td>6</td><td>1</td><td><span class="badge badge-yellow">Incomplete</span></td>
+            <td><span class="arrow">&#9654;</span> Vehicle Registration</td><td><code>VEHICLE</code></td><td>F</td><td>18238</td><td>4</td><td>10</td><td>6</td><td>1</td><td><span class="badge badge-yellow">Incomplete</span></td>
           </tr>
           <tr class="detail-row">
-            <td colspan="8">
+            <td colspan="9">
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
@@ -782,10 +782,10 @@
 
           <!-- Row 6: Access Card -->
           <tr class="expandable-row" id="form-g" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Access Card</td><td>G</td><td>18274</td><td>3</td><td>6</td><td>4</td><td>2</td><td><span class="badge badge-yellow">Incomplete</span></td>
+            <td><span class="arrow">&#9654;</span> Access Card</td><td><code>ACCESSCARD</code></td><td>G</td><td>18274</td><td>3</td><td>6</td><td>4</td><td>2</td><td><span class="badge badge-yellow">Incomplete</span></td>
           </tr>
           <tr class="detail-row">
-            <td colspan="8">
+            <td colspan="9">
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
@@ -807,10 +807,10 @@
 
           <!-- Row 7: Bicycle Tag -->
           <tr class="expandable-row" id="form-h" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Bicycle Tag</td><td>H</td><td>18275</td><td>4</td><td>4</td><td>0</td><td>1</td><td><span class="badge badge-green">Near-complete</span></td>
+            <td><span class="arrow">&#9654;</span> Bicycle Tag</td><td><code>BICYCLE</code></td><td>H</td><td>18275</td><td>4</td><td>4</td><td>0</td><td>1</td><td><span class="badge badge-green">Near-complete</span></td>
           </tr>
           <tr class="detail-row">
-            <td colspan="8">
+            <td colspan="9">
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
@@ -829,10 +829,10 @@
 
           <!-- Row 8: Occupancy Registration -->
           <tr class="expandable-row" id="form-l" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Occupancy Registration</td><td>L</td><td>18276</td><td>2</td><td>10</td><td>8</td><td>1</td><td><span class="badge badge-yellow">Incomplete</span></td>
+            <td><span class="arrow">&#9654;</span> Occupancy Registration</td><td><code>OCCUPANCY</code></td><td>L</td><td>18276</td><td>2</td><td>10</td><td>8</td><td>1</td><td><span class="badge badge-yellow">Incomplete</span></td>
           </tr>
           <tr class="detail-row">
-            <td colspan="8">
+            <td colspan="9">
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
@@ -857,10 +857,10 @@
 
           <!-- Row 10: Pet Registration -->
           <tr class="expandable-row" id="form-pet" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Pet Registration</td><td>New</td><td>N/A</td><td>0</td><td>8</td><td>8</td><td>0</td><td><span class="badge badge-red">Not started</span></td>
+            <td><span class="arrow">&#9654;</span> Pet Registration</td><td><code>PET</code></td><td>New</td><td>N/A</td><td>0</td><td>8</td><td>8</td><td>0</td><td><span class="badge badge-red">Not started</span></td>
           </tr>
           <tr class="detail-row">
-            <td colspan="8">
+            <td colspan="9">
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
@@ -879,10 +879,10 @@
 
           <!-- Row 10: Instructor Reg -->
           <tr class="expandable-row" id="form-instructor" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Instructor Reg</td><td>New</td><td>N/A</td><td>0</td><td>7</td><td>7</td><td>0</td><td><span class="badge badge-red">Not started</span></td>
+            <td><span class="arrow">&#9654;</span> Instructor Reg</td><td><code>INSTRUCTOR</code></td><td>New</td><td>N/A</td><td>0</td><td>7</td><td>7</td><td>0</td><td><span class="badge badge-red">Not started</span></td>
           </tr>
           <tr class="detail-row">
-            <td colspan="8">
+            <td colspan="9">
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
@@ -901,10 +901,10 @@
 
           <!-- Row 13: Temporary Overnight Parking Permit -->
           <tr class="expandable-row" id="form-overnight" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Temporary Overnight Parking Permit</td><td>New</td><td>N/A</td><td>0</td><td>5</td><td>5</td><td>0</td><td><span class="badge badge-red">Not started</span></td>
+            <td><span class="arrow">&#9654;</span> Temporary Overnight Parking Permit</td><td><code>OVERNIGHT</code></td><td>New</td><td>N/A</td><td>0</td><td>5</td><td>5</td><td>0</td><td><span class="badge badge-red">Not started</span></td>
           </tr>
           <tr class="detail-row">
-            <td colspan="8">
+            <td colspan="9">
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
@@ -1033,11 +1033,23 @@
     </div>
 
     <h4>Deposit Collection via PayNow</h4>
-    <p>Hilife's E-Form module cannot collect deposits directly. All deposit and fee collection is handled via <strong>PayNow</strong>. Residents pay via PayNow to MCST 4932 and upload the payment screenshot in the e-form reply thread. MA verifies and tracks deposits manually.</p>
+    <p>Hilife's E-Form module cannot collect deposits directly. All deposit and fee collection is handled via <strong>PayNow</strong>. Residents pay via PayNow to MCST 4932, using a standardised reference format, and upload the payment screenshot in the e-form reply thread. MA verifies and tracks deposits manually.</p>
 
     <div class="info-box info-box-green">
       <strong>Why PayNow:</strong> No credit card processing fees (saves ~$1,000&ndash;$1,500/year on renovation/moving deposits). Works for all deposit durations including long-term vehicle registration deposits. Simple and familiar to residents.
     </div>
+
+    <h4>PayNow Reference Format</h4>
+    <p>When paying via PayNow, residents must indicate the <strong>form key</strong> and <strong>unit number</strong> in the transaction reference:</p>
+    <div class="info-box info-box-blue">
+      <strong>Format:</strong> <code>KEY - UNIT</code><br>
+      <strong>Examples:</strong><br>
+      <code>RENO - 47-08-12</code> (Renovation deposit for unit 47-08-12)<br>
+      <code>MOVING - 53-15-37</code> (Moving deposit for unit 53-15-37)<br>
+      <code>VEHICLE - 61-03-77</code> (Vehicle registration deposit)<br>
+      <code>ACCESSCARD - 55-21-50</code> (Access card fee)
+    </div>
+    <p>This allows MA to match PayNow transfers to e-form submissions without manual cross-referencing.</p>
 
     <div class="info-box info-box-yellow">
       <strong>Status convention:</strong> The e-form stays in <strong>Pending</strong> throughout the entire process &mdash; application, deposit payment, work in progress, inspection, and refund. MA only marks it as <strong>Approved</strong> when the deposit has been fully refunded (or forfeited) and the case is closed. All communication and intermediate steps are managed via the <strong>reply thread</strong>.
@@ -1050,9 +1062,9 @@
       <div class="flow-arrow"></div>
       <div class="flow-step flow-step-action">MA reviews via reply thread (all back-and-forth happens here)</div>
       <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">MA replies: "Please pay $X,XXX via PayNow to MCST 4932 and upload the screenshot here."</div>
+      <div class="flow-step flow-step-action">MA replies: "Please pay $X,XXX via PayNow to MCST 4932. Use reference: KEY - UNIT (e.g. RENO - 47-08-12). Upload the screenshot here."</div>
       <div class="flow-arrow"></div>
-      <div class="flow-step flow-step-action">Resident pays via PayNow, uploads screenshot in reply thread</div>
+      <div class="flow-step flow-step-action">Resident pays via PayNow with reference, uploads screenshot in reply thread</div>
       <div class="flow-arrow"></div>
       <div class="flow-step flow-step-action">MA verifies payment, records deposit</div>
       <div class="flow-arrow"></div>
