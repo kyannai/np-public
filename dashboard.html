@@ -370,6 +370,12 @@ tbody tr:hover { background: #f5f7fa; }
 }
 .clamp-toggle:hover { text-decoration: underline; }
 
+.heatmap { border-collapse: collapse; font-size: 12px; width: 100%; }
+.heatmap th { font-size: 11px; padding: 6px 8px; text-align: center; background: var(--color-bg); }
+.heatmap th:first-child { text-align: left; min-width: 160px; }
+.heatmap td { padding: 4px 8px; text-align: center; border: 1px solid var(--color-border-light); }
+.heatmap td:first-child { text-align: left; font-weight: 500; white-space: nowrap; }
+
 .vendor-action {
   background: var(--color-yellow-bg);
   border-left: 4px solid var(--color-yellow-border);
@@ -677,6 +683,441 @@ tbody tr:hover { background: #f5f7fa; }
     <h2>4. Insights &amp; Recommendations</h2>
     <p style="font-size:13px;color:var(--color-text-light);margin-bottom:16px">Based on 12-month historical analysis for pattern detection.</p>
 
+    <h3 style="margin-bottom:8px">Sub-Cluster Heatmap (6 Months)</h3>
+    <div class="table-wrap"><table class="heatmap"><thead><tr><th>Sub-Cluster</th>
+<th>Nov 25</th>
+<th>Dec 25</th>
+<th>Jan 26</th>
+<th>Feb 26</th>
+<th>Mar 26</th>
+<th>Apr 26</th>
+<th>Total</th></tr></thead><tbody>
+<tr><td>Rubbish Chute</td>
+<td style="background:#63b3ed;color:#fff;font-weight:600">10</td>
+<td style="background:#3182ce;color:#fff;font-weight:600">14</td>
+<td style="background:#63b3ed;color:#fff;font-weight:600">11</td>
+<td style="background:#3182ce;color:#fff;font-weight:600">14</td>
+<td style="background:#63b3ed;color:#fff;font-weight:600">10</td>
+<td style="background:#3182ce;color:#fff;font-weight:600">14</td>
+<td style="font-weight:700">73</td></tr>
+<tr><td>Gate &amp; Door Access</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">8</td>
+<td style="background:#3182ce;color:#fff;font-weight:600">14</td>
+<td style="background:#3182ce;color:#fff;font-weight:600">16</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">9</td>
+<td style="background:#2c5282;color:#fff;font-weight:600">23</td>
+<td style="font-weight:700">71</td></tr>
+<tr><td>Gym Equipment</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">6</td>
+<td style="background:#3182ce;color:#fff;font-weight:600">14</td>
+<td style="background:#3182ce;color:#fff;font-weight:600">16</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">7</td>
+<td style="background:#63b3ed;color:#fff;font-weight:600">13</td>
+<td style="background:#63b3ed;color:#fff;font-weight:600">11</td>
+<td style="font-weight:700">67</td></tr>
+<tr><td>Parking &amp; Traffic</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">8</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">8</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">7</td>
+<td style="background:#63b3ed;color:#fff;font-weight:600">11</td>
+<td style="background:#3182ce;color:#fff;font-weight:600">14</td>
+<td style="font-weight:700">53</td></tr>
+<tr><td>Animal Issues</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">6</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">9</td>
+<td style="background:#63b3ed;color:#fff;font-weight:600">13</td>
+<td style="background:#3182ce;color:#fff;font-weight:600">17</td>
+<td style="font-weight:700">50</td></tr>
+<tr><td>General Enquiry</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">8</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="background:#3182ce;color:#fff;font-weight:600">15</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#3182ce;color:#fff;font-weight:600">17</td>
+<td style="font-weight:700">50</td></tr>
+<tr><td>Noise Disturbance</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">8</td>
+<td style="background:#63b3ed;color:#fff;font-weight:600">11</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#63b3ed;color:#fff;font-weight:600">11</td>
+<td style="background:#63b3ed;color:#fff;font-weight:600">10</td>
+<td style="font-weight:700">49</td></tr>
+<tr><td>Lighting</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">6</td>
+<td style="color:#ccc">-</td>
+<td style="background:#63b3ed;color:#fff;font-weight:600">10</td>
+<td style="background:#2c5282;color:#fff;font-weight:600">23</td>
+<td style="font-weight:700">45</td></tr>
+<tr><td>Smoking</td>
+<td style="background:#63b3ed;color:#fff;font-weight:600">10</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">6</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#63b3ed;color:#fff;font-weight:600">10</td>
+<td style="background:#63b3ed;color:#fff;font-weight:600">11</td>
+<td style="font-weight:700">44</td></tr>
+<tr><td>Dirty Corridor/Lobby</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">7</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">7</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#63b3ed;color:#fff;font-weight:600">11</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">6</td>
+<td style="background:#63b3ed;color:#fff;font-weight:600">10</td>
+<td style="font-weight:700">44</td></tr>
+<tr><td>HiLife System</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">6</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">7</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">8</td>
+<td style="font-weight:700">28</td></tr>
+<tr><td>Bulky Waste</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#3182ce;color:#fff;font-weight:600">14</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="font-weight:700">28</td></tr>
+<tr><td>Dirty Common Area</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">9</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="font-weight:700">27</td></tr>
+<tr><td>Pool &amp; Water Features</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">9</td>
+<td style="font-weight:700">24</td></tr>
+<tr><td>Lift Malfunction</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">7</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">7</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="font-weight:700">23</td></tr>
+<tr><td>Pest Control</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="font-weight:700">23</td></tr>
+<tr><td>General Repair</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">7</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="font-weight:700">21</td></tr>
+<tr><td>Facility Booking</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">6</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="font-weight:700">20</td></tr>
+<tr><td>Landscaping</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">9</td>
+<td style="font-weight:700">19</td></tr>
+<tr><td>Lift Interior</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="font-weight:700">17</td></tr>
+<tr><td>Intercom &amp; Smart Home</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="color:#ccc">-</td>
+<td style="font-weight:700">17</td></tr>
+<tr><td>Playground &amp; Kids</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">6</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="font-weight:700">17</td></tr>
+<tr><td>Wall &amp; Ceiling</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="font-weight:700">16</td></tr>
+<tr><td>Corridor Items</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="color:#ccc">-</td>
+<td style="font-weight:700">16</td></tr>
+<tr><td>Lift Light &amp; Display</td>
+<td style="color:#ccc">-</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="font-weight:700">16</td></tr>
+<tr><td>Door &amp; Lock</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="font-weight:700">14</td></tr>
+<tr><td>Fire Safety</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="font-weight:700">13</td></tr>
+<tr><td>Bicycle Parking</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="font-weight:700">13</td></tr>
+<tr><td>Lift Noise</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">6</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="font-weight:700">12</td></tr>
+<tr><td>Crime &amp; Police</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="font-weight:700">12</td></tr>
+<tr><td>Odor &amp; Stench</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="color:#ccc">-</td>
+<td style="font-weight:700">11</td></tr>
+<tr><td>Electrical</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="font-weight:700">11</td></tr>
+<tr><td>Dirty Lift</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="font-weight:700">11</td></tr>
+<tr><td>Security Guard</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#bee3f8;color:#2c5282;font-weight:600">5</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="font-weight:700">10</td></tr>
+<tr><td>Common Area Leak</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="color:#ccc">-</td>
+<td style="font-weight:700">9</td></tr>
+<tr><td>Roof &amp; Exterior</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="font-weight:700">9</td></tr>
+<tr><td>Mobile Signal</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="color:#ccc">-</td>
+<td style="font-weight:700">8</td></tr>
+<tr><td>Signage</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="font-weight:700">7</td></tr>
+<tr><td>Lift Door</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="font-weight:700">7</td></tr>
+<tr><td>Management Complaint</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="font-weight:700">7</td></tr>
+<tr><td>Access Card</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">4</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="color:#ccc">-</td>
+<td style="font-weight:700">6</td></tr>
+<tr><td>High-Rise Littering</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="color:#ccc">-</td>
+<td style="font-weight:700">5</td></tr>
+<tr><td>Ceiling Seepage</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="font-weight:700">5</td></tr>
+<tr><td>Liquid Dumping</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="font-weight:700">5</td></tr>
+<tr><td>Moving/Logistics</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="color:#ccc">-</td>
+<td style="font-weight:700">4</td></tr>
+<tr><td>In-Unit</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="font-weight:700">4</td></tr>
+<tr><td>Visitor Access</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="font-weight:700">4</td></tr>
+<tr><td>Personal Belongings</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="font-weight:700">4</td></tr>
+<tr><td>Maintenance Fee</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">3</td>
+<td style="font-weight:700">4</td></tr>
+<tr><td>Facility Access</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="font-weight:700">3</td></tr>
+<tr><td>Inconsiderate Neighbour</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="color:#ccc">-</td>
+<td style="font-weight:700">3</td></tr>
+<tr><td>Drainage</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="color:#ccc">-</td>
+<td style="font-weight:700">3</td></tr>
+<tr><td>Renovation</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="color:#ccc">-</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">1</td>
+<td style="background:#ebf4ff;color:#2c5282;font-weight:600">2</td>
+<td style="color:#ccc">-</td>
+<td style="font-weight:700">3</td></tr>
+</tbody></table></div>
+<p style="font-size:11px;color:var(--color-text-light);margin:6px 0 20px">Darker = more cases. Sub-clusters with &lt;3 cases hidden.</p>
 
     <div class="status-group" id="active-issues">
       <div class="status-group-header active">
@@ -1056,7 +1497,7 @@ Regards, [staff]</div>
           <p class="detail-text">Avg 4d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: completed, rectified. Common phrases: &quot;thank you for your feedback&quot;.</div>
+          <div class="detail-text">Responses include action references: rectified, completed. Common phrases: &quot;thank you for your feedback&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">4 dissatisfied out of 8 reviews.</div>
           <div style="margin:6px 0 6px 12px">
@@ -1134,7 +1575,7 @@ Amelia <button class="clamp-toggle" onclick="toggleClamp(this)">Show less</butto
           <p class="detail-text">Avg 1d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: cleared, replaced. Common phrases: &quot;thank you for your feedback&quot;.</div>
+          <div class="detail-text">Responses include action references: replaced, cleared. Common phrases: &quot;thank you for your feedback&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">4 dissatisfied out of 6 reviews.</div>
           <div style="margin:6px 0 6px 12px">
@@ -1205,7 +1646,7 @@ Regards, [staff]</div>
           <p class="detail-text">Avg 2d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: cleared, cleaned. Common phrases: &quot;thank you for your feedback&quot; / &quot;we understand your concern&quot;.</div>
+          <div class="detail-text">Responses include action references: cleaned, cleared. Common phrases: &quot;thank you for your feedback&quot; / &quot;we understand your concern&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">1 dissatisfied out of 7 reviews.</div>
           <div style="margin:6px 0 6px 12px">
@@ -1426,7 +1867,7 @@ Best Regards,
           <p class="detail-text">Avg 1d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: cleaned, rectified. Common phrases: &quot;thank you for your feedback&quot; / &quot;please be informed&quot;.</div>
+          <div class="detail-text">Responses include action references: rectified, cleaned. Common phrases: &quot;thank you for your feedback&quot; / &quot;please be informed&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">3 dissatisfied out of 5 reviews.</div>
           <div style="margin:6px 0 6px 12px">
@@ -1560,7 +2001,7 @@ We will close this feedback and reply to your latest feedback. Regards, [staff]<
           <p class="detail-text">Avg 2d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. Some action words found: completed, removed.</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. Some action words found: removed, completed.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">1 dissatisfied out of 1 reviews.</div>
           <div style="margin:6px 0 6px 12px">
@@ -1646,7 +2087,7 @@ Best Regards,
           <p class="detail-text">Avg 1d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: cleared, cleaned, resolved. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;.</div>
+          <div class="detail-text">Responses include action references: removed, cleaned, cleared. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">No reviews with clear sentiment (42 without review).</div>
 
@@ -2033,7 +2474,7 @@ Best regards, [staff]</div>
           <p class="detail-text">Avg 1d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: cleared, cleaned, completed. Common phrases: &quot;we have assigned&quot; / &quot;for your information&quot;.</div>
+          <div class="detail-text">Responses include action references: cleaned, completed, cleared. Common phrases: &quot;we have assigned&quot; / &quot;for your information&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">No reviews with clear sentiment (16 without review).</div>
 
@@ -2274,7 +2715,7 @@ Regards, [staff]</div>
           <p class="detail-text">Avg 1d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: cleared, cleaned, removed. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;.</div>
+          <div class="detail-text">Responses include action references: removed, cleaned, cleared. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">3 dissatisfied out of 7 reviews.</div>
           <div style="margin:6px 0 6px 12px">
@@ -2435,7 +2876,7 @@ Best Regards,
           <p class="detail-text">Avg 1d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: replaced, rectified. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have assigned&quot;.</div>
+          <div class="detail-text">Responses include action references: rectified, replaced. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have assigned&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">1 dissatisfied out of 2 reviews.</div>
           <div style="margin:6px 0 6px 12px">
@@ -2701,7 +3142,7 @@ Best Regards,
           <p class="detail-text">Avg 2d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: replaced, repaired. Common phrases: &quot;for your information&quot; / &quot;we refer to your feedback&quot;.</div>
+          <div class="detail-text">Responses include action references: repaired, replaced. Common phrases: &quot;for your information&quot; / &quot;we refer to your feedback&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">1 satisfied out of 1 reviews.</div>
           <div style="margin:6px 0 6px 12px">
@@ -2996,7 +3437,7 @@ Regards,
           <p class="detail-text">Avg 1d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: cleared, cleaned, rectified. Common phrases: &quot;thank you for your feedback&quot;.</div>
+          <div class="detail-text">Responses include action references: rectified, cleaned, cleared. Common phrases: &quot;thank you for your feedback&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">10 dissatisfied out of 21 reviews.</div>
           <div style="margin:6px 0 6px 12px">
@@ -3086,7 +3527,7 @@ Best Regards,
           <p class="detail-text">Avg 1d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;we have informed&quot; / &quot;we have assigned&quot;. Some action words found: replaced, rectified.</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;we have informed&quot; / &quot;we have assigned&quot;. Some action words found: rectified, replaced.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">2 dissatisfied out of 4 reviews.</div>
           <div style="margin:6px 0 6px 12px">
@@ -3480,7 +3921,7 @@ Warmest regards,
           <p class="detail-text">Avg 2d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: cleared, removed. Common phrases: &quot;for your information&quot; / &quot;we refer to your feedback&quot;.</div>
+          <div class="detail-text">Responses include action references: removed, cleared. Common phrases: &quot;for your information&quot; / &quot;we refer to your feedback&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">2 satisfied out of 2 reviews.</div>
           <div style="margin:6px 0 6px 12px">
@@ -3664,7 +4105,7 @@ Best Regards,
           <p class="detail-text">Avg 2d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: completed, replaced, rectified. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;.</div>
+          <div class="detail-text">Responses include action references: rectified, completed, replaced. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">No reviews with clear sentiment (18 without review).</div>
 
@@ -3750,7 +4191,7 @@ Best regards, [staff]</div>
           <p class="detail-text">Avg 1d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;please be informed&quot; / &quot;we have assigned&quot;. Some action words found: cleaned, removed.</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;please be informed&quot; / &quot;we have assigned&quot;. Some action words found: removed, cleaned.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">1 dissatisfied out of 1 reviews.</div>
           <div style="margin:6px 0 6px 12px">
@@ -3877,7 +4318,7 @@ Best regards - [staff] <button class="clamp-toggle" onclick="toggleClamp(this)">
           <p class="detail-text">Avg 2d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;we have informed&quot; / &quot;for your information&quot;. Some action words found: completed, repaired.</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot; / &quot;we have informed&quot; / &quot;for your information&quot;. Some action words found: repaired, completed.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">1 dissatisfied out of 1 reviews.</div>
           <div style="margin:6px 0 6px 12px">
@@ -4774,7 +5215,7 @@ Best regards,
           <p class="detail-text">Avg 24d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: completed, rectified.</div>
+          <div class="detail-text">Responses include action references: rectified, completed.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">No reviews with clear sentiment (9 without review).</div>
 
@@ -5567,7 +6008,7 @@ Best Regards,
           <p class="detail-text">Avg 5d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. Some action words found: cleared, cleaned.</div>
+          <div class="detail-text">Template-heavy responses: &quot;thank you for your feedback&quot;. Some action words found: cleaned, cleared.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">3 dissatisfied out of 8 reviews.</div>
           <div style="margin:6px 0 6px 12px">
@@ -5671,7 +6112,7 @@ Thank [staff] for your information. Yesterday the pest control has done with the
           <p class="detail-text">Avg 3d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: cleared, cleaned. Common phrases: &quot;thank you for your feedback&quot; / &quot;for your information&quot;.</div>
+          <div class="detail-text">Responses include action references: cleaned, cleared. Common phrases: &quot;thank you for your feedback&quot; / &quot;for your information&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">No reviews with clear sentiment (61 without review).</div>
 
@@ -6005,7 +6446,7 @@ Thank [staff].</div>
           <p class="detail-text">Avg 1d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Template-heavy responses: &quot;template acknowledgements&quot;. Some action words found: cleared, cleaned.</div>
+          <div class="detail-text">Template-heavy responses: &quot;template acknowledgements&quot;. Some action words found: cleaned, cleared.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">No reviews with clear sentiment (7 without review).</div>
 
@@ -6166,7 +6607,7 @@ Thanks [staff]. <button class="clamp-toggle" onclick="toggleClamp(this)">Show le
           <p class="detail-text">Avg 10d resolution</p>
 
           <div class="detail-label">MA Reply Pattern</div>
-          <div class="detail-text">Responses include action references: completed, replaced, installed. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;.</div>
+          <div class="detail-text">Responses include action references: installed, replaced, completed. Common phrases: &quot;thank you for your feedback&quot; / &quot;we have informed&quot;.</div>
           <div class="detail-label">Resident Sentiment</div>
           <div class="detail-text">No reviews with clear sentiment (7 without review).</div>
 
