@@ -638,13 +638,11 @@
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
-                  
-                  <tr><td>1</td><td>New Correspondence Address</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
+                  <tr><td>1</td><td>New Correspondence Address</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
                   <tr><td>2</td><td>Effective Date of Change</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
-                  <tr><td>3</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
-                  <tr><td>4</td><td>Email Address</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td></td></tr>
-                  <tr><td>5</td><td>Consent</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q5)</span></td><td></td></tr>
-                
+                  <tr><td>3</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>Mobile and/or home</td></tr>
+                  <tr><td>4</td><td>Email Address</td><td>Text</td><td>No</td><td><span class="badge badge-green">Exists (Q4)</span></td><td>For correspondence</td></tr>
+                  <tr><td>5</td><td>Consent (PDPA)</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q5)</span></td><td></td></tr>
                   </tbody>
               </table>
               <div class="form-notes">
@@ -663,27 +661,31 @@
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
-                  
-                  <tr><td>1</td><td>Applicant Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
-                  <tr><td>2</td><td>Applicant Email Address</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
-                  <tr><td>3</td><td>Summary of Proposed Renovation Works</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
+                  <tr class="section-header"><td colspan="6">Section: Applicant Info</td></tr>
+                  <tr><td>1</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>Mobile</td></tr>
+                  <tr><td>2</td><td>Email Address</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
+                  <tr class="section-header"><td colspan="6">Section: Renovation Details</td></tr>
+                  <tr><td>3</td><td>Summary of Proposed Renovation Works</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>Description of scope</td></tr>
                   <tr><td>4</td><td>Date of Commencement</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td></td></tr>
                   <tr><td>5</td><td>Expected Date of Completion</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists (Q5)</span></td><td></td></tr>
                   <tr><td>6</td><td>Drawing Plans / Renovation Proposal</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q6)</span></td><td>Upload PDF/images</td></tr>
-                  <tr><td>7</td><td>Hot Work Required?</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q7)</span></td><td>e.g. welding, cutting, soldering</td></tr>
-                  <tr><td>8</td><td>Name of Contractor Company</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q8)</span></td><td></td></tr>
-                  <tr><td>9</td><td>Contractor Business Reg. No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q9)</span></td><td></td></tr>
-                  <tr><td>10</td><td>Contractor Address</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q10)</span></td><td></td></tr>
-                  <tr><td>11</td><td>Contractor Person-in-Charge</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q11)</span></td><td></td></tr>
-                  <tr><td>12</td><td>Contractor Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q12)</span></td><td></td></tr>
+                  <tr><td>7</td><td>Hot Work Required?</td><td>Single Choice (Yes/No)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q7)</span></td><td>If yes, hot work permit applies</td></tr>
+                  <tr class="section-header"><td colspan="6">Section: Contractor Info</td></tr>
+                  <tr><td>8</td><td>Name of Contractor Company</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q8)</span></td><td>Now separate text field</td></tr>
+                  <tr><td>9</td><td>Contractor Business Reg. No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q9)</span></td><td>Now separate text field</td></tr>
+                  <tr><td>10</td><td>Contractor Address</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q10)</span></td><td>Now separate text field</td></tr>
+                  <tr><td>11</td><td>Contractor Person-in-Charge</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q11)</span></td><td>Now separate text field</td></tr>
+                  <tr><td>12</td><td>Contractor Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q12)</span></td><td>Now separate text field</td></tr>
                   <tr><td>13</td><td>Contractor Email</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q13)</span></td><td></td></tr>
-                  <tr><td>14</td><td>Number of Workers</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Exists (Q14)</span></td><td></td></tr>
-                  <tr><td>15</td><td>Worker Names and ID Numbers</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q15)</span></td><td>Name + work permit/passport no. (NOT NRIC)</td></tr>
-                  <tr><td>16</td><td>Company Stamp</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q16)</span></td><td></td></tr>
-                  <tr><td>17</td><td>Terms & Conditon</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q17)</span></td><td>Includes PDPA consent</td></tr>
-                  <tr><td>18</td><td>Contractor's Indemnity Form for Addition & Alteration</td><td>Multiple Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q18)</span></td><td>Lift protection, common area clauses</td></tr>
-                  <tr><td>19</td><td>Signature of Contractor and Signature of Contractor</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q19)</span></td><td>Upload signed indemnity form</td></tr>
-                
+                  <tr><td>14</td><td>Company Stamp</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q14)</span></td><td></td></tr>
+                  <tr class="section-header"><td colspan="6">Section: Worker Details</td></tr>
+                  <tr><td>15</td><td>Number of Workers</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Exists (Q15)</span></td><td></td></tr>
+                  <tr><td>16</td><td>Worker Names and ID Numbers</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q16)</span></td><td>Name + work permit/passport no. Do NOT collect NRIC.</td></tr>
+                  <tr class="section-header"><td colspan="6">Section: Indemnity &amp; Acknowledgment</td></tr>
+                  <tr><td>17</td><td>Contractor Indemnity Undertaking</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q17)</span></td><td>Lift protection, common area clauses</td></tr>
+                  <tr><td>18</td><td>Terms and Conditions Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q18)</span></td><td></td></tr>
+                  <tr><td>19</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2/Q4)</span></td><td></td></tr>
+                  <tr><td>20</td><td>Signed Contractor Indemnity Form</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q20)</span></td><td>Resident uploads contractor's signed indemnity document</td></tr>
                   </tbody>
               </table>
               <div class="form-notes">
@@ -702,17 +704,18 @@
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
-                  
-                  <tr><td>1</td><td>Moving Direction</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
-                  <tr><td>2</td><td>Date of Moving-in / Moving-Out</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
-                  <tr><td>3</td><td>Preferred Time Slot</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
-                  <tr><td>4</td><td>Name of Moving Company</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td></td></tr>
-                  <tr><td>5</td><td>Contractor Person-in-Charge</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q5)</span></td><td></td></tr>
-                  <tr><td>6</td><td>Contractor Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q6)</span></td><td></td></tr>
-                  <tr><td>7</td><td>Number of Workers</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Exists (Q7)</span></td><td></td></tr>
-                  <tr><td>8</td><td>Particular of Contractor</td><td>Multiple Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q8)</span></td><td>Includes T&C acknowledgment and PDPA consent</td></tr>
-                  <tr><td>9</td><td>Contractor's Indemnity  Form for Moving In / Moving Out</td><td>Multiple Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q9)</span></td><td>Lift protection, common area clauses</td></tr>
-                
+                  <tr><td>1</td><td>Moving Direction</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>"Moving In" or "Moving Out"</td></tr>
+                  <tr><td>2</td><td>Date of Moving</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
+                  <tr><td>3</td><td>Preferred Time Slot</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>Morning (9am-1pm) / Afternoon (1pm-5pm)</td></tr>
+                  <tr class="section-header"><td colspan="6">Section: Contractor Info</td></tr>
+                  <tr><td>4</td><td>Name of Moving Company</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td>Now separate text field</td></tr>
+                  <tr><td>5</td><td>Contractor Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q5)</span></td><td>Now separate text field</td></tr>
+                  <tr><td>6</td><td>Contractor Person-in-Charge</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q6)</span></td><td></td></tr>
+                  <tr><td>7</td><td>Number of Workers</td><td>Number</td><td>No</td><td><span class="badge badge-green">Exists (Q7)</span></td><td></td></tr>
+                  <tr class="section-header"><td colspan="6">Section: Indemnity &amp; Acknowledgment</td></tr>
+                  <tr><td>8</td><td>Contractor Indemnity Undertaking</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q8)</span></td><td>Lift protection, common area protection</td></tr>
+                  <tr><td>9</td><td>Terms and Conditions Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q9)</span></td><td></td></tr>
+                  <tr><td>10</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3/Q4)</span></td><td></td></tr>
                   </tbody>
               </table>
               <div class="form-notes">
@@ -748,16 +751,16 @@
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
-                  
-                  <tr><td>1</td><td>Vehicle Registration Plate No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
-                  <tr><td>2</td><td>Vehicle IU Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
-                  <tr><td>3</td><td>Vehicle Make and Model</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
-                  <tr><td>4</td><td>Vehicle Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td></td></tr>
-                  <tr><td>5</td><td>Company Vehicle Letter</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q5)</span></td><td>Required if company-registered vehicle</td></tr>
-                  <tr><td>6</td><td>Tenancy Agreement Copy</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q6)</span></td><td>Required if tenant</td></tr>
-                  <tr><td>7</td><td>Deposit Payment Confirmation</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q7)</span></td><td>Upload PayNow screenshot ($50 to MCST 4932, ref: VEHICLE - unit)</td></tr>
-                  <tr><td>8</td><td>Consent</td><td>Multiple Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q8)</span></td><td>PDPA + carpark rules acknowledgment</td></tr>
-                
+                  <tr><td>1</td><td>Applicant Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>"Subsidiary Proprietor" or "Tenant"</td></tr>
+                  <tr><td>2</td><td>Tenant Info (if applicable)</td><td>Text (multi-line)</td><td>Conditional</td><td><span class="badge badge-green">Exists (Q2)</span></td><td>Required if tenant. Now separate text field</td></tr>
+                  <tr><td>3</td><td>Vehicle Registration Plate No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>Consolidated from form 18239</td></tr>
+                  <tr><td>4</td><td>Vehicle IU Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td>Consolidated from form 18239</td></tr>
+                  <tr><td>5</td><td>Vehicle Make and Model</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q5)</span></td><td>Consolidated from form 18239</td></tr>
+                  <tr><td>6</td><td>Vehicle Type</td><td>Single Choice</td><td>No</td><td><span class="badge badge-green">Exists (Q6)</span></td><td>Car / Motorcycle / Others</td></tr>
+                  <tr><td>7</td><td>Company Vehicle Letter</td><td>Attachment</td><td>No</td><td><span class="badge badge-green">Exists (Q7)</span></td><td>Required if company-registered vehicle</td></tr>
+                  <tr><td>8</td><td>Tenancy Agreement Copy</td><td>Attachment</td><td>No</td><td><span class="badge badge-green">Exists (Q8)</span></td><td>Required if tenant</td></tr>
+                  <tr><td>9</td><td>Consent + Rules Acknowledgment</td><td>Multiple Choice (checkboxes)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q9)</span></td><td>PDPA + carpark rules</td></tr>
+                  <tr><td>10</td><td>Deposit Payment Confirmation</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q10)</span></td><td>Upload PayNow screenshot ($50 to MCST 4932)</td></tr>
                   </tbody>
               </table>
               <p style="margin-top:12px;"><strong>Note:</strong> The $50 deposit is refundable upon de-registration of the vehicle.</p>
@@ -776,14 +779,12 @@
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
-                  
-                  <tr><td>1</td><td>Type of Application</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
+                  <tr><td>1</td><td>Application Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>"Replacement" or "Additional Card"</td></tr>
                   <tr><td>2</td><td>Number of Cards Required</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
-                  <tr><td>3</td><td>Card Holder Details</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>Name and relationship to owner, per card</td></tr>
-                  <tr><td>4</td><td>Reason for Replacement</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td>Required if applying for replacement</td></tr>
-                  <tr><td>5</td><td>Payment Confirmation</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q5)</span></td><td>Upload PayNow screenshot ($50/card to MCST 4932, ref: ACCESSCARD - unit)</td></tr>
-                  <tr><td>6</td><td>Notes</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q6)</span></td><td>PDPA consent</td></tr>
-                
+                  <tr><td>3</td><td>Card Holder Details</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>Name and relationship to SP per card</td></tr>
+                  <tr><td>4</td><td>Reason for Replacement</td><td>Text</td><td>Conditional</td><td><span class="badge badge-green">Exists (Q4)</span></td><td>Required if "Replacement"</td></tr>
+                  <tr><td>5</td><td>Payment Confirmation</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q5)</span></td><td>Upload PayNow screenshot ($50/card to MCST 4932)</td></tr>
+                  <tr><td>6</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q6)</span></td><td></td></tr>
                   </tbody>
               </table>
               <div class="form-notes">
@@ -801,11 +802,10 @@
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
-                  
-                  <tr><td>1</td><td>No of Bicycle Tag</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
-                  <tr><td>2</td><td>Application For Bicycle Tagging</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
-                  <tr><td>3</td><td>Terms & Condition</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
-                
+                  <tr><td>1</td><td>Number of Bicycle Tags</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
+                  <tr><td>2</td><td>Application Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td>"First-time" or "Replacement"</td></tr>
+                  <tr><td>3</td><td>Terms and Conditions Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>Bicycle parking rules</td></tr>
+                  <tr><td>4</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td></td></tr>
                   </tbody>
               </table>
               <div class="form-notes">
@@ -823,18 +823,16 @@
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
-                  
-                  <tr><td>1</td><td>Registration Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
-                  <tr><td>2</td><td>Owner Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
-                  <tr><td>3</td><td>Tenancy Start Date</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
-                  <tr><td>4</td><td>Tenancy End Date</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td></td></tr>
-                  <tr><td>5</td><td>Tenancy Agreement</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q5)</span></td><td></td></tr>
-                  <tr><td>6</td><td>Number of Occupants</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Exists (Q6)</span></td><td>Maximum 6 unrelated persons</td></tr>
-                  <tr><td>7</td><td>Occupant Details</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q7)</span></td><td>Name, relationship, and contact for each occupant</td></tr>
+                  <tr><td>1</td><td>Registration Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td>"New Occupancy" or "Change of Occupancy"</td></tr>
+                  <tr><td>2</td><td>Owner Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td>Auto-populate from Hilife profile if possible</td></tr>
+                  <tr><td>3</td><td>Tenancy Start Date</td><td>Date</td><td>Conditional</td><td><span class="badge badge-green">Exists (Q3)</span></td><td>Required if tenant</td></tr>
+                  <tr><td>4</td><td>Tenancy End Date</td><td>Date</td><td>Conditional</td><td><span class="badge badge-green">Exists (Q4)</span></td><td>Required if tenant</td></tr>
+                  <tr><td>5</td><td>Tenancy Agreement</td><td>Attachment</td><td>Conditional</td><td><span class="badge badge-green">Exists (Q5)</span></td><td>Required if tenant</td></tr>
+                  <tr><td>6</td><td>Number of Occupants</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Exists (Q6)</span></td><td>Maximum 6 unrelated persons per regulations</td></tr>
+                  <tr><td>7</td><td>Occupant Details</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q7)</span></td><td>Expanded from original</td></tr>
                   <tr><td>8</td><td>Emergency Contact Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q8)</span></td><td></td></tr>
                   <tr><td>9</td><td>Emergency Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q9)</span></td><td></td></tr>
-                  <tr><td>10</td><td>PDPA Consent</td><td>Single Choice</td><td>No</td><td><span class="badge badge-green">Exists (Q10)</span></td><td></td></tr>
-                
+                  <tr><td>10</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-green">Exists (Q10)</span></td><td></td></tr>
                   </tbody>
               </table>
               <div class="form-notes">
@@ -852,16 +850,14 @@
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
-                  
-                  <tr><td>1</td><td>Pet Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
-                  <tr><td>2</td><td>Breed</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
-                  <tr><td>3</td><td>Pet Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
-                  <tr><td>4</td><td>Pet Photo</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td>For identification</td></tr>
-                  <tr><td>5</td><td>AVS License Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q5)</span></td><td>Required for dogs</td></tr>
-                  <tr><td>6</td><td>Vaccination Certificate</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q6)</span></td><td>Up-to-date vaccination proof</td></tr>
-                  <tr><td>7</td><td>Rules Acknowledgment</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q7)</span></td><td></td></tr>
-                  <tr><td>8</td><td>PDPA Consent</td><td>Single Choice</td><td>No</td><td><span class="badge badge-green">Exists (Q8)</span></td><td></td></tr>
-                
+                  <tr><td>1</td><td>Pet Type</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Dog / Cat / Others</td></tr>
+                  <tr><td>2</td><td>Breed</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>3</td><td>Pet Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>4</td><td>Pet Photo</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>For identification</td></tr>
+                  <tr><td>5</td><td>AVS License Number</td><td>Text</td><td>Conditional</td><td><span class="badge badge-red">N/A</span></td><td>Required for dogs</td></tr>
+                  <tr><td>6</td><td>Vaccination Certificate</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Up-to-date vaccination proof</td></tr>
+                  <tr><td>7</td><td>Rules Acknowledgment</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>"I agree to abide by the pet rules and regulations"</td></tr>
+                  <tr><td>8</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
                 </tbody>
               </table>
             </td>
@@ -869,22 +865,20 @@
 
           <!-- Row 10: Instructor Reg -->
           <tr class="expandable-row" id="form-instructor" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Instructor Reg</td><td><code>INSTRUCTOR</code></td><td>New</td><td>18409</td><td>7</td><td>7</td><td>0</td><td>0</td><td><span class="badge badge-green">Exists (Q1)</span></td>
+            <td><span class="arrow">&#9654;</span> Instructor Reg</td><td><code>INSTRUCTOR</code></td><td>New</td><td>18409</td><td>7</td><td>7</td><td>0</td><td>0</td><td><span class="badge badge-green">Complete</span></td>
           </tr>
           <tr class="detail-row">
             <td colspan="9">
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
-                  
-                  <tr><td>1</td><td>Instructor / Coach Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
-                  <tr><td>2</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
-                  <tr><td>3</td><td>Activity / Sport</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
-                  <tr><td>4</td><td>Schedule</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td>Days and times of activity</td></tr>
-                  <tr><td>5</td><td>Insurance / Certification Proof</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-green">Exists (Q5)</span></td><td>Upload insurance or certification</td></tr>
-                  <tr><td>6</td><td>Sponsoring Resident Unit No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q6)</span></td><td>Unit of resident who engaged the coach</td></tr>
-                  <tr><td>7</td><td>PDPA Consent</td><td>Single Choice</td><td>No</td><td><span class="badge badge-green">Exists (Q7)</span></td><td></td></tr>
-                
+                  <tr><td>1</td><td>Instructor/Coach Name</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>2</td><td>Contact Number</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>3</td><td>Activity/Sport</td><td>Single Choice</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Swimming / Tennis / Gym / Yoga / Others</td></tr>
+                  <tr><td>4</td><td>Schedule</td><td>Text (multi-line)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Days and times</td></tr>
+                  <tr><td>5</td><td>Insurance/Certification Proof</td><td>Attachment</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>6</td><td>Sponsoring Resident (Unit No.)</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Resident who engaged the coach</td></tr>
+                  <tr><td>7</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
                 </tbody>
               </table>
             </td>
@@ -893,20 +887,18 @@
 
           <!-- Row 13: Temporary Overnight Parking Permit -->
           <tr class="expandable-row" id="form-overnight" onclick="toggleDetailRow(this)">
-            <td><span class="arrow">&#9654;</span> Temporary Overnight Parking Permit</td><td><code>OVERNIGHT</code></td><td>New</td><td>18410</td><td>5</td><td>5</td><td>0</td><td>0</td><td><span class="badge badge-green">Exists (Q1)</span></td>
+            <td><span class="arrow">&#9654;</span> Temporary Overnight Parking Permit</td><td><code>OVERNIGHT</code></td><td>New</td><td>18410</td><td>5</td><td>5</td><td>0</td><td>0</td><td><span class="badge badge-green">Complete</span></td>
           </tr>
           <tr class="detail-row">
             <td colspan="9">
               <table>
                 <thead><tr><th>#</th><th>Field</th><th>Type</th><th>Required</th><th>Hilife Status</th><th>Notes</th></tr></thead>
                 <tbody>
-                  
-                  <tr><td>1</td><td>Vehicle Registration Plate No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q1)</span></td><td></td></tr>
-                  <tr><td>2</td><td>Parking Start Date</td><td>Date</td><td>Yes</td><td><span class="badge badge-green">Exists (Q2)</span></td><td></td></tr>
-                  <tr><td>3</td><td>Number of Nights</td><td>Number</td><td>Yes</td><td><span class="badge badge-green">Exists (Q3)</span></td><td></td></tr>
-                  <tr><td>4</td><td>Reason for Overnight Parking</td><td>Text</td><td>Yes</td><td><span class="badge badge-green">Exists (Q4)</span></td><td>e.g. visiting guest, temporary vehicle</td></tr>
-                  <tr><td>5</td><td>PDPA Consent</td><td>Single Choice</td><td>No</td><td><span class="badge badge-green">Exists (Q5)</span></td><td></td></tr>
-                
+                  <tr><td>1</td><td>Vehicle Registration Plate No.</td><td>Text</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>2</td><td>Parking Date(s)</td><td>Date</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td>Start date; may need end date for multi-day</td></tr>
+                  <tr><td>3</td><td>Number of Nights</td><td>Number</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
+                  <tr><td>4</td><td>Reason for Overnight Parking</td><td>Text</td><td>No</td><td><span class="badge badge-red">N/A</span></td><td>e.g., visiting guest, temporary vehicle</td></tr>
+                  <tr><td>5</td><td>PDPA Consent</td><td>Single Choice (checkbox)</td><td>Yes</td><td><span class="badge badge-red">N/A</span></td><td></td></tr>
                 </tbody>
               </table>
             </td>
@@ -1172,9 +1164,9 @@
       <table>
         <thead><tr><th>#</th><th>Form</th><th>Fields</th><th>Complexity</th></tr></thead>
         <tbody>
-          <tr><td>8</td><td>Pet Registration</td><td>8</td><td><span class="badge badge-green">Exists (Q1)</span></td></tr>
-          <tr><td>10</td><td>Instructor/Coach Registration</td><td>7</td><td><span class="badge badge-green">Exists (Q10)</span></td></tr>
-          <tr><td>11</td><td>Temporary Overnight Parking Permit</td><td>5</td><td><span class="badge badge-green">Exists (Q11)</span></td></tr>
+          <tr><td>8</td><td>Pet Registration</td><td>8</td><td><span class="badge badge-green">Low</span></td></tr>
+          <tr><td>10</td><td>Instructor/Coach Registration</td><td>7</td><td><span class="badge badge-yellow">Medium</span></td></tr>
+          <tr><td>11</td><td>Temporary Overnight Parking Permit</td><td>5</td><td><span class="badge badge-green">Low</span></td></tr>
           
         </tbody>
       </table>
@@ -1200,7 +1192,7 @@
       <table>
         <thead><tr><th>Form</th><th>Amount</th><th>Type</th><th>Method</th><th>Notes</th></tr></thead>
         <tbody>
-          <tr><td>Renovation (B-1)</td><td>$1,000</td><td>Refundable deposit</td><td><span class="badge badge-green">Exists (Q12)</span></td><td>PayNow to MCST 4932, upload screenshot. MA refunds via bank transfer after inspection.</td></tr>
+          <tr><td>Renovation (B-1)</td><td>$1,000</td><td>Refundable deposit</td><td><span class="badge badge-green">PayNow</span></td><td>PayNow to MCST 4932, upload screenshot. MA refunds via bank transfer after inspection.</td></tr>
           <tr><td>Moving (D-1)</td><td>$1,000</td><td>Refundable deposit</td><td><span class="badge badge-green">PayNow</span></td><td>Same as renovation. Refund within 1&ndash;4 weeks after move.</td></tr>
           <tr><td>Vehicle Reg (F)</td><td>$50</td><td>Refundable deposit</td><td><span class="badge badge-green">PayNow</span></td><td>Long-term deposit (duration of vehicle ownership).</td></tr>
           <tr><td>Access Card (G)</td><td>$50/card</td><td>Non-refundable fee</td><td><span class="badge badge-green">PayNow</span></td><td>Fee per card. Variable quantity.</td></tr>
