@@ -148,7 +148,7 @@
 
 <div class="page-header">
   <h1>Normanton Park &mdash; Feedback Cluster Map</h1>
-  <span class="meta">20 clusters &middot; 68 sub-clusters</span>
+  <span class="meta">20 clusters &middot; 110 sub-clusters</span>
 </div>
 
 <div class="grid" id="grid"></div>
@@ -163,7 +163,7 @@ const clusters = [
   {
     name: "Animal Issues", theme: "amber",
     icon: `<svg viewBox="0 0 24 24"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="20" cy="15" r="2"/><path d="M9 10l-1 3-3.5 3.5a2 2 0 002.8 2.8L11 16l5 1.5"/><circle cx="4" cy="17" r="2"/></svg>`,
-    subs: ["Animal Issues"]
+    subs: ["Dog/Pet Waste","Stray Animals","Wildlife","Irresponsible Pet Owner","Pet Noise"]
   },
   {
     name: "Building Maintenance", theme: "steel",
@@ -183,7 +183,7 @@ const clusters = [
   {
     name: "Crime & Police", theme: "crimson",
     icon: `<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
-    subs: ["Crime & Police"]
+    subs: ["Theft/Loss","Security Concern","Vandalism/Damage","Trespassing","Disturbance"]
   },
   {
     name: "Electrical", theme: "amber",
@@ -193,22 +193,22 @@ const clusters = [
   {
     name: "Fire Safety", theme: "red",
     icon: `<svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z"/></svg>`,
-    subs: ["Fire Safety"]
+    subs: ["Fire Exit/Access","Fire Alarm","Fire Hazard","Fire Equipment"]
   },
   {
     name: "Gym Equipment", theme: "graphite",
     icon: `<svg viewBox="0 0 24 24"><path d="M6.5 6.5h11M6.5 17.5h11M6 12h12"/><rect x="2" y="5" width="3" height="14" rx="1"/><rect x="19" y="5" width="3" height="14" rx="1"/></svg>`,
-    subs: ["Gym Equipment"]
+    subs: ["Equipment Malfunction","Gym Environment","Gym Rules/Etiquette","Missing Equipment","Gym Access"]
   },
   {
     name: "Intercom & Smart Home", theme: "indigo",
     icon: `<svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/><path d="M9 7h6M9 11h4"/></svg>`,
-    subs: ["Intercom & Smart Home"]
+    subs: ["Intercom/Doorbell Malfunction","Smart Device Issue","HiLife Module"]
   },
   {
     name: "Landscaping", theme: "green",
     icon: `<svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 22h3.87l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 2-8 2s4 0 4 4"/><path d="M3.82 22c0-8 4-14 8-14"/></svg>`,
-    subs: ["Landscaping"]
+    subs: ["Landscaping Quality","Trimming/Overgrowth","Water Sprinkler","Fallen Tree/Branch"]
   },
   {
     name: "Lift Issues", theme: "blue",
@@ -223,27 +223,27 @@ const clusters = [
   {
     name: "Parking & Traffic", theme: "steel",
     icon: `<svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 4v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`,
-    subs: ["Parking & Traffic"]
+    subs: ["Unauthorized Parking","General Parking","Speeding/Safety","Gantry/Barrier","Car Wash","Visitor/Delivery Parking","Carpark Maintenance"]
   },
   {
     name: "Pest Control", theme: "moss",
     icon: `<svg viewBox="0 0 24 24"><path d="M8 2l1.88 1.88M14.12 3.88L16 2M9 7.13v-1a3.003 3.003 0 116 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a6 6 0 0112 0v3c0 3.3-2.7 6-6 6z"/><path d="M6 11H3M18 11h3M6 19l-2 2M18 19l2 2M6.5 9.5L4 7M17.5 9.5L20 7"/></svg>`,
-    subs: ["Pest Control"]
+    subs: ["Mosquito/Sandfly","Ant/Insect","Termite","Cockroach","Bee/Wasp","General Pest"]
   },
   {
     name: "Playground & Kids", theme: "violet",
     icon: `<svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5 5 5 0 01-5 5 5 5 0 01-5-5 5 5 0 015-5M5 20a7 7 0 0114 0"/></svg>`,
-    subs: ["Playground & Kids"]
+    subs: ["Equipment Damage","Cleanliness","Safety Concern","Inappropriate Use"]
   },
   {
     name: "Pool & Water Features", theme: "ocean",
     icon: `<svg viewBox="0 0 24 24"><path d="M2 12h20M2 17c1.333-1 2.667-1 4 0s2.667 1 4 0 2.667-1 4 0 2.667 1 4 0M2 7c1.333-1 2.667-1 4 0s2.667 1 4 0 2.667-1 4 0 2.667 1 4 0"/></svg>`,
-    subs: ["Pool & Water Features"]
+    subs: ["Pool Cleanliness","Pool Maintenance","Pool Rules Violation","Pool Equipment"]
   },
   {
     name: "Rubbish Chute", theme: "sienna",
     icon: `<svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>`,
-    subs: ["Rubbish Chute"]
+    subs: ["Chute Blockage","Chute Hardware","Improper Use","Chute Smell","Recycling Chute"]
   },
   {
     name: "Security & Access", theme: "navy",
