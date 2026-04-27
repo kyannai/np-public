@@ -148,7 +148,7 @@
 
 <div class="page-header">
   <h1>Normanton Park &mdash; Feedback Cluster Map</h1>
-  <span class="meta">20 clusters &middot; 110 sub-clusters</span>
+  <span class="meta">19 clusters &middot; 110 sub-clusters</span>
 </div>
 
 <div class="grid" id="grid"></div>
@@ -168,7 +168,7 @@ const clusters = [
   {
     name: "Building Maintenance", theme: "steel",
     icon: `<svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3-3a6 6 0 01-7.4 7.4l-6.3 6.4a2.1 2.1 0 01-3-3l6.4-6.3a6 6 0 017.4-7.4l-3.1 3z"/></svg>`,
-    subs: ["Aircon (Common Area)","Door & Lock","General Repair","Roof & Exterior","Signage","Wall & Ceiling"]
+    subs: ["Aircon (Common Area)","Door & Lock","Electrical","General Repair","Lighting","Roof & Exterior","Signage","Wall & Ceiling"]
   },
   {
     name: "Cleanliness", theme: "teal",
@@ -184,11 +184,6 @@ const clusters = [
     name: "Crime & Police", theme: "crimson",
     icon: `<svg viewBox="0 0 24 24"><path d="M12 2L3 7v6c0 5 3.75 9.5 9 11 5.25-1.5 9-6 9-11V7L12 2z"/><path d="M12 8l1 2.5h2.6l-2.1 1.5.8 2.5-2.3-1.5-2.3 1.5.8-2.5-2.1-1.5H11L12 8z"/></svg>`,
     subs: ["Theft/Loss","Security Concern","Vandalism/Damage","Trespassing","Disturbance"]
-  },
-  {
-    name: "Electrical", theme: "amber",
-    icon: `<svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
-    subs: ["Electrical","Lighting"]
   },
   {
     name: "Fire Safety", theme: "red",
