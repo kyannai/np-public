@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NP Feedback — Cluster & Sub-Cluster Mind Map</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f0f4f8;
+    min-height: 100vh;
+    padding: 32px 24px;
+    color: #1a202c;
+  }
+  h1 {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+    color: #2c5282;
+    margin-bottom: 6px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 13px;
+    color: #718096;
+    margin-bottom: 32px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .cluster-card {
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .cluster-header {
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .cluster-header:hover { filter: brightness(0.96); }
+  .cluster-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .cluster-name {
+    font-size: 14px;
+    font-weight: 700;
+    flex: 1;
+  }
+  .cluster-count {
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(0,0,0,0.12);
+    color: inherit;
+    border-radius: 10px;
+    padding: 2px 8px;
+    flex-shrink: 0;
+  }
+  .sub-list {
+    padding: 4px 0 10px 0;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .sub-item {
+    padding: 5px 16px 5px 38px;
+    font-size: 13px;
+    color: #4a5568;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sub-item::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+    opacity: 0.5;
+  }
+  .back-link {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #2c5282;
+    text-decoration: none;
+  }
+  .back-link:hover { text-decoration: underline; }
+
+  /* Cluster colour palette */
+  .c0  { background: #ebf8ff; color: #2b6cb0; }
+  .c1  { background: #fff5f5; color: #c53030; }
+  .c2  { background: #f0fff4; color: #276749; }
+  .c3  { background: #fffff0; color: #975a16; }
+  .c4  { background: #faf5ff; color: #6b46c1; }
+  .c5  { background: #fff5f5; color: #9b2c2c; }
+  .c6  { background: #fff8f0; color: #c05621; }
+  .c7  { background: #e6fffa; color: #234e52; }
+  .c8  { background: #ebf4ff; color: #2c5282; }
+  .c9  { background: #fef9c3; color: #854d0e; }
+  .c10 { background: #f0fdf4; color: #14532d; }
+  .c11 { background: #fdf4ff; color: #86198f; }
+  .c12 { background: #fff1f2; color: #9f1239; }
+  .c13 { background: #f0f9ff; color: #0c4a6e; }
+  .c14 { background: #fefce8; color: #713f12; }
+  .c15 { background: #f7fee7; color: #365314; }
+  .c16 { background: #ecfeff; color: #164e63; }
+  .c17 { background: #fdf2f8; color: #831843; }
+  .c18 { background: #eff6ff; color: #1e40af; }
+  .c19 { background: #fef2f2; color: #991b1b; }
+  .c20 { background: #f8fafc; color: #334155; }
+  .c21 { background: #e0f2fe; color: #0369a1; }
+</style>
+</head>
+<body>
+
+<a class="back-link" href="index.html">← Back to Home</a>
+<h1>Normanton Park — Feedback Cluster Map</h1>
+<p class="subtitle">20 clusters · 71 sub-clusters</p>
+
+<div class="grid" id="grid"></div>
+
+<script>
+const clusters = [
+  { name: "Admin & General", icon: "🗂️", subs: ["Access Card","Facility Access","Facility Booking","General Enquiry","HiLife System","Maintenance Fee","Management Complaint","Mobile Signal","Moving/Logistics","Parcel & Locker","Renovation","Shuttle Bus"] },
+  { name: "Animal Issues", icon: "🐾", subs: ["Animal Issues"] },
+  { name: "Building Maintenance", icon: "🔧", subs: ["Aircon (Common Area)","Door & Lock","General Repair","Roof & Exterior","Signage","Wall & Ceiling"] },
+  { name: "Cleanliness", icon: "🧹", subs: ["Dirty Common Area","Dirty Corridor/Lobby","Dirty Lift","Odor & Stench"] },
+  { name: "Common Area Obstruction", icon: "🚧", subs: ["Bicycle Parking","Bulky Waste","Corridor Items","Personal Belongings"] },
+  { name: "Crime & Police", icon: "🚨", subs: ["Crime & Police"] },
+  { name: "Electrical", icon: "⚡", subs: ["Electrical"] },
+  { name: "Fire Safety", icon: "🔥", subs: ["Fire Safety"] },
+  { name: "Gym Equipment", icon: "🏋️", subs: ["Gym Equipment"] },
+  { name: "Intercom & Smart Home", icon: "📱", subs: ["Intercom & Smart Home"] },
+  { name: "Landscaping", icon: "🌿", subs: ["Landscaping"] },
+  { name: "Lift Issues", icon: "🛗", subs: ["Lift Aircon","Lift Door","Lift Interior","Lift Light & Display","Lift Malfunction","Lift Noise","Lift Operations"] },
+  { name: "Lighting", icon: "💡", subs: ["Lighting"] },
+  { name: "Noise & Neighbour", icon: "📢", subs: ["Cooking Smell","Flower Pot Hazard","High-Rise Littering","Inconsiderate Neighbour","Liquid Dumping","Noise Disturbance","Smoking","Wet Common Area"] },
+  { name: "Others", icon: "📋", subs: ["General Enquiry","Laundry/Fallen Items","Shuttle Bus"] },
+  { name: "Parking & Traffic", icon: "🚗", subs: ["Parking & Traffic"] },
+  { name: "Pest Control", icon: "🐜", subs: ["Pest Control"] },
+  { name: "Playground & Kids", icon: "🛝", subs: ["Playground & Kids"] },
+  { name: "Pool & Water Features", icon: "🏊", subs: ["Pool & Water Features"] },
+  { name: "Rubbish Chute", icon: "🗑️", subs: ["Rubbish Chute"] },
+  { name: "Security & Access", icon: "🔒", subs: ["CCTV","Gate & Door Access","Junk Mail & Flyers","Security Guard","Unauthorized Activity","Visitor Access"] },
+  { name: "Water & Plumbing", icon: "💧", subs: ["Ceiling Seepage","Common Area Leak","Drainage","In-Unit","Septic & Odor","Water Pressure","Waterlogging","Window & External Leak"] },
+];
+
+const grid = document.getElementById('grid');
+clusters.forEach((cl, i) => {
+  const col = i % 22;
+  const card = document.createElement('div');
+  card.className = 'cluster-card';
+
+  const header = document.createElement('div');
+  header.className = `cluster-header c${col}`;
+  header.innerHTML = `
+    <span class="cluster-icon">${cl.icon}</span>
+    <span class="cluster-name">${cl.name}</span>
+    <span class="cluster-count">${cl.subs.length}</span>
+  `;
+
+  const list = document.createElement('div');
+  list.className = 'sub-list';
+  list.style.color = header.style.color;
+  cl.subs.forEach(s => {
+    const item = document.createElement('div');
+    item.className = 'sub-item';
+    item.textContent = s;
+    list.appendChild(item);
+  });
+
+  card.appendChild(header);
+  card.appendChild(list);
+  grid.appendChild(card);
+});
+</script>
+</body>
+</html>
