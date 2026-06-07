@@ -55,26 +55,30 @@ async function fetchDecryptGunzip(url, key){
   const stream = new Blob([gz]).stream().pipeThrough(new DecompressionStream('gzip'));
   return await new Response(stream).text();
 }
-async function unlockWithKey(key){
+async function rememberKey(key){
+  const raw = await crypto.subtle.exportKey('raw', key);
+  localStorage.setItem(LS_KEY, btoa(String.fromCharCode.apply(null, new Uint8Array(raw))));
+}
+async function unlockWithKey(key, remember){
   const analysisP = fetchDecryptGunzip(ANALYSIS_URL, key);  // gate first paint on this
   const casesP    = fetchDecryptGunzip(CASES_URL, key);     // download in parallel
   const analysisHtml = await analysisP;                     // throws -> wrong password
+  if (remember) await rememberKey(key);                     // persist BEFORE document.write
+  // Hand cases to the rewritten page when they arrive. Registered before
+  // document.write (whose continuation may not run); the wait-shim applies
+  // window.__pendingCases whichever finishes first.
+  casesP.then(function(t){
+    try { window.__pendingCases = JSON.parse(t); if (window.__applyCases) window.__applyCases(); }
+    catch(e){ /* cases unavailable; modals show their empty state */ }
+  });
   // document.write keeps the real page URL, so in-page anchors AND cross-page
   // links resolve against the site origin and navigate normally.
   document.open(); document.write(analysisHtml); document.close();
-  casesP.then(function(t){
-    try { (window.__onCasesReady || function(c){ window.CASES = c; })(JSON.parse(t)); }
-    catch(e){ /* cases unavailable; modals show their empty state */ }
-  });
   return key;
 }
 async function unlock(pw, remember){
   const key = await deriveKey(pw);
-  await unlockWithKey(key);
-  if (remember){
-    const raw = await crypto.subtle.exportKey('raw', key);
-    localStorage.setItem(LS_KEY, btoa(String.fromCharCode(...new Uint8Array(raw))));
-  }
+  await unlockWithKey(key, remember);   // stores the key BEFORE document.write
 }
 document.getElementById('form').addEventListener('submit', async e => {
   e.preventDefault();
@@ -89,7 +93,7 @@ document.getElementById('form').addEventListener('submit', async e => {
   try {
     const raw = Uint8Array.from(atob(b), c => c.charCodeAt(0));
     const key = await crypto.subtle.importKey('raw', raw, { name:'AES-GCM' }, true, ['decrypt']);
-    await unlockWithKey(key);
+    await unlockWithKey(key, false);   // already remembered
   } catch(e){ localStorage.removeItem(LS_KEY); }
 })();
 </script>
