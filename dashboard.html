@@ -7,7 +7,6 @@
 <style>
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
-  #frame{display:none;border:0;width:100vw;height:100vh}
   #gate{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#ebf4ff}
   .card{background:#fff;padding:32px 36px;border-radius:10px;box-shadow:0 10px 40px rgba(44,82,130,.15);width:340px;text-align:center}
   .card h1{font-size:18px;color:#2c5282;margin:0 0 4px}
@@ -20,7 +19,6 @@
 </style>
 </head>
 <body>
-<iframe id="frame" title="dashboard"></iframe>
 <div id="gate">
   <form class="card" id="form">
     <h1>Feedback Dashboard</h1>
@@ -61,16 +59,18 @@ async function unlockWithKey(key){
   const analysisP = fetchDecryptGunzip(ANALYSIS_URL, key);  // gate first paint on this
   const casesP    = fetchDecryptGunzip(CASES_URL, key);     // download in parallel
   const analysisHtml = await analysisP;                     // throws -> wrong password
-  const f = document.getElementById('frame');
-  f.src = URL.createObjectURL(new Blob([analysisHtml], { type:'text/html' }));
-  f.addEventListener('load', async () => {
-    try {
-      const cases = JSON.parse(await casesP);
-      (f.contentWindow.__onCasesReady || function(x){ f.contentWindow.CASES = x; })(cases);
-    } catch(e){ /* cases unavailable; modals will show their empty state */ }
-  }, { once:true });
-  document.getElementById('gate').style.display = 'none';
-  f.style.display = 'block';
+  // Replace this shell with the decrypted dashboard. document.write keeps the
+  // real page URL, so in-page anchors AND cross-page links (All reports,
+  // Cluster Map) resolve against the site origin and navigate normally.
+  document.open();
+  document.write(analysisHtml);
+  document.close();
+  // The dashboard's inline scripts (data, functions, modal-wait shim) have now
+  // run; hand cases over once they finish downloading.
+  casesP.then(function(t){
+    try { (window.__onCasesReady || function(c){ window.CASES = c; })(JSON.parse(t)); }
+    catch(e){ /* cases unavailable; modals show their empty state */ }
+  });
   return key;
 }
 async function unlock(pw, remember){
