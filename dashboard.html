@@ -21,8 +21,8 @@
 <body>
 <div id="gate">
   <form class="card" id="form">
-    <h1>Feedback Dashboard</h1>
-    <p>Enter the dashboard password to continue.</p>
+    <h1>Normanton Park</h1>
+    <p>Enter the password to continue.</p>
     <input id="pw" type="password" placeholder="Password" autocomplete="current-password" autofocus>
     <label class="rm"><input id="rm" type="checkbox" checked> Remember me on this device</label>
     <button type="submit" id="go">Enter</button>
@@ -31,8 +31,8 @@
   </form>
 </div>
 <script>
-const SALT_HEX = "37d789fea1079842284af82e16c61f58", ITERS = 200000;
-const ANALYSIS_URL = "dashboard_analysis.enc", CASES_URL = "dashboard_cases.enc", LS_KEY = "np_dashboard_key";
+const SALT_HEX = "37d789fea1079842284af82e16c61f58", ITERS = 200000, LS_KEY = "np_site_key";
+const ANALYSIS_URL = "dashboard_analysis.enc", CASES_URL = "dashboard_cases.enc";
 const enc = new TextEncoder();
 const hexToBytes = h => new Uint8Array(h.match(/../g).map(b => parseInt(b, 16)));
 
@@ -59,14 +59,9 @@ async function unlockWithKey(key){
   const analysisP = fetchDecryptGunzip(ANALYSIS_URL, key);  // gate first paint on this
   const casesP    = fetchDecryptGunzip(CASES_URL, key);     // download in parallel
   const analysisHtml = await analysisP;                     // throws -> wrong password
-  // Replace this shell with the decrypted dashboard. document.write keeps the
-  // real page URL, so in-page anchors AND cross-page links (All reports,
-  // Cluster Map) resolve against the site origin and navigate normally.
-  document.open();
-  document.write(analysisHtml);
-  document.close();
-  // The dashboard's inline scripts (data, functions, modal-wait shim) have now
-  // run; hand cases over once they finish downloading.
+  // document.write keeps the real page URL, so in-page anchors AND cross-page
+  // links resolve against the site origin and navigate normally.
+  document.open(); document.write(analysisHtml); document.close();
   casesP.then(function(t){
     try { (window.__onCasesReady || function(c){ window.CASES = c; })(JSON.parse(t)); }
     catch(e){ /* cases unavailable; modals show their empty state */ }
