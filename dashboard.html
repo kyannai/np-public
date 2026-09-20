@@ -69,8 +69,8 @@ async function unlockWithKey(key, remember){
   // window.__pendingCases whichever finishes first.
   casesP.then(function(t){
     try { window.__pendingCases = JSON.parse(t); if (window.__applyCases) window.__applyCases(); }
-    catch(e){ /* cases unavailable; modals show their empty state */ }
-  });
+    catch(e){ window.__caseLoadError = 'Case details could not be decoded. Reload the page.'; }
+  }).catch(function(){ window.__caseLoadError = 'Case details failed to load. Reload the page to retry.'; });
   // document.write keeps the real page URL, so in-page anchors AND cross-page
   // links resolve against the site origin and navigate normally.
   document.open(); document.write(analysisHtml); document.close();
